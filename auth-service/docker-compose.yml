@@ -1,0 +1,19 @@
+services:
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DB=mongodb://database:27017/brittany_auth
+      - PORT=80
+      - WEB_CLIENT_ADDRESS=http://localhost:3000
+    ports:
+      - 81:80
+    image: auth
+  database:
+    image: mongo
+    volumes:
+      - database_data:/data/db
+
+volumes:
+  database_data:
