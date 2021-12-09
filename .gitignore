@@ -1,6 +1,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,intellij+all,visualstudiocode,eclipse,gradle
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,intellij+all,visualstudiocode,eclipse,gradle
 
+auth-service/.gradle
+auth-service/node_modules
+
+persistence-service/.gradle
+persistence-service/node_modules
+
 ### Eclipse ###
 .metadata
 bin/
