@@ -17,10 +17,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    maven {
-        allowInsecureProtocol = true
-        url "http://jacamo.sourceforge.net/maven2"
-    }
+    maven { url "http://jacamo.sourceforge.net/maven2" }
     maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
     maven { url "https://repo.gradle.org/gradle/libs-releases-local" }
 
@@ -34,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.jacamo', name: 'jacamo', version: '1.0'
+    compile group: 'org.jacamo', name: 'jacamo', version: '1.0'
 }
 
 sourceSets {
@@ -97,3 +94,4 @@ clean {
     delete 'build'
     delete 'log'
 }
+
