@@ -11,6 +11,7 @@ web-client/.gradle
 web-client/node_modules
 
 greenhouse_core/log
+greenhouse_core/logging.properties
 
 ### Eclipse ###
 .metadata
