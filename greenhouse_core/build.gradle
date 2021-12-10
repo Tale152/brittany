@@ -5,6 +5,10 @@
    December 09, 2021 - 17:52:44
 */
 
+plugins {
+    id "com.palantir.docker" version "0.22.1"
+}
+
 defaultTasks 'run'
 
 apply plugin: 'java'
@@ -63,7 +67,7 @@ task run (type: JavaExec, dependsOn: 'classes') {
 task uberJar(type: Jar, dependsOn: 'classes') {
     group      ' JaCaMo'
     description 'creates a single runnable jar file with all dependencies'
-
+	destinationDir = file('.')
     manifest {
         attributes 'Main-Class': 'jacamo.infra.JaCaMoLauncher'
     }
@@ -93,5 +97,11 @@ clean {
     delete 'bin'
     delete 'build'
     delete 'log'
+}
+
+docker {
+	dependsOn(uberJar)
+    name "greenhouse"
+   	files 'jacamo-greenhouse_core-1.0.jar'
 }
 
