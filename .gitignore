@@ -7,6 +7,9 @@ auth-service/node_modules
 persistence-service/.gradle
 persistence-service/node_modules
 
+web-client/.gradle
+web-client/node_modules
+
 greenhouse_core/log
 
 ### Eclipse ###
