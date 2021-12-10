@@ -17,10 +17,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    maven {
-        allowInsecureProtocol = true
-        url "http://jacamo.sourceforge.net/maven2"
-    }
+    maven { url "http://jacamo.sourceforge.net/maven2" }
     maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
     maven { url "https://repo.gradle.org/gradle/libs-releases-local" }
 
@@ -34,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.jacamo', name: 'jacamo', version: '1.0'
+    compile group: 'org.jacamo', name: 'jacamo', version: '1.0'
 }
 
 sourceSets {
@@ -66,7 +63,6 @@ task run (type: JavaExec, dependsOn: 'classes') {
 task uberJar(type: Jar, dependsOn: 'classes') {
     group      ' JaCaMo'
     description 'creates a single runnable jar file with all dependencies'
-
     manifest {
         attributes 'Main-Class': 'jacamo.infra.JaCaMoLauncher'
     }
@@ -96,4 +92,20 @@ clean {
     delete 'bin'
     delete 'build'
     delete 'log'
+}
+
+task buildDockerImage(type: Exec, dependsOn: uberJar){
+    commandLine("docker", "image", "build", ".", "-t", "greenhouse-core")
+}
+
+task dockerUp(type: Exec, dependsOn: buildDockerImage){
+    commandLine("docker", "container", "run", "-d", "--rm", "--name", "greenhouse-core-container", "greenhouse-core")
+}
+
+task dockerLog(type: Exec){
+    commandLine("docker", "logs", "-f", "greenhouse-core-container")
+}
+
+task dockerDown(type: Exec){
+    commandLine("docker", "container", "stop", "greenhouse-core-container")
 }
