@@ -43,7 +43,7 @@ public class SamplingArtifact extends Artifact {
 		}		
 		this.devices.forEach(d -> this.currentSamples.put(d, new Random().nextInt()));
 		
-		if(this.lastSamples.isEmpty()) {		
+		if(!this.lastSamples.isPresent()) {
 			//TODO mandare dati su db o reperire l'ultima entry su db e controllarla?
 		} else {
 			System.out.println("Last samples " + this.lastSamples + "\n Current samples " + this.currentSamples);
