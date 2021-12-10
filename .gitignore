@@ -7,6 +7,8 @@ auth-service/node_modules
 persistence-service/.gradle
 persistence-service/node_modules
 
+greenhouse_core/log
+
 ### Eclipse ###
 .metadata
 bin/
