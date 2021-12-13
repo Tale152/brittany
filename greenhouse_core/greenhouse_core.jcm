@@ -19,8 +19,14 @@ mas greenhouse_core {
 		focus: brittany.sampling
 	}
 	
+	agent messangerAgent : communicationAgent.asl {
+		focus: brittany.sampling
+		focus: brittany.communication
+	}
+	
 	workspace brittany {
         artifact common: sampling.CommonArtifact()
         artifact sampling: sampling.SamplingArtifact()
+        artifact communication: communication.CommunicationArtifact()
     }
 }
