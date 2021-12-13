@@ -12,7 +12,7 @@ void test_get_one_pin_pin() {
     TEST_ASSERT_EQUAL(mockOnePin.pin(), SINGLE_PIN_PIN);
 }
 
-void test_OnePin(){
+void test_OnePin() {
     RUN_TEST(test_get_one_pin_pin);
 }
 

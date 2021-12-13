@@ -19,11 +19,11 @@ void test_digital_light_pin() {
     TEST_ASSERT_EQUAL(DIGITAL_LIGHT_PIN, digitalLightHw.pin());
 }
 
-void test_digital_light_is_on(){
+void test_digital_light_is_on() {
     TEST_ASSERT_TRUE(digitalLightHw.isOn());
 }
 
-void test_digital_light_is_off(){
+void test_digital_light_is_off() {
     TEST_ASSERT_FALSE(digitalLightHw.isOn());
 }
 
