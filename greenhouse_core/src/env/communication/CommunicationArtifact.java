@@ -14,10 +14,10 @@ public class CommunicationArtifact extends Artifact {
 	
 	void init() {}
 
-	@OPERATION void communicate(List<String> devices) {
+	@OPERATION void communicate(List<String> devices, OpFeedbackParam<List<Pair<String, Integer>>> data) {
 		this.currentSamples = new ArrayList<>();
 		System.out.println("Communicating with " + devices);
 		devices.forEach(d -> this.currentSamples.add(new Pair<>(d, new Random().nextInt())));
-		defineObsProperty("data", this.currentSamples);
+		data.set(this.currentSamples);
 	}
 }
