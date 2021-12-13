@@ -1,3 +1,6 @@
+#include BRITTANY_DIGITAL_LIGHT_HW_TEST
+#define BRITTANY_DIGITAL_LIGHT_HW_TEST
+
 #include <unity.h>
 #include <Arduino.h>
 #include "digital-light/DigitalLightHw.h"
@@ -45,3 +48,4 @@ void test_DigitalLightHw() {
     }
 }
 
+#endif
