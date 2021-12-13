@@ -1,5 +1,5 @@
 tasks.register<Exec>("run") {
-    commandLine("pio", "run")
+    commandLine("pio", "run", "-e", "nodemcuv2")
 }
 
 tasks.register<Exec>("test") {
