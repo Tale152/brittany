@@ -10,10 +10,10 @@ import cartago.*;
 
 public class CommonArtifact extends Artifact {
 	
-	private List<String> devices;
+	private List<String> devices;	
 	
 	void init() {
-		devices = new ArrayList<>(Arrays.asList("id1", "id2", "id3"));
+		devices = new ArrayList<>(Arrays.asList("id1", "id2", "id3"));		
 		defineObsProperty("devices", devices);
 	}
 }
