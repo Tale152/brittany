@@ -1,4 +1,4 @@
-package sampling;
+package utility;
 
 public class Pair<X,Y> {
 	
@@ -16,6 +16,11 @@ public class Pair<X,Y> {
 
 	public Y getY() {
 		return y;
+	}
+
+	@Override
+	public String toString() {
+		return "Pair [x=" + x + ", y=" + y + "]";
 	}
 	
 }
