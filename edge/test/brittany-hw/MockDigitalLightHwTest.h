@@ -35,7 +35,7 @@ void test_mock_digital_light_off_operation() {
     test_mock_digital_light_is_off();
 }
 
-void test_MockDigitalLightHw(){
+void test_MockDigitalLightHw() {
     RUN_TEST(test_get_mock_digital_light_id);
     RUN_TEST(test_get_mock_digital_light_pin);
     RUN_TEST(test_mock_digital_light_is_off); // test that light is initally off.
