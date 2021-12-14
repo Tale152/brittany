@@ -7,18 +7,37 @@
 #include "operation-handler/OperationHandler.h"
 #include <optional>
 
+/**
+ * @brief Type of the parameter to be returned by this class.
+ * 
+ * @tparam T the type of return of the operation.
+ */
 template <typename T>
 
+/**
+ * @brief A handler that may return a generic value, wrapped in a std::optional in case of failures.
+ */
 class ValueReturnedHandlerInterface : public OperationHandler {
 
 public:
 
+    /**
+     * @brief Construct a new Value Returned Handler Interface object
+     * 
+     * @param path the path(route) of the handler.
+     */
     ValueReturnedHandlerInterface(std::string path);
 
     OperationHandlerResult handle(Json::Value args);
 
 private:
     
+    /**
+     * @brief execute an operation that may return a value that is then processed by the handle method.
+     * 
+     * @param args the arguments used by the operation.
+     * @return std::optional<T> a generic return type wrapped in an optional in case of failures.
+     */
     virtual std::optional<T> operation(Json::Value args) = 0;
 
 };
