@@ -1,8 +1,5 @@
-#ifndef BRITTANY_MOCK_DIGITAL_LIGHT_HW_TEST_H
-#define BRITTANY_MOCK_DIGITAL_LIGHT_HW_TEST_H
-
 #include <unity.h>
-#include "digital-light/mock/MockDigitalLightHw.h"
+#include "../mock/hw/MockDigitalLightHw.h"
 
 #define DIGITAL_LIGHT_ID "light"
 #define DIGITAL_LIGHT_PIN 10
@@ -42,5 +39,3 @@ void test_MockDigitalLightHw() {
     RUN_TEST(test_mock_digital_light_on_operation);
     RUN_TEST(test_mock_digital_light_off_operation);
 }
-
-#endif //BRITTANY_MOCK_DIGITAL_LIGHT_HW_TEST_H
