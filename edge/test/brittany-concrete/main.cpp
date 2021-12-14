@@ -1,5 +1,5 @@
-#include <Arduino.h>
 #include <unity.h>
+#include <Arduino.h>
 #include "hw/DigitalLightHwTest.h"
 
 void setup() {

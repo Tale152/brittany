@@ -1,8 +1,5 @@
-#ifndef BRITTANY_ONE_PIN_TEST_H
-#define BRITTANY_ONE_PIN_TEST_H
-
 #include <unity.h>
-#include "feature/OnePin.h"
+#include "hw/feature/OnePin.h"
 
 #define SINGLE_PIN_PIN 10
 
@@ -15,5 +12,3 @@ void test_get_one_pin_pin() {
 void test_OnePin() {
     RUN_TEST(test_get_one_pin_pin);
 }
-
-#endif //BRITTANY_ONE_PIN_TEST_H

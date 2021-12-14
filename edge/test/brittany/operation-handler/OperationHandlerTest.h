@@ -1,8 +1,5 @@
-#ifndef BRITTANY_OPERATION_HANDLER_TEST
-#define BRITTANY_OPERATION_HANDLER_TEST
-
 #include <unity.h>
-#include "mock/MockOperationHandler.h"
+#include "../mock/operation-handler/MockOperationHandler.h"
 
 #define OPERATION_HANDLER_PATH "/operation"
 
@@ -24,5 +21,3 @@ void test_OperationHandler() {
     RUN_TEST(test_operation_handler_path);
     RUN_TEST(test_operation_handler_handle);
 }
-
-#endif //BRITTANY_OPERATION_HANDLER_TEST

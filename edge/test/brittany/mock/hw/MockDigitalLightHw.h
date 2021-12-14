@@ -2,7 +2,7 @@
 #define BRITTANY_MOCK_DIGITAL_LIGHT_HW_TEMPLATE_H
 
 #include <string>
-#include "interfaces/DigitalLightHwInterface.h"
+#include "hw/interfaces/DigitalLightHwInterface.h"
 
 /**
  * @brief Mock class of a digital light component used only for testing purposes.

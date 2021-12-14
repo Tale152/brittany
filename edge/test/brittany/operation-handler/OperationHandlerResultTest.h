@@ -1,12 +1,10 @@
-#ifndef BRITTANY_OPERATION_HANDLER_RESULT_TEST
-#define BRITTANY_OPERATION_HANDLER_RESULT_TEST
-
 #include <unity.h>
 #include <json/json.h>
 #include <json/value.h>
 #include "operation-handler/OperationHandlerResult.h"
+#include "HttpStatusCodes_C++.h"
 
-#define RESULT_CODE 404
+#define RESULT_CODE HttpStatus::NotFound
 
 Json::Value content;
 OperationHandlerResult* result;
@@ -33,5 +31,3 @@ void test_OperationHandlerResult() {
     RUN_TEST(test_operation_handler_result_code);
     RUN_TEST(test_operation_handler_result_content);
 }
-
-#endif //BRITTANY_OPERATION_HANDLER_RESULT_TEST

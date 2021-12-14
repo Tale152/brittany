@@ -1,8 +1,5 @@
-#ifndef BRITTANY_COMPONENT_HW_TEST_H
-#define BRITTANY_COMPONENT_HW_TEST_H
-
 #include <unity.h>
-#include "ComponentHw.h"
+#include "hw/ComponentHw.h"
 
 #define HW_ID "component"
 
@@ -15,5 +12,3 @@ void test_get_component_hw_id() {
 void test_ComponentHw() {
     RUN_TEST(test_get_component_hw_id);
 }
-
-#endif //BRITTANY_COMPONENT_HW_TEST_H

@@ -1,6 +1,3 @@
-#ifndef BRITTANY_DIGITAL_LIGHT_HW_TEST
-#define BRITTANY_DIGITAL_LIGHT_HW_TEST
-
 #include <unity.h>
 #include <Arduino.h>
 #include "digital-light/hw/DigitalLightHw.h"
@@ -47,5 +44,3 @@ void test_DigitalLightHw() {
         delay(100);
     }
 }
-
-#endif
