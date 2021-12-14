@@ -16,8 +16,6 @@ public:
 
     TurnOnHandlerInterface(std::string path);
 
-    OperationHandlerResult handle(Json::Value args);
-
     bool operation(Json::Value args);
 
     /**

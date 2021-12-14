@@ -19,6 +19,8 @@ public:
 
     OperationHandlerResult handle(Json::Value args);
 
+private:
+
     /**
      * @brief Second template method used to execute an operation on args.
      * 
