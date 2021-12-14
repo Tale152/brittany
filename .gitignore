@@ -13,6 +13,9 @@ web-client/node_modules
 greenhouse_core/log
 greenhouse_core/logging.properties
 
+edge/.gradle
+edge/.pio
+
 ### Eclipse ###
 .metadata
 bin/
