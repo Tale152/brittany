@@ -3,7 +3,7 @@
 
 #include <unity.h>
 #include <Arduino.h>
-#include "digital-light/DigitalLightHw.h"
+#include "digital-light/hw/DigitalLightHw.h"
 
 #define DIGITAL_LIGHT_ID "digital-light"
 #define DIGITAL_LIGHT_PIN LED_BUILTIN
