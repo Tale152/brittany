@@ -29,7 +29,7 @@ public:
     std::string path();
 
     /**
-     * @brief execute the OperationHandler.
+     * @brief execute the OperationHandler. This method wiill often act as a template method.
      * 
      * @param args Arguments of the OperationHandler used for computation.
      * @return OperationHandlerResult The result of the computation.
