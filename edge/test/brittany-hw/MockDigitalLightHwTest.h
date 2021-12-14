@@ -2,7 +2,7 @@
 #define BRITTANY_MOCK_DIGITAL_LIGHT_HW_TEST_H
 
 #include <unity.h>
-#include "digital-light/mock/MockDigitalLightHw.h"
+#include "mock/MockDigitalLightHw.h"
 
 #define DIGITAL_LIGHT_ID "light"
 #define DIGITAL_LIGHT_PIN 10
