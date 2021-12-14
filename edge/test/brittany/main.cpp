@@ -4,6 +4,7 @@
 #include "hw/ComponentHwTest.h"
 #include "hw/OnePinTest.h"
 #include "hw/MockDigitalLightHwTest.h"
+#include "utilTest.h"
 
 void test_hw() {
     test_ComponentHw(); //ComponentHwTest
@@ -20,5 +21,6 @@ int main() {
     UNITY_BEGIN();
     test_hw();
     test_operation_handler();
+    test_util();
     UNITY_END();
 }
