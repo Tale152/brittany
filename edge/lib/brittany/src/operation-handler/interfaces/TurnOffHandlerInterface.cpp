@@ -1,14 +1,10 @@
 #include "TurnOffHandlerInterface.h"
 #include "HttpStatusCodes_C++.h"
 
-TurnOffHandlerInterface::TurnOffHandlerInterface(std::string path) : OperationHandler(path) {
+TurnOffHandlerInterface::TurnOffHandlerInterface(std::string path) : OperationHandlerInterface(path) {
     //does nothing
 }
 
-OperationHandlerResult TurnOffHandlerInterface::handle(Json::Value args) {
-    if(turnOff(args.asString())) {
-        return OperationHandlerResult(HttpStatus::OK, "Ok.");
-    } else {
-        return OperationHandlerResult(HttpStatus::NotFound, "Can't find this component.");
-    }
+bool TurnOffHandlerInterface::operation(Json::Value args) {
+    return turnOff(args.asString());
 }

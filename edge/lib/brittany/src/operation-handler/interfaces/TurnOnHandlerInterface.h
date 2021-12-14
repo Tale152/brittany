@@ -4,19 +4,21 @@
 #include <list>
 #include <string>
 #include <json/json.h>
-#include "operation-handler/OperationHandler.h"
+#include "operation-handler/interfaces/OperationHandlerInterface.h"
 
 /**
  * @brief Operation Handler Interface whose objective is to turn on a component.
  * 
  */
-class TurnOnHandlerInterface : public OperationHandler {
+class TurnOnHandlerInterface : public OperationHandlerInterface {
 
 public:
 
     TurnOnHandlerInterface(std::string path);
 
     OperationHandlerResult handle(Json::Value args);
+
+    bool operation(Json::Value args);
 
     /**
      * @brief turn on the chosen component.
