@@ -1,4 +1,4 @@
-name: Test auth service
+name: Auth service CI
 
 on:
   push:
@@ -8,18 +8,14 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
         mongodb-version: [3.6, 4.0, 4.2]
-
     defaults:
       run:
         working-directory: ./auth-service
-
     steps:
     - name: Checkout current branch (full)
       uses: actions/checkout@v2
@@ -37,3 +33,18 @@ jobs:
         mongodb-version: ${{ matrix.mongodb-version }}
     - run: npm install
     - run: npm test
+  deploy-dev-image:
+    needs: test
+    if: github.ref == 'refs/heads/auth-service'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./auth-service
+    steps:
+        - uses: actions/checkout@v1
+        - name: Login to DockerHub Registry
+          run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        - name: Build the latest Docker image
+          run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-auth-service-dev:latest
+        - name: Push the latest Docker image
+          run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/brittany-auth-service-dev:latest
