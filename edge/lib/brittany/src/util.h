@@ -6,14 +6,19 @@
 #include <string>
 
 /**
- * @brief Return the ComponentHw pointer with the chosen id if present.
- * 
- * @param list the list of components.
- * @param id the id of the ComponentHw to find.
- * @return ComponentHw* a pointer to the ComponentHw with the selected id, NULL otherwise.
+ * @tparam T The class of elements contained in the list.
  */
-ComponentHw* find_by_id(std::list<ComponentHw*> list, std::string id) {
-    for(ComponentHw* c : list) {
+template <class T>
+
+/**
+ * @brief Return the T pointer with the chosen id if present.
+ * 
+ * @param list the list of T.
+ * @param id the id of the T to find.
+ * @return T a pointer to the T class with the selected id, NULL otherwise.
+ */
+T find_by_id(std::list<T> list, std::string id) {
+    for(T c : list) {
         if(c->id() == id) {
             return c;
         }
