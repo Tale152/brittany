@@ -2,7 +2,7 @@
 #define BRITTANY_MOCK_DIGITAL_LIGHT_HW_TEMPLATE_H
 
 #include <string>
-#include "../DigitalLightHwInterface.h"
+#include "hw/interfaces/DigitalLightHwInterface.h"
 
 /**
  * @brief Mock class of a digital light component used only for testing purposes.
@@ -14,11 +14,17 @@ public:
 
     MockDigitalLightHw(std::string id, uint8_t pin) : DigitalLightHwInterface(id, pin){ }
 
-    void on();
+    void on() {
+        _isOn = true;
+    };
 
-    void off();
+    void off() {
+        _isOn = false;
+    };
 
-    bool isOn();
+    bool isOn() {
+        return _isOn;
+    };
 
 private:
 

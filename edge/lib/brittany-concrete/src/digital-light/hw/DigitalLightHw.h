@@ -1,7 +1,7 @@
 #ifndef BRITTANY_DIGITAL_LIGHT_HW_H
 #define BRITTANY_DIGITAL_LIGHT_HW_H
 
-#include "digital-light/DigitalLightHwInterface.h"
+#include "hw/interfaces/DigitalLightHwInterface.h"
 
 /**
  * @brief Concrete implementation of a Digital Light component.
