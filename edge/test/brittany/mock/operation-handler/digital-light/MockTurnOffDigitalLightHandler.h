@@ -1,39 +1,39 @@
-#ifndef BRITTANY_MOCK_TURN_ON_DIGITAL_LIGHT_HANDLER_INTERFACE_H
-#define BRITTANY_MOCK_TURN_ON_DIGITAL_LIGHT_HANDLER_INTERFACE_H
+#ifndef BRITTANY_MOCK_TURN_OFF_DIGITAL_LIGHT_HANDLER_INTERFACE_H
+#define BRITTANY_MOCK_TURN_OFF_DIGITAL_LIGHT_HANDLER_INTERFACE_H
 
 #include <list>
 #include <string>
 #include <json/json.h>
-#include "operation-handler/interfaces/TurnOnHandlerInterface.h"
+#include "operation-handler/interfaces/TurnOffHandlerInterface.h"
 #include "../../hw/MockDigitalLightHw.h"
 #include "operation-handler/OperationHandlerResult.h"
 #include "util.h"
 
-class MockTurnOnDigitalLightHandler : public TurnOnHandlerInterface {
+class MockTurnOffDigitalLightHandler : public TurnOffHandlerInterface {
 
 public:
 
-    MockTurnOnDigitalLightHandler(
+    MockTurnOffDigitalLightHandler(
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): TurnOnHandlerInterface(path) {
-         _components = components;
+    ): TurnOffHandlerInterface(path) {
+        _components = components;
     };
 
 private:
 
-    bool turnOn(std::string id) {
+    bool turnOff(std::string id) {
         MockDigitalLightHw* component = find_by_id(_components, id);
         if(component == NULL) {
             return false;
         } else {
-            component->on();
+            component->off();
             return true;
         }
     };
-
+    
     std::list<MockDigitalLightHw*> _components;
 
 };
 
-#endif //BRITTANY_MOCK_TURN_ON_DIGITAL_LIGHT_HANDLER_INTERFACE_H
+#endif //BRITTANY_MOCK_TURN_OFF_DIGITAL_LIGHT_HANDLER_INTERFACE_H
