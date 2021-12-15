@@ -55,8 +55,32 @@ async function createNewOrganization(req, res){
                 ownerRole._id,
                 newOrganization._id
             )
-            res.status(201).json({token: "TODO"})
+            saveNewOrganization(newOrganization, newFarmerOwner, res)
         }
+    }).catch(err => {
+        res.status(500).json({err: err})
+    })
+}
+
+async function deleteOrganization(id, res, error){
+    Organization.deleteOne({ _id: id }).then(() => {
+        res.status(500).json({err: error})
+    }).catch(err => {
+        deleteOrganization(id, res, error)
+    })
+}
+
+async function saveNewOrganization(organization, farmer, res){
+    organization.save().then(() => {
+        farmer.save().then(() => {
+            res.status(201).json({
+                token: "TODO",
+                farmerId: farmer._id,
+                organizationId: organization._id
+            })
+        }).catch(err => {
+            deleteOrganization(organization._id, res, err)
+        })
     }).catch(err => {
         res.status(500).json({err: err})
     })
