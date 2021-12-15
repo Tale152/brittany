@@ -20,14 +20,19 @@ void test_operation_handler_result_content() {
     TEST_ASSERT_TRUE(json_content.get("two", Json::Value().isNull()));
 }
 
-void setup(){
+void setup_operation_handler_result_test(){
     content["one"] = 1;
     content["happy"] = true;
     result = new OperationHandlerResult(RESULT_CODE, content);
 }
 
+
+void post_operation_handler_result_test(){
+    delete result;
+}
+
 void test_OperationHandlerResult() {
-    setup();
+    setup_operation_handler_result_test();
     RUN_TEST(test_operation_handler_result_code);
     RUN_TEST(test_operation_handler_result_content);
 }

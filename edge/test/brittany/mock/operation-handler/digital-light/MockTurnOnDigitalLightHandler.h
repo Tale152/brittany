@@ -5,6 +5,7 @@
 #include <string>
 #include <json/json.h>
 #include "operation-handler/interfaces/TurnOnHandlerInterface.h"
+#include "operation-handler/interfaces/TurnOnHandlerInterface.cpp"
 #include "../../hw/MockDigitalLightHw.h"
 #include "operation-handler/OperationHandlerResult.h"
 #include "util.h"

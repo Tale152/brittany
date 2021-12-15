@@ -30,6 +30,10 @@ void setup_mock_light_handler_test() {
     isOnDigitalLightHandler = new MockIsOnDigitalLightHandler(MOCK_IS_ON_LIGHT_PATH, light_list);
 }
 
+void post_mock_light_handler_test () {
+    delete light0, light1, turnOffDigitalLightHandler, turnOnDigitalLightHandler, isOnDigitalLightHandler;
+}
+
 void check_result_is_ok(OperationHandlerResult result) {
     TEST_ASSERT_EQUAL(HttpStatus::OK, result.code());
     TEST_ASSERT_EQUAL_STRING("Ok.", result.content().asString().c_str());
@@ -96,4 +100,5 @@ void test_MockDigitalLightHandlersTest() {
     RUN_TEST(test_mock_turn_is_off_digital_light_handler);
     RUN_TEST(test_mock_turn_on_digital_light_handler);
     RUN_TEST(test_mock_turn_is_on_digital_light_handler);
+    post_mock_light_handler_test();
 }
