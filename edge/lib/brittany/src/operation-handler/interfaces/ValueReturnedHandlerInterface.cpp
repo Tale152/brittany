@@ -1,6 +1,7 @@
 #include "ValueReturnedHandlerInterface.h"
 #include "HttpStatusCodes_C++.h"
 #include <optional>
+#include "util.h"
 
 template <typename T>
 ValueReturnedHandlerInterface<T>::ValueReturnedHandlerInterface(std::string path) : OperationHandler(path) {
@@ -13,7 +14,7 @@ OperationHandlerResult ValueReturnedHandlerInterface<T>::handle(Json::Value args
     if(result.has_value()){
         return OperationHandlerResult(HttpStatus::OK, Json::Value(result.value()));
     } else {
-        return OperationHandlerResult(HttpStatus::NotFound, Json::Value("Operation failed."));
+        return OperationHandlerResult(HttpStatus::NotFound, Json::Value(phrase(ContentResult::OperationFailed)));
     }
     
 }

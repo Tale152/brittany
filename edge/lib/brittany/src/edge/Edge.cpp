@@ -1,5 +1,6 @@
 #include "Edge.h"
 #include "HttpStatusCodes_C++.h"
+#include "util.h"
 
 Edge::Edge(std::list<OperationHandler*> operations) {
     _operations = operations;
@@ -13,7 +14,7 @@ OperationHandlerResult Edge::execute(std::string route, Json::Value args) {
     }
     return OperationHandlerResult(
         HttpStatus::NotFound,
-        Json::Value("The requested resource does not exist.")
+        Json::Value(phrase(ContentResult::ResourceNotFound))
     );
 }
 
