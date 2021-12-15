@@ -22,3 +22,15 @@ tasks.register<Exec>("persistenceDevDown"){
     commandLine("docker-compose", "-f", "persistence-service-dev-compose.yml", "-p", "persistence-service-dev", "down")
 }
 
+tasks.register<Exec>("coreDevUp"){
+    commandLine("docker", "run", "-d", "--rm", "--name", "greenhouse-core-dev", "alessandrotalmi/brittany-greenhouse-core-dev:latest")
+}
+
+tasks.register<Exec>("coreDevLog"){
+    commandLine("docker", "logs", "-f", "greenhouse-core-dev")
+}
+
+tasks.register<Exec>("coreDevDown"){
+    commandLine("docker", "stop", "greenhouse-core-dev")
+}
+
