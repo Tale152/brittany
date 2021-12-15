@@ -10,7 +10,7 @@
 
 +wait <- .at("now + 2 seconds", {+sample}).
 
-+sample <- sampleOperation; -+wait.
++sample <- ?role(R); sampleOperation(R); -+wait.
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

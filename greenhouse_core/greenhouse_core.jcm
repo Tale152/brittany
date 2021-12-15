@@ -15,6 +15,7 @@
 mas greenhouse_core {
 
     agent samplingAgent : samplingAgent.asl {
+    	beliefs: role("temperature")
 		focus: brittany.common
 		focus: brittany.sampling
 	}
