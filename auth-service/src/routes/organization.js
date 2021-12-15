@@ -75,8 +75,12 @@ async function deleteOrganization(id, res, error){
 async function saveNewOrganization(organization, farmer, res){
     organization.save().then(() => {
         farmer.save().then(() => {
+            var payload = {
+                farmerId: farmer._id.toString(),
+                organizationId: organization._id.toString()
+            }
             res.status(201).json({
-                token: jwt.sign(farmer._id.toString(), tokenSecret)
+                token: jwt.sign(payload, tokenSecret)
             })
         }).catch(err => {
             deleteOrganization(organization._id, res, err)
