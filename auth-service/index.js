@@ -2,6 +2,7 @@ const cors = require('cors')
 var mongoose = require('mongoose')
 const server = require('./src/server')
 var conf = require('./src/conf')
+const rolesSetup = require('./src/setup/populateRoles')
 
 const whitelist = [conf.webClientAddress]
 const corsOptions = {
@@ -18,7 +19,8 @@ server.use(cors(corsOptions))
 
 mongoose
     .connect(conf.dbAddress, {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => {
+    .then(async () => {
+        await rolesSetup.populateRoles()
         server.listen(conf.serverPort, () => {
             console.log(conf.asciiArt)
         })
