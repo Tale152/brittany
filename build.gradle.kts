@@ -34,3 +34,19 @@ tasks.register<Exec>("coreDevDown"){
     commandLine("docker", "stop", "greenhouse-core-dev")
 }
 
+tasks.register<Exec>("clientDevUp"){
+    commandLine("docker", "run", "-d", "--rm",
+        "-p", "3000:3000",
+        "-e", "REACT_APP_PERSISTENCE_SERVICE_ADDRESS=http://localhost",
+        "-e", "REACT_APP_PERSISTENCE_SERVICE_PORT=80",
+        "--name", "web-client-dev", "alessandrotalmi/brittany-web-client-dev:latest"
+    )
+}
+
+tasks.register<Exec>("clientDevLog"){
+    commandLine("docker", "logs", "-f", "web-client-dev")
+}
+
+tasks.register<Exec>("clientDevDown"){
+    commandLine("docker", "stop", "web-client-dev")
+}
