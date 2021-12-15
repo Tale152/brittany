@@ -1,0 +1,22 @@
+name: Greenhouse core CI
+
+on:
+  push:
+    branches: [ 'greenhouse-core' ]
+  pull_request:
+    branches: [ 'greenhouse-core' ]
+
+jobs:
+  deploy-dev-image:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./greenhouse_core
+    steps:
+        - uses: actions/checkout@v1
+        - name: Login to DockerHub Registry
+          run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        - name: Build the latest Docker image
+          run: docker build . --file Dockerfile.dev --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core-dev:latest
+        - name: Push the latest Docker image
+          run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core-dev:latest
