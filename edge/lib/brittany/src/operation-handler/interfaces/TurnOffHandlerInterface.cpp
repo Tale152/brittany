@@ -1,10 +1,13 @@
 #include "TurnOffHandlerInterface.h"
 #include "HttpStatusCodes_C++.h"
 
-TurnOffHandlerInterface::TurnOffHandlerInterface(std::string path) : OperationHandlerInterface(path) {
+TurnOffHandlerInterface::TurnOffHandlerInterface(std::string path) : ValueReturnedHandlerInterface<std::string>(path) {
     //does nothing
 }
 
-bool TurnOffHandlerInterface::operation(Json::Value args) {
-    return turnOff(args.asString());
+std::optional<std::string> TurnOffHandlerInterface::operation(Json::Value args) {
+    if(turnOff(args.asString())){
+        return std::optional("Ok.");
+    }
+    return std::nullopt;
 }

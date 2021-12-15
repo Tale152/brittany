@@ -3,20 +3,27 @@
 
 #include <list>
 #include <string>
+#include <optional>
 #include <json/json.h>
-#include "operation-handler/interfaces/OperationHandlerInterface.h"
+#include "operation-handler/interfaces/ValueReturnedHandlerInterface.h"
 
 /**
  * @brief Operation Handler Interface whose objective is to turn on a component.
  * 
  */
-class TurnOnHandlerInterface : public OperationHandlerInterface {
+class TurnOnHandlerInterface : public ValueReturnedHandlerInterface<std::string> {
 
 public:
 
     TurnOnHandlerInterface(std::string path);
 
-    bool operation(Json::Value args);
+    /**
+     * @brief template method that call the turnOn method.
+     * 
+     * @param args The arguments that the operation uses.
+     * @return std::optional<std::string> an empty optional if operation fails, an "Ok." otherwise.
+     */
+    std::optional<std::string> operation(Json::Value args);
 
     /**
      * @brief turn on the chosen component.
