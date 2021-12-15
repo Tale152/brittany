@@ -1,0 +1,47 @@
+name: Web client CI
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [12.x, 14.x, 16.x]
+    defaults:
+      run:
+        working-directory: ./web-client
+    steps:
+    - name: Checkout current branch (full)
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: web-client/package-lock.json
+    - run: npm install
+    - run: npm test
+
+  deploy-dev-image:
+    needs: test
+    if: github.ref == 'refs/heads/web-client'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web-client
+    steps:
+        - uses: actions/checkout@v1
+        - name: Login to DockerHub Registry
+          run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        - name: Build the latest Docker image
+          run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-web-client-dev:latest
+        - name: Push the latest Docker image
+          run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/brittany-web-client-dev:latest
