@@ -1,5 +1,6 @@
 module.exports = {
     serverPort: process.env.PORT || 81,
+    tokenSecret: process.env.TOKEN_SECRET || "devTokenSecret",
     dbAddress: process.env.DB || 'mongodb://127.0.0.1/brittany_auth',
     testDbAddress: 'mongodb://127.0.0.1/brittany_auth',
     webClientAddress: process.env.WEB_CLIENT_ADDRESS || 'http://localhost:3000',

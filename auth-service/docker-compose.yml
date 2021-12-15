@@ -7,6 +7,7 @@ services:
       - DB=mongodb://database:27017/brittany_auth
       - PORT=80
       - WEB_CLIENT_ADDRESS=http://localhost:3000
+      - TOKEN_SECRET=devTokenSecret
     ports:
       - 81:80
     image: auth
