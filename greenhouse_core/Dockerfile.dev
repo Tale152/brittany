@@ -10,4 +10,4 @@ RUN gradle uberJar --stacktrace
 FROM jomifred/jacamo:1.0
 WORKDIR /app
 COPY --from=0 /app/build/libs /app
-CMD ["java", "-jar", "jacamo-overviewJaCaMo-1.0.jar"]
+CMD ["java", "-jar", "jacamo-greenhouse_core-1.0.jar"]
