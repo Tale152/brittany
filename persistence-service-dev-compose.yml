@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  persistence:
+    image: alessandrotalmi/brittany-persistence-service-dev
+    environment:
+      - DB=mongodb://database:27017/brittany_persistence
+      - PORT=80
+      - WEB_CLIENT_ADDRESS=http://localhost:3000
+    ports:
+      - 80:80
+  database:
+    image: mongo
+    volumes:
+      - database_data:/data/db
+
+volumes:
+  database_data:
