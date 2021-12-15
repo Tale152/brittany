@@ -13,19 +13,23 @@
 #define MOCK_LIGHT_IN_MODULE_PIN_0 1
 #define MOCK_LIGHT_IN_MODULE_PIN_1 2
 
+MockDigitalLightHw* lightInModule0;
+MockDigitalLightHw* lightInModule1;
 MockModule* moduleTest;
 std::list<MockDigitalLightHw*> components;
 
 std::list<std::string> lightNames = {MOCK_LIGHT_IN_MODULE_NAME_0, MOCK_LIGHT_IN_MODULE_NAME_1};
 
 void setup_module_test() {
-    components.push_back(
-        new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_0, MOCK_LIGHT_IN_MODULE_PIN_0)
-    );
-    components.push_back(
-        new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_1, MOCK_LIGHT_IN_MODULE_PIN_1)
-    );
+    lightInModule0 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_0, MOCK_LIGHT_IN_MODULE_PIN_0);
+    lightInModule1 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_1, MOCK_LIGHT_IN_MODULE_PIN_1);
+    components.push_back(lightInModule0);
+    components.push_back(lightInModule1);
     moduleTest = new MockModule(components);
+}
+
+void post_module_test() {
+    delete lightInModule0, lightInModule1, moduleTest;
 }
 
 void execute_on_each_component(OperationHandler* handler, void (*f)(OperationHandler*, std::string)) {
@@ -92,4 +96,5 @@ void test_module_get_handlers(){
 void test_ModuleTest() {
     setup_module_test();
     RUN_TEST(test_module_get_handlers);
+    post_module_test();
 }

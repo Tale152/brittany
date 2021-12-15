@@ -25,6 +25,10 @@ void setup_util_test() {
     list_of_light.push_front(component2);
 }
 
+void post_util_test() {
+    delete component0, component1, component2;
+}
+
 void test_util_find_by_id(){
     TEST_ASSERT_EQUAL(component0, find_by_id(list, COMPONENT_0_NAME));
     TEST_ASSERT_EQUAL(component1, find_by_id(list, COMPONENT_1_NAME));
@@ -36,4 +40,5 @@ void test_util_find_by_id(){
 void test_util() {
     setup_util_test();
     RUN_TEST(test_util_find_by_id);
+    post_util_test();
 }
