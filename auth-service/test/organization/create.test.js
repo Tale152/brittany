@@ -23,32 +23,51 @@ const correctBody = {
     password: password
 }
 
-async function correctOrganizationCreation(){
-    await rolesSetup.populateRoles()
+async function organizationCreate(body, code, then){
     await supertest(server)
         .post("/organization/create")
-        .send(correctBody)
+        .send(body)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(201)
-        .then((res) => expect(res.body).toHaveProperty("token"))
+        .expect(code)
+        .then((res) => then(res))
 }
 
-test("Correct Organization creation", correctOrganizationCreation)
+test("Correct Organization creation", async () => {
+    await rolesSetup.populateRoles()
+    await organizationCreate(correctBody, 201, (res) => expect(res.body).toHaveProperty("token"))
+})
 
 test("Block Organization creation on duplicate Organization name", async () => {
-    await correctOrganizationCreation()
-    await supertest(server)
-        .post("/organization/create")
-        .send({
+    await rolesSetup.populateRoles()
+    await organizationCreate(correctBody, 201, (res) => expect(res.body).toHaveProperty("token"))
+    await organizationCreate(
+        {
             organizationName: organizationName,
             name: name,
             surname: surname,
             mail: "different." + mail,
             birthdate: birthdate,
             password: password
-        })
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(406)
+        },
+        406,
+        (res) => expect(res.body).toHaveProperty("err")
+    )
+})
+
+test("Block Organization creation on duplicate Farmer mail", async () => {
+    await rolesSetup.populateRoles()
+    await organizationCreate(correctBody, 201, (res) => expect(res.body).toHaveProperty("token"))
+    await organizationCreate(
+        {
+            organizationName: "different " + organizationName,
+            name: name,
+            surname: surname,
+            mail: mail,
+            birthdate: birthdate,
+            password: password
+        },
+        406,
+        (res) => expect(res.body).toHaveProperty("err")
+    )
 })
