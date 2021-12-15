@@ -1,23 +1,20 @@
 const jwt = require('jsonwebtoken')
 
 const tokenSecret = require('../../../conf').tokenSecret
+const stringUtil = require('../util/stringUtil')
 const Role = require('../../../mongoose/role')
 const Organization = require('../../../mongoose/organization')
 const OrganizationFactory = require('../../../mongoose/factories/organization')
 const Farmer = require('../../../mongoose/farmer')
 const FarmerFactory = require('../../../mongoose/factories/farmer')
 
-function isValidString(str){
-    return str !== null && str !== undefined && str.trim() !== ""
-}
-
 function areOrganizationCreateParametersValid(params){
-    return isValidString(params.organizationName) &&
-        isValidString(params.mail) &&
-        isValidString(params.name) &&
-        isValidString(params.surname) &&
-        isValidString(params.password) &&
-        isValidString(params.birthdate)
+    return stringUtil.isValidString(params.organizationName) &&
+        stringUtil.isValidString(params.mail) &&
+        stringUtil.isValidString(params.name) &&
+        stringUtil.isValidString(params.surname) &&
+        stringUtil.isValidString(params.password) &&
+        stringUtil.isValidString(params.birthdate)
 }
 
 async function checkUniqueOrganizationCreateParameters(req, res){
