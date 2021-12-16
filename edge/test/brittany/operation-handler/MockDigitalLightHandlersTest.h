@@ -1,7 +1,7 @@
 #include <unity.h>
-#include "../mock/operation-handler/digital-light/MockTurnOffDigitalLightHandler.h"
-#include "../mock/operation-handler/digital-light/MockTurnOnDigitalLightHandler.h"
-#include "../mock/operation-handler/digital-light/MockIsOnDigitalLightHandler.h"
+#include "operation-handler/digital-light/MockTurnOffDigitalLightHandler.h"
+#include "operation-handler/digital-light/MockTurnOnDigitalLightHandler.h"
+#include "operation-handler/digital-light/MockIsOnDigitalLightHandler.h"
 #include "HttpStatusCodes_C++.h"
 
 #define LIGHT_0_NAME "light0"

@@ -1,7 +1,7 @@
 #include <unity.h>
 #include <list>
 #include "edge/Edge.h"
-#include "../mock/operation-handler/MockOperationHandler.h"
+#include "operation-handler/MockOperationHandler.h"
 
 #define MOCK_OPERATION_HANDLER_IN_EDGE_PATH_0 "/path0"
 #define MOCK_OPERATION_HANDLER_IN_EDGE_PATH_1 "/path1"

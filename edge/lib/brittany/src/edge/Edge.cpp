@@ -19,5 +19,5 @@ OperationHandlerResult Edge::execute(std::string route, Json::Value args) {
 }
 
 ThingDescriptor Edge::thingDescriptor() {
-
+    return ThingDescriptor();
 }

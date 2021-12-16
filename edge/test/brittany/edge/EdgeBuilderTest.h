@@ -1,8 +1,8 @@
 #include <unity.h>
 #include "edge/Edge.h"
 #include "edge/EdgeBuilder.h"
-#include "../mock/modules/MockComponentModule.h"
-#include "../mock/modules/MockModule.h"
+#include "modules/MockComponentModule.h"
+#include "modules/MockModule.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
 

@@ -1,7 +1,7 @@
 #include <unity.h>
 #include <list>
 #include "hw/ComponentHw.h"
-#include "mock/hw/MockDigitalLightHw.h"
+#include "hw/MockDigitalLightHw.h"
 #include "util.h"
 
 #define COMPONENT_0_NAME "name0"
