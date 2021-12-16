@@ -1,12 +1,10 @@
 #include "Module.h"
 #include <cstdarg>
 
-template<class T>
-Module<T>::Module(std::list<T*> handlers) {
+Module::Module() {
     //does nothing
 }
 
-template<class T>
-std::list<OperationHandler*> Module<T>::handlers() {
+std::list<OperationHandler*> Module::handlers() {
     return _handlers;
 }

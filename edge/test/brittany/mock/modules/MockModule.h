@@ -3,33 +3,21 @@
 
 #include <list>
 #include "operation-handler/OperationHandler.h"
+#include "../operation-handler/MockOperationHandler.h"
 #include "modules/Module.h"
-#include "modules/Module.cpp"
-#include "../hw/MockDigitalLightHw.h"
-#include "../operation-handler/digital-light/MockIsOnDigitalLightHandler.h"
-#include "../operation-handler/digital-light/MockTurnOffDigitalLightHandler.h"
-#include "../operation-handler/digital-light/MockTurnOnDigitalLightHandler.h"
 
-#define MOCK_IS_ON_HANDLER_MODULE_PATH "/isOn"
-#define MOCK_TURN_ON_HANDLER_MODULE_PATH "/turnOn"
-#define MOCK_TURN_OFF_HANDLER_MODULE_PATH "/turnOff"
+#define OPERATION_HANDLER_IN_MOCK_MODULE_PATH "/value"
 
-class MockModule : public Module<MockDigitalLightHw> {
+class MockModule : public Module {
 
 public:
 
-    MockModule(std::list<MockDigitalLightHw*> components): Module<MockDigitalLightHw>(components) {
+    MockModule(): Module() {
         _handlers.push_back(
-            new MockIsOnDigitalLightHandler(MOCK_IS_ON_HANDLER_MODULE_PATH, components)
-        );
-        _handlers.push_back(
-            new MockTurnOnDigitalLightHandler(MOCK_TURN_ON_HANDLER_MODULE_PATH, components)
-        );  
-        _handlers.push_back(
-            new MockTurnOffDigitalLightHandler(MOCK_TURN_OFF_HANDLER_MODULE_PATH, components)
+            new MockOperationHandler(OPERATION_HANDLER_IN_MOCK_MODULE_PATH)
         );
     };
 
 };
 
-#endif //BRITTANY_MOCK_MODULE_H
+#endif //BRITTANY_MOCK_COMPONENT_MODULE_H

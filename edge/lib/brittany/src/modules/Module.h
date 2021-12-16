@@ -5,28 +5,22 @@
 #include "operation-handler/OperationHandler.h"
 
 /**
- * @tparam T The generic type of the components in the module.
- */
-template<class T>
-
-/**
- * @brief A class that wrap some components and some OperationHandler that maniupulate them.
+ * @brief Class that wraps a collection of handlers.
+ * 
  */
 class Module {
 
 public:
 
     /**
-     * @brief Construct a new Module object. Handlers are created here in subclasses.
-     * 
-     * @param components 
+     * @brief Construct a new Module object.
      */
-    Module(std::list<T*> components);
+    Module();
 
     /**
      * @brief Return the list of OperationHandler in this Module.
      * 
-     * @return std::list<OperationHandler*> 
+     * @return std::list<OperationHandler*> the handlers list.
      */
     std::list<OperationHandler*> handlers();
 

@@ -4,7 +4,7 @@
 #include "operation-handler/OperationHandlerResult.h"
 #include "../mock/operation-handler/MockOperationHandler.h"
 #include "../mock/hw/MockDigitalLightHw.h"
-#include "../mock/modules/MockModule.h"
+#include "../mock/modules/MockComponentModule.h"
 #include "modules/Module.h"
 
 #define MOCK_LIGHT_IN_MODULE_NAME_0 "light0"
@@ -15,7 +15,7 @@
 
 MockDigitalLightHw* lightInModule0;
 MockDigitalLightHw* lightInModule1;
-MockModule* moduleTest;
+MockComponentModule* moduleTest;
 std::list<MockDigitalLightHw*> components;
 
 std::list<std::string> lightNames = {MOCK_LIGHT_IN_MODULE_NAME_0, MOCK_LIGHT_IN_MODULE_NAME_1};
@@ -25,7 +25,7 @@ void setup_module_test() {
     lightInModule1 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_1, MOCK_LIGHT_IN_MODULE_PIN_1);
     components.push_back(lightInModule0);
     components.push_back(lightInModule1);
-    moduleTest = new MockModule(components);
+    moduleTest = new MockComponentModule(components);
 }
 
 void post_module_test() {
@@ -93,7 +93,7 @@ void test_module_get_handlers(){
     TEST_ASSERT_EQUAL(0, handlersList.size());
 }
 
-void test_ModuleTest() {
+void test_ComponentModuleTest() {
     setup_module_test();
     RUN_TEST(test_module_get_handlers);
     post_module_test();
