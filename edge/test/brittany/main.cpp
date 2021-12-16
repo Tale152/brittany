@@ -5,8 +5,9 @@
 #include "hw/ComponentHwTest.h"
 #include "hw/OnePinTest.h"
 #include "hw/MockDigitalLightHwTest.h"
-#include "modules/ModuleTest.h"
+#include "modules/ComponentModuleTest.h"
 #include "edge/EdgeTest.h"
+#include "edge/EdgeBuilderTest.h"
 #include "utilTest.h"
 
 void test_hw() {
@@ -22,11 +23,12 @@ void test_operation_handler() {
 }
 
 void test_modules() {
-    test_ModuleTest(); //ModuleTest
+    test_ComponentModuleTest(); //ModuleTest
 }
 
 void test_edge() {
     test_Edge(); //EdgeTest
+    test_EdgeBuilder(); //EdgeBuilderTest
 }
 
 int main() {
