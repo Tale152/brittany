@@ -1,7 +1,5 @@
 const stringUtil = require('../util/stringUtil')
 const Organization = require('../../../mongoose/organization')
-const OrganizationFactory = require('../../../mongoose/factories/organization')
-const Greenhouse = require('../../../mongoose/greenhouse')
 const GreenhouseFactory = require('../../../mongoose/factories/greenhouse')
 
 function areGreenhouseCreateParametersValid(params){
