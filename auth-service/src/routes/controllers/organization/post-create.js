@@ -28,11 +28,11 @@ async function checkUniqueOrganizationCreateParameters(req, res){
                     createNewOrganization(req, res)
                 }
             }).catch(err => {
-                res.status(500).json({err: err})
+                res.status(500).json({err: err.toString()})
             })
         }
     }).catch(err => {
-        res.status(500).json({err: err})
+        res.status(500).json({err: err.toString()})
     })
 }
 
@@ -68,10 +68,10 @@ async function saveNewOrganization(organization, farmer, res){
                 token: jwt.sign(payload, tokenSecret)
             })
         }).catch(err => {
-            deleteOrganization(organization._id, res, err)
+            deleteOrganization(organization._id, res, err.toString())
         })
     }).catch(err => {
-        res.status(500).json({err: err})
+        res.status(500).json({err: err.toString()})
     })
 }
 

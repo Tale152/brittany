@@ -7,10 +7,10 @@ async function organizationInfoController(req, res){
                 name: result.name
             })
         } else {
-            res.setStatus(404)
+            res.status(404).json({err: "not found"})
         }
     }).catch(err => {
-        res.status(500).json({err: err})
+        res.status(500).json({err: err.toString()})
     })
 }
 

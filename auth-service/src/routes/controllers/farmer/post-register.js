@@ -19,7 +19,7 @@ async function checkUniqueFarmerRegisterMail(req, res){
             createNewFarmer(req, res)
         }
     }).catch(err => {
-        res.status(500).json({err: err})
+        res.status(500).json({err: err.toString()})
     })
 }
 
@@ -39,7 +39,7 @@ async function saveNewFarmer(farmer, res){
     farmer.save().then(() => {
         res.status(201).json({id: farmer._id.toString()})
     }).catch(err => {
-        res.status(500).json({err: err})
+        res.status(500).json({err: err.toString()})
     })
 }
 

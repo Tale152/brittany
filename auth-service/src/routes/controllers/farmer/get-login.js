@@ -22,7 +22,7 @@ function tryLogin(req, res){
             res.status(401).json({err: "Invalid credentials"})
         }
     }).catch(err => {
-        res.status(500).json({err: err})
+        res.status(500).json({err: err.toString()})
     })
 }
 
