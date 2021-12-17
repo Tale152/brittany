@@ -3,6 +3,8 @@ const router = express.Router()
 
 const GetFarmerLogin = require("./controllers/farmer/get-login")
 
-router.get("/farmer/login", (req, res) => GetFarmerLogin.farmerLoginController(req, res))
+router.get("/farmer/login", GetFarmerLogin.farmerLoginController)
+
+
 
 module.exports = router
