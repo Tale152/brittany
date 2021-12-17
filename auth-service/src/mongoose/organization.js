@@ -7,10 +7,7 @@ let OrganizationSchema = new Schema({
         require: true,
         unique: true
     },
-    greenhouses: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Greenhouse'
-    }]
+    greenhouses: ['Greenhouse']
 })
 
 module.exports = mongoose.model("Organization", OrganizationSchema)

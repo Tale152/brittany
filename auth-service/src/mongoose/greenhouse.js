@@ -6,10 +6,7 @@ let GreenhouseSchema = new Schema({
         type: String,
         require: true,
     },
-    environments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Environment'
-    }]
+    environments: ['Environment']
 })
 
 module.exports = mongoose.model("Greenhouse", GreenhouseSchema)
