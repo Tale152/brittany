@@ -1,8 +1,9 @@
 const Organization = require("../greenhouse")
 
-function createEnvironment(name) {
+function createEnvironment(name, password) {
     return new Organization({
-        name: name
+        name: name,
+        password: password
     })
 }
 
