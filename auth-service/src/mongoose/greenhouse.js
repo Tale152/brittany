@@ -1,16 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-let OrganizationSchema = new Schema({
+let GreenhouseSchema = new Schema({
     name: {
         type: String,
         require: true,
-        unique: true
     },
-    greenhouses: [{
+    environments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Greenhouse'
+        ref: 'Environment'
     }]
 })
 
-module.exports = mongoose.model("Organization", OrganizationSchema)
+module.exports = mongoose.model("Greenhouse", GreenhouseSchema)
