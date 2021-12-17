@@ -1,5 +1,6 @@
 #include <unity.h>
 #include <list>
+#include <algorithm>
 #include "edge/Edge.h"
 #include "operation-handler/MockOperationHandler.h"
 
@@ -43,6 +44,14 @@ void test_execute() {
     );
 }
 
+void test_available_path() {
+    std::list<std::string> paths = edgeTest -> availablePaths();
+    TEST_ASSERT_EQUAL(2, paths.size());
+    for(std::string p : {MOCK_OPERATION_HANDLER_IN_EDGE_PATH_0, MOCK_OPERATION_HANDLER_IN_EDGE_PATH_1}) {
+        TEST_ASSERT_TRUE(std::find(paths.begin(), paths.end(), p) != paths.end());
+    }
+}
+
 void test_thing_descriptor() {
     //TODO
 }
@@ -50,6 +59,7 @@ void test_thing_descriptor() {
 void test_Edge() {
     setup_test_edge();
     RUN_TEST(test_execute);
+    RUN_TEST(test_available_path);
     RUN_TEST(test_thing_descriptor);
     post_test_edge();
 }

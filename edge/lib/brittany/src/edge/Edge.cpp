@@ -18,6 +18,14 @@ OperationHandlerResult Edge::execute(std::string route, Json::Value args) {
     );
 }
 
+std::list<std::string> Edge::availablePaths() {
+    std::list<std::string> paths;
+    for(OperationHandler* h : _operations) {
+        paths.push_back(h -> path());
+    }
+    return paths;
+}
+
 ThingDescriptor Edge::thingDescriptor() {
     return ThingDescriptor();
 }

@@ -32,6 +32,13 @@ public:
     OperationHandlerResult execute(std::string route, Json::Value args);
 
     /**
+     * @brief Get all the available path list.
+     * 
+     * @return std::list<std::string> 
+     */
+    std::list<std::string> availablePaths();
+
+    /**
      * @brief Return the Edge Thing Descriptor.
      * 
      * @return ThingDescriptor the Edge Thing Descriptor
