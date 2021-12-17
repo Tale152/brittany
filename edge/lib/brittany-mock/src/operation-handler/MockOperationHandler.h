@@ -8,7 +8,7 @@
 #include "HttpStatusCodes_C++.h"
 
 /**
- * @brief Class that represents an mock OperationHandler used only for testing purposes.
+ * @brief Class that represents a mock OperationHandler used only for testing purposes.
  */
 class MockOperationHandler: public OperationHandler {
 
@@ -25,7 +25,6 @@ public:
 
 private:
 
-    std::string _path;
     int _value;
 
 };
