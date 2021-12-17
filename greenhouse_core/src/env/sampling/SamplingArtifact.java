@@ -8,27 +8,27 @@ import java.util.Map;
 import java.util.Optional;
 
 import cartago.*;
-import utility.CollectionUtility;
-import utility.Pair;
+import utility.Device;
+import utility.Thresholds;
 
 public class SamplingArtifact extends Artifact {
 	
-	private List<String> devices;
+	private List<Device> devices;
+	private Thresholds thresholds;
+	
 	private Optional<Map<String, Integer>> lastSamples;
 	private Map<String, Integer> deltaDevices;
-	private Map<String, Pair<Integer, Integer>> thresholds;
 	
 	void init() {
 		this.lastSamples = Optional.empty();	
 		this.deltaDevices = new HashMap<>();
-		this.thresholds = new HashMap<>();
 	}
 	
-	@OPERATION void initDevices(final List<String> devices) {
+	@OPERATION void setup(final List<Device> devices, final Thresholds thresholds) {
+		this.thresholds = thresholds;
 		this.devices = devices;
-		System.out.println("Init " + devices);
-		devices.forEach(d -> this.deltaDevices.put(d, 200000));
-		devices.forEach(d -> this.thresholds.put(d, new Pair<>(100000,500000)));		
+		System.out.println("Init " + this.devices + " " + this.thresholds);
+		this.devices.forEach(d -> this.deltaDevices.put(d.getId(), 200000));	
 	}
 	
 	@OPERATION void sampleOperation(final String role) {
@@ -36,23 +36,25 @@ public class SamplingArtifact extends Artifact {
 		defineObsProperty("communicate", this.devices); //you can send here the devices you want to ask data to
 	}
 	
-	@OPERATION void updateOperation(final List<Pair<String, Integer>> data) {
-		Map<String, Integer> currentSamples = CollectionUtility.toMap(data);
-		System.out.println(currentSamples);
+	@OPERATION void updateOperation(final List<Device> currentSamples) {
 		if(!this.lastSamples.isPresent()) {
 			//TODO mandare dati su db o reperire l'ultima entry su db e controllarla?
 		} else {
 			System.out.println("Last samples " + this.lastSamples + "\nCurrent samples " + currentSamples);
-			currentSamples.forEach((k,v) -> {
-				if(Math.abs(v - lastSamples.get().get(k)) > this.deltaDevices.get(k)) {
-					System.out.println("Carica su db!");				
-					if(v > this.thresholds.get(k).getY() || v < this.thresholds.get(k).getX()) {
-						System.out.println("Create out of range behavior");
-						defineObsProperty("actuate", new Pair<>(k,v), this.thresholds.get(k));
+			currentSamples.forEach(d -> {
+				if(Math.abs(d.getCurrentValue() - lastSamples.get().get(d.getId())) > this.deltaDevices.get(d.getId())) {
+					System.out.println("Carica su db!");
+					if(this.thresholds.getThreshold(d.getRole()).isPresent()) {
+						if(d.getCurrentValue() > this.thresholds.getThreshold(d.getRole()).get().getY() || d.getCurrentValue() < this.thresholds.getThreshold(d.getRole()).get().getX()) {
+							System.out.println("Create out of range behavior");
+							defineObsProperty("actuate", d, this.thresholds.getThreshold(d.getRole()).get());
+						}
 					}
-				}				
+				}
 			});
 		}
-		this.lastSamples = Optional.of(new HashMap<>(currentSamples));
+		
+		this.lastSamples = Optional.of(new HashMap<>());
+		currentSamples.forEach((d) -> this.lastSamples.get().put(d.getId(), d.getCurrentValue()));		
 	}
 }

@@ -18,6 +18,7 @@ mas greenhouse_core {
     	beliefs: role("temperature")
 		focus: brittany.common
 		focus: brittany.sampling
+		focus: brittany.communication
 	}
 	
 	agent communicationAgent : communicationAgent.asl {

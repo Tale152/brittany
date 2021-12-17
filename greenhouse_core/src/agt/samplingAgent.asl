@@ -6,7 +6,7 @@
 
 /* Plans */
 
-+devices(D) <- initDevices(D); +wait.
++setup(D, T) <- setup(D,T); +wait.
 
 +wait <- .at("now + 2 seconds", {+sample}).
 
