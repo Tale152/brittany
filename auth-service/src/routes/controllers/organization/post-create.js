@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 
 const tokenSecret = require('../../../conf').tokenSecret
 const stringUtil = require('../util/stringUtil')
-const Role = require('../../../mongoose/role')
 const Organization = require('../../../mongoose/organization')
 const OrganizationFactory = require('../../../mongoose/factories/organization')
 const Farmer = require('../../../mongoose/farmer')
@@ -38,25 +37,16 @@ async function checkUniqueOrganizationCreateParameters(req, res){
 }
 
 async function createNewOrganization(req, res){
-    Role.findOne({ name: "Owner" }).then(async ownerRole => {
-        if(ownerRole === null){
-            res.status(500).json({err: "Cannot find Owner role"})
-        } else {
-            var newOrganization = OrganizationFactory.createOrganization(req.body.organizationName)
-            var newFarmerOwner = FarmerFactory.createFarmer(
-                req.body.name,
-                req.body.surname,
-                req.body.birthdate,
-                req.body.mail,
-                req.body.password,
-                ownerRole._id,
-                newOrganization._id
-            )
-            saveNewOrganization(newOrganization, newFarmerOwner, res)
-        }
-    }).catch(err => {
-        res.status(500).json({err: err})
-    })
+    var newOrganization = OrganizationFactory.createOrganization(req.body.organizationName)
+    var newFarmerOwner = FarmerFactory.createFarmer(
+        req.body.name,
+        req.body.surname,
+        req.body.birthdate,
+        req.body.mail,
+        req.body.password,
+        newOrganization._id
+    )
+    saveNewOrganization(newOrganization, newFarmerOwner, res)
 }
 
 async function deleteOrganization(id, res, error){

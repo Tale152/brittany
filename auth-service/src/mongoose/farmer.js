@@ -23,10 +23,6 @@ let FarmerSchema = new Schema({
         type: String,
         require: true
     },
-    id_role: {
-        type: Schema.Types.ObjectId,
-        require: true
-    },
     id_organization: {
         type: Schema.Types.ObjectId,
         require: true

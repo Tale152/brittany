@@ -2,7 +2,6 @@ const supertest = require('supertest')
 
 const server = require('../../src/server')
 const db = require('../util/db')
-const rolesSetup = require('../../src/setup/populateRoles')
 
 beforeAll((done) => db.createConnectionToTestDB(done))
 beforeEach(() => db.resetTestDB())
@@ -34,12 +33,10 @@ async function organizationCreate(body, code, then){
 }
 
 test("Correct Organization creation", async () => {
-    await rolesSetup.populateRoles()
     await organizationCreate(correctBody, 201, (res) => expect(res.body).toHaveProperty("token"))
 })
 
 test("Block Organization creation on duplicate Organization name", async () => {
-    await rolesSetup.populateRoles()
     await organizationCreate(correctBody, 201, (res) => expect(res.body).toHaveProperty("token"))
     await organizationCreate(
         {
@@ -56,7 +53,6 @@ test("Block Organization creation on duplicate Organization name", async () => {
 })
 
 test("Block Organization creation on duplicate Farmer mail", async () => {
-    await rolesSetup.populateRoles()
     await organizationCreate(correctBody, 201, (res) => expect(res.body).toHaveProperty("token"))
     await organizationCreate(
         {
