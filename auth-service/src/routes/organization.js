@@ -8,6 +8,6 @@ const GetOrganizationInfo = require("./controllers/organization/get-info")
 
 router.post("/organization/create", (req, res) => PostCreateOrganization.createOrganizationController(req, res))
 
-router.get("/organization/name", tokenAuth.verifyToken, (req, res) => GetOrganizationInfo.organizationInfoController(req, res))
+router.get("/organization/info", tokenAuth.verifyToken, (req, res) => GetOrganizationInfo.organizationInfoController(req, res))
 
 module.exports = router
