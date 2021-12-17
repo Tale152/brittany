@@ -1,4 +1,3 @@
-const tokenSecret = require('../../../conf').tokenSecret
 const stringUtil = require('../util/stringUtil')
 const Farmer = require('../../../mongoose/farmer')
 const FarmerFactory = require('../../../mongoose/factories/farmer')
