@@ -1,5 +1,7 @@
+const ObjectId = require('mongoose').Types.ObjectId
+
 const stringUtil = require('../util/stringUtil')
-const Organization = require('../../../mongoose/organization')
+const Greenhouse = require('../../../mongoose/greenhouse')
 const GreenhouseFactory = require('../../../mongoose/factories/greenhouse')
 
 function areGreenhouseCreateParametersValid(params){
@@ -7,31 +9,27 @@ function areGreenhouseCreateParametersValid(params){
 }
 
 async function checkUniqueGreenhouseCreateName(req, res){
-    Organization.findById(req.organizationId).then(async organization => {
-        if(organization !== null){
-            if(organization.greenhouses.find(g => g.name === req.body.name) === undefined){
-                createNewGreenhouse(req, res, organization)
-            } else {
-                res.status(406).json({err: "Greenhouse name already in use"})
-            }
+    Greenhouse.find({ id_organization: new ObjectId(req.organizationId) }).then(async greenhouses => {
+        if(greenhouses.find(g => g.name === req.body.name) === undefined){
+            createNewGreenhouse(req, res)
         } else {
-            res.status(404).json({err: "organization not found"})
+            res.status(406).json({err: "Greenhouse name already in use"})
         }
     }).catch(err => {
         res.status(500).json({err: err.toString()})
     })
 }
 
-async function createNewGreenhouse(req, res, organization){
+async function createNewGreenhouse(req, res){
     var newGreenhouse = GreenhouseFactory.createGreenhouse(
+        req.organizationId,
         req.body.name
     )
-    organization.greenhouses.push(newGreenhouse)
-    saveNewGreenhouse(newGreenhouse, organization, res)
+    saveNewGreenhouse(newGreenhouse, res)
 }
 
-async function saveNewGreenhouse(greenhouse, organization, res){
-    organization.save().then(() => {
+async function saveNewGreenhouse(greenhouse, res){
+    greenhouse.save().then(() => {
         res.status(201).json({id: greenhouse._id.toString()})
     }).catch(err => {
         res.status(500).json({err: err.toString()})
