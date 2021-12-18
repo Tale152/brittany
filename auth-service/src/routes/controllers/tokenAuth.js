@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken')
-const tokenSecret = require('../../conf').tokenSecret
+const farmerTokenSecret = require('../../conf').farmerTokenSecret
 
 const verifyToken = (req, res, next) => {
     try {
-        const decoded = jwt.verify(req.headers.token, tokenSecret)
+        const decoded = jwt.verify(req.headers.token, farmerTokenSecret)
         req.farmerId = decoded.farmerId
         req.organizationId = decoded.organizationId
         next()

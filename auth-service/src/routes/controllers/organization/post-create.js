@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const tokenSecret = require('../../../conf').tokenSecret
+const farmerTokenSecret = require('../../../conf').farmerTokenSecret
 const stringUtil = require('../util/stringUtil')
 const Organization = require('../../../mongoose/organization')
 const OrganizationFactory = require('../../../mongoose/factories/organization')
@@ -65,7 +65,7 @@ async function saveNewOrganization(organization, farmer, res){
                 organizationId: organization._id.toString()
             }
             res.status(201).json({
-                token: jwt.sign(payload, tokenSecret)
+                token: jwt.sign(payload, farmerTokenSecret)
             })
         }).catch(err => {
             deleteOrganization(organization._id, res, err.toString())

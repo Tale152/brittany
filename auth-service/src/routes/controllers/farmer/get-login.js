@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const Farmer = require('../../../mongoose/farmer')
-const tokenSecret = require('../../../conf').tokenSecret
+const farmerTokenSecret = require('../../../conf').farmerTokenSecret
 const stringUtil = require('../util/stringUtil')
 
 function areFarmerLoginParametersValid(params){
@@ -16,7 +16,7 @@ function tryLogin(req, res){
                 organizationId: result.id_organization.toString()
             }
             res.status(201).json({
-                token: jwt.sign(payload, tokenSecret)
+                token: jwt.sign(payload, farmerTokenSecret)
             })
         } else {
             res.status(401).json({err: "Invalid credentials"})
