@@ -8,6 +8,7 @@ services:
       - PORT=80
       - WEB_CLIENT_ADDRESS=http://localhost:3000
       - FARMER_TOKEN_SECRET=devFarmerTokenSecret
+      - AGENT_TOKEN_SECRET=devAgentTokenSecret
     ports:
       - 81:80
     image: auth
