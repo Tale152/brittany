@@ -1,9 +1,9 @@
-const Organization = require("../greenhouse")
+const Greenhouse = require("../greenhouse")
 
-function createGreenhouse(name) {
-    return new Organization({
-        name: name,
-        environments: []
+function createGreenhouse(idOrganization, name) {
+    return new Greenhouse({
+        id_organization: idOrganization,
+        name: name
     })
 }
 

@@ -6,8 +6,7 @@ let OrganizationSchema = new Schema({
         type: String,
         require: true,
         unique: true
-    },
-    greenhouses: ['Greenhouse']
+    }
 })
 
 module.exports = mongoose.model("Organization", OrganizationSchema)
