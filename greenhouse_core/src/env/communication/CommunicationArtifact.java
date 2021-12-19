@@ -14,7 +14,7 @@ public class CommunicationArtifact extends Artifact {
 
 	@OPERATION void communicate(List<Device> devices, OpFeedbackParam<List<Device>> data) {
 		System.out.println("Communicating with " + devices);
-		devices.forEach(d -> d.setCurrentValue(new Random().nextInt()));
+		devices.forEach(d -> d.setCurrentValue(new Random().nextInt(3000)));
 		data.set(devices);
 	}
 }

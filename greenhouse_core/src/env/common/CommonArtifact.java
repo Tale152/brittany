@@ -1,6 +1,6 @@
 // CArtAgO artifact code for project greenhouse_core
 
-package sampling;
+package common;
 
 import java.util.ArrayList;
 import java.util.Arrays;
