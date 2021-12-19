@@ -18,7 +18,7 @@ server.use(cors(corsOptions))
 
 mongoose
     .connect(conf.dbAddress, {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => {
+    .then(async () => {
         server.listen(conf.serverPort, () => {
             console.log(conf.asciiArt)
         })
