@@ -13,22 +13,21 @@ import utility.Thresholds;
 
 public class SamplingArtifact extends Artifact {
 	
+	private static final int DELTA = 1;
+	
 	private List<Device> devices;
 	private Thresholds thresholds;
 	
 	private Optional<Map<String, Integer>> lastSamples;
-	private Map<String, Integer> deltaDevices;
 	
 	void init() {
-		this.lastSamples = Optional.empty();	
-		this.deltaDevices = new HashMap<>();
+		this.lastSamples = Optional.empty();
 	}
 	
 	@OPERATION void setup(final List<Device> devices, final Thresholds thresholds) {
 		this.thresholds = thresholds;
 		this.devices = devices;
 		System.out.println("Init " + this.devices + " " + this.thresholds);
-		this.devices.forEach(d -> this.deltaDevices.put(d.getId(), 200000));	
 	}
 	
 	@OPERATION void sampleOperation(final String role) {
@@ -42,7 +41,7 @@ public class SamplingArtifact extends Artifact {
 		} else {
 			System.out.println("Last samples " + this.lastSamples + "\nCurrent samples " + currentSamples);
 			currentSamples.forEach(d -> {
-				if(Math.abs(d.getCurrentValue() - lastSamples.get().get(d.getId())) > this.deltaDevices.get(d.getId())) {
+				if(Math.abs(d.getCurrentValue() - lastSamples.get().get(d.getId())) > DELTA) {
 					System.out.println("Carica su db!");
 					if(this.thresholds.getThreshold(d.getRole()).isPresent()) {
 						if(d.getCurrentValue() > this.thresholds.getThreshold(d.getRole()).get().getY() || d.getCurrentValue() < this.thresholds.getThreshold(d.getRole()).get().getX()) {
