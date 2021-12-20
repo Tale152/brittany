@@ -5,7 +5,7 @@
 #include "hw/ComponentHwTest.h"
 #include "hw/OnePinTest.h"
 #include "hw/MockDigitalLightHwTest.h"
-#include "modules/ComponentModuleTest.h"
+#include "modules/MockDigitalLightModuleTest.h"
 #include "edge/EdgeTest.h"
 #include "edge/EdgeBuilderTest.h"
 #include "utilTest.h"

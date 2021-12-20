@@ -1,7 +1,7 @@
 #include <unity.h>
 #include "edge/Edge.h"
 #include "edge/EdgeBuilder.h"
-#include "modules/MockComponentModule.h"
+#include "modules/MockDigitalLightModule.h"
 #include "modules/MockModule.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
@@ -71,7 +71,7 @@ void execute_edge_test(Edge edge) {
 void test_edgeBuilder_add_module() {
     EdgeBuilder builder = EdgeBuilder();
     builder.addModule(MockModule());
-    builder.addModule(MockComponentModule(mockDigitalLights));
+    builder.addModule(MockDigitalLightModule(mockDigitalLights));
     execute_edge_test(builder.build());
 }
 
@@ -80,7 +80,7 @@ void test_edgeBuilder_add_all_module() {
     EdgeBuilder builder = EdgeBuilder();
     builder.addAllModules(std::list<Module>({
         MockModule(),
-        MockComponentModule(mockDigitalLights)}
+        MockDigitalLightModule(mockDigitalLights)}
     ));
     execute_edge_test(builder.build());
 }

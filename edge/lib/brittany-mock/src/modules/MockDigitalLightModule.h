@@ -1,5 +1,5 @@
-#ifndef BRITTANY_MOCK_COMPONENT_MODULE_H
-#define BRITTANY_MOCK_COMPONENT_MODULE_H
+#ifndef BRITTANY_MOCK_DIGITAL_LIGHT_MODULE_H
+#define BRITTANY_MOCK_DIGITAL_LIGHT_MODULE_H
 
 #include <list>
 #include "operation-handler/OperationHandler.h"
@@ -14,11 +14,11 @@
 #define MOCK_TURN_ON_HANDLER_MODULE_PATH "/turnOn"
 #define MOCK_TURN_OFF_HANDLER_MODULE_PATH "/turnOff"
 
-class MockComponentModule : public ComponentModule<MockDigitalLightHw> {
+class MockDigitalLightModule : public ComponentModule<MockDigitalLightHw> {
 
 public:
 
-    MockComponentModule(std::list<MockDigitalLightHw*> components): ComponentModule<MockDigitalLightHw>(components) {
+    MockDigitalLightModule(std::list<MockDigitalLightHw*> components): ComponentModule<MockDigitalLightHw>(components) {
         _handlers.push_back(
             new MockIsOnDigitalLightHandler(MOCK_IS_ON_HANDLER_MODULE_PATH, components)
         );
@@ -32,4 +32,4 @@ public:
 
 };
 
-#endif //BRITTANY_MOCK_COMPONENT_MODULE_H
+#endif //BRITTANY_MOCK_DIGITAL_LIGHT_MODULE_H
