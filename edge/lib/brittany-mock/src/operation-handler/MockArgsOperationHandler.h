@@ -6,6 +6,7 @@
 #include "operation-handler/OperationHandlerResult.h"
 #include "operation-handler/OperationHandler.h"
 #include "HttpStatusCodes_C++.h"
+#include "json_util.h"
 
 /**
  * @brief Class that represents a mock OperationHandler that sends back
@@ -20,9 +21,7 @@ public:
     };
 
     OperationHandlerResult handle(Json::Value args) {
-        Json::StreamWriterBuilder builder;
-        builder["indentation"] = "";
-        const std::string output = Json::writeString(builder, args);
+        const std::string output = stringify(args);
         stdOutStrategy(output.c_str());
         return OperationHandlerResult(HttpStatus::OK, output);
     };
