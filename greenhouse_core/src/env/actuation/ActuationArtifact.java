@@ -6,9 +6,20 @@ import cartago.*;
 import utility.Device;
 import utility.Pair;
 
+/**
+ * ActautionArtifact is an Artifact that is used to send a message to an actuator to 
+ * handle when the current sample registered is bigger or lower than the threshold set for
+ * a specific device role.
+ *
+ */
 public class ActuationArtifact extends Artifact {
 	void init(int initialValue) {}
 
+	/**
+	 * Used to check the current sample and to notify if it is bigger or lower that the threshold.
+	 * @param outOfRangeDevice, the device that registered the out of range sample.
+	 * @param threshold, the threshold of the specific role of the device.
+	 */
 	@OPERATION void actuate(Device outOfRangeDevice, Pair<Integer,Integer> threshold) {
 		Integer currentValue = outOfRangeDevice.getCurrentValue();
 		if(currentValue < threshold.getX()) {
