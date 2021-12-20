@@ -1,8 +1,8 @@
 const Environment = require('../../../mongoose/environment')
 
 async function infoEnvironmentController(req, res){
-    Environment.findById(req.body.id)
-        .select("-_id -__v")
+    Environment.findById(req.query.id)
+        .select("-_id -__v -password")
         .then(async environment => {
         if(environment !== null){
             res.status(200).json(environment)

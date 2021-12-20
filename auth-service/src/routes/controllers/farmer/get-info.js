@@ -1,7 +1,7 @@
 const Farmer = require('../../../mongoose/farmer')
 
 async function farmerInfoController(req, res){
-    Farmer.findById(req.body.id).then(async result => {
+    Farmer.findById(req.query.id).then(async result => {
         if(result !== null && result.id_organization.toString() === req.organizationId){
             res.status(200).json({
                 name: result.name,

@@ -4,8 +4,8 @@ const stringUtil = require('../util/stringUtil')
 const Environment = require('../../../mongoose/environment')
 
 async function listEnvironmentController(req, res){
-    if(stringUtil.isValidString(req.body.greenhouseId)){
-        Environment.find({ id_greenhouse: new ObjectId(req.body.greenhouseId) })
+    if(stringUtil.isValidString(req.query.greenhouseId)){
+        Environment.find({ id_greenhouse: new ObjectId(req.query.greenhouseId) })
         .select("-id_greenhouse -password -__v")
         .then(async greenhouses => {
             res.status(200).json(greenhouses)
