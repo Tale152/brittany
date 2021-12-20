@@ -12,6 +12,8 @@ import utility.Pair;
 import utility.Thresholds;
 
 public class CommonArtifact extends Artifact {
+	
+	private String authenticationToken;
 
 	private List<Device> devices;
 	private Thresholds thresholds;
@@ -19,7 +21,9 @@ public class CommonArtifact extends Artifact {
 	void init() {}
 
 	@OPERATION
-	void initAfterAuthentication() {
+	void initAfterAuthentication(final String token) {
+		this.authenticationToken = token;
+		
 		devices = new ArrayList<>(Arrays.asList(new Device("id1", "temperature"), new Device("id2", "light"),
 				new Device("id3", "temperature")));
 
@@ -27,6 +31,6 @@ public class CommonArtifact extends Artifact {
 		thresholds.addThreshold("temperature", new Pair<>(1000, 3000));
 		thresholds.addThreshold("light", new Pair<>(1000, 3000));
 
-		//defineObsProperty("setup", devices, thresholds);
+		defineObsProperty("setup", devices, thresholds);
 	}
 }

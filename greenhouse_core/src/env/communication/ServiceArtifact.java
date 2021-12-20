@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -68,6 +66,7 @@ public class ServiceArtifact extends Artifact {
             
             if (tokenObject.has("token")) {
             	System.out.println("TOKEN:" + tokenObject.get("token"));
+            	defineObsProperty("token", tokenObject.get("token").toString());
             } else {
             	throw new IllegalStateException("You did not received the token.");
             }

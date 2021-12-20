@@ -10,6 +10,8 @@
 
 +!authentication <- retrieveAuthenticationData.
 
++token(T) <- initAfterAuthentication(T).
+
 //initAfterAuthentication
 
 { include("$jacamoJar/templates/common-cartago.asl") }
