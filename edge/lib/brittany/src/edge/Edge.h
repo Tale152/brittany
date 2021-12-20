@@ -41,9 +41,9 @@ public:
     /**
      * @brief Return the Edge Thing Descriptor.
      * 
-     * @return ThingDescriptor the Edge Thing Descriptor
+     * @return Json::Value the Edge Thing Descriptor
      */
-    ThingDescriptor thingDescriptor();
+    Json::Value thingDescriptor();
 
 private:
 
