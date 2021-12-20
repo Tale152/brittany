@@ -9,7 +9,7 @@ function areFarmerLoginParametersValid(params){
 }
 
 function tryLogin(req, res){
-    Farmer.findOne({ mail: req.body.mail, password: req.body.password }).then(async result => {
+    Farmer.findOne({ mail: req.query.mail, password: req.query.password }).then(async result => {
         if(result !== null){
             var payload = {
                 farmerId: result._id.toString(),
@@ -27,7 +27,7 @@ function tryLogin(req, res){
 }
 
 async function farmerLoginController(req, res){
-    if(areFarmerLoginParametersValid(req.body)){
+    if(areFarmerLoginParametersValid(req.query)){
         tryLogin(req, res)
     } else {
         res.status(406).json({err: "Invalid parameters"})
