@@ -13,6 +13,10 @@ let SettingsSchema = new Schema({
     expires: {
         type: Date,
         require: true
+    },
+    active: {
+        type: Boolean,
+        require: true
     }
 })
 
