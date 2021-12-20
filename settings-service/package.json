@@ -1,0 +1,28 @@
+{
+  "name": "settings-service",
+  "version": "1.0.0",
+  "description": "Server that handles the persistence of environments settings in the Brittany environment",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tale152/brittany"
+  },
+  "keywords": [
+    "node, mongoDB, jest, gradle, docker, heroku"
+  ],
+  "author": "Alessandro Talmi, Elisa Tronetti, Angelo Filaseta",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.13"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "supertest": "^6.1.6"
+  }
+}
