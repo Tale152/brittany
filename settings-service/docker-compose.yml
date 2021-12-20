@@ -1,5 +1,5 @@
 services:
-  auth:
+  settings:
     build:
       context: .
       dockerfile: Dockerfile
