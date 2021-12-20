@@ -1,0 +1,20 @@
+services:
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DB=mongodb://database:27017/brittany_settings
+      - PORT=80
+      - FARMER_TOKEN_SECRET=devFarmerTokenSecret
+      - AGENT_TOKEN_SECRET=devAgentTokenSecret
+    ports:
+      - 82:80
+    image: settings
+  database:
+    image: mongo
+    volumes:
+      - database_data:/data/db
+
+volumes:
+  database_data:
