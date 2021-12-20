@@ -1,6 +1,7 @@
 #include <unity.h>
 #include "util/Esp8266HttpRequestor.h"
 #include "HttpStatusCodes_C++.h"
+#include "json_util.h"
 
 Esp8266HttpRequestor requestor = Esp8266HttpRequestor();
 

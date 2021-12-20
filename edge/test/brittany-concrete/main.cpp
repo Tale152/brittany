@@ -1,7 +1,6 @@
 #include <unity.h>
 #include <Arduino.h>
 #include "hw/DigitalLightHwTest.h"
-#include "web-server/Esp8266WebServerTest.h"
 #include "util/Esp8266HttpRequestorTest.h"
 #include "wifi_secret.h"
 
@@ -19,6 +18,8 @@ void connectToWifi(){
     Serial.println(WiFi.localIP());  
 }
 
+bool webServerTestIsDone = false;
+
 void setup() {
     delay(7000);
     UNITY_BEGIN();
@@ -26,7 +27,6 @@ void setup() {
     connectToWifi();
     test_DigitalLightHw(); //DigitalLightHwTest
     test_Esp8266HttpRequestor(); //Esp8266HttpRequestorTest
-    test_Esp8266WebWerver(); //Esp8266WebServerTest
     UNITY_END();
 }
 
