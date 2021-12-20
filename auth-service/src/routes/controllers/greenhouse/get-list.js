@@ -10,7 +10,9 @@ async function listGreenhouseController(req, res){
             greenhouses.forEach(g => {
                 delete g.id_organization
             })
-            res.status(200).json(greenhouses)
+            res.status(200).json({
+                greenhouses: greenhouses
+            })
         } else {
             res.status(404).json({err: "Organization not found"})
         }
