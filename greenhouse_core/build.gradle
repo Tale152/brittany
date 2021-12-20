@@ -27,11 +27,13 @@ repositories {
        dirs 'lib'
     }
 
-    mavenCentral()    
+    mavenCentral()
 }
 
 dependencies {
     compile group: 'org.jacamo', name: 'jacamo', version: '1.0'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
 }
 
 sourceSets {
