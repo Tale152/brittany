@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const ObjectId = require('mongoose').Types.ObjectId
 
 const Organization = require('../../../mongoose/organization')
@@ -47,17 +48,28 @@ function tryEnvironment(req, res, greenhouse){
     Environment
         .findOne({ 
             name: req.query.environmentName,
-            id_greenhouse: new ObjectId(greenhouse._id.toString()),
-            password: req.query.environmentPassword
+            id_greenhouse: new ObjectId(greenhouse._id.toString())
         })
         .then(async environment => {
             if(environment !== null){
-                var payload = {
-                    environmentId: environment._id.toString()
-                }
-                res.status(200).json({
-                    token: jwt.sign(payload, agentTokenSecret)
-                })
+                bcrypt.compare(
+                    req.query.environmentPassword,
+                    environment.password,
+                    async (err, result) => {
+                        if (err) {
+                            res.status(500).json({err: err.toString()})
+                        } else if (result === true) {
+                            var payload = {
+                                environmentId: environment._id.toString()
+                            }
+                            res.status(200).json({
+                                token: jwt.sign(payload, agentTokenSecret)
+                            })
+                        } else {
+                            res.status(401).json({err: "Invalid credentials"})
+                        }
+                    }
+                )
             } else {
                 res.status(401).json({err: "Invalid credentials"})
             }

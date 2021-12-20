@@ -27,7 +27,6 @@ function tryLogin(req, res){
                             token: jwt.sign(payload, farmerTokenSecret)
                         })
                     } else {
-                        console.log(result)
                         res.status(401).json({err: "Invalid credentials"})
                     }
                 }

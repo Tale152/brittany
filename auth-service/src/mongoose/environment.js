@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const bcrypt = require('bcryptjs')
+
+const conf = require('../conf')
 
 let EnvironmentSchema = new Schema({
     id_greenhouse: {
@@ -14,6 +17,17 @@ let EnvironmentSchema = new Schema({
         type: String,
         require: true,
     },
+})
+
+EnvironmentSchema.pre("save", function(next) {
+    let environment = this
+    bcrypt.hash(environment.password, conf.passwordSalt, function(err, hash) {
+        if (err) {
+            return next(err)
+        }
+        environment.password = hash
+        next()
+    })
 })
 
 module.exports = mongoose.model("Environment", EnvironmentSchema)
