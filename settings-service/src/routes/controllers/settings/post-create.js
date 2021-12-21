@@ -2,6 +2,19 @@ const stringUtil = require('../util/stringUtil')
 const numberUtil = require('../util/numberUtil')
 const SettingsFactory = require('../../../mongoose/factories/settings')
 
+function isBetween(val, min, max){
+    return numberUtil.isValidNumber(val) && val >= min && val < max
+}
+
+function isLightValid(light){
+    if(light !== undefined){
+        return isBetween(light.fromH, 0, 24) &&
+            isBetween(light.toH, 0, 24) &&
+            isBetween(light.fromM, 0, 60) &&
+            isBetween(light.toM, 0, 60)
+    }
+    return true
+}
 function isRangeFieldValid(field){
     if(field !== undefined){
         return numberUtil.isValidNumber(field.min) && numberUtil.isValidNumber(field.max) && field.min <= field.max
@@ -11,7 +24,7 @@ function isRangeFieldValid(field){
 
 function areSettingsCreateParametersValid(params){
     if(stringUtil.isValidString(params.idEnvironment) && stringUtil.isValidString(params.expires)){
-        return isRangeFieldValid(params.temperature) && isRangeFieldValid(params.humidity)
+        return isRangeFieldValid(params.temperature) && isRangeFieldValid(params.humidity) && isLightValid(params.light)
     }
     return false
 }
@@ -28,6 +41,9 @@ async function createNewSettings(req, res){
     }
     if(req.body.humidity !== undefined){
         newSettings.data.humidity = req.body.humidity
+    }
+    if(req.body.light !== undefined){
+        newSettings.data.light = req.body.light
     }
     saveNewSettings(newSettings, res)
 }
