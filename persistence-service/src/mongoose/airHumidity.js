@@ -16,4 +16,4 @@ let AirHumiditySchema = new Schema({
     },
 })
 
-module.exports = mongoose.model("AirHumidity", AirHumiditySchema)
+module.exports = mongoose.model("Air_Humidity", AirHumiditySchema)
