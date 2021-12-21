@@ -1,0 +1,31 @@
+name: Push Settings Service Container to Heroku
+
+on:
+  workflow_run:
+    workflows: ["Settings service CI"]
+    branches:
+      - master
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    defaults:
+      run:
+        working-directory: ./settings-service
+    steps:
+    - uses: actions/checkout@v1
+    - name: Login to Heroku Container registry
+      env: 
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:login
+    - name: Build container and push
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:push -a ${{ secrets.HEROKU_SETTINGS_SERVICE_NAME }} web 
+    - name: Release container
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:release -a ${{ secrets.HEROKU_SETTINGS_SERVICE_NAME }} web
