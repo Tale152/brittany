@@ -160,38 +160,50 @@ Lista di Greenhouse associate all'Organization contenuta nel Farmer token.
 
 ## Environment
 
+## &#9658; **<font color="green">POST</font>** /environment/**create**
+### **Header richiesti:**
+* **token**  
+<u>Farmer token</u> ottenuto autenticandosi al Farmer account specificato.
+
+### **Parametri body:**
+* **name**  
+Nome, univoco all'interno della Greenhouse, del nuovo Environment che si intende creare.
+* **password**  
+Password del nuovo Environment che si intende creare.
+* **greenhouseId**  
+Id della Greenhouse associata a questo Environment.
+
+### **Risultato atteso:** **201**
+* **id**  
+Id del nuovo Environment creato.
+
 ## &#9658; **<font color="blue">GET</font>** /environment/**list**
 ### **Header richiesti:**
-* token
+* **token**  
+<u>Farmer token</u> ottenuto autenticandosi al Farmer account specificato.
 
 ### **Parametri query:**
-* id
+* **id**  
+Id della Greenhouse della quale si vuole ottenere la lista di Environment associati.
 
 ### **Risultato atteso:** **200**
-* environments
+* **environments**  
+Lista di Environment associati alla Greenhouse specificata.
 
 ## &#9658; **<font color="blue">GET</font>** /environment/**info**
 ### **Header richiesti:**
-* token
+* **token**  
+<u>Farmer token</u> ottenuto autenticandosi al Farmer account specificato.
 
 ### **Parametri query:**
-* id
+* **id**  
+Id dell'Environment della quale si vogliono ottenere le info.
 
 ### **Risultato atteso:** **200**
-* id_greenhouse
-* name
-
-## &#9658; **<font color="green">POST</font>** /environment/**create**
-### **Header richiesti:**
-* token
-
-### **Parametri query:**
-* name
-* password
-* greenhouseId
-
-### **Risultato atteso:** **201**
-* id
+* **id_greenhouse**  
+Id della Greenhouse associata all'Environment specificato.
+* **name**  
+Nome dell'Environment specificato.
 
 ---
 
@@ -199,10 +211,10 @@ Lista di Greenhouse associate all'Organization contenuta nel Farmer token.
 
 ## &#9658; **<font color="blue">GET</font>** /agent/**login**
 ### **Parametri query:**
-* organizationName
-* greenhouseName
-* environmentName
-* environmentPassword
+* **organizationName**
+* **greenhouseName**
+* **environmentName**
+* **environmentPassword**
 
 ### **Risultato atteso:** **200**
-* token
+* **token**
