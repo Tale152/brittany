@@ -6,7 +6,7 @@ let TemperatureSchema = new Schema({
         type: Schema.Types.ObjectId,
         require: true
     },
-    time: {
+    timestamp: {
         type: Date,
         require: true,
     },
