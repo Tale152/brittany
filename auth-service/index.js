@@ -1,4 +1,3 @@
-const cors = require('cors')
 var mongoose = require('mongoose')
 const server = require('./src/server')
 var conf = require('./src/conf')
