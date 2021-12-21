@@ -23,7 +23,7 @@ public:
      * @param port the port of the web server.
      */
     Esp8266WebServer(Edge* e, int port = DEFAULT_WEB_SERVER_PORT): WebServer(e, port), _server{port} {
-
+        Serial.println("Available Server path:");
         _server.onNotFound([&] () {
             _server.send(
                 HttpStatus::NotFound,
@@ -32,6 +32,7 @@ public:
             );
         });
 
+        Serial.println("/");
         _server.on("/", [&] () {
             _server.send(
                 HttpStatus::OK,
@@ -41,6 +42,7 @@ public:
         });
 
         for(std::string p : edge() -> availablePaths()) {
+            Serial.println(p.c_str());
             _server.on(p.c_str(), [&, p] () {
                 Json::Value args;
                 for(int i = 0; i < _server.args(); i++) {    
