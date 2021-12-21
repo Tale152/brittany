@@ -6,7 +6,6 @@ services:
     environment:
       - DB=mongodb://database:27017/brittany_persistence
       - PORT=80
-      - WEB_CLIENT_ADDRESS=http://localhost:3000
     ports:
       - 80:80
   database:
