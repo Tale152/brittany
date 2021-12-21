@@ -141,6 +141,8 @@ Mail del titolare del Farmer account richiesto.
 
 ### **Parametri body:**
 * **name**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Nome, univoco all'interno dell'Organization specificata nel Farmer token, della nuova Greenhouse da creare.
 
 ### **Risultato atteso:** **201**
@@ -167,10 +169,16 @@ Lista di Greenhouse associate all'Organization contenuta nel Farmer token.
 
 ### **Parametri body:**
 * **name**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Nome, univoco all'interno della Greenhouse, del nuovo Environment che si intende creare.
 * **password**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Password del nuovo Environment che si intende creare.
 * **greenhouseId**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Id della Greenhouse associata a questo Environment.
 
 ### **Risultato atteso:** **201**
@@ -184,6 +192,8 @@ Id del nuovo Environment creato.
 
 ### **Parametri query:**
 * **id**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Id della Greenhouse della quale si vuole ottenere la lista di Environment associati.
 
 ### **Risultato atteso:** **200**
@@ -197,6 +207,8 @@ Lista di Environment associati alla Greenhouse specificata.
 
 ### **Parametri query:**
 * **id**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Id dell'Environment della quale si vogliono ottenere le info.
 
 ### **Risultato atteso:** **200**
@@ -212,12 +224,20 @@ Nome dell'Environment specificato.
 ## &#9658; **<font color="blue">GET</font>** /agent/**login**
 ### **Parametri query:**
 * **organizationName**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Nome dell'Organization che contiene la Greenhouse la quale contiene l'Environment alla quale ci si intende autenticare.
 * **greenhouseName**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Nome della Greenhouse che contiene l'Environment alla quale ci si intende autenticare.
 * **environmentName**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Nome dell'Environment alla quale ci si intende autenticare.
 * **environmentPassword**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Password dell'Environment alla quale ci si intende autenticare.
 
 ### **Risultato atteso:** **200**
