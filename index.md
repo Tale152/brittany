@@ -1,9 +1,9 @@
 ---
-title: Project Title
+title: Brittany
 has_children: false
 nav_order: 1
 ---
 
-# Project Title
+# Brittany
 
-Project description.
+Brittany description.

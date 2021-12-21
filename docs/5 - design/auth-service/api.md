@@ -1,12 +1,10 @@
 ---
-title: Auth service - API
-parent: Chapter 2
-nav_order: 1
+title: API
+parent: Auth Service
+grand_parent: Design
 ---
 
-# Auth service - API
-
-## Organization
+# Auth Service - API
 
 ### **GET** /organization/**create**
 Parametri query:
