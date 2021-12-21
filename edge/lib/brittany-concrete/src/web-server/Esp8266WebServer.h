@@ -6,6 +6,7 @@
 #include "ESP8266WebServer.h"
 #include "HttpStatusCodes_C++.h"
 #include "json_util.h"
+#include "util/DebugPrint.h"
 
 /**
  * @brief ESP8266WebServer implementation of web server.
@@ -22,8 +23,11 @@ public:
      * @param e edge reference used by super constructor.
      * @param port the port of the web server.
      */
-    Esp8266WebServer(Edge* e, int port = DEFAULT_WEB_SERVER_PORT): WebServer(e, port), _server{port} {
-        Serial.println("Available Server path:");
+    Esp8266WebServer(Edge* e, int port = DEFAULT_WEB_SERVER_PORT):
+        WebServer(e, port),
+        _server{port},
+        _debug(true) {
+        _debug.println("Available Server path:");
         _server.onNotFound([&] () {
             _server.send(
                 HttpStatus::NotFound,
@@ -32,7 +36,7 @@ public:
             );
         });
 
-        Serial.println("/");
+        _debug.println("/");
         _server.on("/", [&] () {
             _server.send(
                 HttpStatus::OK,
@@ -42,12 +46,16 @@ public:
         });
 
         for(std::string p : edge() -> availablePaths()) {
-            Serial.println(p.c_str());
+            _debug.println(p);
             _server.on(p.c_str(), [&, p] () {
                 Json::Value args;
-                for(int i = 0; i < _server.args(); i++) {    
+                for(int i = 0; i < _server.args(); i++) {
                     args[_server.argName(i).c_str()] = _server.arg(i).c_str();
                 }
+                _debug.println("Request received, forwarded to:");
+                _debug.println(_server.uri().c_str());
+                _debug.println("Arguments:");
+                _debug.println(stringify(args));
                 OperationHandlerResult result = edge() -> execute(p, args);
                 _server.send(
                     result.code(),
@@ -72,6 +80,7 @@ public:
 private:
 
     ESP8266WebServer _server;
+    DebugPrint _debug;
 
 };
 
