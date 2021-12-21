@@ -88,8 +88,12 @@ Id univoco associato al nuovo account Farmer creato.
 ## &#9658; **<font color="blue">GET</font>** /farmer/**login**
 ### **Parametri query:**
 * **mail**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Mail associata al Farmer account al quale si intende autenticarsi.
 * **password**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Password associata al Farmer account al quale si intende autenticarsi.
 
 ### **Risultato atteso:** **200**
@@ -112,6 +116,8 @@ Lista di Farmer associati all'Organization contenuta nel Farmer token.
 
 ### **Parametri query:**
 * **id**  
+Tipo: Stringa  
+Obbligatorio: sì  
 Id del Farmer account della qualesi desidera ottenere le info.
 
 ### **Risultato atteso:** **200**
