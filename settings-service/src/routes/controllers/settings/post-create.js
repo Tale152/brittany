@@ -1,11 +1,10 @@
 const stringUtil = require('../util/stringUtil')
+const numberUtil = require('../util/numberUtil')
 const SettingsFactory = require('../../../mongoose/factories/settings')
 
 function isRangeFieldValid(field){
     if(field !== undefined){
-        return field.min !== undefined && !isNaN(field.min) &&
-            field.max !== undefined && !isNaN(field.max) &&
-            field.min <= field.max
+        return numberUtil.isValidNumber(field.min) && numberUtil.isValidNumber(field.max) && field.min <= field.max
     }
     return true
 }
