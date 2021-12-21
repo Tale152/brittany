@@ -20,12 +20,12 @@ let SettingsSchema = new Schema({
     },
     data: {
         temperature: {
-            max: Number,
-            min: Number
+            min: Number,
+            max: Number
         },
         humidity: {
-            max: Number,
-            min: Number
+            min: Number,
+            max: Number
         },
         light: {
             fromH: Number,
