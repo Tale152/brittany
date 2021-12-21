@@ -5,7 +5,8 @@ function createSettings(idEnvironment, created, expires, active) {
         id_environment: idEnvironment,
         created: created,
         expires: expires,
-        active: active
+        active: active,
+        data: {}
     })
 }
 

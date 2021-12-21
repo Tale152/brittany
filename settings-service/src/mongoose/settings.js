@@ -17,6 +17,22 @@ let SettingsSchema = new Schema({
     active: {
         type: Boolean,
         require: true
+    },
+    data: {
+        temperature: {
+            max: Number,
+            min: Number
+        },
+        humidity: {
+            max: Number,
+            min: Number
+        },
+        light: {
+            fromH: Number,
+            fromM: Number,
+            toH: Number,
+            toM: Number
+        }
     }
 })
 
