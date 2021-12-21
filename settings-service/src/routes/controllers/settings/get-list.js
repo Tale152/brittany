@@ -2,13 +2,15 @@ const ObjectId = require('mongoose').Types.ObjectId
 
 const Settings = require('../../../mongoose/settings')
 
-async function latestSettingsController(req, res){
-    Settings.findOne({ id_environment: new ObjectId(req.environmentId) })
+async function listSettingsController(req, res){
+    Settings.find({ id_environment: new ObjectId(req.query.id) })
         .sort({created: 'desc'})
         .select("-id_environment -__v")
         .then(async result => {
             if(result !== null){
-                res.status(200).json(result)
+                res.status(200).json({
+                    settings: result
+                })
             } else {
                 res.status(404).json({err: "not found"})
             }
@@ -19,5 +21,5 @@ async function latestSettingsController(req, res){
 }
 
 module.exports = {
-    latestSettingsController
+    listSettingsController
 }
