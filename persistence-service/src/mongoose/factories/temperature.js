@@ -1,7 +1,8 @@
 const Temperature = require("../temperature")
 
-function createTemperature(time, value) {
+function createTemperature(idSettings, time, value) {
     return new Temperature({
+        id_settings: idSettings,
         time: time,
         value: value,
     })
