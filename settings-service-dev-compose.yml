@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  settings:
+    image: alessandrotalmi/brittany-settings-service-dev
+    environment:
+      - DB=mongodb://database:27017/brittany_settings
+      - PORT=80
+    ports:
+      - 82:80
+  database:
+    image: mongo
+    volumes:
+      - database_data:/data/db
+
+volumes:
+  database_data:

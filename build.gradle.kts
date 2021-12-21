@@ -10,6 +10,18 @@ tasks.register<Exec>("authDevDown"){
     commandLine("docker-compose", "-f", "auth-service-dev-compose.yml", "-p", "auth-service-dev", "down")
 }
 
+tasks.register<Exec>("settingsDevUp"){
+    commandLine("docker-compose", "-f", "settings-service-dev-compose.yml", "-p", "settings-service-dev", "up", "-d")
+}
+
+tasks.register<Exec>("settingsDevLog"){
+    commandLine("docker-compose", "-f", "settings-service-dev-compose.yml", "-p", "settings-service-dev", "logs", "-f", "settings")
+}
+
+tasks.register<Exec>("settingsDevDown"){
+    commandLine("docker-compose", "-f", "settings-service-dev-compose.yml", "-p", "settings-service-dev", "down")
+}
+
 tasks.register<Exec>("persistenceDevUp"){
     commandLine("docker-compose", "-f", "persistence-service-dev-compose.yml", "-p", "persistence-service-dev", "up", "-d")
 }
