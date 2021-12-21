@@ -6,24 +6,46 @@ grand_parent: Design
 
 # Auth Service - API
 
-### **GET** /organization/**create**
-Parametri query:
-* organizationName
-* name
-* surname
-* mail
-* birthdate
-* password
+### **POST** /organization/**create**
+Parametri body:
+* organizationName  
+Tipo: Stringa  
+Obbligatorio: sì  
+Descrizione Nome *univoco* dell'Organization da creare.
+* name  
+Tipo: Stringa  
+Obbligatorio: sì  
+Nome del primo titolare di un account Farmer collegato all'Organization da creare.
+* surname  
+Tipo: Stringa  
+Obbligatorio: sì  
+Cognome del primo titolare di un account Farmer collegato all'Organization da creare.
+* mail  
+Tipo: Stringa  
+Obbligatorio: sì  
+Mail del primo titolare di un account Farmer collegato all'Organization da creare.
+* birthdate  
+Tipo: Data  
+Formato: *"1997-12-31T00:00:00.000+00:00"*  
+Obbligatorio: sì  
+Mail del primo titolare di un account Farmer collegato all'Organization da creare.
+* password  
+Tipo: Stringa  
+Obbligatorio: sì  
+Password del primo titolare di un account Farmer collegato all'Organization da creare.
 
 Risultato atteso: **201**
-* token
+* token  
+<u>Farmer token</u> ottenuto autenticandosi con il nuovo account Farmer creato.
 
-### **POST** /organization/**info**
+### **GET** /organization/**info**
 Header richiesti:
-* token
+* token  
+<u>Farmer token</u> ottenuto autenticandosi con un account Farmer.
 
 Risultato atteso: **200**
-* name
+* name  
+Nome dell'Organization collegata all'account autenticato.
 ---
 
 ## Farmer
