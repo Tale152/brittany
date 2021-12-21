@@ -211,10 +211,15 @@ Nome dell'Environment specificato.
 
 ## &#9658; **<font color="blue">GET</font>** /agent/**login**
 ### **Parametri query:**
-* **organizationName**
-* **greenhouseName**
-* **environmentName**
-* **environmentPassword**
+* **organizationName**  
+Nome dell'Organization che contiene la Greenhouse la quale contiene l'Environment alla quale ci si intende autenticare.
+* **greenhouseName**  
+Nome della Greenhouse che contiene l'Environment alla quale ci si intende autenticare.
+* **environmentName**  
+Nome dell'Environment alla quale ci si intende autenticare.
+* **environmentPassword**  
+Password dell'Environment alla quale ci si intende autenticare.
 
 ### **Risultato atteso:** **200**
-* **token**
+* **token**  
+<u>Agent token</u> ottenuto autenticandosi ad un Environment.
