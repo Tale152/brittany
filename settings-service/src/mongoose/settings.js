@@ -23,7 +23,7 @@ let SettingsSchema = new Schema({
             min: Number,
             max: Number
         },
-        humidity: {
+        airHumidity: {
             min: Number,
             max: Number
         },

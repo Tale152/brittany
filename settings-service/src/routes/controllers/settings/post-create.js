@@ -24,7 +24,7 @@ function isRangeFieldValid(field){
 
 function areSettingsCreateParametersValid(params){
     if(stringUtil.isValidString(params.idEnvironment) && stringUtil.isValidString(params.expires)){
-        return isRangeFieldValid(params.temperature) && isRangeFieldValid(params.humidity) && isLightValid(params.light)
+        return isRangeFieldValid(params.temperature) && isRangeFieldValid(params.airHumidity) && isLightValid(params.light)
     }
     return false
 }
@@ -39,8 +39,8 @@ async function createNewSettings(req, res){
     if(req.body.temperature !== undefined){
         newSettings.data.temperature = req.body.temperature
     }
-    if(req.body.humidity !== undefined){
-        newSettings.data.humidity = req.body.humidity
+    if(req.body.airHumidity !== undefined){
+        newSettings.data.airHumidity = req.body.airHumidity
     }
     if(req.body.light !== undefined){
         newSettings.data.light = req.body.light
