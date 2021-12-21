@@ -1,27 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const TemperatureFactory = require('../mongoose/factories/temperature')
-const Temperature = require('../mongoose/temperature')
 
-router.post("/temperature/save", (req, res) => {
-    let newTemperature = TemperatureFactory.createTemperature(req.body.time, req.body.value)
-    newTemperature.save().then(() => {
-        res.status(200).json()
-    }).catch(err => {
-        res.status(400).json({err: err})
-    })
-})
+const agentTokenAuth = require('./controllers/agentTokenAuth')
+const farmerTokenAuth = require('./controllers/farmerTokenAuth')
 
-router.get("/temperature/exists", async function(req, res){
-    if(req.query.value === null || req.query.value === undefined || isNaN(req.query.value)){
-        res.status(406).json({err: "Some argument is not valid"})
-    } else {
-        await Temperature.findOne({ value: req.query.value}).then(async result => {
-            res.status(200).json({exists: !!result})
-        }).catch(err => {
-            res.status(400).json({err: err})
-        })
-    }
-})
+const PostTemperatureRegister = require("./controllers/temperature/post-register")
+const GetTemperatureLatest = require("./controllers/temperature/get-latest")
+const GetTemperatureList = require("./controllers/temperature/get-list")
+
+router.post("/temperature/register", agentTokenAuth.verifyToken, PostTemperatureRegister.temperatureRegisterController)
+
+router.get("/temperature/latest", agentTokenAuth.verifyToken, GetTemperatureLatest.temperatureLatestController)
+
+router.get("/temperature/list", farmerTokenAuth.verifyToken, GetTemperatureList.temperatureListController)
 
 module.exports = router
