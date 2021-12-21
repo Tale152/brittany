@@ -3,7 +3,7 @@ const ObjectId = require('mongoose').Types.ObjectId
 const Temperature = require('../../../mongoose/temperature')
 
 async function temperatureLatestController(req, res){
-    Temperature.findOne({ id_settings: new ObjectId(req.body.id) })
+    Temperature.findOne({ id_settings: new ObjectId(req.query.id) })
         .sort({timestamp: 'desc'})
         .select("-_id -id_settings -__v")
         .then(async temperature => {
