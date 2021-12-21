@@ -6,6 +6,13 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
+.gradle
+auth-service
+greenhouse_core
+settings-service
+web-client
+edge
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
