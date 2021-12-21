@@ -134,22 +134,27 @@ Mail del titolare del Farmer account richiesto.
 
 ## Greenhouse
 
-## &#9658; **<font color="blue">GET</font>** /greenhouse/**list**
-### **Header richiesti:**
-* token
-
-### **Risultato atteso:** **200**
-* greenhouses
-
 ## &#9658; **<font color="green">POST</font>** /greenhouse/**create**
 ### **Header richiesti:**
-* token
+* **token**  
+<u>Farmer token</u> ottenuto autenticandosi al Farmer account specificato.
 
-### **Parametri query:**
-* name
+### **Parametri body:**
+* **name**  
+Nome, univoco all'interno dell'Organization specificata nel Farmer token, della nuova Greenhouse da creare.
 
 ### **Risultato atteso:** **201**
-* id
+* **id**  
+Id della Greenhouse creata.
+
+## &#9658; **<font color="blue">GET</font>** /greenhouse/**list**
+### **Header richiesti:**
+* **token**  
+<u>Farmer token</u> ottenuto autenticandosi al Farmer account specificato.
+
+### **Risultato atteso:** **200**
+* **greenhouses**  
+Lista di Greenhouse associate all'Organization contenuta nel Farmer token.
 
 ---
 
