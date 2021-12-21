@@ -20,6 +20,10 @@ MockTurnOffDigitalLightHandler* turnOffDigitalLightHandler;
 MockTurnOnDigitalLightHandler* turnOnDigitalLightHandler;
 MockIsOnDigitalLightHandler* isOnDigitalLightHandler;
 
+Json::Value args0;
+Json::Value args1;
+Json::Value argsFail;
+
 void setup_mock_light_handler_test() {
     light0 = new MockDigitalLightHw(LIGHT_0_NAME, LIGHT_0_PIN);
     light1 = new MockDigitalLightHw(LIGHT_1_NAME, LIGHT_1_PIN);
@@ -28,6 +32,9 @@ void setup_mock_light_handler_test() {
     turnOffDigitalLightHandler = new MockTurnOffDigitalLightHandler(MOCK_TURN_OFF_LIGHT_PATH, light_list);
     turnOnDigitalLightHandler = new MockTurnOnDigitalLightHandler(MOCK_TURN_ON_LIGHT_PATH, light_list);
     isOnDigitalLightHandler = new MockIsOnDigitalLightHandler(MOCK_IS_ON_LIGHT_PATH, light_list);
+    args0["id"] = LIGHT_0_NAME;
+    args1["id"] = LIGHT_1_NAME;
+    argsFail["id"] = "the game";
 }
 
 void post_mock_light_handler_test () {
@@ -48,13 +55,13 @@ void check_result_is_fail(OperationHandlerResult result) {
 void test_mock_turn_off_digital_light_handler() {
     TEST_ASSERT_EQUAL_STRING(MOCK_TURN_OFF_LIGHT_PATH, turnOffDigitalLightHandler->path().c_str());
     check_result_is_ok(
-        turnOffDigitalLightHandler->handle(Json::Value(LIGHT_0_NAME))
+        turnOffDigitalLightHandler->handle(args0)
     );
     check_result_is_ok(
-        turnOffDigitalLightHandler->handle(Json::Value(LIGHT_1_NAME))
+        turnOffDigitalLightHandler->handle(args1)
     );
     check_result_is_fail(
-        turnOffDigitalLightHandler->handle(Json::Value("the game"))
+        turnOffDigitalLightHandler->handle(argsFail)
     );
 }
 
@@ -62,13 +69,13 @@ void test_mock_turn_off_digital_light_handler() {
 void test_mock_turn_on_digital_light_handler(){
     TEST_ASSERT_EQUAL_STRING(MOCK_TURN_ON_LIGHT_PATH, turnOnDigitalLightHandler->path().c_str());
     check_result_is_ok(
-        turnOnDigitalLightHandler->handle(Json::Value(LIGHT_0_NAME))
+        turnOnDigitalLightHandler->handle(args0)
     );
     check_result_is_ok(
-        turnOnDigitalLightHandler->handle(Json::Value(LIGHT_1_NAME))
+        turnOnDigitalLightHandler->handle(args1)
     );
     check_result_is_fail(
-        turnOnDigitalLightHandler->handle(Json::Value("the game"))
+        turnOnDigitalLightHandler->handle(argsFail)
     );
 }
 
@@ -79,9 +86,9 @@ void light_state_check(OperationHandlerResult result, bool isOn) {
 
 void is_on_handler_state_must_be(bool isOn) {
     TEST_ASSERT_EQUAL_STRING(MOCK_IS_ON_LIGHT_PATH, isOnDigitalLightHandler->path().c_str());
-    light_state_check(isOnDigitalLightHandler->handle(Json::Value(LIGHT_0_NAME)), isOn);
-    light_state_check(isOnDigitalLightHandler->handle(Json::Value(LIGHT_1_NAME)), isOn);
-    check_result_is_fail(isOnDigitalLightHandler->handle(Json::Value("the game")));
+    light_state_check(isOnDigitalLightHandler->handle(args0), isOn);
+    light_state_check(isOnDigitalLightHandler->handle(args1), isOn);
+    check_result_is_fail(isOnDigitalLightHandler->handle(argsFail));
 }
 
 //TEST

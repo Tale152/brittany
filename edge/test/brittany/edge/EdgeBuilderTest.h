@@ -49,10 +49,12 @@ void test_edge_execute_working(Edge* edge) {
     auto result0 = edge -> execute(OPERATION_HANDLER_IN_MOCK_MODULE_PATH, Json::Value(INCREMENT_VALUE_TEST));
     check_edge_builder_result_code_is_ok(result0);
     TEST_ASSERT_EQUAL(INCREMENT_VALUE_TEST, result0.content().asInt());
-    auto result1 = edge -> execute(MOCK_TURN_ON_LIGHT_PATH, Json::Value(MOCK_LIGHT_IN_EDGE_BUILDER_NAME));
+    Json::Value args;
+    args["id"] = MOCK_LIGHT_IN_EDGE_BUILDER_NAME;
+    auto result1 = edge -> execute(MOCK_TURN_ON_LIGHT_PATH, args);
     check_edge_builder_result_code_is_ok(result1);
     TEST_ASSERT_EQUAL_STRING(phrase(ContentResult::Ok).c_str(), result1.content().asString().c_str());
-    auto result = edge -> execute(MOCK_IS_ON_LIGHT_PATH, Json::Value(MOCK_LIGHT_IN_EDGE_BUILDER_NAME));
+    auto result = edge -> execute(MOCK_IS_ON_LIGHT_PATH, args);
     check_edge_builder_result_code_is_ok(result);
     TEST_ASSERT_TRUE(result.content().asBool());
 }

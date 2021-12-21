@@ -51,6 +51,7 @@ public:
                 Json::Value args;
                 for(int i = 0; i < _server.args(); i++) {
                     args[_server.argName(i).c_str()] = _server.arg(i).c_str();
+                    _debug.println(_server.arg(i).c_str());
                 }
                 _debug.println("Request received, forwarded to:");
                 _debug.println(_server.uri().c_str());

@@ -26,12 +26,13 @@ public:
 private:
 
     std::optional<bool> operation(Json::Value args) {
-        MockDigitalLightHw* component = find_by_id(_components, args.asString());
-        if(component == NULL){
-           return std::nullopt;
-        } else {
-            return std::optional(component -> isOn());
+        if(args.isMember("id")) {
+            MockDigitalLightHw* component = find_by_id(_components, args["id"].asCString());
+            if(component != NULL){
+                return std::optional(component -> isOn());
+            }
         }
+        return std::nullopt;
     };
     
     std::list<MockDigitalLightHw*> _components;

@@ -6,6 +6,19 @@
 #include <optional>
 
 /**
+ * @brief Get the body of the json object. The body of the post request is always in the plain key.
+ * 
+ * @param json the original json object.
+ * @return Json::Value the object contained in the "plain" key if present, a null Json::Value otherwise.
+ */
+inline std::optional<Json::Value> body(Json::Value json) {
+    if(json.isMember("plain")) {
+        return std::optional<Json::Value>(json["plain"]);
+    }
+    return std::nullopt;
+}
+
+/**
  * @brief Map the Json::Value to the corresponding std::string.
  * 
  * @param json the Json::Value.

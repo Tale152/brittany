@@ -7,7 +7,7 @@ TurnOffHandlerInterface::TurnOffHandlerInterface(std::string path) : ValueReturn
 }
 
 std::optional<std::string> TurnOffHandlerInterface::operation(Json::Value args) {
-    if(turnOff(args.asString())){
+    if(args.isMember("id") && turnOff(args["id"].asCString())){
         return std::optional(phrase(ContentResult::Ok));
     }
     return std::nullopt;
