@@ -6,6 +6,8 @@ services:
     environment:
       - DB=mongodb://database:27017/brittany_auth
       - PORT=80
+      - FARMER_TOKEN_SECRET=devFarmerTokenSecret
+      - AGENT_TOKEN_SECRET=devAgentTokenSecret
     ports:
       - 81:80
   database:
