@@ -1,18 +1,18 @@
 const stringUtil = require('../util/stringUtil')
 const SettingsFactory = require('../../../mongoose/factories/settings')
 
-function isTemperatureValid(temperature){
-    if(temperature !== undefined){
-        return temperature.min !== undefined && !isNaN(temperature.min) &&
-            temperature.max !== undefined && !isNaN(temperature.max) &&
-            temperature.min <= temperature.max
+function isRangeFieldValid(field){
+    if(field !== undefined){
+        return field.min !== undefined && !isNaN(field.min) &&
+            field.max !== undefined && !isNaN(field.max) &&
+            field.min <= field.max
     }
     return true
 }
 
 function areSettingsCreateParametersValid(params){
     if(stringUtil.isValidString(params.idEnvironment) && stringUtil.isValidString(params.expires)){
-        return isTemperatureValid(params.temperature)
+        return isRangeFieldValid(params.temperature) && isRangeFieldValid(params.humidity)
     }
     return false
 }
@@ -26,6 +26,9 @@ async function createNewSettings(req, res){
     )
     if(req.body.temperature !== undefined){
         newSettings.data.temperature = req.body.temperature
+    }
+    if(req.body.humidity !== undefined){
+        newSettings.data.humidity = req.body.humidity
     }
     saveNewSettings(newSettings, res)
 }
