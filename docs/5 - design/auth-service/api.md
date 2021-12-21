@@ -6,7 +6,9 @@ grand_parent: Design
 
 # Auth Service - API
 
-## &#9658; <font color="green">**POST**</font> /organization/**create**
+## Organization
+
+## &#9658; **<font color="green">POST</font>** /organization/**create**
 ### **Parametri body:**
 * **organizationName**  
 Tipo: Stringa  
@@ -38,7 +40,7 @@ Password del primo titolare di un account Farmer collegato all'Organization da c
 * **token**  
 <u>Farmer token</u> ottenuto autenticandosi con il nuovo account Farmer creato.
 
-## &#9658; <font color="blue">**GET**</font> /organization/**info**
+## &#9658; **<font color="blue">GET</font>** /organization/**info**
 ### **Header richiesti:**
 * **token**  
 <u>Farmer token</u> ottenuto autenticandosi con un account Farmer.
@@ -50,7 +52,7 @@ Nome dell'Organization collegata all'account autenticato.
 
 ## Farmer
 
-## &#9658; <font color="blue">**GET**</font> /farmer/**login**
+## &#9658; **<font color="blue">GET</font>** /farmer/**login**
 ### **Parametri query:**
 * mail
 * password
@@ -58,7 +60,7 @@ Nome dell'Organization collegata all'account autenticato.
 ### **Risultato atteso:** **200**
 * token
 
-## &#9658; <font color="blue">**GET**</font> /farmer/**info**
+## &#9658; **<font color="blue">GET</font>** /farmer/**info**
 ### **Header richiesti:**
 * token
 
@@ -68,14 +70,14 @@ Nome dell'Organization collegata all'account autenticato.
 ### **Risultato atteso:** **200**
 * farmers
 
-## &#9658; <font color="blue">**GET**</font> /farmer/**list**
+## &#9658; **<font color="blue">GET</font>** /farmer/**list**
 ### **Header richiesti:**
 * token
 
 ### **Risultato atteso:** **200**
 * farmers
 
-## &#9658; <font color="green">**POST**</font> /farmer/**register**
+## &#9658; **<font color="green">POST</font>** /farmer/**register**
 ### **Header richiesti:**
 * token
 
@@ -92,14 +94,14 @@ Nome dell'Organization collegata all'account autenticato.
 
 ## Greenhouse
 
-## &#9658; <font color="blue">**GET**</font> /greenhouse/**list**
+## &#9658; **<font color="blue">GET</font>** /greenhouse/**list**
 ### **Header richiesti:**
 * token
 
 ### **Risultato atteso:** **200**
 * greenhouses
 
-## &#9658; <font color="green">**POST**</font> /greenhouse/**create**
+## &#9658; **<font color="green">POST</font>** /greenhouse/**create**
 ### **Header richiesti:**
 * token
 
@@ -112,7 +114,7 @@ Nome dell'Organization collegata all'account autenticato.
 
 ## Environment
 
-## &#9658; <font color="blue">**GET**</font> /environment/**list**
+## &#9658; **<font color="blue">GET</font>** /environment/**list**
 ### **Header richiesti:**
 * token
 
@@ -122,7 +124,7 @@ Nome dell'Organization collegata all'account autenticato.
 ### **Risultato atteso:** **200**
 * environments
 
-## &#9658; <font color="blue">**GET**</font> /environment/**info**
+## &#9658; **<font color="blue">GET</font>** /environment/**info**
 ### **Header richiesti:**
 * token
 
@@ -133,7 +135,7 @@ Nome dell'Organization collegata all'account autenticato.
 * id_greenhouse
 * name
 
-## &#9658; <font color="green">**POST**</font> /environment/**create**
+## &#9658; **<font color="green">POST</font>** /environment/**create**
 ### **Header richiesti:**
 * token
 
@@ -148,7 +150,7 @@ Nome dell'Organization collegata all'account autenticato.
 
 ## Agent
 
-## &#9658; <font color="blue">**GET**</font> /agent/**login**
+## &#9658; **<font color="blue">GET</font>** /agent/**login**
 ### **Parametri query:**
 * organizationName
 * greenhouseName
