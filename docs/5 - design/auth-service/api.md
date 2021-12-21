@@ -6,7 +6,7 @@ grand_parent: Design
 
 # Auth Service - API
 
-### **POST** /organization/**create**
+## &#9658; **POST** /organization/**create**
 Parametri body:
 * organizationName  
 Tipo: Stringa  
@@ -38,7 +38,7 @@ Risultato atteso: **201**
 * token  
 <u>Farmer token</u> ottenuto autenticandosi con il nuovo account Farmer creato.
 
-### **GET** /organization/**info**
+## &#9658; **GET** /organization/**info**
 Header richiesti:
 * token  
 <u>Farmer token</u> ottenuto autenticandosi con un account Farmer.
@@ -50,7 +50,7 @@ Nome dell'Organization collegata all'account autenticato.
 
 ## Farmer
 
-### **GET** /farmer/**login**
+## &#9658; **GET** /farmer/**login**
 Parametri query:
 * mail
 * password
@@ -58,7 +58,7 @@ Parametri query:
 Risultato atteso: **200**
 * token
 
-### **GET** /farmer/**info**
+## &#9658; **GET** /farmer/**info**
 Header richiesti:
 * token
 
@@ -68,14 +68,14 @@ Parametri query:
 Risultato atteso: **200**
 * farmers
 
-### **GET** /farmer/**list**
+## &#9658; **GET** /farmer/**list**
 Header richiesti:
 * token
 
 Risultato atteso: **200**
 * farmers
 
-### **POST** /farmer/**register**
+## &#9658; **POST** /farmer/**register**
 Header richiesti:
 * token
 
@@ -92,14 +92,14 @@ Risultato atteso: **201**
 
 ## Greenhouse
 
-### **GET** /greenhouse/**list**
+## &#9658; **GET** /greenhouse/**list**
 Header richiesti:
 * token
 
 Risultato atteso: **200**
 * greenhouses
 
-### **POST** /greenhouse/**create**
+## &#9658; **POST** /greenhouse/**create**
 Header richiesti:
 * token
 
@@ -112,7 +112,7 @@ Risultato atteso: **201**
 
 ## Environment
 
-### **GET** /environment/**list**
+## &#9658; **GET** /environment/**list**
 Header richiesti:
 * token
 
@@ -122,7 +122,7 @@ Parametri query:
 Risultato atteso: **200**
 * environments
 
-### **GET** /environment/**info**
+## &#9658; **GET** /environment/**info**
 Header richiesti:
 * token
 
@@ -133,7 +133,7 @@ Risultato atteso: **200**
 * id_greenhouse
 * name
 
-### **POST** /environment/**create**
+## &#9658; **POST** /environment/**create**
 Header richiesti:
 * token
 
@@ -148,7 +148,7 @@ Risultato atteso: **201**
 
 ## Agent
 
-### **GET** /agent/**login**
+## &#9658; **GET** /agent/**login**
 Parametri query:
 * organizationName
 * greenhouseName
