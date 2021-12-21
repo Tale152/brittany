@@ -14,12 +14,12 @@ void EdgeBuilder::addAllModules(std::list<Module> modules) {
     }
 }
 
-Edge EdgeBuilder::build() {
+Edge* EdgeBuilder::build() {
     std::list<OperationHandler*> handlers;
     for(Module m : _modules) {
         for(OperationHandler* h : m.handlers()) {
             handlers.push_back(h);
         }
     }
-    return Edge(handlers);
+    return new Edge(handlers);
 }

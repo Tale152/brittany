@@ -39,7 +39,7 @@ public:
      * 
      * @return Edge An Edge Object that contains all the handlers contained in the modules added previously.
      */
-    Edge build();
+    Edge* build();
 
 private:
 
