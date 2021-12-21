@@ -1,0 +1,50 @@
+name: Settings service CI
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        mongodb-version: [3.6, 4.0, 4.2]
+    defaults:
+      run:
+        working-directory: ./settings-service
+    steps:
+    - name: Checkout current branch (full)
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: settings-service/package-lock.json
+    - name: Start MongoDB v${{ matrix.mongodb-version }}
+      uses: supercharge/mongodb-github-action@1.2.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+    - run: npm install
+    - run: npm test
+  deploy-dev-image:
+    needs: test
+    if: github.ref == 'refs/heads/settings-service'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./settings-service
+    steps:
+        - uses: actions/checkout@v1
+        - name: Login to DockerHub Registry
+          run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        - name: Build the latest Docker image
+          run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-settings-service-dev:latest
+        - name: Push the latest Docker image
+          run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/brittany-settings-service-dev:latest
