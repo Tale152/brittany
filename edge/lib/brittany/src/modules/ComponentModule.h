@@ -25,6 +25,16 @@ public:
      */
     ComponentModule(std::string name, std::list<T*> components);
 
+    /**
+     * @brief Get the components used by the modules
+     * 
+     * @return std::list<T*> A list containing all the components in the module. 
+     */
+    std::list<T*> components();
+
+private:
+
+    std::list<T*> _components;
 };
 
 #endif //BRITTANY_COMPONENT_MODULE_H

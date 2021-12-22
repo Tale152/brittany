@@ -1,7 +1,11 @@
 #include "ComponentModule.h"
 
 template <class T>
-
 ComponentModule<T>::ComponentModule(std::string name, std::list<T*> components): Module(name) {
-    //does nothing
+    _components = components;
+}
+
+template <class T>
+std::list<T*> ComponentModule<T>::components() {
+    return _components;
 }

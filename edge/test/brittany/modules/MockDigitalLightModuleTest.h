@@ -87,7 +87,15 @@ void test_module_name() {
 }
 
 // TEST
-void test_module_get_handlers(){
+void test_module_components() {
+    std::list<MockDigitalLightHw*> components = moduleTest -> components();
+    TEST_ASSERT_EQUAL(2, components.size());
+    TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_IN_MODULE_NAME_0, components.front()->id().c_str());
+    TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_IN_MODULE_NAME_1, components.back()->id().c_str());
+}
+
+// TEST
+void test_module_get_handlers() {
     std::list<OperationHandler*> handlersList = moduleTest -> handlers();
     TEST_ASSERT_EQUAL(3, handlersList.size());
     OperationHandler* isOnHandler = handlersList.front();
@@ -107,6 +115,7 @@ void test_module_get_handlers(){
 void test_ComponentModuleTest() {
     setup_module_test();
     RUN_TEST(test_module_name);
+    RUN_TEST(test_module_components);
     RUN_TEST(test_module_get_handlers);
     post_module_test();
 }
