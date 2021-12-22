@@ -59,10 +59,10 @@ Mentre i Settings datati vengono considerati automaticamente non più attivi, il
 * **_id**  
 Id univoco del Setting più recente per l'Environment specificato dall'Agent token. 
 * **created**  
-Data di creazione del Setting.  
+Data di creazione del Setting; la data e l'orario fanno riferimento all'<u>UTC</u> (Universal Time Coordinated).  
 Formato: *"1997-12-31T00:00:00.000+00:00"*
 * **expires**  
-Data di scadenza del Setting.  
+Data di scadenza del Setting; la data e l'orario fanno riferimento all'<u>UTC</u> (Universal Time Coordinated).  
 Formato: *"1997-12-31T00:00:00.000+00:00"*
 * **active**  
 Stato attuale del Setting.
@@ -93,10 +93,10 @@ Lista ordinata (per data di creazione, dal più recente al più vecchio) contene
 * **_id**  
 Id univoco del Setting più recente per l'Environment specificato dall'Agent token. 
 * **created**  
-Data di creazione del Setting.  
+Data di creazione del Setting; la data e l'orario fanno riferimento all'<u>UTC</u> (Universal Time Coordinated).  
 Formato: *"1997-12-31T00:00:00.000+00:00"*
 * **expires**  
-Data di scadenza del Setting.  
+Data di scadenza del Setting; la data e l'orario fanno riferimento all'<u>UTC</u> (Universal Time Coordinated).  
 Formato: *"1997-12-31T00:00:00.000+00:00"*
 * **active**  
 Stato attuale del Setting.
