@@ -1,65 +1,83 @@
 #include <unity.h>
-#include <list>
-#include <algorithm>
 #include "edge/Edge.h"
-#include "operation-handler/MockOperationHandler.h"
+#include "modules/MockDigitalLightModule.h"
+#include "modules/MockModule.h"
+#include "HttpStatusCodes_C++.h"
+#include "util.h"
 
-#define MOCK_OPERATION_HANDLER_IN_EDGE_PATH_0 "/path0"
-#define MOCK_OPERATION_HANDLER_IN_EDGE_PATH_1 "/path1"
-#define INCREMENT_VALUE_IN_EDGE 5
+#define MOCK_LIGHT_IN_EDGE_NAME "light"
+#define MOCK_LIGHT_IN_EDGE_PIN 5
+#define TESTING_EXECUTE_ATTEMPT 10
 
-MockOperationHandler* operationHandlerInEdge0;
-MockOperationHandler* operationHandlerInEdge1;
-Edge* edgeTest;
+#define INCREMENT_VALUE_TEST 6
+
+MockDigitalLightHw* mockLightInEdge;
+std::list<MockDigitalLightHw*> mockDigitalLights;
 
 void setup_test_edge() {
-    operationHandlerInEdge0 = new MockOperationHandler(MOCK_OPERATION_HANDLER_IN_EDGE_PATH_0);
-    operationHandlerInEdge1 = new MockOperationHandler(MOCK_OPERATION_HANDLER_IN_EDGE_PATH_1);
-    edgeTest = new Edge(std::list<OperationHandler*>({operationHandlerInEdge0, operationHandlerInEdge1}));
+    mockLightInEdge = new MockDigitalLightHw(
+        MOCK_LIGHT_IN_EDGE_NAME,
+        MOCK_LIGHT_IN_EDGE_PIN
+    );
+    mockDigitalLights.push_back(mockLightInEdge);
 }
 
 void post_test_edge() {
-    delete operationHandlerInEdge0, operationHandlerInEdge1, edgeTest;
+    delete mockLightInEdge;
 }
 
-void test_handler_success(OperationHandlerResult result) {
-    TEST_ASSERT_EQUAL(HttpStatus::OK, result.code());
-    TEST_ASSERT_EQUAL(INCREMENT_VALUE_IN_EDGE, result.content().asInt());
-}
-
-void test_handler_fail(OperationHandlerResult result) {
+void test_edge_result_fail(OperationHandlerResult result) {
     TEST_ASSERT_EQUAL(HttpStatus::NotFound, result.code());
-    TEST_ASSERT_EQUAL_STRING("The requested resource does not exist.", result.content().asString().c_str());
-}
-
-void test_execute() {
-    test_handler_success(
-        edgeTest -> execute(MOCK_OPERATION_HANDLER_IN_EDGE_PATH_0, Json::Value(INCREMENT_VALUE_IN_EDGE))
-    );
-    test_handler_success(
-        edgeTest -> execute(MOCK_OPERATION_HANDLER_IN_EDGE_PATH_1, Json::Value(INCREMENT_VALUE_IN_EDGE))
-    );
-    test_handler_fail(
-        edgeTest -> execute("/ippopotamo", Json::Value(1))
+    TEST_ASSERT_EQUAL_STRING(
+        phrase(ContentResult::ResourceNotFound).c_str(),
+        result.content().asString().c_str()
     );
 }
 
-void test_available_path() {
-    std::list<std::string> paths = edgeTest -> availablePaths();
-    TEST_ASSERT_EQUAL(2, paths.size());
-    for(std::string p : {MOCK_OPERATION_HANDLER_IN_EDGE_PATH_0, MOCK_OPERATION_HANDLER_IN_EDGE_PATH_1}) {
-        TEST_ASSERT_TRUE(std::find(paths.begin(), paths.end(), p) != paths.end());
+void test_edge_execute_fail(Edge* edge) {
+    for(int i = 0; i < TESTING_EXECUTE_ATTEMPT; i++) {
+        test_edge_result_fail(edge -> execute("/"+ i, Json::Value()));
     }
 }
 
-void test_thing_descriptor() {
-    //TODO
+void check_edge_result_code_is_ok(OperationHandlerResult result) {
+    TEST_ASSERT_EQUAL(HttpStatus::OK, result.code());
+}
+
+void test_edge_execute_working(Edge* edge) {
+    auto result0 = edge -> execute(OPERATION_HANDLER_IN_MOCK_MODULE_PATH, Json::Value(INCREMENT_VALUE_TEST));
+    check_edge_result_code_is_ok(result0);
+    TEST_ASSERT_EQUAL(INCREMENT_VALUE_TEST, result0.content().asInt());
+    Json::Value args;
+    args["id"] = MOCK_LIGHT_IN_EDGE_NAME;
+    auto result1 = edge -> execute(MOCK_TURN_ON_LIGHT_PATH, args);
+    check_edge_result_code_is_ok(result1);
+    TEST_ASSERT_EQUAL_STRING(phrase(ContentResult::Ok).c_str(), result1.content().asString().c_str());
+    auto result = edge -> execute(MOCK_IS_ON_LIGHT_PATH, args);
+    check_edge_result_code_is_ok(result);
+    TEST_ASSERT_TRUE(result.content().asBool());
+}
+
+//TEST
+void test_edge_empty() {
+    Edge* edge = new Edge(std::list<Module*>({}));
+    test_edge_execute_fail(edge);
+    delete edge;
+}
+
+//TEST
+void test_edge_list() {
+    Edge* edge = new Edge(std::list<Module*>({
+        new MockModule(),
+        new MockDigitalLightModule(mockDigitalLights)}
+    ));
+    test_edge_execute_working(edge);
+    delete edge;
 }
 
 void test_Edge() {
     setup_test_edge();
-    RUN_TEST(test_execute);
-    RUN_TEST(test_available_path);
-    RUN_TEST(test_thing_descriptor);
+    RUN_TEST(test_edge_empty);
+    RUN_TEST(test_edge_list);
     post_test_edge();
 }

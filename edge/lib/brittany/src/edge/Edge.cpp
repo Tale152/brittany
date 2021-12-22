@@ -1,15 +1,18 @@
 #include "Edge.h"
+#include "modules/Module.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
 
-Edge::Edge(std::list<OperationHandler*> operations) {
-    _operations = operations;
+Edge::Edge(std::list<Module*> modules) {
+    _modules = modules;
 }
 
 OperationHandlerResult Edge::execute(std::string route, Json::Value args) {
-    for(OperationHandler* h: _operations){
-        if(h -> path() == route) {
-            return h -> handle(args);
+    for(Module* m : _modules) {
+        for(OperationHandler* h: m -> handlers()) {
+            if(h -> path() == route) {
+                return h -> handle(args);
+            }
         }
     }
     return OperationHandlerResult(
@@ -20,8 +23,10 @@ OperationHandlerResult Edge::execute(std::string route, Json::Value args) {
 
 std::list<std::string> Edge::availablePaths() {
     std::list<std::string> paths;
-    for(OperationHandler* h : _operations) {
-        paths.push_back(h -> path());
+    for(Module* m : _modules) {
+        for(OperationHandler* h: m -> handlers()) {
+            paths.push_back(h -> path());
+        }
     }
     return paths;
 }

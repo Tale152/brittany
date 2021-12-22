@@ -2,9 +2,9 @@
 #include "web-server/Esp8266WebServer.h"
 #include "hw/MockDigitalLightHw.h"
 #include "modules/MockDigitalLightModule.h"
-#include "edge/EdgeBuilder.h"
 #include <json_util.h>
 #include "wifi_secret.h"
+#include <list>
 
 Esp8266WebServer* server;
 
@@ -26,9 +26,9 @@ void setup_variables() {
     MockDigitalLightHw* light0 = new MockDigitalLightHw("0", 0);
     MockDigitalLightHw* light1 = new MockDigitalLightHw("1", 1);
     std::list<MockDigitalLightHw*> lights = std::list<MockDigitalLightHw*>({light0, light1});
-    EdgeBuilder builder = EdgeBuilder();
-    builder.addModule(MockDigitalLightModule(lights));
-    server = new Esp8266WebServer(builder.build());
+    std::list<Module*> modules = std::list<Module*>({new MockDigitalLightModule(lights)});
+    Edge* edge = new Edge(modules);
+    server = new Esp8266WebServer(edge);
 }
 
 void setup() {

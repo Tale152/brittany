@@ -7,6 +7,7 @@
 #include "operation-handler/OperationHandler.h"
 #include "operation-handler/OperationHandlerResult.h"
 #include "thing-descriptor/ThingDescriptor.h"
+#include "modules/Module.h"
 
 /**
  * @brief Class that acts as a container of the Edge OperationHandlers.
@@ -18,9 +19,9 @@ public:
     /**
      * @brief Construct a new Edge object.
      * 
-     * @param operationHandlers the operation handlers that the Edge will contain.
+     * @param modules The modules that the edge contains.
      */
-    Edge(std::list<OperationHandler*> operationHandlers);
+    Edge(std::list<Module*> modules);
     
     /**
      * @brief Execute the handler whit the specified name and args.
@@ -47,7 +48,7 @@ public:
 
 private:
 
-    std::list<OperationHandler*> _operations;
+    std::list<Module*> _modules;
     
 };
 
