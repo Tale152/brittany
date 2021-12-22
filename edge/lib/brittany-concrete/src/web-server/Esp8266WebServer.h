@@ -37,11 +37,11 @@ public:
         });
 
         _debug.println("/");
-        _server.on("/", [&] () {
+        _server.on("/", [&, port] () {
             _server.send(
                 HttpStatus::OK,
                 "application/json",
-                stringify(edge() -> thingDescriptor()).c_str()
+                stringify(edge() -> thingDescriptor(WiFi.localIP().toString().c_str(), port)).c_str()
             );
         });
 

@@ -8,11 +8,14 @@
 
 #define OPERATION_HANDLER_IN_MOCK_MODULE_PATH "/value"
 
+/**
+ * @brief Mock Module that contains only a MockOperationHandler.
+ */
 class MockModule : public Module {
 
 public:
 
-    MockModule(): Module() {
+    MockModule(std::string name): Module(name) {
         _handlers.push_back(
             new MockOperationHandler(OPERATION_HANDLER_IN_MOCK_MODULE_PATH)
         );

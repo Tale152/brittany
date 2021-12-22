@@ -6,6 +6,9 @@
 #include "util.h"
 #include "../thing-descriptor/ThingDescriptorTest.h"
 
+#define EDGE_MOCK_MODULE_NAME "mock-module"
+#define EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME "light-module"
+
 #define MOCK_LIGHT_IN_EDGE_NAME "light"
 #define MOCK_LIGHT_IN_EDGE_PIN 5
 #define TESTING_EXECUTE_ATTEMPT 10
@@ -69,8 +72,8 @@ void test_edge_empty() {
 //TEST
 void test_edge_list() {
     Edge* edge = new Edge(std::list<Module*>({
-        new MockModule(),
-        new MockDigitalLightModule(mockDigitalLights)}
+        new MockModule(MOCK_MODULE_NAME),
+        new MockDigitalLightModule(EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME, mockDigitalLights)}
     ));
     test_edge_execute_working(edge);
     delete edge;
@@ -78,7 +81,7 @@ void test_edge_list() {
 
 void test_thing_descriptor() {
     Edge* edge = new Edge(std::list<Module*>({
-        new MockDigitalLightModule(mockDigitalLights)
+        new MockDigitalLightModule(EDGE_MOCK_MODULE_NAME, mockDigitalLights)
     }));
     test_ThingDescriptor(edge);
 }

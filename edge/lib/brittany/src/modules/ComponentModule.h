@@ -20,9 +20,10 @@ public:
     /**
      * @brief Construct a new Module object. Handlers are created here in subclasses.
      * 
-     * @param components 
+     * @param name the name of the module.
+     * @param components the components list.
      */
-    ComponentModule(std::list<T*> components);
+    ComponentModule(std::string name, std::list<T*> components);
 
 };
 

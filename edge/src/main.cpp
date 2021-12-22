@@ -26,7 +26,7 @@ void setup_variables() {
     MockDigitalLightHw* light0 = new MockDigitalLightHw("0", 0);
     MockDigitalLightHw* light1 = new MockDigitalLightHw("1", 1);
     std::list<MockDigitalLightHw*> lights = std::list<MockDigitalLightHw*>({light0, light1});
-    std::list<Module*> modules = std::list<Module*>({new MockDigitalLightModule(lights)});
+    std::list<Module*> modules = std::list<Module*>({new MockDigitalLightModule("light", lights)});
     Edge* edge = new Edge(modules);
     server = new Esp8266WebServer(edge);
 }

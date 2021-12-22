@@ -18,7 +18,7 @@ class MockDigitalLightModule : public ComponentModule<MockDigitalLightHw> {
 
 public:
 
-    MockDigitalLightModule(std::list<MockDigitalLightHw*> components): ComponentModule<MockDigitalLightHw>(components) {
+    MockDigitalLightModule(std::string name, std::list<MockDigitalLightHw*> components): ComponentModule<MockDigitalLightHw>(name, components) {
         _handlers.push_back(
             new MockIsOnDigitalLightHandler(MOCK_IS_ON_HANDLER_MODULE_PATH, components)
         );

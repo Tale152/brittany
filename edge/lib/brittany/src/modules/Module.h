@@ -15,7 +15,7 @@ public:
     /**
      * @brief Construct a new Module object.
      */
-    Module();
+    Module(std::string name);
 
     /**
      * @brief Return the list of OperationHandler in this Module.
@@ -24,9 +24,17 @@ public:
      */
     std::list<OperationHandler*> handlers();
 
+    /**
+     * @brief Get the Module name.
+     * 
+     * @return std::string return the module name as string.
+     */
+    std::string name();
+
 protected:
 
     std::list<OperationHandler*> _handlers;
+    std::string _name;
 };
 
 #endif //BRITTANY_MODULE_H
