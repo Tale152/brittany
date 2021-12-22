@@ -1,11 +1,12 @@
 #ifndef BRITTANY_THING_DESCRIPTOR_H
 #define BRITTANY_THING_DESCRIPTOR_H
 
-//TODO
-class ThingDescriptor{
+class ThingDescriptor {
+
 public:
 
-    std::string asString();
+    Json::Value json();
+
 };
 
 

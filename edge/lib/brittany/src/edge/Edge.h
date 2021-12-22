@@ -44,7 +44,7 @@ public:
      * 
      * @return Json::Value the Edge Thing Descriptor
      */
-    Json::Value thingDescriptor();
+    Json::Value thingDescriptor(std::string ip, int port);
 
 private:
 

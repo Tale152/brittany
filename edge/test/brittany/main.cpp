@@ -26,6 +26,7 @@ void test_modules() {
 }
 
 void test_edge() {
+    // (Thing descriptor tested inside)
     test_Edge(); //EdgeTest
 }
 
