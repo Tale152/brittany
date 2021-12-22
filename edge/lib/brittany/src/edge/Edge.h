@@ -6,7 +6,6 @@
 #include <json/json.h>
 #include "operation-handler/OperationHandler.h"
 #include "operation-handler/OperationHandlerResult.h"
-#include "thing-descriptor/ThingDescriptor.h"
 #include "modules/Module.h"
 
 /**

@@ -1,3 +1,6 @@
+#ifndef BRITTANY_TD_UTIL_H
+#define BRITTANY_TD_UTIL_H
+
 #include <string>
 #include <tuple>
 
@@ -28,3 +31,5 @@ namespace TD {
     } 
 
 }
+
+#endif //BRITTANY_TD_UTIL_H
