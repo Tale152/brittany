@@ -14,10 +14,28 @@ public:
 
     static Json::Value build(std::string ip, int port, std::list<Module*> modules) {
         Json::Value td;
+        add_context(td);
+        add_id(td, ip, port);
+        add_title(td);
+        add_security(td);
+        return td;
+    };
+
+private:
+
+    static void add_context(Json::Value &td) { 
         td[key(Key::CONTEXT)] = value(Key::CONTEXT);
-        td["id"] = "http://" + ip + ":" + std::to_string(port);
+    }
+
+    static void add_title(Json::Value &td) { 
         td["title"] = "Mock Title";
-        //Security
+    }
+        
+    static void add_id(Json::Value &td, std::string ip, int port) { 
+        td["id"] = "http://" + ip + ":" + std::to_string(port);
+    }
+
+    static void add_security(Json::Value &td) { 
         Json::Value no_sec_obj;
         no_sec_obj[key(Key::SECURITY_DEFINITIONS_SCHEME)] = value(Key::SECURITY_DEFINITIONS_SCHEME);
         no_sec_obj[key(Key::SECURITY_DEFINITIONS_IN)] = value(Key::SECURITY_DEFINITIONS_IN);
@@ -25,8 +43,7 @@ public:
         security_def_obj[value(Key::SECURITY)] = no_sec_obj;
         td[key(Key::SECURITY_DEFINITIONS)] = security_def_obj;
         td[key(Key::SECURITY)][0] = value(Key::SECURITY);
-        return td;
-    };
+    }
 
 };
 
