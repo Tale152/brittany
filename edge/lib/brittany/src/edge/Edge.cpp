@@ -37,6 +37,8 @@ std::list<std::string> Edge::availablePaths() {
 Json::Value Edge::thingDescriptor(std::string ip, int port) {
     Json::Value td;
     td[key(Key::CONTEXT)] = value(Key::CONTEXT);
+    td["id"] = "http://" + ip + ":" + std::to_string(port);
+    td["title"] = "Mock Title";
     //Security
     Json::Value no_sec_obj;
     no_sec_obj[key(Key::SECURITY_DEFINITIONS_SCHEME)] = value(Key::SECURITY_DEFINITIONS_SCHEME);

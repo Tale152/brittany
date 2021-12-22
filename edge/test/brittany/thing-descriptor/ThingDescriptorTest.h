@@ -33,9 +33,17 @@ void contains_td_security_definitions() {
     TEST_ASSERT_EQUAL_STRING("header", nosec["in"].asCString());
 }
 
+void contains_id_and_title() {
+    TEST_ASSERT_TRUE(td.isMember("id"));
+    std::string expectedId = std::string("http://") + TD_IP_TEST + ":" + std::to_string(TD_PORT_TEST);
+    TEST_ASSERT_EQUAL_STRING(expectedId.c_str(), td["id"].asCString());
+    TEST_ASSERT_TRUE(td.isMember("title"));
+}
+
 void contains_all_elements() {
     td = tdEdge -> thingDescriptor(TD_IP_TEST, TD_PORT_TEST);
     RUN_TEST(contains_context);
+    RUN_TEST(contains_id_and_title);
     RUN_TEST(contains_td_security_definitions);
     RUN_TEST(contains_td_security);
 }
