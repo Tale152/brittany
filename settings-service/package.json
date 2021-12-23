@@ -4,7 +4,7 @@
   "description": "Server that handles the persistence of environments settings in the Brittany environment",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "repository": {
     "type": "git",
