@@ -1,5 +1,6 @@
 const stringUtil = require('../util/stringUtil')
 const numberUtil = require('../util/numberUtil')
+const boolUtil = require('../util/boolUtil')
 const SettingsFactory = require('../../../mongoose/factories/settings')
 
 function isBetween(val, min, max){
@@ -23,7 +24,7 @@ function isRangeFieldValid(field){
 }
 
 function areSettingsCreateParametersValid(params){
-    if(stringUtil.isValidString(params.idEnvironment) && stringUtil.isValidString(params.expires)){
+    if(stringUtil.isValidString(params.idEnvironment) && stringUtil.isValidString(params.expires) && boolUtil.isValidBoolean(params.active)){
         return isRangeFieldValid(params.temperature) && isRangeFieldValid(params.airHumidity) && isLightValid(params.light)
     }
     return false
