@@ -63,7 +63,7 @@ Obbligatorio: sì
 Id del Setting (ottenuto dal setting-service) della quale si vuole ottenere la lista di campionamenti.
 
 ### **Risultato atteso:** **200**
-* **temperatures**  
+* **list**  
 Lista ordinata (dal più recente al più vecchio) di campionamenti della temperatura effettuati per il Setting specificato.
 
 ---
@@ -125,5 +125,5 @@ Obbligatorio: sì
 Id del Setting (ottenuto dal setting-service) della quale si vuole ottenere la lista di campionamenti.
 
 ### **Risultato atteso:** **200**
-* **temperatures**  
+* **list**  
 Lista ordinata (dal più recente al più vecchio) di campionamenti dell'umidità dell'aria effettuati per il Setting specificato.
