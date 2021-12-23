@@ -81,7 +81,7 @@ void test_edge_list() {
 
 void test_thing_descriptor() {
     Edge* edge = new Edge(std::list<Module*>({
-        new MockDigitalLightModule(EDGE_MOCK_MODULE_NAME, mockDigitalLights)
+        new MockDigitalLightModule(EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME, mockDigitalLights)
     }));
     test_ThingDescriptor(edge);
 }

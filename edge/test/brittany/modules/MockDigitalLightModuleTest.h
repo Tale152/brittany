@@ -88,10 +88,10 @@ void test_module_name() {
 
 // TEST
 void test_module_components() {
-    std::list<MockDigitalLightHw*> components = moduleTest -> components();
+    std::list<ComponentHw> components = moduleTest -> components();
     TEST_ASSERT_EQUAL(2, components.size());
-    TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_IN_MODULE_NAME_0, components.front()->id().c_str());
-    TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_IN_MODULE_NAME_1, components.back()->id().c_str());
+    TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_IN_MODULE_NAME_0, components.front().id().c_str());
+    TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_IN_MODULE_NAME_1, components.back().id().c_str());
 }
 
 // TEST

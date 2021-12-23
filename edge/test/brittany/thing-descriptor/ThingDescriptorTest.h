@@ -1,5 +1,6 @@
 #include <unity.h>
 #include "json/json.h"
+#include "edge/Edge.h"
 
 #define TD_IP_TEST "127.0.0.1"
 #define TD_PORT_TEST 80
@@ -39,12 +40,26 @@ void contains_id_and_title() {
     TEST_ASSERT_TRUE(thingDescriptor.isMember("title"));
 }
 
+void contains_modules() {
+    TEST_ASSERT_TRUE(thingDescriptor.isMember("modules"));
+    Json::Value modulesArray = thingDescriptor["modules"];
+    TEST_ASSERT_TRUE(modulesArray.isArray());
+    Json::Value moduleObj = modulesArray[0];
+    TEST_ASSERT_TRUE(moduleObj.isMember("module"));
+    TEST_ASSERT_EQUAL_STRING("light-module", moduleObj["module"].asCString());
+    TEST_ASSERT_TRUE(moduleObj.isMember("components"));
+    Json::Value moduleComponents = moduleObj["components"];
+    TEST_ASSERT_TRUE(moduleComponents.isArray());
+    TEST_ASSERT_EQUAL_STRING("light", moduleComponents[0].asCString());
+}
+
 void contains_all_elements() {
     thingDescriptor = tdEdge -> thingDescriptor(TD_IP_TEST, TD_PORT_TEST);
     RUN_TEST(contains_context);
     RUN_TEST(contains_id_and_title);
     RUN_TEST(contains_td_security_definitions);
     RUN_TEST(contains_td_security);
+    RUN_TEST(contains_modules);
 }
 
 void test_ThingDescriptor(Edge* edge) {

@@ -4,6 +4,9 @@
 #include "td_util.h"
 #include "json/json.h"
 #include "modules/Module.h"
+#include "modules/ComponentModule.h"
+#include "modules/ComponentModule.cpp"
+#include "hw/ComponentHw.h"
 #include <string>
 
 using namespace TD;
@@ -18,6 +21,7 @@ public:
         add_id(td, ip, port);
         add_title(td);
         add_security(td);
+        add_modules(td, modules);
         return td;
     };
 
@@ -43,6 +47,19 @@ private:
         security_def_obj[value(Key::SECURITY)] = no_sec_obj;
         td[key(Key::SECURITY_DEFINITIONS)] = security_def_obj;
         td[key(Key::SECURITY)][0] = value(Key::SECURITY);
+    }
+
+    static void add_modules(Json::Value &td, std::list<Module*> modules) {
+        int i, j = 0;
+        for(Module* m : modules) {
+            td["modules"][0]["module"] = m -> name();
+            ComponentModule<ComponentHw>* cm = static_cast<ComponentModule<ComponentHw>*>(m);
+            j = 0;
+            for(ComponentHw h : cm -> components()) {
+                td["modules"][0]["components"][j++] = h.id();
+            }
+            i++; 
+        }
     }
 
 };

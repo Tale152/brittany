@@ -2,10 +2,12 @@
 
 template <class T>
 ComponentModule<T>::ComponentModule(std::string name, std::list<T*> components): Module(name) {
-    _components = components;
+    for(T* t : components) {
+       _components.push_back(ComponentHw(t -> id()));
+    }
 }
 
 template <class T>
-std::list<T*> ComponentModule<T>::components() {
+std::list<ComponentHw> ComponentModule<T>::components() {
     return _components;
 }

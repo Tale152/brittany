@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include <list>
+#include "hw/ComponentHw.h"
 
 /**
  * @tparam T Template used to pass any component type to ComponentModule.
@@ -26,15 +27,15 @@ public:
     ComponentModule(std::string name, std::list<T*> components);
 
     /**
-     * @brief Get the components used by the modules
+     * @brief Return the list of ComponentHw in this module.
      * 
-     * @return std::list<T*> A list containing all the components in the module. 
+     * @return std::list<ComponentHw> A list of ComponentHw.
      */
-    std::list<T*> components();
+    std::list<ComponentHw> components();
 
 private:
 
-    std::list<T*> _components;
+    std::list<ComponentHw> _components;
 };
 
 #endif //BRITTANY_COMPONENT_MODULE_H
