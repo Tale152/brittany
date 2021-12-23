@@ -45,4 +45,76 @@ test("Missing body fields", async () => {
         idEnvironment: values.idEnvironment,
         active: active,
     })
+    await settingsCreateMissingFileds({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        temperature: {
+            min: 0,
+        }
+    })
+    await settingsCreateMissingFileds({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        temperature: {
+            max: 1,
+        }
+    })
+    await settingsCreateMissingFileds({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        airHumidity: {
+            min: 0,
+        }
+    })
+    await settingsCreateMissingFileds({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        airHumidity: {
+            max: 1,
+        }
+    })
+    await settingsCreateMissingFileds({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        light: {
+            fromM: 30,
+            toH: 5,
+            toM: 0,
+        }
+    })
+    await settingsCreateMissingFileds({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        light: {
+            fromH: 18,
+            toH: 5,
+            toM: 0,
+        }
+    })
+    await settingsCreateMissingFileds({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        light: {
+            fromH: 18,
+            fromM: 30,
+            toM: 0,
+        }
+    })
+    await settingsCreateMissingFileds({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        light: {
+            fromH: 18,
+            fromM: 30,
+            toH: 5,
+        }
+    })
 })
