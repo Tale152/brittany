@@ -2,13 +2,14 @@ const server = require('../../../../src/server')
 const httpTest = require('../../httpTest')
 const values = require('../../values')
 
-async function correctTemperatureRegister(body){
-    await httpTest.post(server, "/temperature/register", body, values.correctAgentToken, 201, (res) => expect(res.body).toHaveProperty("id"))
+async function correctTemperatureRegister(registerRoute, body){
+    await httpTest.post(server, registerRoute, body, values.correctAgentToken, 201, (res) => expect(res.body).toHaveProperty("id"))
 }
 
-module.exports.latestOneValue = async function(route){
+module.exports.latestOneValue = async function(registerRoute, retreiveRoute){
     const value = 42
     await correctTemperatureRegister(
+        registerRoute, 
         {
             id: values.idSettings,
             value: value,
@@ -17,7 +18,7 @@ module.exports.latestOneValue = async function(route){
     )
     await httpTest.get(
         server,
-        route,
+        retreiveRoute,
         {
             id: values.idSettings
         },
@@ -27,13 +28,14 @@ module.exports.latestOneValue = async function(route){
     )
 }
 
-module.exports.latestMultipleValues = async function(route){
+module.exports.latestMultipleValues = async function(registerRoute, retreiveRoute){
     const valueOldest = 42
     const dateOldest = new Date()
     const valueNewest = 7
     const dateNewest = new Date(dateOldest.getTime() + 60000)
 
     await correctTemperatureRegister(
+        registerRoute,
         {
             id: values.idSettings,
             value: valueOldest,
@@ -42,6 +44,7 @@ module.exports.latestMultipleValues = async function(route){
     )
 
     await correctTemperatureRegister(
+        registerRoute,
         {
             id: values.idSettings,
             value: valueNewest,
@@ -51,7 +54,7 @@ module.exports.latestMultipleValues = async function(route){
 
     await httpTest.get(
         server,
-        route,
+        retreiveRoute,
         {
             id: values.idSettings
         },
@@ -61,10 +64,10 @@ module.exports.latestMultipleValues = async function(route){
     )
 }
 
-module.exports.notExistingId = async function(route){
+module.exports.notExistingId = async function(retreiveRoute){
     await httpTest.get(
         server,
-        route,
+        retreiveRoute,
         {
             id: values.idSettings
         },
@@ -74,10 +77,10 @@ module.exports.notExistingId = async function(route){
     )
 }
 
-module.exports.wrongToken = async function(route){
+module.exports.wrongToken = async function(retreiveRoute){
     await httpTest.get(
         server,
-        route,
+        retreiveRoute,
         {
             id: values.idSettings
         },

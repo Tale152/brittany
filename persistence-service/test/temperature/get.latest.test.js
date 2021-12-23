@@ -5,20 +5,21 @@ beforeAll((done) => db.createConnectionToTestDB(done))
 beforeEach(() => db.resetTestDB())
 afterAll((done) => db.dropConnectedTestDB(done))
 
-const route = "/temperature/latest"
+const registerRoute = "/temperature/register"
+const latestRoute = "/temperature/latest"
 
 test("Retreiving with just one value for Temperature", async () => {
-    await latestTests.latestOneValue(route)
+    await latestTests.latestOneValue(registerRoute, latestRoute)
 })
 
 test("Retreiving with multiple values for Temperature", async () => {
-    await latestTests.latestMultipleValues(route)
+    await latestTests.latestMultipleValues(registerRoute, latestRoute)
 })
 
 test("Not existing Settings id for Temperature", async () => {
-    await latestTests.notExistingId(route)
+    await latestTests.notExistingId(latestRoute)
 })
 
 test("Wrong token for Temperature", async () => {
-    await latestTests.wrongToken(route)
+    await latestTests.wrongToken(latestRoute)
 })
