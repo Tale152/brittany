@@ -16,7 +16,7 @@ const correctBody = {
     expires: expires
 }
 
-async function settingsCreateMissingFileds(body){
+async function settingsCreate406(body){
     await settingsCreate(body, values.correctFarmerToken, 406, (res) => { expect(res.body).toHaveProperty("err") })
 }
 
@@ -33,19 +33,19 @@ test("Wrong token", async () => {
 })
 
 test("Missing body fields", async () => {
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         active: active,
         expires: expires
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         expires: expires
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         active: active,
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
         active: active,
@@ -53,7 +53,7 @@ test("Missing body fields", async () => {
             min: 0,
         }
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
         active: active,
@@ -61,7 +61,7 @@ test("Missing body fields", async () => {
             max: 1,
         }
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
         active: active,
@@ -69,7 +69,7 @@ test("Missing body fields", async () => {
             min: 0,
         }
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
         active: active,
@@ -77,7 +77,7 @@ test("Missing body fields", async () => {
             max: 1,
         }
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
         active: active,
@@ -87,7 +87,7 @@ test("Missing body fields", async () => {
             toM: 0,
         }
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
         active: active,
@@ -97,7 +97,7 @@ test("Missing body fields", async () => {
             toM: 0,
         }
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
         active: active,
@@ -107,7 +107,7 @@ test("Missing body fields", async () => {
             toM: 0,
         }
     })
-    await settingsCreateMissingFileds({
+    await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
         active: active,
@@ -115,6 +115,89 @@ test("Missing body fields", async () => {
             fromH: 18,
             fromM: 30,
             toH: 5,
+        }
+    })
+})
+
+test("Wrong params type", async () => {
+    await settingsCreate406({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        temperature: {
+            min: "NaN",
+            max: 1
+        }
+    })
+    await settingsCreate406({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        temperature: {
+            min: 0,
+            max: "NaN",
+        }
+    })
+    await settingsCreate406({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        airHumidity: {
+            min: "NaN",
+            max: 1,
+        }
+    })
+    await settingsCreate406({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        airHumidity: {
+            min: 0,
+            max: "NaN",
+        }
+    })
+    await settingsCreate406({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        light: {
+            fromH: "NaN",
+            fromM: 30,
+            toH: 5,
+            toM: 0,
+        }
+    })
+    await settingsCreate406({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        light: {
+            fromH: 18,
+            fromM: "NaN",
+            toH: 5,
+            toM: 0,
+        }
+    })
+    await settingsCreate406({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        light: {
+            fromH: 18,
+            fromM: 30,
+            toH: "NaN",
+            toM: 0,
+        }
+    })
+    await settingsCreate406({
+        idEnvironment: values.idEnvironment,
+        idEnvironment: values.idEnvironment,
+        active: active,
+        light: {
+            fromH: 18,
+            fromM: 30,
+            toH: 5,
+            toM: "NaN",
         }
     })
 })
