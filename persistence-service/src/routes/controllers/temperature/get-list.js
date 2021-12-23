@@ -9,7 +9,7 @@ async function temperatureListController(req, res){
         .then(async temperatures => {
             if(temperatures !== null){
                 res.status(200).json({
-                    temperatures: temperatures
+                    list: temperatures
                 })
             } else {
                 res.status(404).json({err: "not found"})
