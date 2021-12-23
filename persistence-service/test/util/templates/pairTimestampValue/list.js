@@ -1,10 +1,7 @@
 const server = require('../../../../src/server')
 const httpTest = require('../../httpTest')
 const values = require('../../values')
-
-async function correctRegister(registerRoute, body){
-    await httpTest.post(server, registerRoute, body, values.correctAgentToken, 201, (res) => expect(res.body).toHaveProperty("id"))
-}
+const correctRegister = require('./correctRegister')
 
 module.exports.correctList = async function(registerRoute, retreiveRoute){
     const valueOldest = 42
@@ -12,7 +9,7 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
     const valueNewest = 7
     const dateNewest = new Date(dateOldest.getTime() + 60000)
 
-    await correctRegister(
+    await correctRegister.exec(
         registerRoute,
         {
             id: values.idSettings,
@@ -21,7 +18,7 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
         }
     )
 
-    await correctRegister(
+    await correctRegister.exec(
         registerRoute,
         {
             id: values.idSettings,

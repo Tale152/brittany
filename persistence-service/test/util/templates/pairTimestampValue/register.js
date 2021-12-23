@@ -1,6 +1,7 @@
 const server = require('../../../../src/server')
 const httpTest = require('../../httpTest')
 const values = require('../../values')
+const correctRegister = require('./correctRegister')
 
 const value = 42
 const timestamp = new Date()
@@ -12,14 +13,7 @@ const correctBody = {
 }
 
 module.exports.correctRegister = async function(route){
-    await httpTest.post(
-        server,
-        route,
-        correctBody,
-        values.correctAgentToken,
-        201,
-        (res) => expect(res.body).toHaveProperty("id")
-    )
+    await correctRegister.exec(route, correctBody)
 }
 
 module.exports.wrongToken = async function(route){
