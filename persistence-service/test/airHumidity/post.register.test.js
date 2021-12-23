@@ -1,78 +1,24 @@
-const server = require('../../src/server')
 const db = require('../util/db')
-const httpTest = require('../util/httpTest')
-const values = require('../util/values')
+const timestampValueTests = require('../util/templates/pairTimestampValue/register')
 
 beforeAll((done) => db.createConnectionToTestDB(done))
 beforeEach(() => db.resetTestDB())
 afterAll((done) => db.dropConnectedTestDB(done))
 
-const value = 42
-const timestamp = new Date()
-
-const correctBody = {
-    id: values.idSettings,
-    value: value,
-    timestamp: timestamp
-}
-
-async function airHumidityRegister(body, token, code, then){
-    await httpTest.post(server, "/airHumidity/register", body, token, code, then)
-}
+const route = "/airHumidity/register"
 
 test("Correct Air Humidity registration", async () => {
-    await airHumidityRegister(correctBody, values.correctAgentToken, 201, (res) => expect(res.body).toHaveProperty("id"))
+    await timestampValueTests.correctRegister(route)
 })
 
-test("Wrong token", async () => {
-    await airHumidityRegister(correctBody, values.wrongToken, 401, (res) => {/* does nothing */})
+test("Wrong token on Air Humidity registration", async () => {
+    await timestampValueTests.wrongToken(route)
 })
 
-test("Missing id", async () => {
-    await airHumidityRegister(
-        {
-            value: value,
-            timestamp: timestamp
-        },
-        values.correctAgentToken,
-        406,
-        (res) => expect(res.body).toHaveProperty("err")
-    )
+test("Missing body fields on Air Humidity registration", async () => {
+    await timestampValueTests.missingBodyFields(route)
 })
 
-test("Missing value", async () => {
-    await airHumidityRegister(
-        {
-            id: values.idSettings,
-            timestamp: timestamp
-        },
-        values.correctAgentToken,
-        406,
-        (res) => expect(res.body).toHaveProperty("err")
-    )
-})
-
-test("Value not numeric", async () => {
-    await airHumidityRegister(
-        {
-            id: values.idSettings,
-            value: "not a number",
-            timestamp: timestamp
-        },
-        values.correctAgentToken,
-        406,
-        (res) => expect(res.body).toHaveProperty("err")
-    )
-})
-
-test("Missing timestamp", async () => {
-    await airHumidityRegister(
-        {
-            id: values.idSettings,
-            value: value
-        },
-        values.correctAgentToken,
-        406,
-        (res) => expect(res.body).toHaveProperty("err")
-    )
+test("Body value not numeric on Air Humidity registration", async () => {
+    await timestampValueTests.bodyValueNotNumeric(route)
 })
