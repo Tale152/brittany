@@ -1,41 +1,31 @@
-const supertest = require('supertest')
-const jwt = require('jsonwebtoken')
-
 const server = require('../../src/server')
 const db = require('../util/db')
-const agentTokenSecret = require('../../src/conf').agentTokenSecret
+const httpTest = require('../util/httpTest')
+const values = require('../util/values')
 
 beforeAll((done) => db.createConnectionToTestDB(done))
 beforeEach(() => db.resetTestDB())
 afterAll((done) => db.dropConnectedTestDB(done))
 
-const token = jwt.sign({}, agentTokenSecret)
-const idEnvironment = "61c099edd3c873c6030793b7"
 const value = 42
 const timestamp = new Date()
 
 const correctBody = {
-    id: idEnvironment,
+    id: values.idSettings,
     value: value,
     timestamp: timestamp
 }
 
 async function temperatureRegister(body, token, code, then){
-    await supertest(server)
-        .post("/temperature/register")
-        .send(body)
-        .set('token', token)
-        .set('Accept', 'application/json')
-        .expect(code)
-        .then((res) => then(res))
+    await httpTest.post(server, "/temperature/register", body, token, code, then)
 }
 
 test("Correct Temperature registration", async () => {
-    await temperatureRegister(correctBody, token, 201, (res) => expect(res.body).toHaveProperty("id"))
+    await temperatureRegister(correctBody, values.correctAgentToken, 201, (res) => expect(res.body).toHaveProperty("id"))
 })
 
 test("Wrong token", async () => {
-    await temperatureRegister(correctBody, jwt.sign({}, "wrong"), 401, (res) => {/* does nothing */})
+    await temperatureRegister(correctBody, values.wrongToken, 401, (res) => {/* does nothing */})
 })
 
 test("Missing id", async () => {
@@ -44,7 +34,7 @@ test("Missing id", async () => {
             value: value,
             timestamp: timestamp
         },
-        token,
+        values.correctAgentToken,
         406,
         (res) => expect(res.body).toHaveProperty("err")
     )
@@ -53,10 +43,10 @@ test("Missing id", async () => {
 test("Missing value", async () => {
     await temperatureRegister(
         {
-            id: idEnvironment,
+            id: values.idSettings,
             timestamp: timestamp
         },
-        token,
+        values.correctAgentToken,
         406,
         (res) => expect(res.body).toHaveProperty("err")
     )
@@ -65,11 +55,11 @@ test("Missing value", async () => {
 test("Value not numeric", async () => {
     await temperatureRegister(
         {
-            id: idEnvironment,
+            id: values.idSettings,
             value: "not a number",
             timestamp: timestamp
         },
-        token,
+        values.correctAgentToken,
         406,
         (res) => expect(res.body).toHaveProperty("err")
     )
@@ -78,10 +68,10 @@ test("Value not numeric", async () => {
 test("Missing timestamp", async () => {
     await temperatureRegister(
         {
-            id: idEnvironment,
+            id: values.idSettings,
             value: value
         },
-        token,
+        values.correctAgentToken,
         406,
         (res) => expect(res.body).toHaveProperty("err")
     )
