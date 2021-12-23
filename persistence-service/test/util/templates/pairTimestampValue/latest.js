@@ -2,13 +2,13 @@ const server = require('../../../../src/server')
 const httpTest = require('../../httpTest')
 const values = require('../../values')
 
-async function correctTemperatureRegister(registerRoute, body){
+async function correctRegister(registerRoute, body){
     await httpTest.post(server, registerRoute, body, values.correctAgentToken, 201, (res) => expect(res.body).toHaveProperty("id"))
 }
 
 module.exports.latestOneValue = async function(registerRoute, retreiveRoute){
     const value = 42
-    await correctTemperatureRegister(
+    await correctRegister(
         registerRoute, 
         {
             id: values.idSettings,
@@ -34,7 +34,7 @@ module.exports.latestMultipleValues = async function(registerRoute, retreiveRout
     const valueNewest = 7
     const dateNewest = new Date(dateOldest.getTime() + 60000)
 
-    await correctTemperatureRegister(
+    await correctRegister(
         registerRoute,
         {
             id: values.idSettings,
@@ -43,7 +43,7 @@ module.exports.latestMultipleValues = async function(registerRoute, retreiveRout
         }
     )
 
-    await correctTemperatureRegister(
+    await correctRegister(
         registerRoute,
         {
             id: values.idSettings,
