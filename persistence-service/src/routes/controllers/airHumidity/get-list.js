@@ -9,7 +9,7 @@ async function airHumidityListController(req, res){
         .then(async airHumidities => {
             if(airHumidities !== null){
                 res.status(200).json({
-                    airHumidities: airHumidities
+                    list: airHumidities
                 })
             } else {
                 res.status(404).json({err: "not found"})
