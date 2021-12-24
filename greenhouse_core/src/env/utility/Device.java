@@ -1,5 +1,10 @@
 package utility;
 
+/**
+ * A device is the main object present in the physical greenhouse, used to sample or to actuate operations.
+ * @author teemo
+ *
+ */
 public class Device {
 	private final String id;
 	private final String role;

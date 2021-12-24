@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Thresholds are the minimum and the maximum value that a certain type of sample can have inside the greenhouse.
+ * 
+ */
 public class Thresholds {
 	private Map<String, Pair<Integer, Integer>> thresholds;
 	
