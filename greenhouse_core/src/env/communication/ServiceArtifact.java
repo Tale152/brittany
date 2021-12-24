@@ -17,6 +17,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import utility.Pair;
+import utility.Thresholds;
 
 /**
  * ServiceArtifact is an Artifact used to communicate with all the services outside the greenhouse.
@@ -27,7 +29,8 @@ import okhttp3.Response;
 public class ServiceArtifact extends Artifact {
 
 	private final static String LOGIN_FILE = "login.txt";
-	private final static String AUTH_SERVICE = "http://localhost:81/agent/login";
+	private final static String AUTH_SERVICE_URL = "http://localhost:81/agent/login";
+	private final static String SETTINGS_SERVICE_URL = "http://localhost:82/settings/latest";
 	
 	private OkHttpClient client;
 	private List<String> loginData;
@@ -57,7 +60,7 @@ public class ServiceArtifact extends Artifact {
 	}
 	
 	@INTERNAL_OPERATION void autheticate() {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE).newBuilder();
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE_URL).newBuilder();
 		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
 		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
 		urlBuilder.addQueryParameter("environmentName", this.loginData.get(2));
@@ -85,5 +88,46 @@ public class ServiceArtifact extends Artifact {
 			e.printStackTrace();
 		}
 	}
-
+	
+	@OPERATION void getSettings(final String token) {
+		Thresholds thresholds = new Thresholds();
+		
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
+		String url = urlBuilder.build().toString();
+		
+		Request request = new Request.Builder()
+				.addHeader("token", token)
+                .url(url)
+                .build();
+		
+		try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+            	throw new IOException("Unexpected code " + response);
+            }
+            
+            JsonObject settingsObject = JsonParser.parseString(response.body().string()).getAsJsonObject(); 
+            
+            if (settingsObject.has("data")) {
+            	JsonObject dataObject = settingsObject.get("data").getAsJsonObject();
+            	if (dataObject.has("temperature")) {
+            		JsonObject temperature = settingsObject.get("temperature").getAsJsonObject();
+            		thresholds.addThreshold("temperature", new Pair<>(temperature.get("min").getAsInt(), temperature.get("max").getAsInt()));
+            	}
+            	if (dataObject.has("airHumidity")) {
+            		JsonObject airHumidity = settingsObject.get("airHumidity").getAsJsonObject();
+            		thresholds.addThreshold("temperature", new Pair<>(airHumidity.get("min").getAsInt(), airHumidity.get("max").getAsInt()));
+            	}
+            	if (dataObject.has("light")) {
+            		JsonObject light = settingsObject.get("light").getAsJsonObject();
+            		thresholds.addThreshold("light", new Pair<>(light.get("min").getAsInt(), light.get("max").getAsInt()));
+            	}
+            	
+            	//TODO return thresholds in order to send it to common!!
+            	
+            }
+            
+        } catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
