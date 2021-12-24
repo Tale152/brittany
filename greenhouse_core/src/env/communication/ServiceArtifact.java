@@ -18,6 +18,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * ServiceArtifact is an Artifact used to communicate with all the services outside the greenhouse.
+ * It is the Artifact used to retrieve settings for the greenhouse and it is used also to upload the data
+ * registered by the sampling devices.
+ *
+ */
 public class ServiceArtifact extends Artifact {
 
 	private final static String LOGIN_FILE = "login.txt";
@@ -31,6 +37,10 @@ public class ServiceArtifact extends Artifact {
 		this.client = new OkHttpClient();
 	}
 
+	/**
+	 * Operation used to retrieve the authentication token, in order to be able to communicate with the other
+	 * services.
+	 */
 	@OPERATION void retrieveAuthenticationData() {
 		try {
 			File file = new File(LOGIN_FILE);
