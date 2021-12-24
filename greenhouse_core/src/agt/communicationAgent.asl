@@ -6,7 +6,7 @@
 
 /* Plans */
 
-+communicate(D) <- communicate(D, Samples); updateOperation(Samples).
++communicate(D) <- getSamplesOperation(D, Samples); updateOperation(Samples).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
