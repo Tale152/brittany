@@ -58,6 +58,11 @@ public class SamplingArtifact extends Artifact {
 				this.devices.stream().filter(d -> d.getRole().equals(role)).collect(Collectors.toList())); 
 	}
 	
+	/**
+	 * Operation used to update the current value of the samples, and to decide if it is necessary to send
+	 * the data recorded to the persistence service and to check if an actuator had to be triggered.
+	 * @param currentSamples data retrieved from the sampling devices in the greenhouse.
+	 */
 	@OPERATION void updateOperation(final List<Device> currentSamples) {
 		if(!this.lastSamples.isPresent()) {
 			//TODO mandare dati su db o reperire l'ultima entry su db e controllarla?
