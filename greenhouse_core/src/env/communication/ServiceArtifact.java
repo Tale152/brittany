@@ -21,6 +21,7 @@ import okhttp3.Response;
 public class ServiceArtifact extends Artifact {
 
 	private final static String LOGIN_FILE = "login.txt";
+	private final static String AUTH_SERVICE = "http://localhost:81/agent/login";
 	
 	private OkHttpClient client;
 	private List<String> loginData;
@@ -46,7 +47,7 @@ public class ServiceArtifact extends Artifact {
 	}
 	
 	@INTERNAL_OPERATION void autheticate() {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse("http://localhost:81/agent/login").newBuilder();
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE).newBuilder();
 		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
 		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
 		urlBuilder.addQueryParameter("environmentName", this.loginData.get(2));
