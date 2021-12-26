@@ -7,7 +7,7 @@ async function latestSettingsController(req, res){
         .sort({created: 'desc'})
         .select("-id_environment -__v")
         .then(async result => {
-            if(result !== null){
+            if(result !== undefined && result.active === true &&  new Date() < result.expires){
                 res.status(200).json(result)
             } else {
                 res.status(404).json({err: "not found"})
