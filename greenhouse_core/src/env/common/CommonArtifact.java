@@ -22,7 +22,6 @@ public class CommonArtifact extends Artifact {
 	private String authenticationToken;
 
 	private List<Device> devices;
-	private Thresholds thresholds;
 
 	void init() {}
 
@@ -32,16 +31,12 @@ public class CommonArtifact extends Artifact {
 	 * @param token the authentication token retrieved from the server, used for authentication purposes during the
 	 * communication with other servers.
 	 */
-	@OPERATION void initAfterAuthentication(final String token) {
+	@OPERATION void initAfterAuthentication(final String token, final Thresholds thresholds) {
 		this.authenticationToken = token;
 		
 		//for test purpose right now devices and thresholds are hard-coded
 		devices = new ArrayList<>(Arrays.asList(new Device("id1", "temperature"), new Device("id2", "light"),
 				new Device("id3", "temperature")));
-
-		thresholds = new Thresholds();
-		thresholds.addThreshold("temperature", new Pair<>(1000, 3000));
-		thresholds.addThreshold("light", new Pair<>(1000, 3000));
 
 		defineObsProperty("setup", devices, thresholds);
 	}

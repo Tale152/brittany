@@ -17,6 +17,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import utility.Device;
 import utility.Pair;
 import utility.Thresholds;
 
@@ -79,8 +80,8 @@ public class ServiceArtifact extends Artifact {
             JsonObject tokenObject = JsonParser.parseString(response.body().string()).getAsJsonObject(); 
             
             if (tokenObject.has("token")) {
+            	defineObsProperty("token", tokenObject.get("token").getAsString());
             	System.out.println("TOKEN:" + tokenObject.get("token"));
-            	defineObsProperty("token", tokenObject.get("token").toString());
             } else {
             	throw new IllegalStateException("You did not received the token.");
             }
@@ -89,7 +90,7 @@ public class ServiceArtifact extends Artifact {
 		}
 	}
 	
-	@OPERATION void getSettings(final String token) {
+	@OPERATION void getSettings(final String token, OpFeedbackParam<Thresholds> settings) {
 		Thresholds thresholds = new Thresholds();
 		
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
@@ -102,27 +103,29 @@ public class ServiceArtifact extends Artifact {
 		
 		try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-            	throw new IOException("Unexpected code " + response);
+            	//threshold is empty, handle that
+            	settings.set(thresholds);
+            } else {
+            	JsonObject settingsObject = JsonParser.parseString(response.body().string()).getAsJsonObject(); 
+                
+                if (settingsObject.has("data")) {
+                	JsonObject dataObject = settingsObject.get("data").getAsJsonObject();
+                	if (dataObject.has("temperature")) {
+                		JsonObject temperature = dataObject.get("temperature").getAsJsonObject();
+                		thresholds.addThreshold("temperature", new Pair<>(temperature.get("min").getAsInt(), temperature.get("max").getAsInt()));
+                	}
+                	if (dataObject.has("airHumidity")) {
+                		JsonObject airHumidity = dataObject.get("airHumidity").getAsJsonObject();
+                		thresholds.addThreshold("temperature", new Pair<>(airHumidity.get("min").getAsInt(), airHumidity.get("max").getAsInt()));
+                	}
+                	if (dataObject.has("light")) {
+                		JsonObject light = dataObject.get("light").getAsJsonObject();
+                		thresholds.addThreshold("light", new Pair<>(light.get("min").getAsInt(), light.get("max").getAsInt()));
+                	}
+                	
+                	System.out.println(thresholds);
+                	settings.set(thresholds);
             }
-            
-            JsonObject settingsObject = JsonParser.parseString(response.body().string()).getAsJsonObject(); 
-            
-            if (settingsObject.has("data")) {
-            	JsonObject dataObject = settingsObject.get("data").getAsJsonObject();
-            	if (dataObject.has("temperature")) {
-            		JsonObject temperature = settingsObject.get("temperature").getAsJsonObject();
-            		thresholds.addThreshold("temperature", new Pair<>(temperature.get("min").getAsInt(), temperature.get("max").getAsInt()));
-            	}
-            	if (dataObject.has("airHumidity")) {
-            		JsonObject airHumidity = settingsObject.get("airHumidity").getAsJsonObject();
-            		thresholds.addThreshold("temperature", new Pair<>(airHumidity.get("min").getAsInt(), airHumidity.get("max").getAsInt()));
-            	}
-            	if (dataObject.has("light")) {
-            		JsonObject light = settingsObject.get("light").getAsJsonObject();
-            		thresholds.addThreshold("light", new Pair<>(light.get("min").getAsInt(), light.get("max").getAsInt()));
-            	}
-            	
-            	//TODO return thresholds in order to send it to common!!
             	
             }
             
