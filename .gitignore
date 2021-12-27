@@ -8,8 +8,9 @@
 
 .gradle
 auth-service
-greenhouse_core
 settings-service
+persistence-service
+greenhouse_core
 web-client
 edge
 
