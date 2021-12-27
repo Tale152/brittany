@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 
+const environmentName = "Test env"
+const environmentPassword = "envpsw"
 const greenhouseName = "Brittany"
 const organizationName = "TestOrganization"
 const name = "Peter"
@@ -17,6 +19,8 @@ const correctOrganizationBody = {
 }
 
 module.exports = {
+    environmentName: environmentName,
+    environmentPassword: environmentPassword,
     greenhouseName: greenhouseName,
     organizationName: organizationName,
     name: name,
