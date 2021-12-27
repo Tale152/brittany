@@ -23,7 +23,7 @@ function tryLogin(req, res){
                             farmerId: farmer._id.toString(),
                             organizationId: farmer.id_organization.toString()
                         }
-                        res.status(201).json({
+                        res.status(200).json({
                             token: jwt.sign(payload, farmerTokenSecret)
                         })
                     } else {
