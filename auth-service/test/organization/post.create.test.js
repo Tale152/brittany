@@ -1,6 +1,5 @@
-const supertest = require('supertest')
-
 const server = require('../../src/server')
+const httpTest = require('../util/httpTest')
 const db = require('../util/db')
 
 beforeAll((done) => db.createConnectionToTestDB(done))
@@ -23,13 +22,7 @@ const correctBody = {
 }
 
 async function organizationCreate(body, code, then){
-    await supertest(server)
-        .post("/organization/create")
-        .send(body)
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(code)
-        .then((res) => then(res))
+    await httpTest.post(server, "/organization/create", body, "", code, then)
 }
 
 test("Correct Organization creation", async () => {
