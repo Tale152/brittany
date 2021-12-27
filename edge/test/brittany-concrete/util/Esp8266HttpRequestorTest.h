@@ -16,7 +16,7 @@ void test_http_requestor_get() {
     Json::Value response_body = response_content.value();
     TEST_ASSERT_EQUAL(1, response_body["userId"].asInt());
     TEST_ASSERT_EQUAL(1, response_body["id"].asInt());
-    TEST_ASSERT_EQUAL_STRING("delectus aut autem", response_body["title"].asString().c_str());
+    TEST_ASSERT_EQUAL_STRING("delectus aut autem", response_body["title"].asCString());
     TEST_ASSERT_FALSE(response_body["completed"].asBool());
 }
 
@@ -35,8 +35,8 @@ void test_http_requestor_post() {
     TEST_ASSERT_TRUE(response_content.has_value());
     Json::Value response_body = response_content.value();
     TEST_ASSERT_TRUE(response_body.isMember("id"));
-    TEST_ASSERT_EQUAL_STRING("foo", response_body["title"].asString().c_str());
-    TEST_ASSERT_EQUAL_STRING("bar", response_body["body"].asString().c_str());
+    TEST_ASSERT_EQUAL_STRING("foo", response_body["title"].asCString());
+    TEST_ASSERT_EQUAL_STRING("bar", response_body["body"].asCString());
     TEST_ASSERT_EQUAL(1, response_body["userId"].asInt());
 }
 

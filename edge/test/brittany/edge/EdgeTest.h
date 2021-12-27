@@ -33,7 +33,7 @@ void test_edge_result_fail(OperationHandlerResult result) {
     TEST_ASSERT_EQUAL(HttpStatus::NotFound, result.code());
     TEST_ASSERT_EQUAL_STRING(
         phrase(ContentResult::ResourceNotFound).c_str(),
-        result.content().asString().c_str()
+        result.content().asCString()
     );
 }
 
@@ -58,7 +58,7 @@ void test_edge_execute_working(Edge* edge) {
     args["id"] = MOCK_LIGHT_IN_EDGE_NAME;
     auto result1 = edge -> execute(as_route(MOCK_TURN_ON_HANDLER_MODULE_NAME), args);
     check_edge_result_code_is_ok(result1);
-    TEST_ASSERT_EQUAL_STRING(phrase(ContentResult::Ok).c_str(), result1.content().asString().c_str());
+    TEST_ASSERT_EQUAL_STRING(phrase(ContentResult::Ok).c_str(), result1.content().asCString());
     auto result = edge -> execute(as_route(MOCK_IS_ON_HANDLER_MODULE_NAME), args);
     check_edge_result_code_is_ok(result);
     TEST_ASSERT_TRUE(result.content().asBool());
