@@ -16,9 +16,7 @@ module.exports.latestOneValue = async function(registerRoute, retreiveRoute){
     await httpTest.get(
         server,
         retreiveRoute,
-        {
-            id: values.idSettings
-        },
+        {},
         values.correctAgentToken,
         200,
         (res) => expect(res.body.value).toBe(value)
@@ -52,9 +50,7 @@ module.exports.latestMultipleValues = async function(registerRoute, retreiveRout
     await httpTest.get(
         server,
         retreiveRoute,
-        {
-            id: values.idSettings
-        },
+        {},
         values.correctAgentToken,
         200,
         (res) => expect(res.body.value).toBe(valueNewest)
@@ -65,9 +61,7 @@ module.exports.notExistingId = async function(retreiveRoute){
     await httpTest.get(
         server,
         retreiveRoute,
-        {
-            id: values.idSettings
-        },
+        {},
         values.correctAgentToken,
         404,
         (res) => {/* does nothing */}
@@ -78,9 +72,7 @@ module.exports.wrongToken = async function(retreiveRoute){
     await httpTest.get(
         server,
         retreiveRoute,
-        {
-            id: values.idSettings
-        },
+        {},
         values.wrongToken,
         401,
         (res) => {/* does nothing */}

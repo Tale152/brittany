@@ -1,8 +1,8 @@
 const AirHumidity = require("../airHumidity")
 
-function createAirHumidity(idEnvironment, timestamp, value) {
+function createAirHumidity(idSettings, timestamp, value) {
     return new AirHumidity({
-        id_environment: idEnvironment,
+        id_settings: idSettings,
         timestamp: timestamp,
         value: value,
     })

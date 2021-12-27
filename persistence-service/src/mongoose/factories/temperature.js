@@ -1,8 +1,8 @@
 const Temperature = require("../temperature")
 
-function createTemperature(idEnvironment, timestamp, value) {
+function createTemperature(idSettings, timestamp, value) {
     return new Temperature({
-        id_environment: idEnvironment,
+        id_settings: idSettings,
         timestamp: timestamp,
         value: value,
     })

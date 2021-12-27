@@ -3,9 +3,9 @@ const ObjectId = require('mongoose').Types.ObjectId
 const AirHumidity = require('../../../mongoose/airHumidity')
 
 async function airHumidityLatestController(req, res){
-    AirHumidity.findOne({ id_settings: new ObjectId(req.query.id) })
+    AirHumidity.findOne({ id_environment: new ObjectId(req.environmentId) })
         .sort({timestamp: 'desc'})
-        .select("-_id -id_settings -__v")
+        .select("-_id -id_environment -__v")
         .then(async airHumidity => {
             if(airHumidity !== null){
                 res.status(200).json(airHumidity)

@@ -9,7 +9,7 @@ function areTemperatureRegisterParametersValid(params){
 
 async function createNewTemperature(req, res){
     var newTemperature = TemperatureFactory.createTemperature(
-        req.environmentId,
+        req.body.id,
         req.body.timestamp,
         req.body.value
     )
