@@ -200,23 +200,6 @@ Id della Greenhouse della quale si vuole ottenere la lista di Environment associ
 * **environments**  
 Lista di Environment associati alla Greenhouse specificata.
 
-## &#9658; **<font color="blue">GET</font>** /environment/**info**
-### **Header richiesti:**
-* **token**  
-<u>Farmer token</u> ottenuto autenticandosi al Farmer account specificato.
-
-### **Parametri query:**
-* **id**  
-Tipo: Stringa  
-Obbligatorio: sì  
-Id dell'Environment della quale si vogliono ottenere le info.
-
-### **Risultato atteso:** **200**
-* **id_greenhouse**  
-Id della Greenhouse associata all'Environment specificato.
-* **name**  
-Nome dell'Environment specificato.
-
 ---
 
 ## Agent
