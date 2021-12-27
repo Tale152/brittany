@@ -16,10 +16,6 @@ test("Retreiving with multiple values for for Air Humidity", async () => {
     await latestTests.latestMultipleValues(registerRoute, latestRoute)
 })
 
-test("Not existing Settings id for for Air Humidity", async () => {
-    await latestTests.notExistingId(latestRoute)
-})
-
 test("Wrong token for for Air Humidity", async () => {
     await latestTests.wrongToken(latestRoute)
 })

@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 let AirHumiditySchema = new Schema({
-    id_settings: {
+    id_environment: {
         type: Schema.Types.ObjectId,
         require: true
     },

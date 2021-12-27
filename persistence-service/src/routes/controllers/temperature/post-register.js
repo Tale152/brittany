@@ -3,14 +3,13 @@ const numberUtil = require('../util/numberUtil')
 const TemperatureFactory = require('../../../mongoose/factories/temperature')
 
 function areTemperatureRegisterParametersValid(params){
-    return stringUtil.isValidString(params.id) &&
-        stringUtil.isValidString(params.timestamp) &&
+    return stringUtil.isValidString(params.timestamp) &&
         numberUtil.isValidNumber(params.value)
 }
 
 async function createNewTemperature(req, res){
     var newTemperature = TemperatureFactory.createTemperature(
-        req.body.id,
+        req.environmentId,
         req.body.timestamp,
         req.body.value
     )
