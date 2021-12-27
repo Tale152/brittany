@@ -15,14 +15,14 @@ import utility.settings.RangeSetting;
  */
 public class ActuationArtifact extends Artifact {
 	
-	void init(int initialValue) {}
+	void init() {}
 
 	/**
 	 * Used to check the current sample and to notify if it is bigger or lower that the threshold.
 	 * @param outOfRangeDevice the device that registered the out of range sample.
 	 * @param setting the setting of the specific category of the device.
 	 */
-	@OPERATION void actuate(Device outOfRangeDevice, RangeSetting setting) {
+	@OPERATION void actuate(final Device outOfRangeDevice, final RangeSetting setting) {
 		int currentValue = outOfRangeDevice.getCurrentValue();
 		Pair<Integer, Integer> range = setting.getRange();
 		
