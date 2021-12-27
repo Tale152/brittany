@@ -95,7 +95,7 @@ public class ServiceArtifact extends Artifact {
 		}
 	}
 
-	@OPERATION void getSettings(final String token, OpFeedbackParam<Optional<Settings>> retrievedSettigns) {
+	@OPERATION void getSettings(final String token, OpFeedbackParam<Optional<Settings>> retrievedSettings) {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
 		String url = urlBuilder.build().toString();
 
@@ -104,7 +104,7 @@ public class ServiceArtifact extends Artifact {
 		try (Response response = client.newCall(request).execute()) {
 			if (!response.isSuccessful()) {
 				// settings is empty, handle that
-				retrievedSettigns.set(Optional.empty());
+				retrievedSettings.set(Optional.empty());
 			} else {
 				JsonObject settingsObject = JsonParser.parseString(response.body().string()).getAsJsonObject();
 
@@ -136,7 +136,7 @@ public class ServiceArtifact extends Artifact {
 					}
 
 					System.out.println("SETTINGS: " + settings);
-					retrievedSettigns.set(Optional.of(settings));
+					retrievedSettings.set(Optional.of(settings));
 
 				}
 
