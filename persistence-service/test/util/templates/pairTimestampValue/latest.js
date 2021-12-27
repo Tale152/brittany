@@ -8,7 +8,6 @@ module.exports.latestOneValue = async function(registerRoute, retreiveRoute){
     await correctRegister.exec(
         registerRoute, 
         {
-            id: values.idSettings,
             value: value,
             timestamp: new Date()
         }
@@ -32,7 +31,6 @@ module.exports.latestMultipleValues = async function(registerRoute, retreiveRout
     await correctRegister.exec(
         registerRoute,
         {
-            id: values.idSettings,
             value: valueOldest,
             timestamp: dateOldest
         }
@@ -41,7 +39,6 @@ module.exports.latestMultipleValues = async function(registerRoute, retreiveRout
     await correctRegister.exec(
         registerRoute,
         {
-            id: values.idSettings,
             value: valueNewest,
             timestamp: dateNewest
         }

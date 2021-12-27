@@ -12,7 +12,6 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
     await correctRegister.exec(
         registerRoute,
         {
-            id: values.idEnvironment,
             value: valueOldest,
             timestamp: dateOldest
         }
@@ -21,7 +20,6 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
     await correctRegister.exec(
         registerRoute,
         {
-            id: values.idEnvironment,
             value: valueNewest,
             timestamp: dateNewest
         }

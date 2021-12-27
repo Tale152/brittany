@@ -7,7 +7,6 @@ const value = 42
 const timestamp = new Date()
 
 const correctBody = {
-    id: values.idSettings,
     value: value,
     timestamp: timestamp
 }
@@ -55,7 +54,6 @@ module.exports.bodyValueNotNumeric = async function(route){
         server,
         route,
         {
-            id: values.idSettings,
             value: "not a number",
             timestamp: timestamp
         },
