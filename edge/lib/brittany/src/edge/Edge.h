@@ -6,7 +6,7 @@
 #include <json/json.h>
 #include "operation-handler/OperationHandler.h"
 #include "operation-handler/OperationHandlerResult.h"
-#include "thing-descriptor/ThingDescriptor.h"
+#include "modules/Module.h"
 
 /**
  * @brief Class that acts as a container of the Edge OperationHandlers.
@@ -18,9 +18,9 @@ public:
     /**
      * @brief Construct a new Edge object.
      * 
-     * @param operationHandlers the operation handlers that the Edge will contain.
+     * @param modules The modules that the edge contains.
      */
-    Edge(std::list<OperationHandler*> operationHandlers);
+    Edge(std::list<Module*> modules);
     
     /**
      * @brief Execute the handler whit the specified name and args.
@@ -32,15 +32,22 @@ public:
     OperationHandlerResult execute(std::string route, Json::Value args);
 
     /**
+     * @brief Get all the available path list.
+     * 
+     * @return std::list<std::string> 
+     */
+    std::list<std::string> availablePaths();
+
+    /**
      * @brief Return the Edge Thing Descriptor.
      * 
-     * @return ThingDescriptor the Edge Thing Descriptor
+     * @return Json::Value the Edge Thing Descriptor
      */
-    ThingDescriptor thingDescriptor();
+    Json::Value thingDescriptor(std::string ip, int port);
 
 private:
 
-    std::list<OperationHandler*> _operations;
+    std::list<Module*> _modules;
     
 };
 

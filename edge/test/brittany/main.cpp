@@ -5,7 +5,7 @@
 #include "hw/ComponentHwTest.h"
 #include "hw/OnePinTest.h"
 #include "hw/MockDigitalLightHwTest.h"
-#include "modules/ModuleTest.h"
+#include "modules/MockDigitalLightModuleTest.h"
 #include "edge/EdgeTest.h"
 #include "utilTest.h"
 
@@ -22,10 +22,11 @@ void test_operation_handler() {
 }
 
 void test_modules() {
-    test_ModuleTest(); //ModuleTest
+    test_ComponentModuleTest(); //ModuleTest
 }
 
 void test_edge() {
+    // (Thing descriptor tested inside)
     test_Edge(); //EdgeTest
 }
 

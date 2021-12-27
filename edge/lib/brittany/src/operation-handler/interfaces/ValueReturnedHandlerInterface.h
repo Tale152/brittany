@@ -24,9 +24,10 @@ public:
     /**
      * @brief Construct a new Value Returned Handler Interface object
      * 
+     * @param name the name of the handler.
      * @param path the path(route) of the handler.
      */
-    ValueReturnedHandlerInterface(std::string path);
+    ValueReturnedHandlerInterface(std::string name, std::string path);
 
     OperationHandlerResult handle(Json::Value args);
 

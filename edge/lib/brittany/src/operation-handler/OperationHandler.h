@@ -17,9 +17,18 @@ public:
     /**
      * @brief Construct a new Operation Handler object.
      * 
+     * @param name The name of the OperationHandler
      * @param path The path of the OperationHandler.
      */
-    OperationHandler(std::string path);
+    OperationHandler(std::string name, std::string path);
+
+
+    /**
+     * @brief Return the name of the OperationHandler.
+     * 
+     * @return std::string the name of the operation.
+     */
+    std::string name();
 
     /**
      * @brief Return the path of the OperationHandler.
@@ -38,6 +47,7 @@ public:
 
 private:
 
+    std::string _name;
     std::string _path;
 
 };
