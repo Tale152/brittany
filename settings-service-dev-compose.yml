@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  persistence:
-    image: alessandrotalmi/brittany-persistence-service-dev
+  settings:
+    image: alessandrotalmi/brittany-settings-service-dev
     environment:
-      - DB=mongodb://database:27017/brittany_persistence
+      - DB=mongodb://database:27017/brittany_settings
       - PORT=80
       - FARMER_TOKEN_SECRET=devFarmerTokenSecret
       - AGENT_TOKEN_SECRET=devAgentTokenSecret
     ports:
-      - 80:80
+      - 82:80
   database:
     image: mongo
     volumes:
