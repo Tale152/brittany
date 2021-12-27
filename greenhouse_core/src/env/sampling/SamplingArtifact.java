@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 import cartago.*;
 import utility.Device;
-import utility.Thresholds;
+import utility.settings.RangeSetting;
+import utility.settings.Settings;
 
 /**
  * SamplingArtifact is an Artifact used to handle all the sampling operations of the application.
@@ -24,7 +25,7 @@ public class SamplingArtifact extends Artifact {
 	private static final int DELTA = 1;
 	
 	private List<Device> devices;
-	private Thresholds thresholds;
+	private Optional<Settings> settings;
 	
 	private Optional<Map<String, Integer>> lastSamples;
 	
@@ -39,10 +40,10 @@ public class SamplingArtifact extends Artifact {
 	 * @param thresholds the minimum and maximum values that a device of a specific role must observe. If it is 
 	 * not respected, an actuator is started to resolve the bad status.
 	 */
-	@OPERATION void setup(final List<Device> devices, final Thresholds thresholds) {
-		this.thresholds = thresholds;
+	@OPERATION void setup(final List<Device> devices, final Optional<Settings> settings) {
+		this.settings = settings;
 		this.devices = devices;
-		System.out.println("Init " + this.devices + " " + this.thresholds);
+		System.out.println("Init " + this.devices + " " + this.settings);
 	}
 	
 	/**
@@ -70,12 +71,15 @@ public class SamplingArtifact extends Artifact {
 			currentSamples.forEach(d -> {
 				if(Math.abs(d.getCurrentValue() - lastSamples.get().get(d.getId())) > DELTA) {
 					System.out.println("Carica su db!");
-					if(this.thresholds.getThreshold(d.getRole()).isPresent()) {
-						if(d.getCurrentValue() > this.thresholds.getThreshold(d.getRole()).get().getY() || d.getCurrentValue() < this.thresholds.getThreshold(d.getRole()).get().getX()) {
-							System.out.println("Create out of range behavior");
-							defineObsProperty("actuate", d, this.thresholds.getThreshold(d.getRole()).get());
+					if(this.settings.isPresent()) {
+						if(this.settings.get().getSetting(d.getRole()).isPresent()) {
+							//TODO this has to be done only when we use a RangeSetting
+							if(d.getCurrentValue() > ((RangeSetting) this.settings.get().getSetting(d.getRole()).get()).getRange().getX() || d.getCurrentValue() < ((RangeSetting) this.settings.get().getSetting(d.getRole()).get()).getRange().getY()) {
+								System.out.println("Create out of range behavior");
+								defineObsProperty("actuate", d, this.settings.get().getSetting(d.getRole()).get());
+							}
 						}
-					}
+					}					
 				}
 			});
 		}
