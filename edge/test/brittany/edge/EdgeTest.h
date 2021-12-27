@@ -4,7 +4,6 @@
 #include "modules/MockModule.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
-#include "../thing-descriptor/ThingDescriptorTest.h"
 
 #define EDGE_MOCK_MODULE_NAME "mock-module"
 #define EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME "light-module"
@@ -82,17 +81,9 @@ void test_edge_list() {
     delete edge;
 }
 
-void test_thing_descriptor() {
-    Edge* edge = new Edge(std::list<Module*>({
-        new MockDigitalLightModule(EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME, mockDigitalLights)
-    }));
-    test_ThingDescriptor(edge);
-}
-
 void test_Edge() {
     setup_test_edge();
     RUN_TEST(test_edge_empty);
     RUN_TEST(test_edge_list);
-    RUN_TEST(test_thing_descriptor);
     post_test_edge();
 }

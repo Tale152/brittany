@@ -7,6 +7,7 @@
 #include "hw/MockDigitalLightHwTest.h"
 #include "modules/MockDigitalLightModuleTest.h"
 #include "edge/EdgeTest.h"
+#include "edge/ThingDescriptorTest.h"
 #include "utilTest.h"
 
 void test_hw() {
@@ -26,8 +27,8 @@ void test_modules() {
 }
 
 void test_edge() {
-    // (Thing descriptor tested inside)
     test_Edge(); //EdgeTest
+    test_ThingDescriptor(); //ThingDescriptorTest
 }
 
 int main() {
