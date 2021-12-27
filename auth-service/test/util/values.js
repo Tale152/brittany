@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 
+const greenhouseName = "Brittany"
 const organizationName = "TestOrganization"
 const name = "Peter"
 const surname = "Parker"
@@ -16,6 +17,7 @@ const correctOrganizationBody = {
 }
 
 module.exports = {
+    greenhouseName: greenhouseName,
     organizationName: organizationName,
     name: name,
     surname: surname,
