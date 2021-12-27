@@ -7,7 +7,6 @@ beforeAll((done) => db.createConnectionToTestDB(done))
 beforeEach(() => db.resetTestDB())
 afterAll((done) => db.dropConnectedTestDB(done))
 
-const active = true
 const expires = new Date(new Date().getTime() + 60000)
 
 const correctBody = {
