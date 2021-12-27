@@ -1,6 +1,5 @@
 const stringUtil = require('../util/stringUtil')
 const numberUtil = require('../util/numberUtil')
-const boolUtil = require('../util/boolUtil')
 const SettingsFactory = require('../../../mongoose/factories/settings')
 
 function isBetween(val, min, max){
