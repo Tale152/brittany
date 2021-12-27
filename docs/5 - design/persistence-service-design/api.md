@@ -14,10 +14,6 @@ grand_parent: Design
 <u>Agent token</u> ottenuto autenticandosi ad un Environment presso l'auth-service.
 
 ### **Parametri body:**
-* **id**  
-Tipo: Stringa  
-Obbligatorio: sì  
-Id dei Settings (ottenuto tramite settings-service) per la quale si stanno effettuando i campionamenti.
 * **timestamp**  
 Tipo: Data  
 Formato: *"1997-12-31T00:00:00.000+00:00"*  
@@ -36,12 +32,6 @@ Identificativo del campionamento effettuato.
 ### **Header richiesti:**
 * **token**  
 <u>Farmer token</u> ottenuto autenticandosi con un account Farmer presso l'auth-service.
-
-### **Parametri query:**
-* **id**  
-Tipo: Stringa  
-Obbligatorio: sì  
-Id del Setting (ottenuto dal setting-service) della quale si vuole ottenere l'ultima temperatura campionata.
 
 ### **Risultato atteso:** **200**
 * **timestamp**  
@@ -76,10 +66,6 @@ Lista ordinata (dal più recente al più vecchio) di campionamenti della tempera
 <u>Agent token</u> ottenuto autenticandosi ad un Environment presso l'auth-service.
 
 ### **Parametri body:**
-* **id**  
-Tipo: Stringa  
-Obbligatorio: sì  
-Id dei Settings (ottenuto tramite settings-service) per la quale si stanno effettuando i campionamenti.
 * **timestamp**  
 Tipo: Data  
 Formato: *"1997-12-31T00:00:00.000+00:00"*  
@@ -98,12 +84,6 @@ Identificativo del campionamento effettuato.
 ### **Header richiesti:**
 * **token**  
 <u>Farmer token</u> ottenuto autenticandosi con un account Farmer presso l'auth-service.
-
-### **Parametri query:**
-* **id**  
-Tipo: Stringa  
-Obbligatorio: sì  
-Id del Setting (ottenuto dal setting-service) della quale si vuole ottenere l'ultima umidità dell'aria campionata.
 
 ### **Risultato atteso:** **200**
 * **timestamp**  
