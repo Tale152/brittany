@@ -50,7 +50,7 @@ Valore campionato.
 * **id**  
 Tipo: Stringa  
 Obbligatorio: sì  
-Id del Setting (ottenuto dal setting-service) della quale si vuole ottenere la lista di campionamenti.
+Id dell'Environment (ottenuto dall'auth-service) della quale si vuole ottenere la lista di campionamenti.
 
 ### **Risultato atteso:** **200**
 * **list**  
@@ -102,7 +102,7 @@ Valore campionato.
 * **id**  
 Tipo: Stringa  
 Obbligatorio: sì  
-Id del Setting (ottenuto dal setting-service) della quale si vuole ottenere la lista di campionamenti.
+Id dell'Environment (ottenuto dall'auth-service) della quale si vuole ottenere la lista di campionamenti.
 
 ### **Risultato atteso:** **200**
 * **list**  
