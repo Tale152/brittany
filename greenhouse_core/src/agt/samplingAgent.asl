@@ -6,11 +6,11 @@
 
 /* Plans */
 
-+setup(D, T) <- setup(D,T); +wait.
++setup(Devices, Settings) <- setup(Devices, Settings); +wait.
 
 +wait <- .at("now + 2 seconds", {+sample}).
 
-+sample <- ?role(R); sampleOperation(R); -+wait.
++sample <- ?role(Role); sampleOperation(Role); -+wait.
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

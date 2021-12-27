@@ -6,7 +6,7 @@
 
 /* Plans */
 
-+actuate(S, T) <- actuate(S, T).
++actuate(Device, Setting) <- actuate(Device, Setting).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

@@ -10,7 +10,7 @@
 
 +!authentication <- retrieveAuthenticationData.
 
-+token(T) <- getSettings(T, S); initAfterAuthentication(T, S).
++token(Token) <- getSettings(Token, Settings); initAfterAuthentication(Token, Settings).
 
 //initAfterAuthentication
 
