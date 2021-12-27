@@ -1,6 +1,6 @@
 {
   "name": "settings-service",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Server that handles the persistence of environments settings in the Brittany environment",
   "main": "index.js",
   "scripts": {
