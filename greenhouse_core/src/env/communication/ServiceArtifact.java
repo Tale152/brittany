@@ -27,7 +27,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import utility.Device;
 import utility.Pair;
-import utility.settings.Settings;
+import utility.setting.Settings;
 
 /**
  * ServiceArtifact is an Artifact used to communicate with all the services

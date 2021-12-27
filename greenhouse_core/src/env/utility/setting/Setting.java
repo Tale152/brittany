@@ -1,4 +1,4 @@
-package utility.settings;
+package utility.setting;
 
 public class Setting {
 	

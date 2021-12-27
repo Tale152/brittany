@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 
 import cartago.*;
 import utility.Device;
-import utility.settings.RangeSetting;
-import utility.settings.Settings;
+import utility.setting.RangeSetting;
+import utility.setting.Settings;
 
 /**
  * SamplingArtifact is an Artifact used to handle all the sampling operations of the application.

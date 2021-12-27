@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import cartago.*;
 import utility.Device;
-import utility.settings.Settings;
+import utility.setting.Settings;
 
 /**
  * CommonArtifact is the core Artifact of this JaCaMo application.

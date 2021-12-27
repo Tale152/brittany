@@ -5,7 +5,7 @@ package actuation;
 import cartago.*;
 import utility.Device;
 import utility.Pair;
-import utility.settings.RangeSetting;
+import utility.setting.RangeSetting;
 
 /**
  * ActautionArtifact is an Artifact that is used to send a message to an actuator to 

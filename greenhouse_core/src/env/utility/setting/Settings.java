@@ -1,12 +1,10 @@
-package utility.settings;
+package utility.setting;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import utility.Pair;
 
 public class Settings {
 	
