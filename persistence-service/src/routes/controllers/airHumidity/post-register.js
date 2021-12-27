@@ -3,14 +3,13 @@ const numberUtil = require('../util/numberUtil')
 const AirHumidityFactory = require('../../../mongoose/factories/airHumidity')
 
 function areAirHumidityRegisterParametersValid(params){
-    return stringUtil.isValidString(params.id) &&
-        stringUtil.isValidString(params.timestamp) &&
+    return stringUtil.isValidString(params.timestamp) &&
         numberUtil.isValidNumber(params.value)
 }
 
 async function createNewAirHumidity(req, res){
     var newAirHumidity = AirHumidityFactory.createAirHumidity(
-        req.body.id,
+        req.environmentId,
         req.body.timestamp,
         req.body.value
     )

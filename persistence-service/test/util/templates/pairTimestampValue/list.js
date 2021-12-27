@@ -12,7 +12,6 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
     await correctRegister.exec(
         registerRoute,
         {
-            id: values.idSettings,
             value: valueOldest,
             timestamp: dateOldest
         }
@@ -21,7 +20,6 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
     await correctRegister.exec(
         registerRoute,
         {
-            id: values.idSettings,
             value: valueNewest,
             timestamp: dateNewest
         }
@@ -31,7 +29,7 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
         server,
         retreiveRoute,
         {
-            id: values.idSettings
+            id: values.idEnvironment
         },
         values.correctFarmerToken,
         200,
@@ -47,7 +45,7 @@ module.exports.notExistingId = async function(retreiveRoute){
         server,
         retreiveRoute,
         {
-            id: values.idSettings
+            id: values.idEnvironment
         },
         values.correctFarmerToken,
         200,
@@ -60,7 +58,7 @@ module.exports.wrongToken = async function(retreiveRoute){
         server,
         retreiveRoute,
         {
-            id: values.idSettings
+            id: values.idEnvironment
         },
         values.wrongToken,
         401,
