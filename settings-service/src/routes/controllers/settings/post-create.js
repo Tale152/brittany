@@ -24,7 +24,7 @@ function isRangeFieldValid(field){
 }
 
 function areSettingsCreateParametersValid(params){
-    if(stringUtil.isValidString(params.idEnvironment) && stringUtil.isValidString(params.expires) && boolUtil.isValidBoolean(params.active)){
+    if(stringUtil.isValidString(params.idEnvironment) && stringUtil.isValidString(params.expires)){
         return isRangeFieldValid(params.temperature) && isRangeFieldValid(params.airHumidity) && isLightValid(params.light)
     }
     return false

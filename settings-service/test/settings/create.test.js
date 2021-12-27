@@ -12,7 +12,6 @@ const expires = new Date(new Date().getTime() + 60000)
 
 const correctBody = {
     idEnvironment: values.idEnvironment,
-    active: active,
     expires: expires
 }
 
@@ -34,21 +33,14 @@ test("Wrong token", async () => {
 
 test("Missing body fields", async () => {
     await settingsCreate406({
-        active: active,
         expires: expires
     })
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
-        expires: expires
-    })
-    await settingsCreate406({
-        idEnvironment: values.idEnvironment,
-        active: active,
     })
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         temperature: {
             min: 0,
         }
@@ -56,7 +48,6 @@ test("Missing body fields", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         temperature: {
             max: 1,
         }
@@ -64,7 +55,6 @@ test("Missing body fields", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         airHumidity: {
             min: 0,
         }
@@ -72,7 +62,6 @@ test("Missing body fields", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         airHumidity: {
             max: 1,
         }
@@ -80,7 +69,6 @@ test("Missing body fields", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         light: {
             fromM: 30,
             toH: 5,
@@ -90,7 +78,6 @@ test("Missing body fields", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         light: {
             fromH: 18,
             toH: 5,
@@ -100,7 +87,6 @@ test("Missing body fields", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         light: {
             fromH: 18,
             fromM: 30,
@@ -110,7 +96,6 @@ test("Missing body fields", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         light: {
             fromH: 18,
             fromM: 30,
@@ -123,7 +108,6 @@ test("Wrong params type", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         temperature: {
             min: "NaN",
             max: 1
@@ -132,7 +116,6 @@ test("Wrong params type", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         temperature: {
             min: 0,
             max: "NaN",
@@ -141,7 +124,6 @@ test("Wrong params type", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         airHumidity: {
             min: "NaN",
             max: 1,
@@ -150,7 +132,6 @@ test("Wrong params type", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         airHumidity: {
             min: 0,
             max: "NaN",
@@ -159,7 +140,6 @@ test("Wrong params type", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         light: {
             fromH: "NaN",
             fromM: 30,
@@ -170,7 +150,6 @@ test("Wrong params type", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         light: {
             fromH: 18,
             fromM: "NaN",
@@ -181,7 +160,6 @@ test("Wrong params type", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         light: {
             fromH: 18,
             fromM: 30,
@@ -192,7 +170,6 @@ test("Wrong params type", async () => {
     await settingsCreate406({
         idEnvironment: values.idEnvironment,
         idEnvironment: values.idEnvironment,
-        active: active,
         light: {
             fromH: 18,
             fromM: 30,
