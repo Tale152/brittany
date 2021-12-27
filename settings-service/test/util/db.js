@@ -13,7 +13,7 @@ module.exports.resetTestDB = async function(){
     const collections = await mongoose.connection.db.collections()
 
     for (let collection of collections) {
-        await collection.remove()
+        await collection.drop()
     }
 }
 
