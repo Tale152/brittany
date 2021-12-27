@@ -70,7 +70,7 @@ public class SamplingArtifact extends Artifact {
 			System.out.println("Last samples " + this.lastSamples + "\nCurrent samples " + currentSamples);
 			currentSamples.forEach(d -> {
 				if(Math.abs(d.getCurrentValue() - lastSamples.get().get(d.getId())) > DELTA) {
-					System.out.println("Carica su db!");
+					defineObsProperty("uploadPersistence", d);
 					if(this.settings.isPresent()) {
 						if(this.settings.get().getSetting(d.getRole()).isPresent()) {
 							//TODO this has to be done only when we use a RangeSetting

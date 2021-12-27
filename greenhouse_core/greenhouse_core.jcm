@@ -17,6 +17,7 @@ mas greenhouse_core {
 	agent setupAgent : setupAgent.asl {
 		focus: brittany.common
 		focus: brittany.service
+		focus: brittany.sampling
 	}
 
     agent samplingAgent : samplingAgent.asl {

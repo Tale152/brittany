@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,9 +20,12 @@ import com.google.gson.JsonParser;
 
 import cartago.*;
 import okhttp3.HttpUrl;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import utility.Device;
 import utility.Pair;
 import utility.settings.Settings;
 
@@ -33,12 +37,13 @@ import utility.settings.Settings;
  *
  */
 public class ServiceArtifact extends Artifact {
-	
+
 	private final static String UTC_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 
 	private final static String LOGIN_FILE = "login.txt";
 	private final static String AUTH_SERVICE_URL = "http://localhost:81/agent/login";
 	private final static String SETTINGS_SERVICE_URL = "http://localhost:82/settings/latest";
+	private final static String PERSISTENCE_SERVICE_URL = "http://localhost:80/";
 
 	private OkHttpClient client;
 	private List<String> loginData;
@@ -52,7 +57,8 @@ public class ServiceArtifact extends Artifact {
 	 * Operation used to retrieve the authentication token, in order to be able to
 	 * communicate with the other services.
 	 */
-	@OPERATION void retrieveAuthenticationData() {
+	@OPERATION
+	void retrieveAuthenticationData() {
 		try {
 			File file = new File(LOGIN_FILE);
 			Scanner scanner = new Scanner(file);
@@ -67,7 +73,8 @@ public class ServiceArtifact extends Artifact {
 		}
 	}
 
-	@INTERNAL_OPERATION void autheticate() {
+	@INTERNAL_OPERATION
+	void autheticate() {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE_URL).newBuilder();
 		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
 		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
@@ -95,7 +102,8 @@ public class ServiceArtifact extends Artifact {
 		}
 	}
 
-	@OPERATION void getSettings(final String token, OpFeedbackParam<Optional<Settings>> retrievedSettings) {
+	@OPERATION
+	void getSettings(final String token, OpFeedbackParam<Optional<Settings>> retrievedSettings) {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
 		String url = urlBuilder.build().toString();
 
@@ -109,11 +117,11 @@ public class ServiceArtifact extends Artifact {
 				JsonObject settingsObject = JsonParser.parseString(response.body().string()).getAsJsonObject();
 
 				if (settingsObject.has("_id") && settingsObject.has("created")) {
-								
+
 					SimpleDateFormat dataFormatter = new SimpleDateFormat(UTC_FORMAT);
-					dataFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));				
+					dataFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 					Date creationDate = dataFormatter.parse(settingsObject.get("created").getAsString());
-					
+
 					Settings settings = new Settings(settingsObject.get("_id").getAsString(), creationDate);
 
 					if (settingsObject.has("data")) {
@@ -143,6 +151,36 @@ public class ServiceArtifact extends Artifact {
 			}
 
 		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@OPERATION
+	void uploadPersistence(final Device device, final String token) {
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(PERSISTENCE_SERVICE_URL + device.getRole() + "/register").newBuilder();
+		String url = urlBuilder.build().toString();
+
+		JsonObject sample = new JsonObject();
+		sample.addProperty("id", "asd");
+		sample.addProperty("value", device.getCurrentValue());
+		sample.addProperty("timestamp", Instant.now().toString());
+		
+		RequestBody body = RequestBody.create(sample.toString(), MediaType.parse("application/json; charset=utf-8"));
+		
+		Request request = new Request.Builder()
+				.addHeader("token", token)
+				.url(url)
+				.post(body)
+				.build();
+
+		try (Response response = client.newCall(request).execute()) {
+			if (!response.isSuccessful()) {
+				throw new IOException("Unexpected code " + response);
+			} else {
+				System.out.println("Data of " + device + "correcty uploaded");
+			}
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
