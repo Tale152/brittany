@@ -49,15 +49,18 @@ void check_edge_result_code_is_ok(OperationHandlerResult result) {
 }
 
 void test_edge_execute_working(Edge* edge) {
-    auto result0 = edge -> execute(OPERATION_HANDLER_IN_MOCK_MODULE_PATH, Json::Value(INCREMENT_VALUE_TEST));
+    auto result0 = edge -> execute(
+        as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME),
+        Json::Value(INCREMENT_VALUE_TEST)
+    );
     check_edge_result_code_is_ok(result0);
     TEST_ASSERT_EQUAL(INCREMENT_VALUE_TEST, result0.content().asInt());
     Json::Value args;
     args["id"] = MOCK_LIGHT_IN_EDGE_NAME;
-    auto result1 = edge -> execute(MOCK_TURN_ON_LIGHT_PATH, args);
+    auto result1 = edge -> execute(as_route(MOCK_TURN_ON_HANDLER_MODULE_NAME), args);
     check_edge_result_code_is_ok(result1);
     TEST_ASSERT_EQUAL_STRING(phrase(ContentResult::Ok).c_str(), result1.content().asString().c_str());
-    auto result = edge -> execute(MOCK_IS_ON_LIGHT_PATH, args);
+    auto result = edge -> execute(as_route(MOCK_IS_ON_HANDLER_MODULE_NAME), args);
     check_edge_result_code_is_ok(result);
     TEST_ASSERT_TRUE(result.content().asBool());
 }
@@ -72,7 +75,7 @@ void test_edge_empty() {
 //TEST
 void test_edge_list() {
     Edge* edge = new Edge(std::list<Module*>({
-        new MockModule(MOCK_MODULE_NAME),
+        new MockModule(EDGE_MOCK_MODULE_NAME),
         new MockDigitalLightModule(EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME, mockDigitalLights)}
     ));
     test_edge_execute_working(edge);

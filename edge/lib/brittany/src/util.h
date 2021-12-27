@@ -7,6 +7,12 @@
 
 enum class ContentResult { Ok, ResourceNotFound, OperationFailed };
 
+/**
+ * @brief Return a string description to insert in the content result.
+ * 
+ * @param content the value of ContentResult to convert to string.
+ * @return std::string the converted string.
+ */
 inline std::string phrase(ContentResult content) {
     switch (content) {
     case ContentResult::Ok:
@@ -22,6 +28,17 @@ inline std::string phrase(ContentResult content) {
         return "";
         break;
     }
+}
+
+/**
+ * @brief Return the same string with a slash in front.
+ * Used to avoid repetitions of name and paths in Handlers.
+ * 
+ * @param string the input string.
+ * @return std::string the string as route (/string)
+ */
+inline std::string as_route(std::string string) {
+    return "/" + string;
 }
 
 

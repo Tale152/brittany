@@ -17,9 +17,10 @@ class MockIsOnDigitalLightHandler : public ValueReturnedHandlerInterface<bool> {
 public:
 
     MockIsOnDigitalLightHandler(
+        std::string name,
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): ValueReturnedHandlerInterface<bool>(path) {
+    ): ValueReturnedHandlerInterface<bool>(name, path) {
         _components = components;
     };
 

@@ -15,9 +15,10 @@ class MockTurnOnDigitalLightHandler : public TurnOnHandlerInterface {
 public:
 
     MockTurnOnDigitalLightHandler(
+        std::string name,
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): TurnOnHandlerInterface(path) {
+    ): TurnOnHandlerInterface(name, path) {
          _components = components;
     };
 

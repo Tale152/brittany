@@ -15,7 +15,7 @@ class TurnOffHandlerInterface : public ValueReturnedHandlerInterface<std::string
 
 public:
 
-    TurnOffHandlerInterface(std::string path);
+    TurnOffHandlerInterface(std::string name, std::string path);
 
     /**
      * @brief template method that call the turnOff method.

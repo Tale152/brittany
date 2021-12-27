@@ -5,8 +5,9 @@
 #include "operation-handler/OperationHandler.h"
 #include "../operation-handler/MockOperationHandler.h"
 #include "modules/Module.h"
+#include "util.h"
 
-#define OPERATION_HANDLER_IN_MOCK_MODULE_PATH "/value"
+#define OPERATION_HANDLER_IN_MOCK_MODULE_NAME "value"
 
 /**
  * @brief Mock Module that contains only a MockOperationHandler.
@@ -17,7 +18,10 @@ public:
 
     MockModule(std::string name): Module(name) {
         _handlers.push_back(
-            new MockOperationHandler(OPERATION_HANDLER_IN_MOCK_MODULE_PATH)
+            new MockOperationHandler(
+                OPERATION_HANDLER_IN_MOCK_MODULE_NAME,
+                as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME)
+            )
         );
     };
 

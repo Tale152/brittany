@@ -4,7 +4,7 @@
 #include "util.h"
 
 template <typename T>
-ValueReturnedHandlerInterface<T>::ValueReturnedHandlerInterface(std::string path) : OperationHandler(path) {
+ValueReturnedHandlerInterface<T>::ValueReturnedHandlerInterface(std::string name, std::string path) : OperationHandler(name, path) {
     //does nothing
 }
 

@@ -57,7 +57,7 @@ void test_turn_on_turn_off_handler_in_module(OperationHandler* handler, std::str
 }
 
 void test_is_on_is_off_handler_in_module(OperationHandler* handler, std::string component_name, bool isOn) {
-    check_handler_path(handler, MOCK_IS_ON_HANDLER_MODULE_PATH);
+    check_handler_path(handler, as_route(MOCK_IS_ON_HANDLER_MODULE_NAME));
     Json::Value args;
     args["id"] = component_name;
     OperationHandlerResult result = handler->handle(args);
@@ -66,11 +66,11 @@ void test_is_on_is_off_handler_in_module(OperationHandler* handler, std::string 
 }
 
 void test_turn_on_handler_in_module(OperationHandler* handler, std::string component_name) {
-    test_turn_on_turn_off_handler_in_module(handler, MOCK_TURN_ON_HANDLER_MODULE_PATH, component_name);
+    test_turn_on_turn_off_handler_in_module(handler, as_route(MOCK_TURN_ON_HANDLER_MODULE_NAME), component_name);
 }
 
 void test_turn_off_handler_in_module(OperationHandler* handler, std::string component_name) {
-    test_turn_on_turn_off_handler_in_module(handler, MOCK_TURN_OFF_HANDLER_MODULE_PATH, component_name);
+    test_turn_on_turn_off_handler_in_module(handler, as_route(MOCK_TURN_OFF_HANDLER_MODULE_NAME), component_name);
 }
 
 void test_is_off_handler_in_module(OperationHandler* handler, std::string component_name) {
