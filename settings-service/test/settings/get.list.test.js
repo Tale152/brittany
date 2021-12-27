@@ -24,7 +24,7 @@ test("No id provided", async () => {
 })
 
 test("Correct listing", async () => {
-    correctCreate({
+    await correctCreate({
         idEnvironment: values.idEnvironment,
         expires: new Date(new Date().getTime() + 30000),
         temperature: {
@@ -32,7 +32,7 @@ test("Correct listing", async () => {
             max: 7
         }
     })
-    correctCreate({
+    await correctCreate({
         idEnvironment: values.idEnvironment,
         expires: new Date(new Date().getTime() + 60000),
         temperature: {
