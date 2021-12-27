@@ -22,6 +22,7 @@ public:
         add_title(td);
         add_security(td);
         add_modules(td, modules);
+        add_actions(td, ip, port, modules);
         return td;
     };
 
@@ -60,6 +61,20 @@ private:
             }
             i++; 
         }
+    }
+
+    static void add_actions(Json::Value &td, std::string ip, int port, std::list<Module*> modules) {
+        for(Module* m : modules) {
+            for(OperationHandler* h : m -> handlers()) {
+                Json::Value action;
+                action["module"] = m -> name();
+                action["forms"][0]["href"] =
+                    std::string("http://") + ip + ":" + std::to_string(port) + h -> path();
+                action["forms"][0]["contentType"] = "application/json";
+                td["actions"][h -> name()] = action;
+            }
+        }
+        
     }
 
 };

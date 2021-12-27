@@ -53,6 +53,28 @@ void contains_modules() {
     TEST_ASSERT_EQUAL_STRING("light", moduleComponents[0].asCString());
 }
 
+void contains_actions() {
+    TEST_ASSERT_TRUE(thingDescriptor.isMember("actions"));
+    Json::Value actions = thingDescriptor["actions"];
+    std::string actionNames[3] = {"turnOn", "turnOff", "isOn"};
+    for(std::string n : actionNames) {
+        Json::Value action = actions[n];
+        TEST_ASSERT_TRUE(action.isMember("module"));
+        TEST_ASSERT_EQUAL_STRING("light-module", action["module"].asCString());
+        TEST_ASSERT_TRUE(action.isMember("forms"));
+        Json::Value forms = action["forms"];
+        TEST_ASSERT_TRUE(forms.isArray());
+        TEST_ASSERT_TRUE(forms[0].isMember("href"));
+        TEST_ASSERT_TRUE(forms[0].isMember("contentType"));
+        TEST_ASSERT_EQUAL_STRING(
+            (std::string("http://") + TD_IP_TEST + ":" + std::to_string(TD_PORT_TEST) + "/" + n).c_str(),
+            forms[0]["href"].asCString()
+        );
+        TEST_ASSERT_EQUAL_STRING("application/json", forms[0]["contentType"].asCString());
+    }
+    
+}
+
 void contains_all_elements() {
     thingDescriptor = tdEdge -> thingDescriptor(TD_IP_TEST, TD_PORT_TEST);
     RUN_TEST(contains_context);
@@ -60,6 +82,7 @@ void contains_all_elements() {
     RUN_TEST(contains_td_security_definitions);
     RUN_TEST(contains_td_security);
     RUN_TEST(contains_modules);
+    RUN_TEST(contains_actions);
 }
 
 void test_ThingDescriptor(Edge* edge) {
