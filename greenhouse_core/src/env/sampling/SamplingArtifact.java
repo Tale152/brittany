@@ -11,6 +11,7 @@ import cartago.*;
 import utility.Device;
 import utility.Sample;
 import utility.setting.RangeSetting;
+import utility.setting.Setting;
 import utility.setting.Settings;
 
 /**
@@ -18,7 +19,8 @@ import utility.setting.Settings;
  * the application.
  * Once everything is set up, every samplingAgent that is focusing on this
  * Artifact will start the sampling operation,
- * and when the samples are retried, the update of the information are going to
+ * and when the samples are retrieved, the update of the information are going
+ * to
  * be handled here (uploading the data
  * to the persistence service and starting an actuator if needed).
  *
@@ -37,16 +39,15 @@ public class SamplingArtifact extends Artifact {
 	}
 
 	/**
-	 * Operation used to set up the devices and the thresholds, which are the basic
-	 * information
-	 * needed to actually start the sampling.
+	 * Operation used to set up the devices and the settings, which are the basic
+	 * information needed to actually start the sampling.
 	 * 
-	 * @param devices    a list of all the devices that are present in the
-	 *                   greenhouse.
-	 * @param thresholds the minimum and maximum values that a device of a specific
-	 *                   role must observe. If it is
-	 *                   not respected, an actuator is started to resolve the bad
-	 *                   status.
+	 * @param devices  a list of all the devices that are present in the
+	 *                 greenhouse.
+	 * @param settings the minimum and maximum values that a device of a specific
+	 *                 category must observe. If it is
+	 *                 not respected, an actuator is started to resolve the bad
+	 *                 status.
 	 */
 	@OPERATION
 	void setup(final List<Device> devices, final Optional<Settings> settings) {
@@ -61,15 +62,15 @@ public class SamplingArtifact extends Artifact {
 	 * for a specific role of devices. This starts the communication with the
 	 * devices performed by the CommunicationAgent.
 	 * 
-	 * @param role, every SamplingAgent have a specific role, that matches with the
-	 *              device role. It is the type of
-	 *              sample that is going to be retrieved.
+	 * @param category, every samplingAgent have a specific category, that matches
+	 *                  with the
+	 *                  device category. It is the type of sample that is going to
+	 *                  be retrieved.
 	 */
 	@OPERATION
-	void sampleOperation(final String role) {
+	void sampleOperation(final String category) {
 		// the role can be use to filter the devices to communicate with
-		defineObsProperty("communicate",
-				this.devices.stream().filter(d -> d.getRole().equals(role)).collect(Collectors.toList()));
+		defineObsProperty("communicate", getDevicesByCategory(category));
 	}
 
 	/**
@@ -98,18 +99,16 @@ public class SamplingArtifact extends Artifact {
 			if (this.settings.isPresent()) {
 				if (this.settings.get().getSetting(avarageSample.getCategory()).isPresent()) {
 					// TODO this has to be done only when we use a RangeSetting
-					if (avarageSample.getValue() < ((RangeSetting) this.settings.get().getSetting(avarageSample.getCategory()).get())
-							.getRange().getX()
-							|| avarageSample.getValue() > ((RangeSetting) this.settings.get().getSetting(avarageSample.getCategory())
-									.get()).getRange().getY()) {
+					if (avarageSample.getValue() < ((RangeSetting) getSettingByCategory(avarageSample.getCategory())).getMin()
+							|| avarageSample.getValue() > ((RangeSetting) getSettingByCategory(avarageSample.getCategory())).getMax()) {
 						System.out.println("Create out of range behavior");
-						defineObsProperty("actuate", avarageSample, this.settings.get().getSetting(avarageSample.getCategory()).get());
+						defineObsProperty("actuate", avarageSample, getSettingByCategory(avarageSample.getCategory()));
 					}
 				}
 			}
 			this.lastSamples.add(avarageSample);
 		}
-		
+
 	}
 
 	private Sample getAvarageOfSamples(final List<Sample> samples) {
@@ -120,6 +119,14 @@ public class SamplingArtifact extends Artifact {
 
 	private Optional<Sample> getSampleByCategory(final List<Sample> samples, final String category) {
 		return samples.stream().filter(s -> s.getCategory().equals(category)).findFirst();
+	}
+
+	private List<Device> getDevicesByCategory(final String category) {
+		return this.devices.stream().filter(d -> d.getCategory().equals(category)).collect(Collectors.toList());
+	}
+
+	private Setting getSettingByCategory(final String category) {
+		return this.settings.get().getSetting(category).get();
 	}
 
 }

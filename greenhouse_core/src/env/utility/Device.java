@@ -6,25 +6,25 @@ package utility;
  */
 public class Device {
 	private final String id;
-	private final String role;
+	private final String category;
 	//TODO TD
 	
-	public Device(final String id, final String role) {
+	public Device(final String id, final String category) {
 		this.id = id;
-		this.role = role;
+		this.category = category;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public String getRole() {
-		return role;
+	public String getCategory() {
+		return category;
 	}
 
 	@Override
 	public String toString() {
-		return "Device [id=" + id + ", role=" + role + "]";
+		return "Device [id=" + id + ", category=" + category + "]";
 	}
 	
 }

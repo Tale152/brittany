@@ -10,9 +10,13 @@ public class RangeSetting extends Setting {
 		super(category);
 		this.range = range;
 	}
-	
-	public Pair<Integer, Integer> getRange(){
-		return this.range;
+
+	public int getMin() {
+		return this.range.getX();
+	}
+
+	public int getMax() {
+		return this.range.getY();
 	}
 
 	@Override
