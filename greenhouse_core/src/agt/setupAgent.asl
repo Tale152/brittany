@@ -12,7 +12,7 @@
 
 +token(Token) <- getSettings(Token, Settings); initAfterAuthentication(Token, Settings).
 
-+uploadPersistence(Device) <- ?token(Token); uploadPersistence(Device, Token).
++uploadPersistence(Sample) <- ?token(Token); uploadPersistence(Sample, Token).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
