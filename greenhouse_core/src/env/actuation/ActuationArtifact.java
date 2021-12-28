@@ -18,9 +18,9 @@ public class ActuationArtifact extends Artifact {
 	void init() {}
 
 	/**
-	 * Used to check the current sample and to notify if it is bigger or lower that the threshold.
-	 * @param outOfRangeDevice the device that registered the out of range sample.
-	 * @param setting the setting of the specific category of the device.
+	 * Used to check the current sample and to notify if it is bigger or lower that the settings.
+	 * @param outOfRangeSample the sample is out of range base on the settings.
+	 * @param setting the setting of the specific category of the sample.
 	 */
 	@OPERATION void actuate(final Sample outOfRangeSample, final RangeSetting setting) {
 		int currentValue = outOfRangeSample.getValue();
