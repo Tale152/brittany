@@ -3,8 +3,8 @@
 package actuation;
 
 import cartago.*;
-import utility.Device;
 import utility.Pair;
+import utility.Sample;
 import utility.setting.RangeSetting;
 
 /**
@@ -22,8 +22,8 @@ public class ActuationArtifact extends Artifact {
 	 * @param outOfRangeDevice the device that registered the out of range sample.
 	 * @param setting the setting of the specific category of the device.
 	 */
-	@OPERATION void actuate(final Device outOfRangeDevice, final RangeSetting setting) {
-		int currentValue = outOfRangeDevice.getCurrentValue();
+	@OPERATION void actuate(final Sample outOfRangeSample, final RangeSetting setting) {
+		int currentValue = outOfRangeSample.getValue();
 		Pair<Integer, Integer> range = setting.getRange();
 		
 		if(currentValue < range.getX()) {

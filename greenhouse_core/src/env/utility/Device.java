@@ -7,13 +7,11 @@ package utility;
 public class Device {
 	private final String id;
 	private final String role;
-	private int currentValue;
 	//TODO TD
 	
 	public Device(final String id, final String role) {
 		this.id = id;
 		this.role = role;
-		this.currentValue = 0;
 	}
 
 	public String getId() {
@@ -24,17 +22,9 @@ public class Device {
 		return role;
 	}
 
-	public int getCurrentValue() {
-		return currentValue;
-	}
-
-	public void setCurrentValue(int currentValue) {
-		this.currentValue = currentValue;
-	}
-
 	@Override
 	public String toString() {
-		return "Device [id=" + id + ", role=" + role + ", currentValue=" + currentValue + "]";
+		return "Device [id=" + id + ", role=" + role + "]";
 	}
 	
 }

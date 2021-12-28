@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,8 +24,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import utility.Device;
 import utility.Pair;
+import utility.Sample;
 import utility.setting.Settings;
 
 /**
@@ -138,6 +137,7 @@ public class ServiceArtifact extends Artifact {
 						}
 						if (dataObject.has("light")) {
 							JsonObject light = dataObject.get("light").getAsJsonObject();
+							//TODO fix to actually create a HourSetting
 							settings.createSetting("light",
 									new Pair<>(light.get("min").getAsInt(), light.get("max").getAsInt()));
 						}
@@ -156,16 +156,15 @@ public class ServiceArtifact extends Artifact {
 	}
 
 	@OPERATION
-	void uploadPersistence(final Device device, final String token) {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(PERSISTENCE_SERVICE_URL + device.getRole() + "/register").newBuilder();
+	void uploadPersistence(final Sample sample, final String token) {
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(PERSISTENCE_SERVICE_URL + sample.getCategory() + "/register").newBuilder();
 		String url = urlBuilder.build().toString();
 
-		JsonObject sample = new JsonObject();
-		sample.addProperty("id", "asd");
-		sample.addProperty("value", device.getCurrentValue());
-		sample.addProperty("timestamp", Instant.now().toString());
+		JsonObject jsonSample = new JsonObject();
+		jsonSample.addProperty("value",	sample.getValue());
+		jsonSample.addProperty("timestamp", sample.getSamplingTime());
 		
-		RequestBody body = RequestBody.create(sample.toString(), MediaType.parse("application/json; charset=utf-8"));
+		RequestBody body = RequestBody.create(jsonSample.toString(), MediaType.parse("application/json; charset=utf-8"));
 		
 		Request request = new Request.Builder()
 				.addHeader("token", token)
@@ -177,7 +176,7 @@ public class ServiceArtifact extends Artifact {
 			if (!response.isSuccessful()) {
 				throw new IOException("Unexpected code " + response);
 			} else {
-				System.out.println("Data of " + device + "correcty uploaded");
+				System.out.println(sample + "correcty uploaded");
 			}
 
 		} catch (IOException e) {
