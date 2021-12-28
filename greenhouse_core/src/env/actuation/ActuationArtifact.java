@@ -24,12 +24,11 @@ public class ActuationArtifact extends Artifact {
 	 */
 	@OPERATION void actuate(final Sample outOfRangeSample, final RangeSetting setting) {
 		int currentValue = outOfRangeSample.getValue();
-		Pair<Integer, Integer> range = setting.getRange();
 		
-		if(currentValue < range.getX()) {
-			System.out.println("Do something to increase the value. \nCurrent value: " + currentValue + " Min value: " + range.getX());
-		} else if (currentValue > range.getY()) {
-			System.out.println("Do something to decrease the value. \nCurrent value: " + currentValue + " Max value: " + range.getY());
+		if(currentValue < setting.getMin()) {
+			System.out.println("Do something to increase the value. \nCurrent value: " + currentValue + " Min value: " + setting.getMin());
+		} else if (currentValue > setting.getMax()) {
+			System.out.println("Do something to decrease the value. \nCurrent value: " + currentValue + " Max value: " + setting.getMax());
 		} else {
 			throw new IllegalStateException("If the actuator is called, the value must be greater than the max or lower than the min value");
 		}
