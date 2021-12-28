@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import exampleReducer from './example/reducer'
+import identityReducer from './identity/reducer'
 
 const allReducers = combineReducers({
-    example: exampleReducer,
+    identity: identityReducer,
 })
 
 export default allReducers
