@@ -8,7 +8,7 @@ export default function RedirectButton(props) {
   const isLoading = useSelector(state => state.util.isLoading)
   
   if(props.redirect === true){
-    return RedirectTo(props.destination)
+    return <RedirectTo destination={ props.destination } />
   } else {
     return(
       <Button

@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
   
 import FarmerLogin from '../../farmerLogin/FarmerLogin'
+import Register from '../../register/Register'
 import Home from '../../home/Home'
   
 export default function Router() {
@@ -12,6 +13,7 @@ export default function Router() {
     <BrowserRouter>
       <Switch>
         <Route path="/" element={<FarmerLogin/>} />
+        <Route path="/register" element={<Register/>} />
         <Route path="/home" element={<Home/>} />
       </Switch>
     </BrowserRouter>
