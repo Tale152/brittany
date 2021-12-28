@@ -23,14 +23,12 @@ export default function FarmerLoginPage() {
                     <Form className="mt-1 mb-3"  >
                         <h1 className="d-flex justify-content-center">Farmer login</h1>
                         <FormText
-                            isLoading = { false }   //TODO
                             text = { "Mail:" }
                             placeholder = { "Enter Mail" }
                             onChange = { input => setInputMail(input) }
                             onEnter = { () => farmerLogin(inputMail, inputPassword, dispatch) }
                         />
                         <FormPassword
-                            isLoading = { false }   //TODO
                             text = { "Password:" }
                             placeholder = { "Enter Password" }
                             onChange = { input => setInputPassword(input) }
@@ -38,13 +36,11 @@ export default function FarmerLoginPage() {
                         />
                         <div className="mt-lg-3">
                             <FormLogin
-                                isLoading = { false }   //TODO
                                 text={ "Login" } 
                                 onClick = { () => farmerLogin(inputMail, inputPassword, dispatch) }
                             />
                             <RedirectButton
                                 text = { "Register Organization" }
-                                isLoading = { false } //TODO
                                 redirect = { false } //TODO
                                 destination = { "TODO" } //TODO
                                 onClick = { () => {console.log("Organization registration")}}

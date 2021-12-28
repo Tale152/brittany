@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import Form from 'react-bootstrap/Form'
 
 export default function FormInput(props){
@@ -5,7 +6,7 @@ export default function FormInput(props){
         <>
             <h3>{props.text}</h3>
             <Form.Control
-                style={props.isLoading ? { pointerEvents: "none", opacity: "0.4" } : {}}
+                style={useSelector(state => state.util.isLoading) ? { pointerEvents: "none", opacity: "0.4" } : {}}
                 type={props.type}
                 onChange={e => props.onChange(e.target.value)}
                 placeholder={props.placeholder}

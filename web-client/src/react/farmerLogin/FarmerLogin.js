@@ -10,7 +10,7 @@ export default function FarmerLogin() {
   if (token === null) {
       return <FarmerLoginPage />
   } else {
-      return <RedirectTo destination={"/"} /> //TODO change destination
+      return <RedirectTo destination={"home"} />
   }
   
 }
