@@ -3,7 +3,6 @@
 package actuation;
 
 import cartago.*;
-import utility.Pair;
 import utility.Sample;
 import utility.setting.RangeSetting;
 

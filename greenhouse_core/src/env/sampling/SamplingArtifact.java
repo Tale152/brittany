@@ -99,8 +99,11 @@ public class SamplingArtifact extends Artifact {
 			if (this.settings.isPresent()) {
 				if (this.settings.get().getSetting(avarageSample.getCategory()).isPresent()) {
 					// TODO this has to be done only when we use a RangeSetting
-					if (avarageSample.getValue() < ((RangeSetting) getSettingByCategory(avarageSample.getCategory())).getMin()
-							|| avarageSample.getValue() > ((RangeSetting) getSettingByCategory(avarageSample.getCategory())).getMax()) {
+					if (avarageSample.getValue() < ((RangeSetting) getSettingByCategory(avarageSample.getCategory()))
+							.getMin()
+							|| avarageSample
+									.getValue() > ((RangeSetting) getSettingByCategory(avarageSample.getCategory()))
+											.getMax()) {
 						System.out.println("Create out of range behavior");
 						defineObsProperty("actuate", avarageSample, getSettingByCategory(avarageSample.getCategory()));
 					}
