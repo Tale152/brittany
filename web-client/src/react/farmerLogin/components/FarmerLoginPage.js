@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 
@@ -7,8 +8,11 @@ import FormPassword from '../../_common/form/input/FormPassword'
 import FormLogin from '../../_common/form/button/FormLogin'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 
+import farmerLogin from '../../../js/farmerLogin'
+
 export default function FarmerLoginPage() {
 
+    const dispatch = useDispatch()
     const [inputMail, setInputMail] = useState(undefined)
     const [inputPassword, setInputPassword] = useState(undefined)
 
@@ -23,20 +27,20 @@ export default function FarmerLoginPage() {
                             text = { "Mail:" }
                             placeholder = { "Enter Mail" }
                             onChange = { input => setInputMail(input) }
-                            onEnter = { () => {console.log("enter")} } //TODO
+                            onEnter = { () => farmerLogin(inputMail, inputPassword, dispatch) }
                         />
                         <FormPassword
                             isLoading = { false }   //TODO
                             text = { "Password:" }
                             placeholder = { "Enter Password" }
                             onChange = { input => setInputPassword(input) }
-                            onEnter = { () => {console.log("enter")} } //TODO
+                            onEnter = { () => farmerLogin(inputMail, inputPassword, dispatch) }
                         />
                         <div className="mt-lg-3">
                             <FormLogin
                                 isLoading = { false }   //TODO
                                 text={ "Login" } 
-                                onClick = { () => {console.log(inputMail + " " + inputPassword)} }  //TODO
+                                onClick = { () => farmerLogin(inputMail, inputPassword, dispatch) }
                             />
                             <RedirectButton
                                 text = { "Register Organization" }
