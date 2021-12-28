@@ -4,9 +4,8 @@ export default function FormButton(props){
     return (
         <Button
             style = { props.isLoading ? { pointerEvents: "none", opacity: "0.4" } : {} }
-            className = "col-lg-12 mt-3"
+            className = "col-lg-12 my-2"
             variant = "primary"
-            size = "lg"
             block = "true"
             onClick = { props.onClick }
         >
