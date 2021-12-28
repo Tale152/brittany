@@ -4,7 +4,7 @@ import {
     Route,
 } from 'react-router-dom'
   
-import FarmerLogin from '../../farmerLogin/FarmerLogin'
+import FarmerLogin from '../../farmerLogin/Login'
 import Register from '../../register/Register'
 import Home from '../../home/Home'
   

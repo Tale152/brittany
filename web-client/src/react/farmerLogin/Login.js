@@ -1,14 +1,14 @@
 import { useSelector } from 'react-redux'
 
 import RedirectTo from '../_common/navigation/Redirect'
-import FarmerLoginPage from './components/FarmerLoginPage'
+import LoginPage from './components/LoginPage'
 
 export default function FarmerLogin() {
 
   let token = useSelector(state => state.identity.token)
 
   if (token === null) {
-      return <FarmerLoginPage />
+      return <LoginPage />
   } else {
       return <RedirectTo destination={"home"} />
   }

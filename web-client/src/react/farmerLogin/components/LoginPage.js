@@ -10,7 +10,7 @@ import RedirectButton from '../../_common/navigation/RedirectButton'
 
 import farmerLogin from '../../../js/farmerLogin'
 
-export default function FarmerLoginPage() {
+export default function LoginPage() {
 
     const dispatch = useDispatch()
     const [goToRegister, setGoToRegister] = useState(false)
@@ -22,7 +22,7 @@ export default function FarmerLoginPage() {
             <Row className="d-flex justify-content-center">
                 <div className="my-5 container col-lg-3 col-9 border border-primary rounded trnsp">
                     <Form className="mt-1 mb-3"  >
-                        <h1 className="d-flex justify-content-center">Farmer login</h1>
+                        <h1 className="d-flex justify-content-center">Login</h1>
                         <FormText
                             text = { "Mail:" }
                             placeholder = { "Enter Mail" }
