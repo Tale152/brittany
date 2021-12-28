@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import utility.Pair;
+
 public class Settings {
 	
 	private final String id;
