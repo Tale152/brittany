@@ -1,16 +1,18 @@
-// Agent samplingAgent in project greenhouse_core
+// Agent setupAgent in project greenhouse_core
 
 /* Initial beliefs and rules */
 
 /* Initial goals */
 
+!authentication.
+
 /* Plans */
 
-+setup(Devices, Settings) <- setup(Devices, Settings); +wait.
++!authentication <- retrieveAuthenticationData.
 
-+wait <- .at("now + 2 seconds", {+sample}).
++token(Token) <- getSettings(Token, Settings); initAfterAuthentication(Token, Settings).
 
-+sample <- ?role(Role); sampleOperation(Role); -+wait.
++uploadPersistence(Sample) <- ?token(Token); uploadPersistence(Sample, Token).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

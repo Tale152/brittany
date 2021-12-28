@@ -13,10 +13,18 @@
 */
 
 mas greenhouse_core {
+	
+	agent setupAgent : setupAgent.asl {
+		focus: brittany.common
+		focus: brittany.service
+		focus: brittany.sampling
+	}
 
     agent samplingAgent : samplingAgent.asl {
+    	beliefs: role("temperature")
 		focus: brittany.common
 		focus: brittany.sampling
+		focus: brittany.communication
 	}
 	
 	agent communicationAgent : communicationAgent.asl {
@@ -30,9 +38,10 @@ mas greenhouse_core {
 	}
 	
 	workspace brittany {
-        artifact common: sampling.CommonArtifact()
+        artifact common: common.CommonArtifact()
         artifact sampling: sampling.SamplingArtifact()
         artifact communication: communication.CommunicationArtifact()
         artifact actuation: actuation.ActuationArtifact()
+        artifact service: communication.ServiceArtifact()
     }
 }
