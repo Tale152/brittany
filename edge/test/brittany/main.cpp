@@ -5,6 +5,7 @@
 #include "hw/ComponentHwTest.h"
 #include "hw/OnePinTest.h"
 #include "hw/MockDigitalLightHwTest.h"
+#include "hw/MockTempHumSensorHwTest.h"
 #include "modules/MockDigitalLightModuleTest.h"
 #include "edge/EdgeTest.h"
 #include "edge/ThingDescriptorTest.h"
@@ -14,6 +15,7 @@ void test_hw() {
     test_ComponentHw(); //ComponentHwTest
     test_OnePin(); //OnePinTest
     test_MockDigitalLightHw(); //MockDigitalLightHwTest
+    test_MockTempHumSensorHwTest(); //MockTempHumSensorHwTest
 }
 
 void test_operation_handler() {
