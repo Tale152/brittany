@@ -16,6 +16,12 @@ class DHT22SensorHw : public TempHumHwInterface {
 
 public:
 
+    /**
+     * @brief Construct a new DHT22SensorHw object.
+     * 
+     * @param id the hw id.
+     * @param pin the data pin of the DHT22.
+     */
     DHT22SensorHw(std::string id, uint8_t pin);
 
     std::optional<float> temperatureCelsius();

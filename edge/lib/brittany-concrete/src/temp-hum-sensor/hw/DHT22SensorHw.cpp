@@ -12,7 +12,7 @@ std::optional<float> DHT22SensorHw::temperatureCelsius() {
 std::optional<float> DHT22SensorHw::temperatureKelvin() {
     std::optional<float> tempC = temperatureCelsius();
     if(tempC.has_value()){
-        return std::optional(tempC.value() + 273.15);
+        return std::optional(Temperature::fromCToK(tempC.value()));
     }
     return std::nullopt;
 }
