@@ -31,7 +31,7 @@ public:
 public:
 
     static float fromCToF(float c) {
-        return c * (9/5) + 32;
+        return c * 1.8 + 32;
     };
 
     static float fromCToK(float c) {
