@@ -4,15 +4,13 @@ import {
     Route,
 } from 'react-router-dom'
   
-import Authentication from '../../authentication/Authentication'
-import HomePage from "../../homepage/Homepage"
+import FarmerLogin from '../../farmerLogin/FarmerLogin'
   
 export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" element={<Authentication/>} />
-        <Route path="/home" element={<HomePage/>} />
+        <Route path="/" element={<FarmerLogin/>} />
       </Switch>
     </BrowserRouter>
   )
