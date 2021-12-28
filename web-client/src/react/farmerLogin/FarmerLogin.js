@@ -1,11 +1,16 @@
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
+
+import RedirectTo from '../_common/navigation/Redirect'
+import FarmerLoginPage from './components/FarmerLoginPage'
 
 export default function FarmerLogin() {
 
-  return (
-    <>
-      <p>Farmer login</p>
-    </>
-  )
+  let token = useSelector(state => state.identity.token)
+
+  if (token === null) {
+      return <FarmerLoginPage />
+  } else {
+      return <RedirectTo destination={"/"} /> //TODO change destination
+  }
   
 }
