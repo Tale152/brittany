@@ -2,9 +2,13 @@
 
 package communication;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,6 +54,7 @@ public class ServiceArtifact extends Artifact {
 	void init() {
 		this.loginData = new ArrayList<>();
 		this.client = new OkHttpClient();
+
 	}
 
 	/**
@@ -58,18 +63,22 @@ public class ServiceArtifact extends Artifact {
 	 */
 	@OPERATION
 	void retrieveAuthenticationData() {
-		try {
-			File file = new File(LOGIN_FILE);
-			Scanner scanner = new Scanner(file);
+
+		InputStream fileInputStream = getClass().getClassLoader()
+				.getResourceAsStream(LOGIN_FILE);
+
+		try (Scanner scanner = new Scanner(fileInputStream)) {
 			while (scanner.hasNextLine()) {
-				String data = scanner.nextLine();
-				this.loginData.add(data);
+				String line = scanner.nextLine();
+				this.loginData.add(line);
 			}
 			scanner.close();
+
 			autheticate();
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@INTERNAL_OPERATION
@@ -137,7 +146,7 @@ public class ServiceArtifact extends Artifact {
 						}
 						if (dataObject.has("light")) {
 							JsonObject light = dataObject.get("light").getAsJsonObject();
-							//TODO fix to actually create a HourSetting
+							// TODO fix to actually create a HourSetting
 							settings.createSetting("light",
 									new Pair<>(light.get("min").getAsInt(), light.get("max").getAsInt()));
 						}
@@ -157,15 +166,17 @@ public class ServiceArtifact extends Artifact {
 
 	@OPERATION
 	void uploadPersistence(final Sample sample, final String token) {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(PERSISTENCE_SERVICE_URL + sample.getCategory() + "/register").newBuilder();
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(PERSISTENCE_SERVICE_URL + sample.getCategory() + "/register")
+				.newBuilder();
 		String url = urlBuilder.build().toString();
 
 		JsonObject jsonSample = new JsonObject();
-		jsonSample.addProperty("value",	sample.getValue());
+		jsonSample.addProperty("value", sample.getValue());
 		jsonSample.addProperty("timestamp", sample.getSamplingTime());
-		
-		RequestBody body = RequestBody.create(jsonSample.toString(), MediaType.parse("application/json; charset=utf-8"));
-		
+
+		RequestBody body = RequestBody.create(jsonSample.toString(),
+				MediaType.parse("application/json; charset=utf-8"));
+
 		Request request = new Request.Builder()
 				.addHeader("token", token)
 				.url(url)
