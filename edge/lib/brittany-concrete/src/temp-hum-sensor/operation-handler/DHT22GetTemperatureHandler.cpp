@@ -1,8 +1,9 @@
 #include "DHT22GetTemperatureHandler.h"
 #include "util.h"
+#include "thing-descriptor/OperationType.h"
 
 DHT22GetTemperatureHandler::DHT22GetTemperatureHandler(std::string name, std::string path, std::list<DHT22SensorHw*> components)
-    :ValueReturnedHandlerInterface(name, path, OperationType::PROPERTY) {
+: ValueReturnedHandlerInterface<float>(name, path, OperationType::PROPERTY) {
     _components = components;
 }
 
@@ -22,7 +23,7 @@ std::optional<float> DHT22GetTemperatureHandler::operation(Json::Value args) {
                     return std::nullopt;
                 }
             }
-        return c -> temperatureCelsius();
+            return c -> temperatureCelsius();
         }
         return std::nullopt; // failed to retrieve component
     }

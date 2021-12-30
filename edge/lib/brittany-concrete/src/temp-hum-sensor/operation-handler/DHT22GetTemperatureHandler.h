@@ -16,9 +16,9 @@ public:
         std::list<DHT22SensorHw*> components
     );
 
-    std::optional<float> operation(Json::Value args);
-
 private:
+
+    std::optional<float> operation(Json::Value args);
 
     std::list<DHT22SensorHw*> _components;
 };
