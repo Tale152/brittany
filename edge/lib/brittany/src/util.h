@@ -4,6 +4,7 @@
 #include "hw/ComponentHw.h"
 #include <list>
 #include <string>
+#include <optional>
 
 enum class ContentResult { Ok, ResourceNotFound, OperationFailed };
 
@@ -54,13 +55,13 @@ template <class T>
  * @param id the id of the T to find.
  * @return T a pointer to the T class with the selected id, NULL otherwise.
  */
-inline T find_by_id(std::list<T> list, std::string id) {
+inline std::optional<T> find_by_id(std::list<T> list, std::string id) {
     for(T c : list) {
         if(c->id() == id) {
-            return c;
+            return std::optional(c);
         }
     }
-    return NULL;
+    return std::nullopt;
 }
 
 #endif //BRITTANY_UTIL_H

@@ -27,9 +27,9 @@ private:
 
     std::optional<bool> operation(Json::Value args) {
         if(args.isMember("id")) {
-            MockDigitalLightHw* component = find_by_id(_components, args["id"].asCString());
-            if(component != NULL){
-                return std::optional(component -> isOn());
+            std::optional<MockDigitalLightHw*> oc = find_by_id(_components, args["id"].asCString());
+            if(oc.has_value()){
+                return std::optional(oc.value() -> isOn());
             }
         }
         return std::nullopt;

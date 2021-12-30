@@ -25,12 +25,12 @@ public:
 private:
 
     bool turnOn(std::string id) {
-        MockDigitalLightHw* component = find_by_id(_components, id);
-        if(component == NULL) {
-            return false;
-        } else {
-            component->on();
+        std::optional<MockDigitalLightHw*> oc = find_by_id(_components, id);
+        if(oc.has_value()) {
+            oc.value() -> on();
             return true;
+        } else {
+            return false;
         }
     };
 
