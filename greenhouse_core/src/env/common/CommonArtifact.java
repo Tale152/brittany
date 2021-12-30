@@ -18,8 +18,6 @@ import utility.setting.Settings;
  *
  */
 public class CommonArtifact extends Artifact {
-	
-	private String authenticationToken;
 
 	private List<Device> devices;
 
@@ -31,8 +29,7 @@ public class CommonArtifact extends Artifact {
 	 * @param token the authentication token retrieved from the server, used for authentication purposes during the
 	 * communication with other servers.
 	 */
-	@OPERATION void initAfterAuthentication(final String token, final Optional<Settings> settings) {
-		this.authenticationToken = token;
+	@OPERATION void initAfterAuthentication(final Optional<Settings> settings) {
 		
 		//for test purpose right now devices and thresholds are hard-coded
 		devices = new ArrayList<>(Arrays.asList(new Device("id1", "temperature"), new Device("id2", "light"),

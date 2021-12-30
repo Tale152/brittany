@@ -1,4 +1,4 @@
-// Agent samplingAgent in project greenhouse_core
+// Agent persistenceAgent in project greenhouse_core
 
 /* Initial beliefs and rules */
 
@@ -6,11 +6,9 @@
 
 /* Plans */
 
-+setup(Devices, Settings) <- setup(Devices, Settings); !wait.
++token(Token).
 
-+!wait <- .at("now + 10 seconds", {+!sample}).
-
-+!sample <- ?role(Role); sampleOperation(Role); !wait.
++uploadPersistence(Sample) <- ?token(Token); uploadPersistence(Sample, Token).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

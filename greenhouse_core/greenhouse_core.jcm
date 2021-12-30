@@ -20,6 +20,11 @@ mas greenhouse_core {
 		focus: brittany.sampling
 	}
 
+	agent persistenceAgent : persistenceAgent.asl {
+		focus: brittany.service
+		focus: brittany.sampling
+	}
+
     agent samplingAgent : samplingAgent.asl {
     	beliefs: role("temperature")
 		focus: brittany.common

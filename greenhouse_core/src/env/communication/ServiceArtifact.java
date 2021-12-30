@@ -49,7 +49,6 @@ public class ServiceArtifact extends Artifact {
 	void init() {
 		this.loginData = new ArrayList<>();
 		this.client = new OkHttpClient();
-
 	}
 
 	/**

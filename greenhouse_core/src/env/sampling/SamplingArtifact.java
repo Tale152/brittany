@@ -97,6 +97,7 @@ public class SamplingArtifact extends Artifact {
 				}
 			}
 			if (this.settings.isPresent()) {
+				System.out.println("Settings in sampling: " +this.settings);
 				if (this.settings.get().getSetting(avarageSample.getCategory()).isPresent()) {
 					// TODO this has to be done only when we use a RangeSetting
 					if (avarageSample.getValue() < ((RangeSetting) getSettingByCategory(avarageSample.getCategory()))

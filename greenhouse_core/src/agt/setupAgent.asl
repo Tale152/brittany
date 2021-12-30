@@ -10,9 +10,11 @@
 
 +!authentication <- retrieveAuthenticationData.
 
-+token(Token) <- getSettings(Token, Settings); initAfterAuthentication(Token, Settings).
++token(Token) <- getSettings(Token, Settings); initAfterAuthentication(Settings); !wait.
 
-+uploadPersistence(Sample) <- ?token(Token); uploadPersistence(Sample, Token).
++!wait <- .at("now + 5 seconds", {+!settings}).
+
++!settings <- ?token(Token); getSettings(Token, Settings); !wait.
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
