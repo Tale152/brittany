@@ -6,6 +6,10 @@
 #include <json/json.h>
 #include "operation-handler/OperationHandler.h"
 #include <optional>
+#include "ValueReturnedHandlerInterface.h"
+#include "HttpStatusCodes_C++.h"
+#include "util.h"
+
 
 /**
  * @brief Type of the parameter to be returned by this class.
@@ -27,9 +31,18 @@ public:
      * @param name the name of the handler.
      * @param path the path(route) of the handler.
      */
-    ValueReturnedHandlerInterface(std::string name, std::string path, OperationType operationType);
+    ValueReturnedHandlerInterface(std::string name, std::string path, OperationType operationType) : OperationHandler(name, path, operationType) {
+        //does nothing
+    };
 
-    OperationHandlerResult handle(Json::Value args);
+    OperationHandlerResult handle(Json::Value args) {
+        std::optional<T> result = operation(args);
+        if(result.has_value()){
+            return OperationHandlerResult(HttpStatus::OK, Json::Value(result.value()));
+        } else {
+            return OperationHandlerResult(HttpStatus::NotFound, Json::Value(phrase(ContentResult::OperationFailed)));
+        }
+    }
 
 private:
     
