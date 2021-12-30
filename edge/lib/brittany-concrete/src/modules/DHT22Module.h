@@ -1,3 +1,6 @@
+#ifndef BRITTANY_DHT22_MODULE
+#define BRITTANY_DHT22_MODULE
+
 #include "modules/ComponentModule.h"
 #include "temp-hum-sensor/hw/DHT22SensorHw.h"
 #include "temp-hum-sensor/operation-handler/DHT22GetTemperatureHandler.h"
@@ -5,11 +8,11 @@
 
 #define DHT22_GET_TEMPERATURE_HANDLER_NAME "temperature"
 
-class MockDigitalLightModule : public ComponentModule<DHT22SensorHw> {
+class DHT22Module : public ComponentModule<DHT22SensorHw> {
 
 public:
 
-    MockDigitalLightModule(std::string name, std::list<DHT22SensorHw*> components): ComponentModule<DHT22SensorHw>(name, components) {
+    DHT22Module(std::string name, std::list<DHT22SensorHw*> components): ComponentModule<DHT22SensorHw>(name, components) {
         _handlers.push_back(
             new DHT22GetTemperatureHandler(
                 DHT22_GET_TEMPERATURE_HANDLER_NAME,
@@ -20,3 +23,5 @@ public:
     };
 
 };
+
+#endif //BRITTANY_DHT22_MODULE
