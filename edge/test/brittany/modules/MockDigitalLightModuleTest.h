@@ -53,7 +53,7 @@ void test_turn_on_turn_off_handler_in_module(OperationHandler* handler, std::str
     args["id"] = component_name;
     OperationHandlerResult result = handler->handle(args);
     check_handler_code_is_ok(result);
-    TEST_ASSERT_EQUAL_STRING("Ok.", result.content().asString().c_str());
+    TEST_ASSERT_EQUAL_STRING("Ok.", result.content().asCString());
 }
 
 void test_is_on_is_off_handler_in_module(OperationHandler* handler, std::string component_name, bool isOn) {

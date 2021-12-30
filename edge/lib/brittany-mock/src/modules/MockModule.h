@@ -6,6 +6,7 @@
 #include "../operation-handler/MockOperationHandler.h"
 #include "modules/Module.h"
 #include "util.h"
+#include "thing-descriptor/OperationType.h"
 
 #define OPERATION_HANDLER_IN_MOCK_MODULE_NAME "value"
 
@@ -20,7 +21,8 @@ public:
         _handlers.push_back(
             new MockOperationHandler(
                 OPERATION_HANDLER_IN_MOCK_MODULE_NAME,
-                as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME)
+                as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME),
+                OperationType::ACTION
             )
         );
     };

@@ -5,14 +5,17 @@
 #include "hw/ComponentHwTest.h"
 #include "hw/OnePinTest.h"
 #include "hw/MockDigitalLightHwTest.h"
+#include "hw/MockTempHumSensorHwTest.h"
 #include "modules/MockDigitalLightModuleTest.h"
 #include "edge/EdgeTest.h"
+#include "edge/ThingDescriptorTest.h"
 #include "utilTest.h"
 
 void test_hw() {
     test_ComponentHw(); //ComponentHwTest
     test_OnePin(); //OnePinTest
     test_MockDigitalLightHw(); //MockDigitalLightHwTest
+    test_MockTempHumSensorHwTest(); //MockTempHumSensorHwTest
 }
 
 void test_operation_handler() {
@@ -26,8 +29,8 @@ void test_modules() {
 }
 
 void test_edge() {
-    // (Thing descriptor tested inside)
     test_Edge(); //EdgeTest
+    test_ThingDescriptor(); //ThingDescriptorTest
 }
 
 int main() {

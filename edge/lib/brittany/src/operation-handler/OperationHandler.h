@@ -4,6 +4,7 @@
 #include <string>
 #include <json/json.h>
 #include "OperationHandlerResult.h"
+#include "thing-descriptor/OperationType.h"
 
 /**
  * @brief Class that represents an operation that uses some arguments for a computation and
@@ -19,8 +20,9 @@ public:
      * 
      * @param name The name of the OperationHandler
      * @param path The path of the OperationHandler.
+     * @param operationTye The operation type of the OperationHandler.
      */
-    OperationHandler(std::string name, std::string path);
+    OperationHandler(std::string name, std::string path, OperationType operationType);
 
 
     /**
@@ -38,6 +40,13 @@ public:
     std::string path();
 
     /**
+     * @brief Get the operation type of the handler.
+     * 
+     * @return OperationType The type of the Operation.
+     */
+    OperationType operationType();
+
+    /**
      * @brief execute the OperationHandler. This method wiill often act as a template method.
      * 
      * @param args Arguments of the OperationHandler used for computation.
@@ -49,6 +58,7 @@ private:
 
     std::string _name;
     std::string _path;
+    OperationType _operationType;
 
 };
 
