@@ -3,10 +3,10 @@
 
 #include <string>
 #include <list>
-#include "operation-handler/interfaces/ValueReturnedHandlerInterface.h"
+#include "DHT22Handler.h"
 #include "temp-hum-sensor/hw/DHT22SensorHw.h"
 
-class DHT22GetHumidityHandler : public ValueReturnedHandlerInterface<float> {
+class DHT22GetHumidityHandler : public DHT22Handler {
 
 public:
 
@@ -18,7 +18,7 @@ public:
 
 private:
 
-    std::optional<float> operation(Json::Value args);
+    std::optional<float> sub_operation(DHT22SensorHw* hw, Json::Value args);
 
     std::list<DHT22SensorHw*> _components;
 };
