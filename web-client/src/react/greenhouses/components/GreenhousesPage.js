@@ -1,25 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import greenhouseList from '../../../js/greenhouseList'
+import List from '../../_common/List'
 
 export default function GreenhousesPage() {
 
     const dispatch = useDispatch()
-    const [greenhouses, setGreenhouses] = useState([])
     let token = useSelector(state => state.identity.token)
+    let list = useSelector(state => state.greenhouses.list)
 
-    useEffect(() => {
-        greenhouseList(token, dispatch).then((res) => {
-            if(Array.isArray(res)){
-                setGreenhouses(res)
-            }
-        })
-    }, [token, dispatch])
+    useEffect(() => greenhouseList(token, dispatch), [token, dispatch])
 
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
-            <p>{greenhouses.length}</p>
+            <List elements={list} />
         </div>   
     )
   
