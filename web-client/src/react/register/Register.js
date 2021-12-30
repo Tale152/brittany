@@ -10,7 +10,7 @@ export default function Register() {
   if (token === null) {
       return <RegisterPage />
   } else {
-      return <RedirectTo destination={"home"} />
+      return <RedirectTo destination={"greenhouses"} />
   }
   
 }

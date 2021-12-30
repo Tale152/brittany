@@ -6,7 +6,7 @@ import {
   
 import FarmerLogin from '../../farmerLogin/Login'
 import Register from '../../register/Register'
-import Home from '../../home/Home'
+import Greenhouses from '../../greenhouses/Greenhouses'
   
 export default function Router() {
   return (
@@ -14,7 +14,7 @@ export default function Router() {
       <Switch>
         <Route path="/" element={<FarmerLogin/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path="/home" element={<Home/>} />
+        <Route path="/greenhouses" element={<Greenhouses/>} />
       </Switch>
     </BrowserRouter>
   )
