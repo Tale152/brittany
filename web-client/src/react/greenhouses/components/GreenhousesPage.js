@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { setSelected } from '../../../redux/greenhouses/actions'
 import greenhouseList from '../../../js/greenhouseList'
 import List from '../../_common/List'
 
@@ -14,7 +15,7 @@ export default function GreenhousesPage() {
 
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
-            <List elements={list} />
+            <List elements={list} onElementClick={(id) => {dispatch(setSelected(id))}}/>
         </div>   
     )
   
