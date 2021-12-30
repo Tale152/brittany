@@ -28,7 +28,6 @@ private:
         return std::nullopt; // id not found
     }
 
-
     virtual std::optional<float> sub_operation(DHT22SensorHw* hw, Json::Value args) = 0;
 
     std::list<DHT22SensorHw*> _components;

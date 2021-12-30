@@ -34,7 +34,7 @@ void test_mock_celsius() {
 
 void test_mock_fahrenheit() {
     TEST_ASSERT_EQUAL_FLOAT(
-        MOCK_TEMP_HUM_SENSOR_CELSIUS * (9/5) + 32,
+        MOCK_TEMP_HUM_SENSOR_CELSIUS * 1.8 + 32,
         tempHum.temperatureFahrenheit().value()
     );
     TEST_ASSERT_FALSE(brokenTempHum.temperatureFahrenheit().has_value());
