@@ -4,9 +4,11 @@
 #include "modules/ComponentModule.h"
 #include "temp-hum-sensor/hw/DHT22SensorHw.h"
 #include "temp-hum-sensor/operation-handler/DHT22GetTemperatureHandler.h"
+#include "temp-hum-sensor/operation-handler/DHT22GetHumidityHandler.h"
 #include "util.h"
 
 #define DHT22_GET_TEMPERATURE_HANDLER_NAME "temperature"
+#define DHT22_GET_HUMIDITY_HANDLER_NAME "humidity"
 
 class DHT22Module : public ComponentModule<DHT22SensorHw> {
 
@@ -17,6 +19,13 @@ public:
             new DHT22GetTemperatureHandler(
                 DHT22_GET_TEMPERATURE_HANDLER_NAME,
                 as_route(DHT22_GET_TEMPERATURE_HANDLER_NAME),
+                components
+            )
+        );
+         _handlers.push_back(
+            new DHT22GetHumidityHandler(
+                DHT22_GET_HUMIDITY_HANDLER_NAME,
+                as_route(DHT22_GET_HUMIDITY_HANDLER_NAME),
                 components
             )
         );

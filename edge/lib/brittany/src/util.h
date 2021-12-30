@@ -49,11 +49,11 @@ inline std::string as_route(std::string string) {
 template <class T>
 
 /**
- * @brief Return the T pointer with the chosen id if present.
+ * @brief Return the T with the chosen id if present.
  * 
  * @param list the list of T.
  * @param id the id of the T to find.
- * @return T a pointer to the T class with the selected id, NULL otherwise.
+ * @return std::optional<T> nullopt if the id is not found, the value otherwise.
  */
 inline std::optional<T> find_by_id(std::list<T> list, std::string id) {
     for(T c : list) {
