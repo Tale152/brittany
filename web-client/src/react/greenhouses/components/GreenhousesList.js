@@ -6,7 +6,7 @@ import { setSelectedGreenhouse } from '../../../redux/greenhouses/actions'
 import EnvironmentListModal from './EnvironmentListModal'
 import List from '../../_common/List'
 
-export default function GreenhousesList(props) {
+export default function GreenhousesList() {
 
     const dispatch = useDispatch()
     let token = useSelector(state => state.identity.token)
