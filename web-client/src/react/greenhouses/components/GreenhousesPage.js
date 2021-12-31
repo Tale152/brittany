@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import greenhouseList from '../../../js/greenhouse/greenhouseList'
+import OrganizationName from '../../_common/OrganizationName'
 import CreateGreenhouseButton from './CreateGreenhouseButton'
 import GreenhousesList from './GreenhousesList'
 
@@ -14,7 +15,8 @@ export default function GreenhousesPage() {
 
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
-            <h1 className="d-flex justify-content-center">Greenhouses</h1>
+            <OrganizationName />
+            <h2 className="d-flex justify-content-center">Greenhouses</h2>
             <CreateGreenhouseButton />
             <GreenhousesList />
         </div>   
