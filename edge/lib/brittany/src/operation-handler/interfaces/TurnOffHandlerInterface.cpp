@@ -2,7 +2,8 @@
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
 
-TurnOffHandlerInterface::TurnOffHandlerInterface(std::string name, std::string path) : ValueReturnedHandlerInterface<std::string>(name, path) {
+TurnOffHandlerInterface::TurnOffHandlerInterface(std::string name, std::string path, OperationType operationType) :
+    ValueReturnedHandlerInterface<std::string>(name, path, operationType) {
     //does nothing
 }
 

@@ -56,12 +56,12 @@ void post_mock_light_handler_test () {
 
 void check_result_is_ok(OperationHandlerResult result) {
     TEST_ASSERT_EQUAL(HttpStatus::OK, result.code());
-    TEST_ASSERT_EQUAL_STRING("Ok.", result.content().asString().c_str());
+    TEST_ASSERT_EQUAL_STRING("Ok.", result.content().asCString());
 }
 
 void check_result_is_fail(OperationHandlerResult result) {
     TEST_ASSERT_EQUAL(HttpStatus::NotFound, result.code());
-    TEST_ASSERT_EQUAL_STRING("Operation failed.", result.content().asString().c_str());
+    TEST_ASSERT_EQUAL_STRING("Operation failed.", result.content().asCString());
 }
 
 //TEST

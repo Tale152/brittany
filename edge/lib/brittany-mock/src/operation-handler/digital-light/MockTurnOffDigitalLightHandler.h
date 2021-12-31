@@ -18,19 +18,19 @@ public:
         std::string name,
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): TurnOffHandlerInterface(name, path) {
+    ): TurnOffHandlerInterface(name, path, OperationType::ACTION) {
         _components = components;
     };
 
 private:
 
     bool turnOff(std::string id) {
-        MockDigitalLightHw* component = find_by_id(_components, id);
-        if(component == NULL) {
-            return false;
-        } else {
-            component->off();
+        std::optional<MockDigitalLightHw*> oc = find_by_id(_components, id);
+        if(oc.has_value()) {
+            oc.value() -> off();
             return true;
+        } else {
+            return false;
         }
     };
     

@@ -15,7 +15,7 @@ class TurnOnHandlerInterface : public ValueReturnedHandlerInterface<std::string>
 
 public:
 
-    TurnOnHandlerInterface(std::string name, std::string path);
+    TurnOnHandlerInterface(std::string name, std::string path, OperationType operationType);
 
     /**
      * @brief template method that call the turnOn method.
