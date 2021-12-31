@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
-import { setToken } from '../redux/identity/actions'
-import { setIsLoading } from '../redux/util/actions'
+import { setToken } from '../../redux/identity/actions'
+import { setIsLoading } from '../../redux/util/actions'
 
 export default function farmerLogin(mail, password, dispatch){
     dispatch(setIsLoading(true))

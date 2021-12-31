@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import greenhouseList from '../../../js/greenhouseList'
+import greenhouseList from '../../../js/greenhouse/greenhouseList'
 import CreateGreenhouseButton from './CreateGreenhouseButton'
 import GreenhousesList from './GreenhousesList'
 import EnvironmentListModal from './EnvironmentListModal'

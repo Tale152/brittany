@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import environmentList from '../../../js/environmentList'
+import environmentList from '../../../js/environment/environmentList'
 import { setSelectedGreenhouse } from '../../../redux/greenhouses/actions'
 import List from '../../_common/List'
 

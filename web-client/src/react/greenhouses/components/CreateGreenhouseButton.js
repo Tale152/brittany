@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import greenhouseCreate from '../../../js/greenhouseCreate'
+import greenhouseCreate from '../../../js/greenhouse/greenhouseCreate'
 import CustomCenteredButton from '../../_common/CustomCenteredButton'
 import CustomModal from '../../_common/CustomModal'
 import FormText from '../../_common/form/input/FormText'

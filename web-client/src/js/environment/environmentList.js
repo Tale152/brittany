@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
-import { setIsLoading } from '../redux/util/actions'
-import { setEnvironmentList } from '../redux/environments/actions'
+import { setIsLoading } from '../../redux/util/actions'
+import { setEnvironmentList } from '../../redux/environments/actions'
 
 export default function environmentList(token, greenhouseId, dispatch){
     dispatch(setIsLoading(true))

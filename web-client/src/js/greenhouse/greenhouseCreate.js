@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-import { setIsLoading } from '../redux/util/actions'
+import { setIsLoading } from '../../redux/util/actions'
 import greenhouseList from './greenhouseList'
 
 export default function greenhouseCreate(token, name, dispatch){

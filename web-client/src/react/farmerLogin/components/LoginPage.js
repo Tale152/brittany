@@ -8,7 +8,7 @@ import FormPassword from '../../_common/form/input/FormPassword'
 import FormLogin from '../../_common/form/button/FormLogin'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 
-import farmerLogin from '../../../js/farmerLogin'
+import farmerLogin from '../../../js/farmer/farmerLogin'
 
 export default function LoginPage() {
 

@@ -8,7 +8,7 @@ import FormPassword from '../../_common/form/input/FormPassword'
 import FormLogin from '../../_common/form/button/FormLogin'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 
-import organizationRegister from '../../../js/organizationRegister'
+import organizationRegister from '../../../js/organization/organizationRegister'
 
 export default function RegisterPage() {
 
