@@ -5,6 +5,7 @@ import farmerList from '../../../js/farmer/farmerList'
 import OrganizationName from '../../_common/OrganizationName'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 import FarmersList from './FarmersList'
+import CreateFarmerButton from './CreateFarmerButton'
 
 export default function FarmersPage(){
 
@@ -25,6 +26,7 @@ export default function FarmersPage(){
             />
             <hr />
             <h2 className="d-flex justify-content-center">Farmers</h2>
+            <CreateFarmerButton />
             <FarmersList />
         </div>   
     )
