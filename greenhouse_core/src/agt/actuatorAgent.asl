@@ -7,8 +7,8 @@
 /* Plans */
 
 /*
- * SA: Sample that caused an out of range status.
- * SE: Settings that are violated by the sample current value.
+ * Sample: Sample that caused an out of range status.
+ * Setting: Setting that are violated by the sample current value.
  * Plan that is triggered when a Sample does not respect the current settings.
  */
 +actuate(Sample, Setting) <- actuate(Sample, Setting).
