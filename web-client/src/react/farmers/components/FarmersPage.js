@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
+import farmerList from '../../../js/farmer/farmerList'
 import OrganizationName from '../../_common/OrganizationName'
 import RedirectButton from '../../_common/navigation/RedirectButton'
+import FarmersList from './FarmersList'
 
 export default function FarmersPage(){
 
+    const dispatch = useDispatch()
+    let token = useSelector(state => state.identity.token)
     const [goToGreenhouses, setGoToGreenhouses] = useState(false)
+
+    useEffect(() => farmerList(token, dispatch), [token, dispatch])
 
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
@@ -18,6 +25,7 @@ export default function FarmersPage(){
             />
             <hr />
             <h2 className="d-flex justify-content-center">Farmers</h2>
+            <FarmersList />
         </div>   
     )
 }
