@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
+import farmerRegister from '../../../js/farmer/farmerRegister'
 import CustomCenteredButton from '../../_common/CustomCenteredButton'
 import CustomModal from '../../_common/CustomModal'
 import FormPassword from '../../_common/form/input/FormPassword'
@@ -35,7 +36,7 @@ export default function CreateFarmerButton() {
                             placeholder = { "Enter new Farmer's name" }
                             onChange = { input => setInputName(input) }
                             onEnter = { () => {
-                                //TODO
+                                farmerRegister(token, inputName, inputSurname, inputMail, inputBirthdate, inputPassword, inputPasswordConfirm, dispatch)
                                 setShowModal(false)
                             }}
                         />
@@ -44,7 +45,7 @@ export default function CreateFarmerButton() {
                             placeholder = { "Enter new Farmer's surname" }
                             onChange = { input => setInputSurname(input) }
                             onEnter = { () => {
-                                //TODO
+                                farmerRegister(token, inputName, inputSurname, inputMail, inputBirthdate, inputPassword, inputPasswordConfirm, dispatch)
                                 setShowModal(false)
                             }}
                         />
@@ -53,7 +54,7 @@ export default function CreateFarmerButton() {
                             placeholder = { "Enter new Farmer's mail" }
                             onChange = { input => setInputMail(input) }
                             onEnter = { () => {
-                                //TODO
+                                farmerRegister(token, inputName, inputSurname, inputMail, inputBirthdate, inputPassword, inputPasswordConfirm, dispatch)
                                 setShowModal(false)
                             }}
                         />
@@ -62,7 +63,7 @@ export default function CreateFarmerButton() {
                             placeholder = { "Enter new Farmer's birthdate" }
                             onChange = { input => setInputBirthdate(input) }
                             onEnter = { () => {
-                                //TODO
+                                farmerRegister(token, inputName, inputSurname, inputMail, inputBirthdate, inputPassword, inputPasswordConfirm, dispatch)
                                 setShowModal(false)
                             }}
                         />
@@ -71,7 +72,7 @@ export default function CreateFarmerButton() {
                             placeholder = { "Enter new Farmer's password" }
                             onChange = { input => setInputPassword(input) }
                             onEnter = { () => {
-                                //TODO
+                                farmerRegister(token, inputName, inputSurname, inputMail, inputBirthdate, inputPassword, inputPasswordConfirm, dispatch)
                                 setShowModal(false)
                             }}
                         />
@@ -80,13 +81,13 @@ export default function CreateFarmerButton() {
                             placeholder = { "Enter again new Farmer's password" }
                             onChange = { input => setInputPasswordConfirm(input) }
                             onEnter = { () => {
-                                //TODO
+                                farmerRegister(token, inputName, inputSurname, inputMail, inputBirthdate, inputPassword, inputPasswordConfirm, dispatch)
                                 setShowModal(false)
                             }}
                         />
                         <CustomCenteredButton
                             onClick = { () => {
-                                //TODO
+                                farmerRegister(token, inputName, inputSurname, inputMail, inputBirthdate, inputPassword, inputPasswordConfirm, dispatch)
                                 setShowModal(false)
                             }}
                             text = { "Create" }
