@@ -1,19 +1,19 @@
 import $ from 'jquery'
 
 import { setIsLoading } from '../redux/util/actions'
-import { setGreenhouseList } from '../redux/greenhouses/actions'
+import { setEnvironmentList } from '../redux/environments/actions'
 
-export default function greenhouseList(token, dispatch){
+export default function environmentList(token, greenhouseId, dispatch){
     dispatch(setIsLoading(true))
     $.ajax({
-        url: "http://localhost:81/greenhouse/list",
+        url: "http://localhost:81/environment/list?id=" + greenhouseId,
         type: 'GET',
         headers: {"token": token}
     }).done(function (result) {
-        dispatch(setGreenhouseList(result.greenhouses))
+        dispatch(setEnvironmentList(result.environments))
     }).fail(function (result) {
         console.log(result)
-        dispatch(setGreenhouseList([]))
+        dispatch(setEnvironmentList([]))
     }).always(function() {
         dispatch(setIsLoading(false))
     })

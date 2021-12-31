@@ -1,13 +1,13 @@
-export const setList = (list) => {
+export const setGreenhouseList = (list) => {
     return {
-        type: "SET_LIST",
+        type: "SET_GREENHOUSE_LIST",
         payload: list
     }
 }
 
-export const setSelected = (selected) => {
+export const setSelectedGreenhouse = (selected) => {
     return {
-        type: "SET_SELECTED",
+        type: "SET_SELECTED_GREENHOUSE",
         payload: selected
     }
 }

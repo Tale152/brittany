@@ -5,10 +5,10 @@ var initialState = {
 
 const greenhousesReducer = (state = initialState, action) => {
     switch(action.type){
-        case 'SET_LIST': return Object.assign({}, state, {
+        case 'SET_GREENHOUSE_LIST': return Object.assign({}, state, {
             list: action.payload
         })
-        case 'SET_SELECTED': return Object.assign({}, state, {
+        case 'SET_SELECTED_GREENHOUSE': return Object.assign({}, state, {
             selected: action.payload
         })
         default: return state;

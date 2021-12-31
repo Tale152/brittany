@@ -16,7 +16,7 @@ export default function List(props){
     } else {
         return (
             <Row className="d-flex justify-content-center">
-                <ListGroup className="my-5 container col-lg-3 col-9">
+                <ListGroup className="my-5 container col-lg-8 col-14">
                     {createList(props.elements, props.onElementClick)}
                 </ListGroup>
             </Row>
