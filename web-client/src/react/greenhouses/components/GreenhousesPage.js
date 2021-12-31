@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import greenhouseList from '../../../js/greenhouseList'
+import CreateGreenhouseButton from './CreateGreenhouseButton'
 import GreenhousesList from './GreenhousesList'
 import EnvironmentListModal from './EnvironmentListModal'
 
@@ -16,6 +17,7 @@ export default function GreenhousesPage() {
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
             <h1 className="d-flex justify-content-center">Greenhouses</h1>
+            <CreateGreenhouseButton />
             <GreenhousesList showEnvironmentModal = { () => setShowEnvironmentModal(true) } />
             <EnvironmentListModal show = { showEnvironmentModal } onHide = { () => setShowEnvironmentModal(false) } />
         </div>   
