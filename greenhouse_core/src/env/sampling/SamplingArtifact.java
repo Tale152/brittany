@@ -95,16 +95,15 @@ public class SamplingArtifact extends Artifact {
 				}
 			}
 			if (this.settings.isPresent()) {
-				System.out.println("Settings in sampling: " +this.settings);
-				if (this.settings.get().getSetting(avarageSample.getCategory()).isPresent()) {
-					// TODO this has to be done only when we use a RangeSetting
-					if (avarageSample.getValue() < ((RangeSetting) getSettingByCategory(avarageSample.getCategory()))
-							.getMin()
-							|| avarageSample
-									.getValue() > ((RangeSetting) getSettingByCategory(avarageSample.getCategory()))
-											.getMax()) {
+				String category = avarageSample.getCategory();
+				System.out.println("Settings in sampling: " + this.settings);
+				if (getSettingByCategory(category).isPresent()
+						&& getSettingByCategory(category).get() instanceof RangeSetting) {
+					RangeSetting rangeSetting = (RangeSetting) getSettingByCategory(category).get();
+					if (avarageSample.getValue() < rangeSetting.getMin()
+							|| avarageSample.getValue() > rangeSetting.getMax()) {
 						System.out.println("Create out of range behavior");
-						defineObsProperty("actuate", avarageSample, getSettingByCategory(avarageSample.getCategory()));
+						defineObsProperty("actuate", avarageSample, rangeSetting);
 					}
 				}
 			}
@@ -127,8 +126,8 @@ public class SamplingArtifact extends Artifact {
 		return this.devices.stream().filter(d -> d.getCategory().equals(category)).collect(Collectors.toList());
 	}
 
-	private Setting getSettingByCategory(final String category) {
-		return this.settings.get().getSetting(category).get();
+	private Optional<Setting> getSettingByCategory(final String category) {
+		return this.settings.get().getSetting(category);
 	}
 
 }

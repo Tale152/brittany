@@ -71,14 +71,7 @@ public class ServiceArtifact extends Artifact {
 
 	@INTERNAL_OPERATION
 	void autheticate() {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE_URL).newBuilder();
-		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
-		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
-		urlBuilder.addQueryParameter("environmentName", this.loginData.get(2));
-		urlBuilder.addQueryParameter("environmentPassword", this.loginData.get(3));
-		String url = urlBuilder.build().toString();
-
-		Request request = new Request.Builder().url(url).build();
+		Request request = new Request.Builder().url(getAuthenticationUrl()).build();
 
 		try (Response response = client.newCall(request).execute()) {
 			if (!response.isSuccessful()) {
@@ -97,6 +90,16 @@ public class ServiceArtifact extends Artifact {
 		}
 	}
 
+	private String getAuthenticationUrl(){
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE_URL).newBuilder();
+		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
+		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
+		urlBuilder.addQueryParameter("environmentName", this.loginData.get(2));
+		urlBuilder.addQueryParameter("environmentPassword", this.loginData.get(3));
+
+		return urlBuilder.build().toString();
+	}
+
 	@OPERATION
 	void getSettings(final String token) {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
@@ -106,7 +109,7 @@ public class ServiceArtifact extends Artifact {
 
 		try (Response response = client.newCall(request).execute()) {
 			if (!response.isSuccessful()) {
-				// settings is empty, handle that
+				// settings are empty
 				defineObsProperty("settings", Optional.empty());
 			} else {
 				JsonObject settingsObject = JsonParser.parseString(response.body().string()).getAsJsonObject();

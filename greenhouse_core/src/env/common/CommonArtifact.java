@@ -24,7 +24,7 @@ public class CommonArtifact extends Artifact {
 	private Optional<Settings> settings;
 
 	void init() {
-		// for test purpose right now device are hard-coded
+		// for test purpose right now devices are hard-coded
 		this.devices = new ArrayList<>(Arrays.asList(new Device("id1", "temperature"), new Device("id2", "light"),
 				new Device("id3", "temperature")));
 		this.settings = Optional.empty();
