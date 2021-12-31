@@ -4,3 +4,10 @@ export const setToken = (token) => {
         payload: token
     }
 }
+
+export const setOrganizationName = (name) => {
+    return {
+        type: "SET_ORGANIZATION_NAME",
+        payload: name
+    }
+}
