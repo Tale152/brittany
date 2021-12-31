@@ -18,13 +18,10 @@ import com.google.gson.JsonParser;
 
 import cartago.*;
 import okhttp3.HttpUrl;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import utility.Pair;
-import utility.Sample;
 import utility.setting.Settings;
 
 /**
@@ -41,7 +38,7 @@ public class ServiceArtifact extends Artifact {
 	private final static String LOGIN_FILE = "login.txt";
 	private final static String AUTH_SERVICE_URL = "http://localhost:81/agent/login";
 	private final static String SETTINGS_SERVICE_URL = "http://localhost:82/settings/latest";
-	private final static String PERSISTENCE_SERVICE_URL = "http://localhost:80/";
+	
 
 	private OkHttpClient client;
 	private List<String> loginData;
@@ -158,34 +155,4 @@ public class ServiceArtifact extends Artifact {
 		}
 	}
 
-	@OPERATION
-	void uploadPersistence(final Sample sample, final String token) {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(PERSISTENCE_SERVICE_URL + sample.getCategory() + "/register")
-				.newBuilder();
-		String url = urlBuilder.build().toString();
-
-		JsonObject jsonSample = new JsonObject();
-		jsonSample.addProperty("value", sample.getValue());
-		jsonSample.addProperty("timestamp", sample.getSamplingTime());
-
-		RequestBody body = RequestBody.create(jsonSample.toString(),
-				MediaType.parse("application/json; charset=utf-8"));
-
-		Request request = new Request.Builder()
-				.addHeader("token", token)
-				.url(url)
-				.post(body)
-				.build();
-
-		try (Response response = client.newCall(request).execute()) {
-			if (!response.isSuccessful()) {
-				throw new IOException("Unexpected code " + response);
-			} else {
-				System.out.println(sample + "correcty uploaded");
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

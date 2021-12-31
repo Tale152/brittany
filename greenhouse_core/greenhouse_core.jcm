@@ -16,12 +16,13 @@ mas greenhouse_core {
 	
 	agent setupAgent : setupAgent.asl {
 		focus: brittany.common
-		focus: brittany.service
+		focus: services.service
 		focus: brittany.sampling
 	}
 
 	agent persistenceAgent : persistenceAgent.asl {
-		focus: brittany.service
+		focus: services.service
+		focus: services.persistence
 		focus: brittany.sampling
 	}
 
@@ -46,7 +47,11 @@ mas greenhouse_core {
         artifact common: common.CommonArtifact()
         artifact sampling: sampling.SamplingArtifact()
         artifact communication: communication.CommunicationArtifact()
-        artifact actuation: actuation.ActuationArtifact()
-        artifact service: communication.ServiceArtifact()
+        artifact actuation: actuation.ActuationArtifact()      
     }
+
+	workspace services {
+		artifact persistence: communication.PersistenceArtifact()
+		artifact service: communication.ServiceArtifact()
+	}
 }

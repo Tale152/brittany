@@ -12,7 +12,7 @@
 
 +token(Token) <- getSettings(Token, Settings); initAfterAuthentication(Settings); !wait.
 
-+!wait <- .at("now + 5 seconds", {+!settings}).
++!wait <- .at("now + 100 seconds", {+!settings}).
 
 +!settings <- ?token(Token); getSettings(Token, Settings); !wait.
 

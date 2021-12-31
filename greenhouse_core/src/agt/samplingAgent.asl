@@ -8,7 +8,7 @@
 
 +setup(Devices, Settings) <- setup(Devices, Settings); !wait.
 
-+!wait <- .at("now + 10 seconds", {+!sample}).
++!wait <- .at("now + 2 seconds", {+!sample}).
 
 +!sample <- ?role(Role); sampleOperation(Role); !wait.
 

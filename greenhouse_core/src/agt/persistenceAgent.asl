@@ -6,8 +6,6 @@
 
 /* Plans */
 
-+token(Token).
-
 +uploadPersistence(Sample) <- ?token(Token); uploadPersistence(Sample, Token).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
