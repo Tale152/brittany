@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedGreenhouse } from '../../../redux/greenhouses/actions'
 import { setSelectedEnvironment, setEnvironmentList } from '../../../redux/environments/actions'
 import CustomModal from '../../_common/CustomModal'
+import CreateEnvironmentButton from './CreateEnvironmentButton'
 import List from '../../_common/List'
 
 export default function EnvironmentListModal(props) {
@@ -20,12 +21,15 @@ export default function EnvironmentListModal(props) {
             }}
             title={"Environments"}
             body={
-                <List
-                    elements={environments}
-                    onElementClick={(id) => {
-                        dispatch(setSelectedEnvironment(id))
-                    }}
-                />
+                <>
+                    <CreateEnvironmentButton />
+                    <List
+                        elements={environments}
+                        onElementClick={(id) => {
+                            dispatch(setSelectedEnvironment(id))
+                        }}
+                    />
+                </>
             }
         />
     )
