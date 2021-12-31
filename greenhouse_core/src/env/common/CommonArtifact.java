@@ -13,28 +13,35 @@ import utility.setting.Settings;
 
 /**
  * CommonArtifact is the core Artifact of this JaCaMo application.
- * Its main role is to wait for the retrieval of the authentication token, and then it starts the
+ * Its main role is to wait for the retrieval of the authentication token, and
+ * then it starts the
  * sampling activity, initializing all the data that the other agents will need.
  *
  */
 public class CommonArtifact extends Artifact {
 
 	private List<Device> devices;
+	private Optional<Settings> settings;
 
-	void init() {}
-
-	/**
-	 * Operation used when the token for the authentication has been retrieved, to actually create the instances of all 
-	 * data used from the other agents.
-	 * @param token the authentication token retrieved from the server, used for authentication purposes during the
-	 * communication with other servers.
-	 */
-	@OPERATION void initAfterAuthentication(final Optional<Settings> settings) {
-		
-		//for test purpose right now devices and thresholds are hard-coded
-		devices = new ArrayList<>(Arrays.asList(new Device("id1", "temperature"), new Device("id2", "light"),
+	void init() {
+		// for test purpose right now device are hard-coded
+		this.devices = new ArrayList<>(Arrays.asList(new Device("id1", "temperature"), new Device("id2", "light"),
 				new Device("id3", "temperature")));
+		this.settings = Optional.empty();
 
-		defineObsProperty("setup", devices, settings);
+		defineObsProperty("setup", devices, this.settings);
+	}
+
+	@OPERATION
+	void shareDevices(final List<Device> devices) {
+		updateObsProperty("setup", this.devices, this.settings);
+	}
+
+	@OPERATION
+	void shareSettings(final Optional<Settings> settings) {
+		if (!this.settings.equals(settings)) {
+			this.settings = settings;
+			updateObsProperty("setup", this.devices, this.settings);
+		}
 	}
 }

@@ -38,7 +38,6 @@ public class ServiceArtifact extends Artifact {
 	private final static String LOGIN_FILE = "login.txt";
 	private final static String AUTH_SERVICE_URL = "http://localhost:81/agent/login";
 	private final static String SETTINGS_SERVICE_URL = "http://localhost:82/settings/latest";
-	
 
 	private OkHttpClient client;
 	private List<String> loginData;
@@ -54,7 +53,6 @@ public class ServiceArtifact extends Artifact {
 	 */
 	@OPERATION
 	void retrieveAuthenticationData() {
-
 		InputStream fileInputStream = getClass().getClassLoader()
 				.getResourceAsStream(LOGIN_FILE);
 
@@ -69,7 +67,6 @@ public class ServiceArtifact extends Artifact {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@INTERNAL_OPERATION
@@ -92,7 +89,6 @@ public class ServiceArtifact extends Artifact {
 
 			if (tokenObject.has("token")) {
 				defineObsProperty("token", tokenObject.get("token").getAsString());
-				System.out.println("TOKEN:" + tokenObject.get("token"));
 			} else {
 				throw new IllegalStateException("You did not received the token.");
 			}
@@ -102,7 +98,7 @@ public class ServiceArtifact extends Artifact {
 	}
 
 	@OPERATION
-	void getSettings(final String token, OpFeedbackParam<Optional<Settings>> retrievedSettings) {
+	void getSettings(final String token) {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
 		String url = urlBuilder.build().toString();
 
@@ -111,12 +107,11 @@ public class ServiceArtifact extends Artifact {
 		try (Response response = client.newCall(request).execute()) {
 			if (!response.isSuccessful()) {
 				// settings is empty, handle that
-				retrievedSettings.set(Optional.empty());
+				defineObsProperty("settings", Optional.empty());
 			} else {
 				JsonObject settingsObject = JsonParser.parseString(response.body().string()).getAsJsonObject();
 
 				if (settingsObject.has("_id") && settingsObject.has("created")) {
-
 					SimpleDateFormat dataFormatter = new SimpleDateFormat(UTC_FORMAT);
 					dataFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 					Date creationDate = dataFormatter.parse(settingsObject.get("created").getAsString());
@@ -144,12 +139,10 @@ public class ServiceArtifact extends Artifact {
 					}
 
 					System.out.println("SETTINGS: " + settings);
-					retrievedSettings.set(Optional.of(settings));
-
+					defineObsProperty("settings", Optional.of(settings));
 				}
 
 			}
-
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}

@@ -10,11 +10,14 @@
 
 +!authentication <- retrieveAuthenticationData.
 
-+token(Token) <- getSettings(Token, Settings); initAfterAuthentication(Settings); !wait.
++token(Token) <- getSettings(Token); !wait.
 
-+!wait <- .at("now + 100 seconds", {+!settings}).
++settings(Settings) <- shareSettings(Settings).
 
-+!settings <- ?token(Token); getSettings(Token, Settings); !wait.
++!wait <- .at("now + 2 seconds", {+!updateSettings}).
+
++!updateSettings <- ?token(Token); getSettings(Token); !wait.
+
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
