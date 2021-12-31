@@ -1,4 +1,4 @@
-// Agent messangerAgent in project greenhouse_core
+// Agent communicationAgent in project greenhouse_core
 
 /* Initial beliefs and rules */
 
