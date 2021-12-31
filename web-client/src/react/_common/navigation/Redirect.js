@@ -1,5 +1,5 @@
 import { Navigate, Link } from 'react-router-dom'
 
-export default function RedirectTo(destination){
-    return <Link to={"/"+destination}><Navigate to={"/"+destination} /></Link>
+export default function RedirectTo(props){
+    return <Link to={"/"+props.destination}><Navigate to={"/"+props.destination} /></Link>
 }

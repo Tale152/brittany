@@ -4,15 +4,19 @@ import {
     Route,
 } from 'react-router-dom'
   
-import Authentication from '../../authentication/Authentication'
-import HomePage from "../../homepage/Homepage"
+import FarmerLogin from '../../farmerLogin/Login'
+import Register from '../../register/Register'
+import Greenhouses from '../../greenhouses/Greenhouses'
+import Farmers from '../../farmers/Farmers'
   
 export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" element={<Authentication/>} />
-        <Route path="/home" element={<HomePage/>} />
+        <Route path="/" element={<FarmerLogin/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/greenhouses" element={<Greenhouses/>} />
+        <Route path="/farmers" element={<Farmers/>} />
       </Switch>
     </BrowserRouter>
   )
