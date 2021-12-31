@@ -137,11 +137,8 @@ public class ServiceArtifact extends Artifact {
 									new Pair<>(light.get("min").getAsInt(), light.get("max").getAsInt()));
 						}
 					}
-
-					System.out.println("SETTINGS: " + settings);
 					defineObsProperty("settings", Optional.of(settings));
 				}
-
 			}
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();

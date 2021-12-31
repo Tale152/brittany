@@ -53,7 +53,6 @@ public class SamplingArtifact extends Artifact {
 	void setup(final List<Device> devices, final Optional<Settings> settings) {
 		this.settings = settings;
 		this.devices = devices;
-		System.out.println("Init " + this.devices + " " + this.settings);
 	}
 
 	/**
@@ -85,7 +84,6 @@ public class SamplingArtifact extends Artifact {
 	@OPERATION
 	void updateOperation(final List<Sample> currentSamples) {
 		if (!currentSamples.isEmpty()) {
-			System.out.println("Current samples before avarage " + currentSamples);
 			Sample avarageSample = getAvarageOfSamples(currentSamples);
 			Optional<Sample> lastSample = getSampleByCategory(lastSamples, avarageSample.getCategory());
 			System.out.println("Avarage current Sample: " + avarageSample + "\nLast avarage sample: " + lastSample);
