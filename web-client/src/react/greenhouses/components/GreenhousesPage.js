@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setSelectedGreenhouse } from '../../../redux/greenhouses/actions'
-import { setSelectedEnvironment, setEnvironmentList } from '../../../redux/environments/actions'
 import greenhouseList from '../../../js/greenhouseList'
 import environmentList from '../../../js/environmentList'
 import List from '../../_common/List'
-import CustomModal from '../../_common/CustomModal'
+import EnvironmentListModal from './EnvironmentListModal'
 
 export default function GreenhousesPage() {
 
@@ -14,7 +13,6 @@ export default function GreenhousesPage() {
     const [showEnvironmentModal, setShowEnvironmentModal] = useState(false)
     let token = useSelector(state => state.identity.token)
     let greenhouses = useSelector(state => state.greenhouses.list)
-    let environments = useSelector(state => state.environments.list)
 
     useEffect(() => greenhouseList(token, dispatch), [token, dispatch])
 
@@ -29,23 +27,7 @@ export default function GreenhousesPage() {
                     setShowEnvironmentModal(true)
                 }}
             />
-            <CustomModal
-                show={showEnvironmentModal}
-                onHide={() => {
-                    dispatch(setSelectedGreenhouse(null))
-                    dispatch(setEnvironmentList([]))
-                    setShowEnvironmentModal(false)
-                }}
-                title={"Environments"}
-                body={
-                    <List
-                        elements={environments}
-                        onElementClick={(id) => {
-                            dispatch(setSelectedEnvironment(id))
-                        }}
-                    />
-                }
-            />
+            <EnvironmentListModal show = { showEnvironmentModal } onHide = { () => setShowEnvironmentModal(false) } />
         </div>   
     )
   
