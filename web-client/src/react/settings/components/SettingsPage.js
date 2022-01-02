@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import settingsList from '../../../js/settings/settingsList'
+import Navbar from '../../_common/Navbar'
 import CurrentSetting from './CurrentSetting'
 import SettingsList from './SettingsList'
 
@@ -15,6 +16,10 @@ export default function SettingsPage() {
 
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
+            <Navbar
+                redirectText = { "Go to Data" }
+                redirectDestination = { "data" }
+            />
             <CurrentSetting />
             <SettingsList />
         </div>   
