@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { setSelectedSetting } from '../../../redux/settings/actions'
 import List from '../../_common/List'
+import SettingsDetails from './SettingsDetails'
 
 export default function CurrentSetting() {
 
@@ -26,6 +27,11 @@ export default function CurrentSetting() {
                     dispatch(setSelectedSetting(id))
                     setShowModal(true)
                 }}
+            />
+            <SettingsDetails
+                show = { showModal }
+                onHide = { () => {setShowModal(false)} }
+                isCurrent = { true }
             />
         </>
     )

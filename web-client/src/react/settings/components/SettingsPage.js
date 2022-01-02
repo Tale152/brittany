@@ -22,6 +22,7 @@ export default function SettingsPage() {
                 redirectDestination = { "data" }
                 additionalContent = {<RedirectButton text = { "Back to Greenhouses" } destination = { "greenhouses" } />}
             />
+            <h2 className="d-flex justify-content-center">Settings</h2>
             <CurrentSetting />
             <SettingsList />
         </div>   
