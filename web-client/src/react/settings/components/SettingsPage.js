@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import settingsList from '../../../js/settings/settingsList'
 import Navbar from '../../_common/Navbar'
 import RedirectButton from '../../_common/navigation/RedirectButton'
+import CreateSettings from './CreateSettings'
 import CurrentSetting from './CurrentSetting'
 import SettingsList from './SettingsList'
 
@@ -23,6 +24,7 @@ export default function SettingsPage() {
                 additionalContent = {<RedirectButton text = { "Back to Greenhouses" } destination = { "greenhouses" } />}
             />
             <h2 className="d-flex justify-content-center">Settings</h2>
+            <CreateSettings />
             <CurrentSetting />
             <SettingsList />
         </div>   

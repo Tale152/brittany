@@ -33,9 +33,9 @@ function createSettingsInfo(settings, isCurrent, dispatch, setSelectedSetting, o
                 <p>Expires: {selected.expires.replace(/[A-Za-z]+/g, ' ')}</p>
                 {isCurrent ? <p>Is active: {selected.active.toString()}</p> : <></>}
                 <hr/>
-                {selected.data.temperature === undefined ? <></> : <p>Temperature: Min({selected.data.temperature.min}) - Max({selected.data.temperature.max})</p>}
-                {selected.data.airHumidity === undefined ? <></> : <p>Air humidity: Min({selected.data.airHumidity.min}) - Max({selected.data.airHumidity.max})</p>}
-                {selected.data.light === undefined ? <></> : <p>Light: From({formatTime(selected.data.light.fromH, selected.data.light.fromM)}) - To({formatTime(selected.data.light.toH, selected.data.light.toM)})</p>}
+                {(selected.data === undefined || selected.data.temperature === undefined) ? <></> : <p>Temperature: Min({selected.data.temperature.min}) - Max({selected.data.temperature.max})</p>}
+                {(selected.data === undefined || selected.data.airHumidity === undefined) ? <></> : <p>Air humidity: Min({selected.data.airHumidity.min}) - Max({selected.data.airHumidity.max})</p>}
+                {(selected.data === undefined || selected.data.light === undefined) ? <></> : <p>Light: From({formatTime(selected.data.light.fromH, selected.data.light.fromM)}) - To({formatTime(selected.data.light.toH, selected.data.light.toM)})</p>}
                 <SwitchCurrentActiveStateButton 
                     show = { isCurrent }
                     active = { selected.active }
