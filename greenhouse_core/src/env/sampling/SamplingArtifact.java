@@ -68,8 +68,11 @@ public class SamplingArtifact extends Artifact {
 	 */
 	@OPERATION
 	void sampleOperation(final String category) {
-		// the role can be use to filter the devices to communicate with
-		defineObsProperty("communicate", getDevicesByCategory(category));
+		List<Device> filteredDevices = getDevicesByCategory(category);
+		if (!devices.isEmpty()) {
+			// the role can be use to filter the devices to communicate with
+			defineObsProperty("communicate", filteredDevices);
+		}
 	}
 
 	/**
