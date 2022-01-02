@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import settingsList from '../../../js/settings/settingsList'
 import Navbar from '../../_common/Navbar'
+import RedirectButton from '../../_common/navigation/RedirectButton'
 import CurrentSetting from './CurrentSetting'
 import SettingsList from './SettingsList'
 
@@ -19,6 +20,7 @@ export default function SettingsPage() {
             <Navbar
                 redirectText = { "Go to Data" }
                 redirectDestination = { "data" }
+                additionalContent = {<RedirectButton text = { "Back to Greenhouses" } destination = { "greenhouses" } />}
             />
             <CurrentSetting />
             <SettingsList />

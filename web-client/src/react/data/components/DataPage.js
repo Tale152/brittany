@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import Navbar from '../../_common/Navbar'
+import RedirectButton from '../../_common/navigation/RedirectButton'
 
 export default function DataPage() {
 
@@ -13,6 +14,7 @@ export default function DataPage() {
             <Navbar
                 redirectText = { "Go to Settings" }
                 redirectDestination = { "settings" }
+                additionalContent = {<RedirectButton text = { "Back to Greenhouses" } destination = { "greenhouses" } />}
             />
             
         </div>   
