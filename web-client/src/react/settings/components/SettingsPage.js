@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import settingsList from '../../../js/settings/settingsList'
+import CurrentSetting from './CurrentSetting'
+import SettingsList from './SettingsList'
 
 export default function SettingsPage() {
 
@@ -13,7 +15,8 @@ export default function SettingsPage() {
 
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
-            TODO settings
+            <CurrentSetting />
+            <SettingsList />
         </div>   
     )
   
