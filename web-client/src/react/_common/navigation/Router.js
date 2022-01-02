@@ -8,7 +8,7 @@ import FarmerLogin from '../../farmerLogin/Login'
 import Register from '../../register/Register'
 import Greenhouses from '../../greenhouses/Greenhouses'
 import Farmers from '../../farmers/Farmers'
-import SettingsPage from '../../settings/components/SettingsPage'
+import Settings from '../../settings/Settings'
   
 export default function Router() {
   return (
@@ -18,7 +18,7 @@ export default function Router() {
         <Route path="/register" element={<Register/>} />
         <Route path="/greenhouses" element={<Greenhouses/>} />
         <Route path="/farmers" element={<Farmers/>} />
-        <Route path="/settings" element={<SettingsPage/>} />
+        <Route path="/settings" element={<Settings/>} />
       </Switch>
     </BrowserRouter>
   )
