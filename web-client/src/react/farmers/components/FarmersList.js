@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 
 import { setSelectedFarmer } from '../../../redux/farmers/actions'
-import FarmersListModal from './FarmersListModal'
+import FarmersInfoModal from './FarmersInfoModal'
 import List from '../../_common/List'
 
 export default function FarmersList() {
@@ -15,12 +15,14 @@ export default function FarmersList() {
         <>
             <List
                 elements={farmers}
+                keyGenerator = { (f) => { return f.name + " " + f.surname + " " + f.birthdate } }
+                textGenerator = { (f) =>  { return f.name + " " + f.surname } }
                 onElementClick={(id) => {
                     dispatch(setSelectedFarmer(id))
                     setShowModal(true)
                 }}
             />
-            <FarmersListModal show = { showModal } onHide = { () => setShowModal(false) } />
+            <FarmersInfoModal show = { showModal } onHide = { () => setShowModal(false) } />
         </>
     )
 }

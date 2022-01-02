@@ -31,6 +31,8 @@ export default function EnvironmentListModal(props) {
                         <CreateEnvironmentButton />
                         <List
                             elements={environments}
+                            keyGenerator = { (e) => { return e.name } }
+                            textGenerator = { (e) =>  { return e.name } }
                             onElementClick={(id) => {
                                 dispatch(setSelectedEnvironment(id))
                                 setGoToSettings(true)

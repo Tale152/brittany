@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { setSelectedFarmer } from '../../../redux/farmers/actions'
 import CustomModal from '../../_common/CustomModal'
 
-export default function FarmersListModal(props) {
+export default function FarmersInfoModal(props) {
 
     const dispatch = useDispatch()
     let farmers = useSelector(state => state.farmers)

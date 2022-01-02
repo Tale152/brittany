@@ -16,8 +16,10 @@ export default function GreenhousesList() {
     return (
         <>
             <List
-                elements={greenhouses}
-                onElementClick={(id) => {
+                elements = { greenhouses }
+                keyGenerator = { (g) => { return g.name } }
+                textGenerator = { (g) =>  { return g.name } }
+                onElementClick = {(id) => {
                     dispatch(setSelectedGreenhouse(id))
                     environmentList(token, id, dispatch)
                     setShowEnvironmentModal(true)
