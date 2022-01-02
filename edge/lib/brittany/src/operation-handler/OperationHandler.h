@@ -4,7 +4,7 @@
 #include <string>
 #include <json/json.h>
 #include "OperationHandlerResult.h"
-#include "thing-descriptor/OperationType.h"
+#include "types/OperationType.h"
 
 /**
  * @brief Class that represents an operation that uses some arguments for a computation and
@@ -59,7 +59,6 @@ private:
     std::string _name;
     std::string _path;
     OperationType _operationType;
-
 };
 
 #endif //BRITTANY_OPERATION_HANDLER_H

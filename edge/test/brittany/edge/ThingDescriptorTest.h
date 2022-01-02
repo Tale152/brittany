@@ -83,7 +83,7 @@ void check_actions_and_properties(Json::Value object, std::string names[], int s
             );
             TEST_ASSERT_EQUAL_STRING("application/json", forms[0]["contentType"].asCString());
         }
-        
+        //TODO TEST WITH A SINGLE COMPONENT, AS THE ACTION AND PROPERTY NAME CHANGES
     }
 }
 

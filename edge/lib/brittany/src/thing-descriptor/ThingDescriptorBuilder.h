@@ -67,7 +67,7 @@ private:
         for(Module* m : modules) {
             for(OperationHandler* h : m -> handlers()) {
                 ComponentModule<ComponentHw>* cm = static_cast<ComponentModule<ComponentHw>*>(m);
-                for(ComponentHw c : cm->components()) {
+                for(ComponentHw c : cm -> components()) {
                     Json::Value action;
                     action["module"] = m -> name();
                     action["forms"][0]["href"] =
@@ -86,7 +86,11 @@ private:
                         objectName = "events";
                         break;
                     }
-                    td[objectName][h -> name() + "-" + c.id()] = action;
+                    std::string name = h -> name();
+                    if(cm->components().size() != 1) {
+                        name += "-" + c.id();
+                    }
+                    td[objectName][name] = action;
                 } 
             }
         }

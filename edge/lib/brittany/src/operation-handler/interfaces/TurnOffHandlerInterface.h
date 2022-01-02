@@ -6,8 +6,6 @@
 #include <optional>
 #include <json/json.h>
 #include "operation-handler/interfaces/ValueReturnedHandlerInterface.h"
-#include "thing-descriptor/OperationType.h"
-
 /**
  * @brief Operation Handler Interface whose objective is to turn off a component.
  * 

@@ -6,7 +6,7 @@
 #include "../operation-handler/MockOperationHandler.h"
 #include "modules/Module.h"
 #include "util.h"
-#include "thing-descriptor/OperationType.h"
+#include "operation-handler/types/OperationType.h"
 
 #define OPERATION_HANDLER_IN_MOCK_MODULE_NAME "value"
 
