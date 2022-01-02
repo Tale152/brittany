@@ -1,6 +1,5 @@
 #include "DHT22GetHumidityHandler.h"
 #include "util.h"
-#include "thing-descriptor/OperationType.h"
 
 DHT22GetHumidityHandler::DHT22GetHumidityHandler(
     std::string name,

@@ -21,8 +21,7 @@ public:
         _handlers.push_back(
             new MockOperationHandler(
                 OPERATION_HANDLER_IN_MOCK_MODULE_NAME,
-                as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME),
-                OperationType::ACTION
+                as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME)
             )
         );
     };

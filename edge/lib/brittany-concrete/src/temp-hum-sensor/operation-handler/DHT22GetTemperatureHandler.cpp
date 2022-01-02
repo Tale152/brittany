@@ -1,6 +1,5 @@
 #include "DHT22GetTemperatureHandler.h"
 #include "util.h"
-#include "thing-descriptor/OperationType.h"
 
 DHT22GetTemperatureHandler::DHT22GetTemperatureHandler(
     std::string name,

@@ -19,7 +19,12 @@ public:
         std::string name,
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): ValueReturnedHandlerInterface<bool>(name, path, OperationType::PROPERTY) {
+    ): ValueReturnedHandlerInterface<bool>(
+        name,
+        path,
+        OperationType::PROPERTY,
+        Type::BOOLEAN
+    ) {
         _components = components;
     };
 

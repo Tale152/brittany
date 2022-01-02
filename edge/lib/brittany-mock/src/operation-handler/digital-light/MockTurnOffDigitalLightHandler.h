@@ -18,7 +18,7 @@ public:
         std::string name,
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): TurnOffHandlerInterface(name, path, OperationType::ACTION) {
+    ): TurnOffHandlerInterface(name, path) {
         _components = components;
     };
 

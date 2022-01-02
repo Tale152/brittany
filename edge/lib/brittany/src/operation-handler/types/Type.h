@@ -1,5 +1,5 @@
-#ifndef BRITTANY_OPERATION_TYPE_H
-#define BRITTANY_OPERATION_TYPE_H
+#ifndef BRITTANY_TYPE_H
+#define BRITTANY_TYPE_H
 
 #include <string>
 
@@ -16,7 +16,7 @@ enum Type {
     NULL_TYPE
 };
 
-std::string type_to_string(Type type) {
+inline std::string type_to_string(Type type) {
     switch (type) {
         case OBJECT:
             return "object";
@@ -37,5 +37,4 @@ std::string type_to_string(Type type) {
     }
 }
 
-
-#endif
+#endif // BRITTANY_TYPE_H
