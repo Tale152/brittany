@@ -1,6 +1,7 @@
 ---
 title: Organizzazione
 parent: Edge
+grand_parent: Design
 nav_order: 1
 ---
 

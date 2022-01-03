@@ -1,6 +1,7 @@
 ---
 title: Architettura Generale
 parent: Edge
+grand_parent: Design
 nav_order: 2
 ---
 

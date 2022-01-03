@@ -1,6 +1,7 @@
 ---
 title: Thing Descriptor
 parent: Edge
+grand_parent: Design
 nav_order: 3
 ---
 
