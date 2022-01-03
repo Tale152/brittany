@@ -5,6 +5,7 @@
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
 
+#define EDGE_MOCK_TITLE "MockEdge"
 #define EDGE_MOCK_MODULE_NAME "mock-module"
 #define EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME "light-module"
 
@@ -27,6 +28,10 @@ void setup_test_edge() {
 
 void post_test_edge() {
     delete mockLightInEdge;
+}
+
+void test_edge_title(Edge* edge) {
+    TEST_ASSERT_EQUAL_STRING(EDGE_MOCK_TITLE, edge -> title().c_str());
 }
 
 void test_edge_result_fail(OperationHandlerResult result) {
@@ -66,17 +71,20 @@ void test_edge_execute_working(Edge* edge) {
 
 //TEST
 void test_edge_empty() {
-    Edge* edge = new Edge(std::list<Module*>({}));
+    Edge* edge = new Edge(EDGE_MOCK_TITLE, std::list<Module*>({}));
     test_edge_execute_fail(edge);
     delete edge;
 }
 
 //TEST
 void test_edge_list() {
-    Edge* edge = new Edge(std::list<Module*>({
-        new MockModule(EDGE_MOCK_MODULE_NAME),
-        new MockDigitalLightModule(EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME, mockDigitalLights)}
-    ));
+    Edge* edge = new Edge(EDGE_MOCK_TITLE,
+        std::list<Module*>({
+            new MockModule(EDGE_MOCK_MODULE_NAME),
+            new MockDigitalLightModule(EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME, mockDigitalLights)
+        })
+    );
+    test_edge_title(edge);
     test_edge_execute_working(edge);
     delete edge;
 }

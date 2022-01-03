@@ -4,6 +4,7 @@
 #include "hw/MockDigitalLightHw.h"
 #include "modules/MockDigitalLightModule.h"
 
+#define EDGE_MOCK_TITLE_TD "MockEdge"
 #define MOCK_MODULE_TD_NAME "light-module"
 #define MOCK_LIGHT_TD_0_ID "0"
 #define MOCK_LIGHT_TD_1_ID "1"
@@ -49,6 +50,7 @@ void contains_id_and_title() {
     std::string expectedId = std::string("http://") + TD_IP_TEST + ":" + std::to_string(TD_PORT_TEST);
     TEST_ASSERT_EQUAL_STRING(expectedId.c_str(), thingDescriptor["id"].asCString());
     TEST_ASSERT_TRUE(thingDescriptor.isMember("title"));
+    TEST_ASSERT_EQUAL_STRING(EDGE_MOCK_TITLE_TD, thingDescriptor["title"].asCString());
 }
 
 void contains_modules() {
@@ -143,12 +145,14 @@ void contains_all_elements() {
 void setup_thing_descriptor_test() { 
     mockLight0 = new MockDigitalLightHw(MOCK_LIGHT_TD_0_ID, 0);
     mockLight1 = new MockDigitalLightHw(MOCK_LIGHT_TD_1_ID, 1);
-    tdEdge = new Edge(std::list<Module*>({
-        new MockDigitalLightModule(
-            MOCK_MODULE_TD_NAME,
-            std::list({mockLight0, mockLight1})
-        )}
-    ));
+    tdEdge = new Edge(EDGE_MOCK_TITLE_TD, 
+        std::list<Module*>({
+            new MockDigitalLightModule(
+                MOCK_MODULE_TD_NAME,
+                std::list({mockLight0, mockLight1})
+            )}
+        )
+    );
 }
 
 void post_thing_descriptor_test() {

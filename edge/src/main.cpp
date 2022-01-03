@@ -14,8 +14,7 @@
 Esp8266WebServer* server;
 
 void setup_variables() {
-    Edge* edge = new Edge(edge_modules());
-    server = new Esp8266WebServer(edge);
+    server = new Esp8266WebServer(edge());
 }
 
 void connect_to_wifi() {
