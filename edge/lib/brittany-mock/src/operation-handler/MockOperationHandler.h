@@ -14,8 +14,8 @@ class MockOperationHandler: public OperationHandler {
 
 public:
 
-    MockOperationHandler(std::string name, std::string path, OperationType operationType) :
-        OperationHandler(name, path, operationType) {
+    MockOperationHandler(std::string name, std::string path) :
+        OperationHandler(name, path, OperationType::PROPERTY, Type::INTEGER) {
         _value = 0;
     };
 

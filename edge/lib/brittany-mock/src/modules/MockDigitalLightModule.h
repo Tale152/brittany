@@ -10,7 +10,6 @@
 #include "../operation-handler/digital-light/MockTurnOffDigitalLightHandler.h"
 #include "../operation-handler/digital-light/MockTurnOnDigitalLightHandler.h"
 
-
 #define MOCK_IS_ON_HANDLER_MODULE_NAME "isOn"
 #define MOCK_TURN_ON_HANDLER_MODULE_NAME "turnOn"
 #define MOCK_TURN_OFF_HANDLER_MODULE_NAME "turnOff"

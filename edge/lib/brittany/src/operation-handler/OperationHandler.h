@@ -4,7 +4,8 @@
 #include <string>
 #include <json/json.h>
 #include "OperationHandlerResult.h"
-#include "thing-descriptor/OperationType.h"
+#include "operation-handler/types/OperationType.h"
+#include "operation-handler/types/Type.h"
 
 /**
  * @brief Class that represents an operation that uses some arguments for a computation and
@@ -21,9 +22,14 @@ public:
      * @param name The name of the OperationHandler
      * @param path The path of the OperationHandler.
      * @param operationTye The operation type of the OperationHandler.
+     * @param outputType The type of the Output.
      */
-    OperationHandler(std::string name, std::string path, OperationType operationType);
-
+    OperationHandler(
+        std::string name,
+        std::string path,
+        OperationType operationType,
+        Type outputType
+    );
 
     /**
      * @brief Return the name of the OperationHandler.
@@ -47,6 +53,13 @@ public:
     OperationType operationType();
 
     /**
+     * @brief Get the type of the output. Used primarly for Thing Descriptor generation.
+     * 
+     * @return Type Return the Type of the output.
+     */
+    Type outputType();
+
+    /**
      * @brief execute the OperationHandler. This method wiill often act as a template method.
      * 
      * @param args Arguments of the OperationHandler used for computation.
@@ -59,7 +72,7 @@ private:
     std::string _name;
     std::string _path;
     OperationType _operationType;
-
+    Type _outputType;
 };
 
 #endif //BRITTANY_OPERATION_HANDLER_H

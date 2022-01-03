@@ -24,13 +24,6 @@ public:
     };
 
     /**
-     * @brief Destroy the Web Server object.
-     * 
-     */
-    ~WebServer() {
-        delete _edge;
-    };
-    /**
      * @brief Start the WebServer.
      */
     virtual void begin() = 0;

@@ -65,7 +65,22 @@ void contains_modules() {
     TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_TD_1_ID, moduleComponents[1].asCString());
 }
 
-void check_actions_and_properties(Json::Value object, std::string names[], int size) {
+void check_additional_actions(Json::Value action) {
+    TEST_ASSERT_TRUE(action.isMember("output"));
+    TEST_ASSERT_TRUE(action["output"].isMember("type"));
+    TEST_ASSERT_EQUAL_STRING("string", action["output"]["type"].asCString());
+}
+
+void check_additional_properties(Json::Value property) {
+    TEST_ASSERT_TRUE(property.isMember("type"));
+    TEST_ASSERT_EQUAL_STRING("boolean", property["type"].asCString());
+}
+
+void check_additional_events(Json::Value event) {
+
+}
+
+void check_actions_and_properties(Json::Value object, std::string names[], int size, OperationType type) {
     for(int i = 0; i < size; i++) {
         for(std::string c : tdComponents) {
             Json::Value name = object[names[i] + "-" + c];
@@ -82,8 +97,21 @@ void check_actions_and_properties(Json::Value object, std::string names[], int s
                 forms[0]["href"].asCString()
             );
             TEST_ASSERT_EQUAL_STRING("application/json", forms[0]["contentType"].asCString());
+            switch (type) {
+            case OperationType::ACTION:
+                check_additional_actions(name);
+                break;
+            case OperationType::PROPERTY:
+                check_additional_properties(name);
+                break;
+            case OperationType::EVENT:
+                check_additional_events(name);
+                break;
+            default:
+                break;
+            }
         }
-        
+        //TODO TEST WITH A SINGLE COMPONENT, AS THE ACTION AND PROPERTY NAME CHANGES
     }
 }
 
@@ -91,14 +119,14 @@ void contains_properties() {
     TEST_ASSERT_TRUE(thingDescriptor.isMember("properties"));
     Json::Value properties = thingDescriptor["properties"];
     std::string propertiesName[1] = {"isOn"};
-    check_actions_and_properties(properties, propertiesName, 1);
+    check_actions_and_properties(properties, propertiesName, 1, OperationType::PROPERTY);
 }
 
 void contains_actions() {
     TEST_ASSERT_TRUE(thingDescriptor.isMember("actions"));
     Json::Value actions = thingDescriptor["actions"];
     std::string actionNames[2] = {"turnOn", "turnOff"};
-    check_actions_and_properties(actions, actionNames, 2);
+    check_actions_and_properties(actions, actionNames, 2, OperationType::ACTION);
 }
 
 void contains_all_elements() {

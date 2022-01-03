@@ -6,8 +6,6 @@
 #include <optional>
 #include <json/json.h>
 #include "operation-handler/interfaces/ValueReturnedHandlerInterface.h"
-#include "thing-descriptor/OperationType.h"
-
 /**
  * @brief Operation Handler Interface whose objective is to turn off a component.
  * 
@@ -16,7 +14,7 @@ class TurnOffHandlerInterface : public ValueReturnedHandlerInterface<std::string
 
 public:
 
-    TurnOffHandlerInterface(std::string name, std::string path, OperationType operationType);
+    TurnOffHandlerInterface(std::string name, std::string path);
 
     /**
      * @brief template method that call the turnOff method.

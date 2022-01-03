@@ -3,12 +3,10 @@
 
 #define OPERATION_HANDLER_NAME "Operation"
 #define OPERATION_HANDLER_PATH "/operation"
-#define OPERATION_HANDLER_TYPE OperationType::ACTION
 
 MockOperationHandler mockOperationHandler = MockOperationHandler(
     OPERATION_HANDLER_NAME,
-    OPERATION_HANDLER_PATH,
-    OPERATION_HANDLER_TYPE
+    OPERATION_HANDLER_PATH
 );
 
 void test_operation_handler_name() {
@@ -19,8 +17,12 @@ void test_operation_handler_path() {
     TEST_ASSERT_EQUAL_STRING(OPERATION_HANDLER_PATH, mockOperationHandler.path().c_str());
 }
 
-void test_operation_handler_type() {
-    TEST_ASSERT_EQUAL(OPERATION_HANDLER_TYPE, mockOperationHandler.operationType());
+void test_operation_handler_operation_type() {
+    TEST_ASSERT_EQUAL(OperationType::PROPERTY, mockOperationHandler.operationType());
+}
+
+void test_operation_handler_output_type() {
+    TEST_ASSERT_EQUAL(Type::INTEGER, mockOperationHandler.outputType());
 }
 
 void test_operation_handler_handle() {
@@ -34,5 +36,6 @@ void test_operation_handler_handle() {
 void test_OperationHandler() {
     RUN_TEST(test_operation_handler_path);
     RUN_TEST(test_operation_handler_handle);
-    RUN_TEST(test_operation_handler_type);
+    RUN_TEST(test_operation_handler_operation_type);
+    RUN_TEST(test_operation_handler_output_type);
 }

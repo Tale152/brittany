@@ -11,7 +11,7 @@ class DHT22Handler : public ValueReturnedHandlerInterface<float> {
 public:
 
     DHT22Handler(std::string name, std::string path, std::list<DHT22SensorHw*> components)
-    : ValueReturnedHandlerInterface<float> (name, path, OperationType::PROPERTY) {
+    : ValueReturnedHandlerInterface<float> (name, path, OperationType::PROPERTY, Type::NUMBER) {
         _components = components;
     };
 

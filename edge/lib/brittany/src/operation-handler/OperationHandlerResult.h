@@ -2,6 +2,7 @@
 #define BRITTANY_OPERATION_HANDLER_RESULT_H
 
 #include "json/json.h"
+#include "operation-handler/types/Type.h"
 
 /**
  * @brief A class that wraps the results information of an OperationHandler.
@@ -36,6 +37,7 @@ private:
 
     int _code;
     Json::Value _content;
+
 };
 
 #endif //BRITTANY_OPERATION_HANDLER_RESULT_H

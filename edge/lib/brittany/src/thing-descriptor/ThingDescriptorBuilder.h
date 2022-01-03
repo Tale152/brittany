@@ -67,26 +67,32 @@ private:
         for(Module* m : modules) {
             for(OperationHandler* h : m -> handlers()) {
                 ComponentModule<ComponentHw>* cm = static_cast<ComponentModule<ComponentHw>*>(m);
-                for(ComponentHw c : cm->components()) {
-                    Json::Value action;
-                    action["module"] = m -> name();
-                    action["forms"][0]["href"] =
+                for(ComponentHw c : cm -> components()) {
+                    Json::Value object;
+                    object["module"] = m -> name();
+                    object["forms"][0]["href"] =
                         std::string("http://") + ip + ":" + std::to_string(port) + h -> path() + "?id=" + c.id();
-                    action["forms"][0]["contentType"] = "application/json";
+                    object["forms"][0]["contentType"] = "application/json";
                     std::string objectName;
-                    switch (h -> operationType())
-                    {
+                    std::string name = h -> name();
+                    if(cm->components().size() != 1) {
+                        name += "-" + c.id();
+                    }
+                    std::string type = type_to_string(h -> outputType());
+                    switch (h -> operationType()) {
                     case OperationType::ACTION:
                         objectName = "actions";
+                        object["output"]["type"] = type;
                         break;
                     case OperationType::PROPERTY:
                         objectName = "properties";
+                        object["type"] = type;
                         break;
                     case OperationType::EVENT:
                         objectName = "events";
                         break;
                     }
-                    td[objectName][h -> name() + "-" + c.id()] = action;
+                    td[objectName][name] = object;
                 } 
             }
         }
