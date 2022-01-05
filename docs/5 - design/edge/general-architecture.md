@@ -13,8 +13,8 @@ Ogni Edge è quello che nel Web Of Things viene definito Thing, ossia un oggetto
 Nei seguenti diagrammi delle classi, il componente chiamato ``Edge`` è la classe centrale che può eseguire dei comandi, i quali vanno a recuperare informazioni o ad agire sullo stato dello stesso.
 
 <div align="center">
-<img src="https://images2.imgbox.com/d1/db/RTbTBRU6_o.png" alt="High-Level organizaiton">
-<p align="center"> Diagramma delle classi - Edge</p>
+<img src="https://images2.imgbox.com/d1/db/RTbTBRU6_o.png" alt="Diagramma delle classi - Edge">
+<p align="center"> Diagramma delle classi - Edge </p>
 </div>
 
 Ogni ``Edge`` viene quindi utilizzato per la creazione di un ``WebServer`` REST. Le API disponibili sono variabili e dipendono dai componenti affidati all'Edge.
@@ -28,8 +28,8 @@ Gli ``OperationHandler`` sono contenuti all'interno di ``Module``.
 Un ``Module`` non è altro che una raccolta di ``OperationHandler`` che agiscono sugli stessi componenti.
 
 <div align="center">
-<img src="https://images2.imgbox.com/ca/5d/42ZI1GTZ_o.png" alt="High-Level organizaiton">
-<p align="center"> Diagramma di Sequenza - Edge</p>
+<img src="https://images2.imgbox.com/ca/5d/42ZI1GTZ_o.png" alt="Diagramma di Sequenza - Edge">
+<p align="center">Diagramma di Sequenza - Edge</p>
 </div>
 
 Per effettuare una richiesta al ``WebServer``, il client esegue una normalissima HTTP Request. Il ``WebServer`` riceverà quindi la richiesta ed eseguirà la funzione _execute_, la quale itererà sui ``Module`` posseduti da ``Edge`` e contatterà l'``OperationHandler`` corretto che verrà quindi eseguito. Una volta ottenuto il risultato dalla computazione il risultato tornerà ad ``Edge`` e poi al ``WebServer``, il quale preparerà il risultato per la trasmissione e lo invierà come HTTP Response.
@@ -69,8 +69,8 @@ Un ``Module`` è una classe composta da più OperationHandler che hanno componen
 </details>
 
 <div align="center">
-<img src="https://images2.imgbox.com/72/1e/6WKzoirp_o.png" alt="High-Level organizaiton">
-<p align="center"> Diagramma delle classi - Module</p>
+<img src="https://images2.imgbox.com/72/1e/6WKzoirp_o.png" alt="Diagramma delle classi - Module">
+<p align="center">Diagramma delle classi - Module</p>
 </div>
 
 ``DigitalLightModule`` in questo caso è un modulo che contiene due ``OperationHandler`` che agiscono sugli stessi componenti di tipo ``DigitalLightHw``.
