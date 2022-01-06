@@ -48,3 +48,48 @@ Per natura dell’event loop, Node è single-threaded, ma è possibile, su necce
 <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Node.js_logo_2015.svg" width="300px" height="80px" alt="Node.js logo">
 <p align="center">Logo di Node.js</p>
 </div>
+
+
+### Mongoose
+
+Mongoose è una libreria per Node.js che permette di creare degli Schema per rappresentare i dati da
+archiviare nel sistema.  
+Ogni Schema è associato ad una collezione nel Database di MongoDB.  
+Mongoose viene utilizzato per la creazione del proprio model, è infatti possibile creare delle istanze dallo Schema attraverso delle Factory ed utilizzarli come dei semplici oggetti Javascript.
+Oltre ad offrire metodi aggiuntivi già pronti per salvare i dati dentro il Database è possibile creare funzioni che sono oggetti appartenenti ad un relativo schema possono richiamare, rendendo la modellazione molto object-oriented.  
+La creazione di uno schema di esempio per archiviare gattini su Mongoose avviene nel seguente modo:
+```js
+const kittySchema = new mongoose.Schema({
+    name: String
+});
+```
+Dopo aver creato uno Schema è necessario creare una costante che rappresenta il model e collegarlo alloSchema appena creato:
+```js
+const Kitten = mongoose.model('Kitten', kittySchema);
+```
+Ora è possibile creare dei nuovi gattini utilizzando una sintassi object oriented:
+```js
+let jojo = new Kitten({ name: 'JoJo' });
+console.log(jojo.name); // 'JoJo'
+```
+È anche possibile creare funzioni da associare al model appena creato:
+```js
+kittySchema.methods.meow = function () {
+const greeting = this.name
+    ? "Meow name is " + this.name
+    : "I don't have a name";
+console.log(greeting);
+jojo.meow(); // 'Meow name is JoJo'
+```
+Per salvare il gattino nella collezione basterà richiamare il metodo save().
+Si consiglia di utilizzare i metodi then() e catch() per avere controllo sul risultato dell’operazione:
+```js
+jojo.save() //save jojo in the collection
+.then() //do something when operation is completed
+.catch() //do something if an error occurred
+```
+
+<div align="center">
+<img src="https://miro.medium.com/max/1296/1*iDvsmUwzZQxJSKdL0xzwIA.png" width="300px" height="100px" alt="Mongoose logo">
+<p align="center">Logo di Mongoose</p>
+</div>
