@@ -1,5 +1,5 @@
 ---
-title: Strumenti utilizzati - Edge
+title: Edge
 has_children: false
 parent: Strumenti utilizzati
 ---

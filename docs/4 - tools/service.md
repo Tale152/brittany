@@ -1,5 +1,5 @@
 ---
-title: Strumenti utilizzati - Services
+title: Services
 has_children: false
 parent: Strumenti utilizzati
 ---

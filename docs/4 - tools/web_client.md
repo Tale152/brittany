@@ -1,5 +1,5 @@
 ---
-title: Strumenti utilizzati - Web Client
+title: Web Client
 has_children: false
 parent: Strumenti utilizzati
 ---

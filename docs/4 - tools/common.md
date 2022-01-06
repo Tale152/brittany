@@ -1,5 +1,5 @@
 ---
-title: Strumenti utilizzati - Strumenti Comuni
+title: Strumenti Comuni
 has_children: false
 parent: Strumenti utilizzati
 nav_order: 1

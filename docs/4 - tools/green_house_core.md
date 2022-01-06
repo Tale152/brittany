@@ -1,5 +1,5 @@
 ---
-title: Strumenti utilizzati - Greenhouse Core 
+title: Greenhouse Core 
 has_children: false
 parent: Strumenti utilizzati
 ---
