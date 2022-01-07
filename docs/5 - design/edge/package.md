@@ -42,6 +42,41 @@ Edge è composto da tre librerie utente. Da questo momento in avanti verranno us
 - <span style="background-color: pink"> _brittany-concrete_ </span>: I componenti di questa libreria non sono utilizzabili nell'environment ``native``. Ad esempio l'implementazione reale di un sensore di temperatura si trova in questa libreria.
 - <span style="background-color: #FFFF99"> _brittany-mock_ </span>: I componenti di questa liberia sono utilizzabili anche nell'environment ``native`` e contengono implementazioni di mock, a solo fine di testing.
 
+#### Diagrammi dei package
+
+Viene ora illustrata la divisione in package di ciascuna libreria:
+
+##### brittany
+
+<div align="center">
+<img src="https://images2.imgbox.com/b3/3c/sG7VAt8C_o.png" alt="Package diagram - brittany">
+<p align="center">Diagramma dei Package - brittany</p>
+</div>
+
+I package della libreria brittany hanno i seguenti scopi:
+
+- __hw__: contiene le classi comuni utili a creare componenti hardware
+    - __feature__: contiene classi utili per creare componenti più complessi. Alcuni componenti potrebbero avere infatti feature in comune, per esempio la possibilità di essere accesi o spenti. 
+    - __interfaces__: contiene interfacce di partenza per creare degli effettivi componenti o componenti di mock.
+- __edge__: contiene le implementazioni della classe edge e altri componenti relativi ad esse.
+- __operation-handler__: contiene le classi utili per poter creare degli OperationHandler.
+  - __interfaces__: come nel caso di hw, contiene classi utili per poter creare operation handler più complessi a partire da caratteristiche più semplici.
+  - __types__: package utilizzato principalmente per informazioni addizionali sugli handler, in particolare informazioni utili per generare un thing descriptor robusto.
+- __web-server__: contiene le classi utili per poter creare implementazioni di Web Server ed altre funzioni di utilità a loro collegati.
+- __thing-descriptor__: contiene classi utili per generare un Thing Descriptor.
+- __modules__: contiene classi utili per creare dei moduli.
+
+##### brittany-mock
+<div align="center">
+<img src="https://images2.imgbox.com/61/3f/Ypyj15zU_o.png" alt="Package diagram - brittany-mock">
+<p align="center">Diagramma dei Package - brittany-mock</p>
+</div>
+
+##### brittany-concrete
+<img src="https://images2.imgbox.com/7f/93/md5iN7DL_o.png" alt="Package diagram - brittany-concrete">
+<p align="center">Diagramma dei Package - brittany-concrete</p>
+</div>
+
 ### test
 Anche per i test vi sono due cartelle principali:
 
