@@ -40,3 +40,17 @@ Gradle offre la possibilità di creare task personalizzati.
 
 ### Docker
 
+Docker è un sistema open-source tramite il quale è possibile automatizzare, tra le altre cose, il processo di deployment di applicazioni all’interno di contenitori software.
+Docker implementa API di alto livello per gestire container che eseguono processi in ambienti isolati.  
+
+Utilizzando i container dunque le risorse possono essere isolate, i servizi limitati e i processi avviati in modo da avere una prospettiva completamente privata del sistema operativo, col loro proprio identificativo, file system e interfaccia di rete. Più container condividono lo stesso kernel, ma ciascuno di essi può essere
+costretto a utilizzare una certa quantità di risorse, come la CPU, la memoria e l’I/O.
+
+Al fine di creare un container Docker sarà necessario specificare un Dockerfile per ogni servizio erogato.
+Similmente ai gitignore per il versioning git, è possibile definire dei dockerignore per segnalare a docker quali file ignorare durante la copia dei file all’interno del container.
+
+
+<div align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" width="400px" height="100px" alt="Docker Logo">
+<p align="center">Logo di Docker</p>
+</div>
