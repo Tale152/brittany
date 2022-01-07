@@ -4,7 +4,7 @@
 #include <string>
 #include <list>
 #include "operation-handler/interfaces/ValueReturnedHandlerInterface.h"
-#include "temp-hum-sensor/hw/DHT22SensorHw.h"
+#include "temp-hum-sensor/dht22/hw/DHT22SensorHw.h"
 
 class DHT22Handler : public ValueReturnedHandlerInterface<float> {
 

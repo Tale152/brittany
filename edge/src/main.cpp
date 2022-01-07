@@ -5,8 +5,6 @@
 #include <json_util.h>
 #include "wifi_secret.h"
 #include <list>
-#include "temp-hum-sensor/hw/DHT22SensorHw.h"
-#include "modules/DHT22Module.h"
 #include "modules/Module.h"
 #include "modules/dht22.h"
 #include "modules/mock-digital-light.h"
