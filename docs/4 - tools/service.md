@@ -49,6 +49,22 @@ Per natura dell’event loop, Node è single-threaded, ma è possibile, su necce
 <p align="center">Logo di Node.js</p>
 </div>
 
+### MongoDB
+MongoDB è un DBMS NoSQL, cioè non utilizza un meccanismo di persistenza relazionale come un tradizionale SQL.
+Il modello NoSQL non è unico e può dunque utilizzare varie strutture dati per sostiturire le tabelle con
+campi uniformi usate in SQL.
+In particolare mongoDB utilizza un modello orientato al documento, dove le informazioni sono memorizzate in una struttura gerarchica ad albero ed un qualsiasi numero di campi con qualsiasi lunghezza può essere aggiunto. I campi a loro volta possono anche contenere pezzi multipli di dati.
+I DBMS orientati al documento offrono alcuni vantaggi, specialmente in ambito web, rispetto ai tradizionali
+RDBMS:
+- Maggiore flessibilità dei dati, utile per avere meno rigidità in fase di sviluppo o, in generale, per scenari in cui i dati memorizzati non sono sempre uniformi.
+- Facilità nella trasposizione in strutture dati javascript in quanto i JSON (i documenti utilizzati internamente in mongoDB e, ormai, standard de facto) trovano una corrispondenza uno a uno con esse.
+
+D’altro canto è pur vero che una struttura meno rigida aumenta il rischio di duplicazione di dati ed inconsistenze; è dunque richiesta al progettista una maggiore cautela nella manipolazione di dati.
+
+<div align="center">
+<img src="https://nodejstutorial.it/images/mongodb-logo-rgb-j6w271g1xn.jpg/920" width="250px" height="80px" alt="MongoDB logo">
+<p align="center">Logo di MongoDB</p>
+</div>
 
 ### Mongoose
 
