@@ -53,7 +53,7 @@ Viene ora illustrata la divisione in package di ciascuna libreria:
 <p align="center">Diagramma dei Package - brittany</p>
 </div>
 
-I package della libreria brittany hanno i seguenti scopi:
+I package della libreria ``brittany`` hanno i seguenti scopi:
 
 - __hw__: contiene le classi comuni utili a creare componenti hardware
     - __feature__: contiene classi utili per creare componenti più complessi. Alcuni componenti potrebbero avere infatti feature in comune, per esempio la possibilità di essere accesi o spenti. 
@@ -67,11 +67,19 @@ I package della libreria brittany hanno i seguenti scopi:
 - __modules__: contiene classi utili per creare dei moduli.
 
 ##### brittany-mock
+
 <div align="center">
 <img src="https://images2.imgbox.com/61/3f/Ypyj15zU_o.png" alt="Package diagram - brittany-mock">
 <p align="center">Diagramma dei Package - brittany-mock</p>
 </div>
 
+I package della libreria ``brittany-mock`` hanno una struttura solida solo a partire dal secondo layer.  
+Nel primo layer ogni package rappresenta un componente di mock. Nel diagramma vengono riportati due esempi di componenti di mock, ``mock-digital-light`` e ``mock-temp-hum-sensor``.
+I package scalano ovviamente in funzione al numero di componenti di mock che si aggiungono al sistema.
+Ogni componente è poi suddiviso in:
+- __hw__: le implementazioni mock dei relativi componenti hardware.
+- __operation-handler__: le implementazioni di mock dei relativi operation handler.
+- __modules__: le implementazioni di mock dei relativi moduli.
 ##### brittany-concrete
 <img src="https://images2.imgbox.com/7f/93/md5iN7DL_o.png" alt="Package diagram - brittany-concrete">
 <p align="center">Diagramma dei Package - brittany-concrete</p>
