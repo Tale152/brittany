@@ -28,5 +28,3 @@ Il file di configurazione è diviso in "ambienti". In questo modo è possibile c
 <img src="https://cdn.platformio.org/images/platformio-logo.17fdc3bc.png" width="200px" height="200px" alt="PlatformIO Logo">
 <p align="center">Logo di PlatformIO</p>
 </div>
-
-
