@@ -80,10 +80,20 @@ Ogni componente è poi suddiviso in:
 - __hw__: le implementazioni mock dei relativi componenti hardware.
 - __operation-handler__: le implementazioni di mock dei relativi operation handler.
 - __modules__: le implementazioni di mock dei relativi moduli.
+  
 ##### brittany-concrete
+
 <img src="https://images2.imgbox.com/7f/93/md5iN7DL_o.png" alt="Package diagram - brittany-concrete">
 <p align="center">Diagramma dei Package - brittany-concrete</p>
 </div>
+
+Come per ``brittany-mock``, anche nella libreria ``brittany-concrete`` vi è una divisione per componenti, ma con un livello di dettaglio in più.
+Esistono infatti diversi tipi di componenti hardware che effettuano le stesse operazioni ma possono avere implementazioni diverse, a differenza di una classe di mock.
+Nel caso del diagramma, anche in questo caso vi è una divisione in componenti, in particolare ``digital-light`` e ``temp-hum-sensor``. Esistono però diversi tipi di sensori per la misurazione di temperatura ed umidità, per cui è necessaria una ulteriore distinzione, in questo caso tra i sensori di tipo ``dht11`` e ``dht22``.
+Si arriva dunque alle foglie, che anche in questo caso sono:
+- __hw__: le implementazioni effettive e reali dei relativi componenti hardware.
+- __operation-handler__: le implementazioni effettive e reali dei relativi operation handler.
+- __modules__: le implementazioni effettive e reali dei relativi moduli.
 
 ### test
 Anche per i test vi sono due cartelle principali:
