@@ -4,11 +4,10 @@
 #include <list>
 #include "operation-handler/OperationHandler.h"
 #include "modules/ComponentModule.h"
-#include "modules/ComponentModule.cpp"
-#include "../hw/MockDigitalLightHw.h"
-#include "../operation-handler/digital-light/MockIsOnDigitalLightHandler.h"
-#include "../operation-handler/digital-light/MockTurnOffDigitalLightHandler.h"
-#include "../operation-handler/digital-light/MockTurnOnDigitalLightHandler.h"
+#include "mock-digital-light/hw/MockDigitalLightHw.h"
+#include "mock-digital-light/operation-handler/MockIsOnDigitalLightHandler.h"
+#include "mock-digital-light/operation-handler/MockTurnOffDigitalLightHandler.h"
+#include "mock-digital-light/operation-handler/MockTurnOnDigitalLightHandler.h"
 
 #define MOCK_IS_ON_HANDLER_MODULE_NAME "isOn"
 #define MOCK_TURN_ON_HANDLER_MODULE_NAME "turnOn"

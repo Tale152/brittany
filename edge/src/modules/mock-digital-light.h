@@ -1,5 +1,8 @@
 #ifdef BRITTANY_MAIN_MOCK_DIGITAL_LIGHT
 
+#include "mock-digital-light/hw/MockDigitalLightHw.h"
+#include "mock-digital-light/modules/MockDigitalLightModule.h"
+
 Edge* edge() {
     MockDigitalLightHw* light0 = new MockDigitalLightHw("0", 0);
     MockDigitalLightHw* light1 = new MockDigitalLightHw("1", 1);

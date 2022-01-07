@@ -5,7 +5,6 @@
 #include "json/json.h"
 #include "modules/Module.h"
 #include "modules/ComponentModule.h"
-#include "modules/ComponentModule.cpp"
 #include "hw/ComponentHw.h"
 #include <string>
 

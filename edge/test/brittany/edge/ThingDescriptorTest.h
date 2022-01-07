@@ -1,8 +1,8 @@
 #include <unity.h>
 #include "json/json.h"
 #include "edge/Edge.h"
-#include "hw/MockDigitalLightHw.h"
-#include "modules/MockDigitalLightModule.h"
+#include "mock-digital-light/hw/MockDigitalLightHw.h"
+#include "mock-digital-light/modules/MockDigitalLightModule.h"
 
 #define EDGE_MOCK_TITLE_TD "MockEdge"
 #define MOCK_MODULE_TD_NAME "light-module"

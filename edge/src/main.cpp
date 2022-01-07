@@ -1,10 +1,8 @@
 #include <Arduino.h>
-#include "web-server/Esp8266WebServer.h"
-#include "hw/MockDigitalLightHw.h"
-#include "modules/MockDigitalLightModule.h"
 #include <json_util.h>
-#include "wifi_secret.h"
 #include <list>
+#include "web-server/Esp8266WebServer.h"
+#include "wifi_secret.h"
 #include "modules/Module.h"
 #include "modules/dht22.h"
 #include "modules/mock-digital-light.h"

@@ -5,7 +5,7 @@
 #include <string>
 #include <json/json.h>
 #include "operation-handler/interfaces/ValueReturnedHandlerInterface.h"
-#include "../../hw/MockDigitalLightHw.h"
+#include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "operation-handler/OperationHandlerResult.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"

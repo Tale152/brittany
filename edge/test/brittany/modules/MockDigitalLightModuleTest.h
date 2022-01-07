@@ -2,9 +2,9 @@
 #include <unity.h>
 #include "operation-handler/OperationHandler.h"
 #include "operation-handler/OperationHandlerResult.h"
-#include "operation-handler/MockOperationHandler.h"
-#include "hw/MockDigitalLightHw.h"
-#include "modules/MockDigitalLightModule.h"
+#include "mock/operation-handler/MockOperationHandler.h"
+#include "mock-digital-light/hw/MockDigitalLightHw.h"
+#include "mock-digital-light/modules/MockDigitalLightModule.h"
 #include "modules/Module.h"
 
 #define MOCK_MODULE_NAME "light"

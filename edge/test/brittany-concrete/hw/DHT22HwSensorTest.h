@@ -1,6 +1,6 @@
 #include <unity.h>
 #include <Arduino.h>
-#include "temp-hum-sensor/hw/DHT22SensorHw.h"
+#include "temp-hum-sensor/dht22/hw/DHT22SensorHw.h"
 
 #define DHT22_SENSOR_NAME "dht22"
 #define DHT22_SENSOR_PIN D1

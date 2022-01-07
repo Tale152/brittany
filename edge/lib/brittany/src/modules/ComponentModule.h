@@ -24,14 +24,20 @@ public:
      * @param name the name of the module.
      * @param components the components list.
      */
-    ComponentModule(std::string name, std::list<T*> components);
+    ComponentModule(std::string name, std::list<T*> components) : Module(name) {
+        for(T* t : components) {
+            _components.push_back(ComponentHw(t -> id()));
+        }
+    }
 
     /**
      * @brief Return the list of ComponentHw in this module.
      * 
      * @return std::list<ComponentHw> A list of ComponentHw.
      */
-    std::list<ComponentHw> components();
+    std::list<ComponentHw> components() {
+        return _components;
+    }
 
 private:
 

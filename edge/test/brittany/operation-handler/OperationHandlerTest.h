@@ -1,5 +1,5 @@
 #include <unity.h>
-#include "operation-handler/MockOperationHandler.h"
+#include "mock/operation-handler/MockOperationHandler.h"
 
 #define OPERATION_HANDLER_NAME "Operation"
 #define OPERATION_HANDLER_PATH "/operation"

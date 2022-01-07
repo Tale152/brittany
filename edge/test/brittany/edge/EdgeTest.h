@@ -1,7 +1,7 @@
 #include <unity.h>
 #include "edge/Edge.h"
-#include "modules/MockDigitalLightModule.h"
-#include "modules/MockModule.h"
+#include "mock-digital-light/modules/MockDigitalLightModule.h"
+#include "mock/modules/MockModule.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
 
