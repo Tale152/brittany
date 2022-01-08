@@ -56,12 +56,18 @@ void post_mock_light_handler_test () {
 
 void check_result_is_ok(OperationHandlerResult result) {
     TEST_ASSERT_EQUAL(HttpStatus::OK, result.code());
-    TEST_ASSERT_EQUAL_STRING("Ok.", result.content().asCString());
+    TEST_ASSERT_EQUAL_STRING(
+        phrase(ContentResult::Ok).c_str(),
+        result.content().asCString()
+    );
 }
 
-void check_result_is_fail(OperationHandlerResult result) {
+void check_result_is_not_found(OperationHandlerResult result) {
     TEST_ASSERT_EQUAL(HttpStatus::NotFound, result.code());
-    TEST_ASSERT_EQUAL_STRING("Operation failed.", result.content().asCString());
+    TEST_ASSERT_EQUAL_STRING(
+        phrase(ContentResult::ResourceNotFound).c_str(),
+        result.content().asCString()
+    );
 }
 
 //TEST
@@ -80,7 +86,7 @@ void test_mock_turn_off_digital_light_handler() {
     check_result_is_ok(
         turnOffDigitalLightHandler->handle(args1)
     );
-    check_result_is_fail(
+    check_result_is_not_found(
         turnOffDigitalLightHandler->handle(argsFail)
     );
 }
@@ -101,7 +107,7 @@ void test_mock_turn_on_digital_light_handler(){
     check_result_is_ok(
         turnOnDigitalLightHandler->handle(args1)
     );
-    check_result_is_fail(
+    check_result_is_not_found(
         turnOnDigitalLightHandler->handle(argsFail)
     );
 }
@@ -123,7 +129,7 @@ void is_on_handler_state_must_be(bool isOn) {
 
     light_state_check(isOnDigitalLightHandler->handle(args0), isOn);
     light_state_check(isOnDigitalLightHandler->handle(args1), isOn);
-    check_result_is_fail(isOnDigitalLightHandler->handle(argsFail));
+    check_result_is_not_found(isOnDigitalLightHandler->handle(argsFail));
 }
 
 //TEST

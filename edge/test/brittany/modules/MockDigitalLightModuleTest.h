@@ -62,7 +62,11 @@ void test_is_on_is_off_handler_in_module(OperationHandler* handler, std::string 
     args["id"] = component_name;
     OperationHandlerResult result = handler->handle(args);
     check_handler_code_is_ok(result);
-    TEST_ASSERT_EQUAL(isOn, result.content().asBool());
+    if(isOn) {
+        TEST_ASSERT_TRUE(result.content().asBool());
+    } else {
+        TEST_ASSERT_FALSE(result.content().asBool());
+    }
 }
 
 void test_turn_on_handler_in_module(OperationHandler* handler, std::string component_name) {

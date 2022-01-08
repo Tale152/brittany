@@ -17,15 +17,36 @@ public:
 
 private:
 
-    std::optional<float> operation(Json::Value args) {
+    ValueReturnedResult<float> operation(Json::Value args) {
         if(args.isMember("id")) {
             std::optional<DHT22SensorHw*> oc = find_by_id(_components, args["id"].asCString());
             if(oc.has_value()) {
-                return sub_operation(oc.value(), args);
+                std::optional<float> opt_value = sub_operation(oc.value(), args);
+                if(opt_value.has_value()) {
+                    return ValueReturnedResult<float>(
+                        HttpStatus::OK,
+                        opt_value.value()
+                    );
+                } else {
+                   return ValueReturnedResult<float>(
+                        HttpStatus::InternalServerError,
+                        std::nullopt,
+                        phrase(ContentResult::OperationFailed)
+                    );
+                } 
+            } else {
+                return ValueReturnedResult<float>(
+                    HttpStatus::NotFound,
+                    std::nullopt,
+                    phrase(ContentResult::ResourceNotFound)
+                );
             }
-            return std::nullopt; // failed to retrieve component
         }
-        return std::nullopt; // id not found
+        return ValueReturnedResult<float>(
+            HttpStatus::BadRequest,
+            std::nullopt,
+            phrase(ContentResult::BadRequest)
+        );
     }
 
     virtual std::optional<float> sub_operation(DHT22SensorHw* hw, Json::Value args) = 0;
