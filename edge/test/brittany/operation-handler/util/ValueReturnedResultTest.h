@@ -54,7 +54,7 @@ void test_value_returned_full_constructor() {
 
 void test_value_returned_non_opt_constructor() {
     ValueReturnedResult<int> res = ValueReturnedResult<int>(
-        100,
+        VALUE_RETURNED_RESULT_CODE,
         VALUE_RETURNED_RESULT_VALUE,
         VALUE_RETURNED_RESULT_MESSAGE
     );
@@ -63,7 +63,7 @@ void test_value_returned_non_opt_constructor() {
 
 void test_value_returned_no_message_constructor() {
     ValueReturnedResult<int> res = ValueReturnedResult<int>(
-        100,
+        VALUE_RETURNED_RESULT_CODE,
         VALUE_RETURNED_RESULT_VALUE
     );
     test_value_returned_result_code(VALUE_RETURNED_RESULT_CODE, res.code());
@@ -72,9 +72,23 @@ void test_value_returned_no_message_constructor() {
     TEST_ASSERT_FALSE(is_value_returned_result_message_present(res.message()));
 }
 
+void test_value_returned_message_constructor() {
+        ValueReturnedResult<int> res = ValueReturnedResult<int>(
+        VALUE_RETURNED_RESULT_CODE,
+        std::nullopt,
+        std::string(VALUE_RETURNED_RESULT_MESSAGE)
+    );
+    test_value_returned_result_code(VALUE_RETURNED_RESULT_CODE, res.code());
+    TEST_ASSERT_TRUE(is_value_returned_result_value_present(res.message()));
+    test_value_returned_result_message(VALUE_RETURNED_RESULT_MESSAGE, res.message().value());
+    TEST_ASSERT_FALSE(is_value_returned_result_value_present(res.value()));
+
+}
+
 void test_ValueReturnedResultTest(){
     RUN_TEST(test_value_returned_code_constructor);
     RUN_TEST(test_value_returned_full_constructor);
     RUN_TEST(test_value_returned_non_opt_constructor);
+    RUN_TEST(test_value_returned_message_constructor);
     RUN_TEST(test_value_returned_no_message_constructor);
 }

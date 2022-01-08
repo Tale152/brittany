@@ -27,6 +27,16 @@ public:
     }
 
     /**
+     * @brief Construct a new Value Returned Result object. There will surely be a message.
+     * 
+     * @param code the code.
+     * @param opt_value the optional value.
+     * @param msg the message.
+     */
+    ValueReturnedResult(int code, std::optional<T> opt_value, std::string msg)
+        : ValueReturnedResult(code, opt_value, std::optional<std::string>(msg)) { }
+
+    /**
      * @brief Construct a new Value Returned Result object.
      * 
      * @param code the code.
