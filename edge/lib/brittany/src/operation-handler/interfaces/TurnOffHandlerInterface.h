@@ -16,8 +16,23 @@ public:
 
     TurnOffHandlerInterface(std::string name, std::string path);
 
+
+    /**
+     * @brief Calls the turnOff method.
+     * 
+     * @param args the arguments passed from operation.
+     * @return std::optional<std::string> a string  with an "Ok." message if everything worked.
+     * Empty otherise.
+     */
     std::optional<std::string> retrieveValue(Json::Value args);
 
+    /**
+     * @brief turn off the chosen component.
+     * 
+     * @param id the id of the component to turn off.
+     * @return true if the operation succeed.
+     * @return false if the operation fails.
+     */
     virtual bool turnOff(std::string id) = 0;
 
 };

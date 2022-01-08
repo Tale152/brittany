@@ -17,6 +17,13 @@ public:
 
     TurnOnHandlerInterface(std::string name,std::string path);
 
+    /**
+     * @brief Calls the turnOn method.
+     * 
+     * @param args the arguments passed from operation.
+     * @return std::optional<std::string> a string  with an "Ok." message if everything worked.
+     * Empty otherise.
+     */
     std::optional<std::string> retrieveValue(Json::Value args);
 
     /**
