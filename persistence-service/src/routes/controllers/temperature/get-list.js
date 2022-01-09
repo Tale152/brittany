@@ -4,7 +4,7 @@ const Temperature = require('../../../mongoose/temperature')
 
 async function temperatureListController(req, res){
     Temperature.find({ id_environment: new ObjectId(req.query.id) })
-        .sort({timestamp: 'desc'})
+        .sort({timestamp: 'asc'})
         .select("-_id -id_environment -__v")
         .then(async temperatures => {
             if(temperatures !== null){
