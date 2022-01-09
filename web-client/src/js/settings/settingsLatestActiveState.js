@@ -2,6 +2,7 @@ import $ from 'jquery'
 
 import { setIsLoading } from '../../redux/util/actions'
 import settingsList from './settingsList'
+import { settingsService } from '../../conf'
 
 export default function settingsLatestActiveState(token, settingsId, environmentId, active, dispatch){
     dispatch(setIsLoading(true))
@@ -11,7 +12,7 @@ export default function settingsLatestActiveState(token, settingsId, environment
            'token': token
         }
     })
-    $.post("http://localhost:82/settings/latestActiveState", createParams(environmentId, active))
+    $.post(settingsService + "/settings/latestActiveState", createParams(environmentId, active))
         .done(function (result) {
             settingsList(token, environmentId, dispatch)
         })

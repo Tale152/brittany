@@ -2,11 +2,12 @@ import $ from 'jquery'
 
 import { setIsLoading } from '../../redux/util/actions'
 import { setEnvironmentList } from '../../redux/environments/actions'
+import { authService } from '../../conf'
 
 export default function environmentList(token, greenhouseId, dispatch){
     dispatch(setIsLoading(true))
     $.ajax({
-        url: "http://localhost:81/environment/list?id=" + greenhouseId,
+        url: authService + "/environment/list?id=" + greenhouseId,
         type: 'GET',
         headers: {"token": token}
     }).done(function (result) {

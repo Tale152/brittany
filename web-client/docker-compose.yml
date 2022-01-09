@@ -6,8 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - REACT_APP_PERSISTENCE_SERVICE_ADDRESS=http://localhost
-      - REACT_APP_PERSISTENCE_SERVICE_PORT=80
+      - REACT_APP_PERSISTENCE_SERVICE_ADDRESS=http://localhost:80
+      - REACT_APP_AUTH_SERVICE_ADDRESS=http://localhost:81
+      - REACT_APP_SETTINGS_SERVICE_ADDRESS=http://localhost:82
     ports:
       - 3000:3000
     image: web_client

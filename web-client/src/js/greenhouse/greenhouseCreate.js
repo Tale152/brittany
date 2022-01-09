@@ -2,6 +2,7 @@ import $ from 'jquery'
 
 import { setIsLoading } from '../../redux/util/actions'
 import greenhouseList from './greenhouseList'
+import { authService } from '../../conf'
 
 export default function greenhouseCreate(token, name, dispatch){
     dispatch(setIsLoading(true))
@@ -11,7 +12,7 @@ export default function greenhouseCreate(token, name, dispatch){
            'token': token
         }
     })
-    $.post("http://localhost:81/greenhouse/create", createParams(name))
+    $.post(authService + "/greenhouse/create", createParams(name))
         .done(function (result) {
             greenhouseList(token, dispatch)
         })

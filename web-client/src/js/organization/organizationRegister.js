@@ -3,6 +3,7 @@ import $ from 'jquery'
 import { setToken } from '../../redux/identity/actions'
 import { setIsLoading } from '../../redux/util/actions'
 import organizationInfo from './organizationInfo'
+import { authService } from '../../conf'
 
 $.ajaxSetup({
     contentType: "application/json; charset=utf-8"
@@ -10,7 +11,7 @@ $.ajaxSetup({
 
 export default function organizationRegister(organizationName, name, surname, mail, birthdate, password, passwordConfirm, dispatch){
     dispatch(setIsLoading(true))
-    $.post("http://localhost:81/organization/create", createParams(organizationName, name, surname, mail, birthdate, password))
+    $.post(authService + "/organization/create", createParams(organizationName, name, surname, mail, birthdate, password))
         .done(function (result) {
             dispatch(setToken(result.token))
             organizationInfo(result.token, dispatch)

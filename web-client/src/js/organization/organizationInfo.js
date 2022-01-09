@@ -1,10 +1,11 @@
 import $ from 'jquery'
 
 import { setOrganizationName } from '../../redux/identity/actions'
+import { authService } from '../../conf'
 
 export default function organizationInfo(token, dispatch){
     $.ajax({
-        url: "http://localhost:81/organization/info",
+        url: authService + "/organization/info",
         type: 'GET',
         headers: {"token": token}
     }).done(function (result) {
