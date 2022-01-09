@@ -23,7 +23,8 @@ MockIsOnDigitalLightHandler* isOnDigitalLightHandler;
 
 Json::Value args0;
 Json::Value args1;
-Json::Value argsFail;
+Json::Value argsNotFound;
+Json::Value argsBadRequest;
 
 void setup_mock_light_handler_test() {
     light0 = new MockDigitalLightHw(LIGHT_0_NAME, LIGHT_0_PIN);
@@ -47,7 +48,8 @@ void setup_mock_light_handler_test() {
     );
     args0["id"] = LIGHT_0_NAME;
     args1["id"] = LIGHT_1_NAME;
-    argsFail["id"] = "the game";
+    argsNotFound["id"] = "the game";
+    argsBadRequest["za"] = "warudo";
 }
 
 void post_mock_light_handler_test () {
@@ -62,11 +64,24 @@ void check_result_is_ok(OperationHandlerResult result) {
     );
 }
 
+void check_result_error(OperationHandlerResult result, int code, std::string message) {
+    TEST_ASSERT_EQUAL(code, result.code());
+    TEST_ASSERT_EQUAL_STRING(message.c_str(), result.content().asCString());
+}
+
 void check_result_is_not_found(OperationHandlerResult result) {
-    TEST_ASSERT_EQUAL(HttpStatus::NotFound, result.code());
-    TEST_ASSERT_EQUAL_STRING(
-        phrase(ContentResult::ResourceNotFound).c_str(),
-        result.content().asCString()
+    check_result_error(
+        result,
+        HttpStatus::NotFound,
+        phrase(ContentResult::ResourceNotFound).c_str()
+    );
+}
+
+void check_result_is_bad_request(OperationHandlerResult result) {
+    check_result_error(
+        result,
+        HttpStatus::BadRequest,
+        phrase(ContentResult::BadRequest).c_str()
     );
 }
 
@@ -87,7 +102,10 @@ void test_mock_turn_off_digital_light_handler() {
         turnOffDigitalLightHandler->handle(args1)
     );
     check_result_is_not_found(
-        turnOffDigitalLightHandler->handle(argsFail)
+        turnOffDigitalLightHandler->handle(argsNotFound)
+    );
+    check_result_is_bad_request(
+        turnOffDigitalLightHandler->handle(argsBadRequest)
     );
 }
 
@@ -108,7 +126,10 @@ void test_mock_turn_on_digital_light_handler(){
         turnOnDigitalLightHandler->handle(args1)
     );
     check_result_is_not_found(
-        turnOnDigitalLightHandler->handle(argsFail)
+        turnOnDigitalLightHandler->handle(argsNotFound)
+    );
+    check_result_is_bad_request(
+        turnOnDigitalLightHandler->handle(argsBadRequest)
     );
 }
 
@@ -129,7 +150,7 @@ void is_on_handler_state_must_be(bool isOn) {
 
     light_state_check(isOnDigitalLightHandler->handle(args0), isOn);
     light_state_check(isOnDigitalLightHandler->handle(args1), isOn);
-    check_result_is_not_found(isOnDigitalLightHandler->handle(argsFail));
+    check_result_is_not_found(isOnDigitalLightHandler->handle(argsNotFound));
 }
 
 //TEST
