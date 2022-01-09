@@ -19,7 +19,7 @@ export default function DataPage() {
     let maxAirHum = undefined
     let settings = useSelector(state => state.settings.list)
     if(settings.length > 0 && new Date(settings[0].expires) > new Date()){
-        let current = [settings[0]]
+        let current = settings[0]
         if(current.data !== undefined){
             if(current.data.temperature !== undefined){
                 minTemp = current.data.temperature.min
