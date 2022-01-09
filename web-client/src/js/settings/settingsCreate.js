@@ -2,6 +2,7 @@ import $ from 'jquery'
 
 import { setIsLoading } from '../../redux/util/actions'
 import settingsList from './settingsList'
+import { settingsService } from '../../conf'
 
 export default function settingsCreate(token, payload, environmentId, dispatch){
     dispatch(setIsLoading(true))
@@ -11,7 +12,7 @@ export default function settingsCreate(token, payload, environmentId, dispatch){
            'token': token
         }
     })
-    $.post("http://localhost:82/settings/create", createParams(payload))
+    $.post(settingsService + "/settings/create", createParams(payload))
         .done(function (result) {
             settingsList(token, environmentId, dispatch)
         })

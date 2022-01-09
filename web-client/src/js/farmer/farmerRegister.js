@@ -2,6 +2,7 @@ import $ from 'jquery'
 
 import { setIsLoading } from '../../redux/util/actions'
 import farmerList from './farmerList'
+import { authService } from '../../conf'
 
 export default function farmerRegister(token, name, surname, mail, birthdate, password, passwordConfirm, dispatch){
     dispatch(setIsLoading(true))
@@ -12,7 +13,7 @@ export default function farmerRegister(token, name, surname, mail, birthdate, pa
         }
     })
     //TODO check password
-    $.post("http://localhost:81/farmer/register", createParams(name, surname, mail, birthdate, password))
+    $.post(authService + "/farmer/register", createParams(name, surname, mail, birthdate, password))
         .done(function (result) {
             farmerList(token, dispatch)
         })

@@ -2,11 +2,12 @@ import $ from 'jquery'
 
 import { setIsLoading } from '../../redux/util/actions'
 import { setFarmersList } from '../../redux/farmers/actions'
+import { authService } from '../../conf'
 
 export default function farmerList(token, dispatch){
     dispatch(setIsLoading(true))
     $.ajax({
-        url: "http://localhost:81/farmer/list",
+        url: authService + "/farmer/list",
         type: 'GET',
         headers: {"token": token}
     }).done(function (result) {
