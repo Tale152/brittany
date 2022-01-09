@@ -64,13 +64,13 @@ void check_result_is_ok(OperationHandlerResult result) {
     );
 }
 
-void check_result_error(OperationHandlerResult result, int code, std::string message) {
+void check_result_is_error(OperationHandlerResult result, int code, std::string message) {
     TEST_ASSERT_EQUAL(code, result.code());
     TEST_ASSERT_EQUAL_STRING(message.c_str(), result.content().asCString());
 }
 
 void check_result_is_not_found(OperationHandlerResult result) {
-    check_result_error(
+    check_result_is_error(
         result,
         HttpStatus::NotFound,
         phrase(ContentResult::ResourceNotFound).c_str()
@@ -78,59 +78,37 @@ void check_result_is_not_found(OperationHandlerResult result) {
 }
 
 void check_result_is_bad_request(OperationHandlerResult result) {
-    check_result_error(
+    check_result_is_error(
         result,
         HttpStatus::BadRequest,
         phrase(ContentResult::BadRequest).c_str()
     );
 }
 
+template <class T>
+void test_handler_name_and_path(T h, std::string name) {
+    TEST_ASSERT_EQUAL_STRING(name.c_str(), h -> name().c_str());
+    TEST_ASSERT_EQUAL_STRING(as_route(name).c_str(), h -> path().c_str());
+}
+
+template <class T>
+void test_handle_with_different_args(T h) {
+    check_result_is_ok(h->handle(args0));
+    check_result_is_ok(h->handle(args1));
+    check_result_is_not_found(h->handle(argsNotFound));
+    check_result_is_bad_request(h->handle(argsBadRequest));
+}
+
 //TEST
 void test_mock_turn_off_digital_light_handler() {
-    TEST_ASSERT_EQUAL_STRING(
-        MOCK_TURN_OFF_LIGHT_NAME,
-        turnOffDigitalLightHandler -> name().c_str()
-    );
-    TEST_ASSERT_EQUAL_STRING(
-        as_route(MOCK_TURN_OFF_LIGHT_NAME).c_str(),
-        turnOffDigitalLightHandler -> path().c_str()
-    );
-    check_result_is_ok(
-        turnOffDigitalLightHandler->handle(args0)
-    );
-    check_result_is_ok(
-        turnOffDigitalLightHandler->handle(args1)
-    );
-    check_result_is_not_found(
-        turnOffDigitalLightHandler->handle(argsNotFound)
-    );
-    check_result_is_bad_request(
-        turnOffDigitalLightHandler->handle(argsBadRequest)
-    );
+    test_handler_name_and_path(turnOffDigitalLightHandler, MOCK_TURN_OFF_LIGHT_NAME);
+    test_handle_with_different_args(turnOffDigitalLightHandler);   
 }
 
 //TEST
 void test_mock_turn_on_digital_light_handler(){
-    TEST_ASSERT_EQUAL_STRING(
-        MOCK_TURN_ON_LIGHT_NAME,
-        turnOnDigitalLightHandler -> name().c_str()
-    );
-    TEST_ASSERT_EQUAL_STRING(
-        as_route(MOCK_TURN_ON_LIGHT_NAME).c_str(),
-        turnOnDigitalLightHandler -> path().c_str()
-    );
-    check_result_is_ok(
-        turnOnDigitalLightHandler->handle(args0)
-    );
-    check_result_is_ok(
-        turnOnDigitalLightHandler->handle(args1)
-    );
-    check_result_is_not_found(
-        turnOnDigitalLightHandler->handle(argsNotFound)
-    );
-    check_result_is_bad_request(
-        turnOnDigitalLightHandler->handle(argsBadRequest)
-    );
+    test_handler_name_and_path(turnOnDigitalLightHandler, MOCK_TURN_ON_LIGHT_NAME);
+    test_handle_with_different_args(turnOnDigitalLightHandler);
 }
 
 void light_state_check(OperationHandlerResult result, bool isOn) {
@@ -139,15 +117,7 @@ void light_state_check(OperationHandlerResult result, bool isOn) {
 }
 
 void is_on_handler_state_must_be(bool isOn) {
-    TEST_ASSERT_EQUAL_STRING(
-        MOCK_IS_ON_LIGHT_NAME,
-        isOnDigitalLightHandler -> name().c_str()
-    );
-    TEST_ASSERT_EQUAL_STRING(
-        as_route(MOCK_IS_ON_LIGHT_NAME).c_str(),
-        isOnDigitalLightHandler -> path().c_str()
-    );
-
+    test_handler_name_and_path(isOnDigitalLightHandler, MOCK_IS_ON_LIGHT_NAME);
     light_state_check(isOnDigitalLightHandler->handle(args0), isOn);
     light_state_check(isOnDigitalLightHandler->handle(args1), isOn);
     check_result_is_not_found(isOnDigitalLightHandler->handle(argsNotFound));
