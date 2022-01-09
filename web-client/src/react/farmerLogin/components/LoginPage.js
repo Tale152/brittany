@@ -13,7 +13,6 @@ import farmerLogin from '../../../js/farmer/farmerLogin'
 export default function LoginPage() {
 
     const dispatch = useDispatch()
-    const [goToRegister, setGoToRegister] = useState(false)
     const [inputMail, setInputMail] = useState(undefined)
     const [inputPassword, setInputPassword] = useState(undefined)
 
@@ -42,9 +41,7 @@ export default function LoginPage() {
                             />
                             <RedirectButton
                                 text = { "Register" }
-                                redirect = { goToRegister }
                                 destination = { "register" }
-                                onClick = { () => setGoToRegister(true)}
                             />
                         </div>
                     </Form>

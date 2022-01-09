@@ -13,7 +13,6 @@ import organizationRegister from '../../../js/organization/organizationRegister'
 export default function RegisterPage() {
 
     const dispatch = useDispatch()
-    const [goToFarmerLogin, setGoToFarmerLogin] = useState(false)
     const [inputOrganizationName, setOrganizationName] = useState("")
     const [inputName, setInputName] = useState("")
     const [inputSurname, setInputSurname] = useState("")
@@ -77,9 +76,7 @@ export default function RegisterPage() {
                             />
                             <RedirectButton
                                 text = { "Login" }
-                                redirect = { goToFarmerLogin }
                                 destination = { "" }
-                                onClick = { () => setGoToFarmerLogin(true)}
                             />
                         </div>
                     </Form>

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 
@@ -6,13 +7,14 @@ import RedirectTo from './Redirect'
 export default function RedirectButton(props) {
 
   const isLoading = useSelector(state => state.util.isLoading)
-  
-  if(props.redirect === true){
+  const [goToRedirect, setGoToRedirect] = useState(false)
+
+  if(goToRedirect === true){
     return <RedirectTo destination={ props.destination } />
   } else {
     return(
       <Button
-        onClick = { () => props.onClick() }
+        onClick = { () => setGoToRedirect(true) }
         className = "col-lg-12 my-2"
         variant = "primary"
         style = { isLoading ? { pointerEvents: "none", opacity: "0.4" } : {} }

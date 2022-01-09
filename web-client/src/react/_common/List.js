@@ -17,18 +17,18 @@ export default function List(props){
         return (
             <Row className="d-flex justify-content-center">
                 <ListGroup className="my-5 container col-lg-8 col-14">
-                    {createList(props.elements, props.onElementClick)}
+                    {createList(props.elements, props.keyGenerator, props.textGenerator, props.onElementClick)}
                 </ListGroup>
             </Row>
         )
     }
 }
 
-function createList(elements, onElementClick) {
+function createList(elements, keyGenerator, textGenerator, onElementClick) {
     return (
         <>
             {elements.map(element => (
-                <ListGroup.Item key={element.name} action onClick={() => onElementClick(element._id)}>{element.name}</ListGroup.Item>
+                <ListGroup.Item key={keyGenerator(element)} action onClick={() => onElementClick(element._id)}>{textGenerator(element)}</ListGroup.Item>
             ))}
         </>
     )
