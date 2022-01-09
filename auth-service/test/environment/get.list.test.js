@@ -25,7 +25,7 @@ test("Correct list", async () => {
     }, token, 201, (res) => { /* does nothing */ })
     await httpTest.get(server, "/environment/list",{
         id: greenhouseId
-    }, token, 200, (res) => { expect(res.body.greenhouses[0].name).toBe(values.environmentName) })
+    }, token, 200, (res) => { expect(res.body.environments[0].name).toBe(values.environmentName) })
 })
 
 test("Wrong token", async () => {
