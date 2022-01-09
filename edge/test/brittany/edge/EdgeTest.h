@@ -4,6 +4,7 @@
 #include "mock/modules/MockModule.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
+#include <algorithm>
 
 #define EDGE_MOCK_TITLE "MockEdge"
 #define EDGE_MOCK_MODULE_NAME "mock-module"
@@ -17,6 +18,33 @@
 
 MockDigitalLightHw* mockLightInEdge;
 std::list<MockDigitalLightHw*> mockDigitalLights;
+
+void test_string_element_is_in_list(std::list<std::string> list, std::string string) {
+    bool found = std::find(list.begin(), list.end(), string) != list.end();
+    TEST_ASSERT_TRUE(found);
+}
+
+void test_light_module_available_path(Edge* edge) {
+    test_string_element_is_in_list(
+        edge -> availablePaths(),
+        as_route(MOCK_IS_ON_LIGHT_NAME)
+    );
+    test_string_element_is_in_list(
+        edge -> availablePaths(),
+        as_route(MOCK_TURN_OFF_LIGHT_NAME)
+    );
+    test_string_element_is_in_list(
+        edge -> availablePaths(),
+        as_route(MOCK_TURN_ON_LIGHT_NAME)
+    );
+}
+
+void test_mock_module_available_path(Edge* edge) {
+    test_string_element_is_in_list(
+        edge -> availablePaths(),
+        as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME)
+    );
+}
 
 void setup_test_edge() {
     mockLightInEdge = new MockDigitalLightHw(
@@ -52,6 +80,11 @@ void check_edge_result_code_is_ok(OperationHandlerResult result) {
     TEST_ASSERT_EQUAL(HttpStatus::OK, result.code());
 }
 
+void test_edge_available_path(Edge* edge) {
+    std::list<std::string> paths = edge -> availablePaths();
+
+}
+
 void test_edge_execute_working(Edge* edge) {
     auto result0 = edge -> execute(
         as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME),
@@ -73,6 +106,7 @@ void test_edge_execute_working(Edge* edge) {
 void test_edge_empty() {
     Edge* edge = new Edge(EDGE_MOCK_TITLE, std::list<Module*>({}));
     test_edge_execute_fail(edge);
+    TEST_ASSERT_EQUAL(0, edge ->availablePaths().size());
     delete edge;
 }
 
@@ -85,6 +119,9 @@ void test_edge_list() {
         })
     );
     test_edge_title(edge);
+    test_mock_module_available_path(edge);
+    test_light_module_available_path(edge);
+    TEST_ASSERT_EQUAL(4, edge ->availablePaths().size());
     test_edge_execute_working(edge);
     delete edge;
 }
