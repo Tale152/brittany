@@ -2,6 +2,8 @@
 #include "operation-handler/interfaces/util/ValueReturnedResult.h"
 #include "operation-handler/interfaces/util/ValueReturnedResultFactory.h"
 
+#define VALUE_RETURNED_FACTORY_VALUE 13
+
 template <class T>
 
 void test_value_returned_result_factory_no_value(ValueReturnedResult<T> r, int code, std::string message) {
@@ -30,8 +32,17 @@ void test_value_returned_result_factory_bad_request() {
     );
 }
 
+void test_value_returned_result_factory_ok_with_value() {
+    auto r = ValueReturnedResultFactory<int>::OkWithValueResult(VALUE_RETURNED_FACTORY_VALUE);
+    TEST_ASSERT_EQUAL(HttpStatus::OK, r.code());
+    TEST_ASSERT_TRUE(r.value().has_value());
+    TEST_ASSERT_EQUAL(VALUE_RETURNED_FACTORY_VALUE, r.value().value());
+    TEST_ASSERT_FALSE(r.message().has_value());
+}
+
 void test_ValueReturnedResultFactoryTest(){
     RUN_TEST(test_value_returned_result_factory_not_found);
     RUN_TEST(test_value_returned_result_factory_bad_request);
+    RUN_TEST(test_value_returned_result_factory_ok_with_value);
 }
  

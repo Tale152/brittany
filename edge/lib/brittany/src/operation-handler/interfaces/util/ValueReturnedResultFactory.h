@@ -11,6 +11,10 @@ class ValueReturnedResultFactory {
 
 public:
 
+    static ValueReturnedResult<T> OkWithValueResult(T value) {
+        return ValueReturnedResult<T>(HttpStatus::OK, value);
+    }
+
     static ValueReturnedResult<T> NotFoundResult() {
         return ValueReturnedResult<T>(
                 HttpStatus::NotFound,
