@@ -9,7 +9,7 @@
 #include "ValueReturnedHandlerInterface.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
-#include "operation-handler/interfaces/util/ValueReturnedResult.h"
+#include "operation-handler/interfaces/util/ValueReturnedResultFactory.h"
 
 template <typename T>
 
@@ -56,23 +56,11 @@ private:
         if(args.isMember("id")){
             std::optional<T> value = retrieveValue(args);
             if(value.has_value()){
-                return ValueReturnedResult<T>(
-                    HttpStatus::OK,
-                    value.value()
-                );
-            } else {
-                return ValueReturnedResult<T>(
-                    HttpStatus::NotFound,
-                    std::nullopt,
-                    phrase(ContentResult::ResourceNotFound)
-                );
+                return ValueReturnedResultFactory<T>::OkWithValueResult(value.value());
             }
+            return ValueReturnedResultFactory<T>::NotFoundResult();
         }
-        return ValueReturnedResult<T>(
-            HttpStatus::BadRequest,
-            std::nullopt,
-            phrase(ContentResult::BadRequest)
-        );
+        return ValueReturnedResultFactory<T>::BadRequestResult();
     };
 
     /**
