@@ -49,8 +49,9 @@ tasks.register<Exec>("coreDevDown"){
 tasks.register<Exec>("clientDevUp"){
     commandLine("docker", "run", "-d", "--rm",
         "-p", "3000:3000",
-        "-e", "REACT_APP_PERSISTENCE_SERVICE_ADDRESS=http://localhost",
-        "-e", "REACT_APP_PERSISTENCE_SERVICE_PORT=80",
+        "-e", "REACT_APP_PERSISTENCE_SERVICE_ADDRESS=http://localhost:80",
+        "-e", "REACT_APP_AUTH_SERVICE_ADDRESS=http://localhost:81",
+        "-e", "REACT_APP_SETTINGS_SERVICE_ADDRESS=http://localhost:82",
         "--name", "web-client-dev", "alessandrotalmi/brittany-web-client-dev:latest"
     )
 }
