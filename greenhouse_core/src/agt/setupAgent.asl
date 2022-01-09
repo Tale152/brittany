@@ -42,5 +42,7 @@
  */
 +!updateSettings <- ?token(Token); getSettings(Token); !wait.
 
++components(Components) <- shareDevices(Components).
+
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

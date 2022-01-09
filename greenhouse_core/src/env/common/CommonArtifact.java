@@ -3,13 +3,11 @@
 package common;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import cartago.*;
 import utility.component.Component;
-import utility.component.ComponentBuilder;
 import utility.setting.Settings;
 
 /**
@@ -21,29 +19,30 @@ import utility.setting.Settings;
  */
 public class CommonArtifact extends Artifact {
 
-	private List<Component> devices;
+	private List<Component> components;
 	private Optional<Settings> settings;
 
 	void init() {
 		// for test purpose right now devices are hard-coded
-		this.devices = new ArrayList<>(Arrays.asList(
-				ComponentBuilder.create("1", "1", "temperature").build(),
-				ComponentBuilder.create("1", "2", "temperature").build()));
+		this.components = new ArrayList<>();
 		this.settings = Optional.empty();
 
-		defineObsProperty("setup", devices, this.settings);
+		defineObsProperty("setup", components, this.settings);
 	}
 
 	@OPERATION
-	void shareDevices(final List<Component> devices) {
-		updateObsProperty("setup", this.devices, this.settings);
+	void shareDevices(final List<Component> components) {
+		if (!this.components.equals(components)) {
+			this.components = components;
+		}
+		updateObsProperty("setup", this.components, this.settings);
 	}
 
 	@OPERATION
 	void shareSettings(final Optional<Settings> settings) {
 		if (!this.settings.equals(settings)) {
 			this.settings = settings;
-			updateObsProperty("setup", this.devices, this.settings);
+			updateObsProperty("setup", this.components, this.settings);
 		}
 	}
 }

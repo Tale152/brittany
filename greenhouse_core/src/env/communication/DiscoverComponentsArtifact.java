@@ -45,20 +45,18 @@ public class DiscoverComponentsArtifact extends Artifact {
 		} catch (WotException e1) {
 			e1.printStackTrace();
 		}
-
 		getThingDescriptorByFile();
 	}
 
 	@OPERATION
 	void discoverComponents() {
-
 		// i don't know how to broadcast a message but I assume a will receive urls of
 		// the proper devices
 
-	}
-
-	private void getThingDescriptor(final String url) {
-		//TODO
+		//for test purposes
+		getThingDescriptorByFile();
+		System.out.println("UPDATED COMPONENTS!");
+		defineObsProperty("components", this.components);
 	}
 
 	private void getThingDescriptorByFile() {
