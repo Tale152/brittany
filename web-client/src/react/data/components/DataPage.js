@@ -32,7 +32,15 @@ export default function DataPage() {
         }
     }
 
-    useEffect(() => listData(token, environmentId, dispatch), [token, environmentId, dispatch])
+    useEffect(() => {
+        listData(token, environmentId, dispatch)
+        const interval = setInterval(() => {
+            listData(token, environmentId, dispatch)
+        }, 5000)
+        return () => {
+            clearTimeout(interval)
+        }
+    }, [token, environmentId, dispatch])
 
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
