@@ -19,6 +19,14 @@ public:
         );
     }
 
+    static ValueReturnedResult<T> BadRequestResult() {
+        return ValueReturnedResult<T>(
+                HttpStatus::BadRequest,
+                std::nullopt,
+                phrase(ContentResult::BadRequest)
+        );
+    }
+
 };
 
 #endif //BRITTANY_VALUE_RETURNED_RESULT_FACTORY_H
