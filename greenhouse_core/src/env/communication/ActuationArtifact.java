@@ -1,6 +1,6 @@
 // CArtAgO artifact code for project greenhouse_core
 
-package actuation;
+package communication;
 
 import cartago.*;
 import utility.Sample;

@@ -21,6 +21,8 @@ repositories {
     maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
     maven { url "https://repo.gradle.org/gradle/libs-releases-local" }
 
+    maven { url "https://git.informatik.uni-hamburg.de/api/v4/groups/sane-public/-/packages/maven" }
+
     //maven { url "https://jade.tilab.com/maven/" }
 
     flatDir {
@@ -34,6 +36,8 @@ dependencies {
     compile group: 'org.jacamo', name: 'jacamo', version: '1.0'
     compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
     compile 'com.google.code.gson:gson:2.8.9'
+    compile group: 'city.sane.wot-servient', name: 'wot-servient', version: '1.15'
+    compile group: 'city.sane.wot-servient', name: 'wot-servient-binding-http', version: '1.15'
 }
 
 sourceSets {

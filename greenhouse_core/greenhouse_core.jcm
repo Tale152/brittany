@@ -47,11 +47,13 @@ mas greenhouse_core {
         artifact common: common.CommonArtifact()
         artifact sampling: sampling.SamplingArtifact()
         artifact communication: communication.CommunicationArtifact()
-        artifact actuation: actuation.ActuationArtifact()      
+        artifact actuation: communication.ActuationArtifact()
+		artifact discover: communication.DiscoverComponentsArtifact()   
     }
 
 	workspace services {
 		artifact persistence: communication.PersistenceArtifact()
 		artifact service: communication.ServiceArtifact()
 	}
+
 }

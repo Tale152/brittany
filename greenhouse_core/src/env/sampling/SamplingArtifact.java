@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import cartago.*;
-import utility.Device;
 import utility.Sample;
+import utility.component.Component;
 import utility.setting.RangeSetting;
 import utility.setting.Setting;
 import utility.setting.Settings;
@@ -29,7 +29,7 @@ public class SamplingArtifact extends Artifact {
 
 	private static final int DELTA = 1;
 
-	private List<Device> devices;
+	private List<Component> components;
 	private Optional<Settings> settings;
 
 	private List<Sample> lastSamples;
@@ -42,17 +42,17 @@ public class SamplingArtifact extends Artifact {
 	 * Operation used to set up the devices and the settings, which are the basic
 	 * information needed to actually start the sampling.
 	 * 
-	 * @param devices  a list of all the devices that are present in the
-	 *                 greenhouse.
-	 * @param settings the minimum and maximum values that a device of a specific
-	 *                 category must observe. If it is
-	 *                 not respected, an actuator is started to resolve the bad
-	 *                 status.
+	 * @param components a list of all the components that are present in the
+	 *                   greenhouse.
+	 * @param settings   the minimum and maximum values that a device of a specific
+	 *                   category must observe. If it is
+	 *                   not respected, an actuator is started to resolve the bad
+	 *                   status.
 	 */
 	@OPERATION
-	void setup(final List<Device> devices, final Optional<Settings> settings) {
+	void setup(final List<Component> components, final Optional<Settings> settings) {
 		this.settings = settings;
-		this.devices = devices;
+		this.components = components;
 	}
 
 	/**
@@ -68,8 +68,8 @@ public class SamplingArtifact extends Artifact {
 	 */
 	@OPERATION
 	void sampleOperation(final String category) {
-		List<Device> filteredDevices = getDevicesByCategory(category);
-		if (!devices.isEmpty()) {
+		List<Component> filteredDevices = getDevicesByCategory(category);
+		if (!components.isEmpty()) {
 			// the role can be use to filter the devices to communicate with
 			defineObsProperty("communicate", filteredDevices);
 		}
@@ -100,6 +100,7 @@ public class SamplingArtifact extends Artifact {
 			if (this.settings.isPresent()) {
 				String category = avarageSample.getCategory();
 				System.out.println("Settings in sampling: " + this.settings);
+				// handled only range settings
 				if (getSettingByCategory(category).isPresent()
 						&& getSettingByCategory(category).get() instanceof RangeSetting) {
 					RangeSetting rangeSetting = (RangeSetting) getSettingByCategory(category).get();
@@ -125,8 +126,8 @@ public class SamplingArtifact extends Artifact {
 		return samples.stream().filter(s -> s.getCategory().equals(category)).findFirst();
 	}
 
-	private List<Device> getDevicesByCategory(final String category) {
-		return this.devices.stream().filter(d -> d.getCategory().equals(category)).collect(Collectors.toList());
+	private List<Component> getDevicesByCategory(final String category) {
+		return this.components.stream().filter(d -> d.getCategory().equals(category)).collect(Collectors.toList());
 	}
 
 	private Optional<Setting> getSettingByCategory(final String category) {
