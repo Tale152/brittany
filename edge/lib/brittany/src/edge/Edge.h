@@ -18,10 +18,19 @@ public:
     /**
      * @brief Construct a new Edge object.
      * 
+     * @param title The title of the Edge.
      * @param modules The modules that the edge contains.
      */
-    Edge(std::list<Module*> modules);
+    Edge(std::string title, std::list<Module*> modules);
     
+
+    /**
+     * @brief get the Edge title.
+     * 
+     * @return std::string Return the Edge title.
+     */
+    std::string title();
+
     /**
      * @brief Execute the handler whit the specified name and args.
      * 
@@ -41,12 +50,15 @@ public:
     /**
      * @brief Return the Edge Thing Descriptor.
      * 
+     * @param ip The ip to insert in the TD.
+     * @param port The port to insert in the TD.
      * @return Json::Value the Edge Thing Descriptor
      */
     Json::Value thingDescriptor(std::string ip, int port);
 
 private:
 
+    std::string _title;
     std::list<Module*> _modules;
     
 };

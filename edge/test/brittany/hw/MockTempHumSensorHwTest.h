@@ -1,6 +1,6 @@
 #include <unity.h>
 #include <optional>
-#include "hw/MockTempHumSensorHw.h"
+#include "mock-temp-hum-sensor/hw/MockTempHumSensorHw.h"
 
 #define MOCK_TEMP_HUM_SENSOR_NAME "temp-hum"
 #define MOCK_TEMP_HUM_SENSOR_PIN 0

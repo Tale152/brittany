@@ -6,7 +6,12 @@
 #include <string>
 #include <optional>
 
-enum class ContentResult { Ok, ResourceNotFound, OperationFailed };
+enum class ContentResult {
+    Ok,
+    ResourceNotFound,
+    OperationFailed,
+    BadRequest
+};
 
 /**
  * @brief Return a string description to insert in the content result.
@@ -18,13 +23,12 @@ inline std::string phrase(ContentResult content) {
     switch (content) {
     case ContentResult::Ok:
         return "Ok.";
-        break;
     case ContentResult::ResourceNotFound:
         return "The requested resource does not exist.";
-        break;
     case ContentResult::OperationFailed:
         return "Operation failed.";
-        break;
+    case ContentResult::BadRequest:
+        return "Bad Request";
     default:
         return "";
         break;

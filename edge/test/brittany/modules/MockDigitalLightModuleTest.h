@@ -2,9 +2,9 @@
 #include <unity.h>
 #include "operation-handler/OperationHandler.h"
 #include "operation-handler/OperationHandlerResult.h"
-#include "operation-handler/MockOperationHandler.h"
-#include "hw/MockDigitalLightHw.h"
-#include "modules/MockDigitalLightModule.h"
+#include "mock/operation-handler/MockOperationHandler.h"
+#include "mock-digital-light/hw/MockDigitalLightHw.h"
+#include "mock-digital-light/modules/MockDigitalLightModule.h"
 #include "modules/Module.h"
 
 #define MOCK_MODULE_NAME "light"
@@ -53,7 +53,7 @@ void test_turn_on_turn_off_handler_in_module(OperationHandler* handler, std::str
     args["id"] = component_name;
     OperationHandlerResult result = handler->handle(args);
     check_handler_code_is_ok(result);
-    TEST_ASSERT_EQUAL_STRING("Ok.", result.content().asCString());
+    TEST_ASSERT_EQUAL_STRING(phrase(ContentResult::Ok).c_str(), result.content().asCString());
 }
 
 void test_is_on_is_off_handler_in_module(OperationHandler* handler, std::string component_name, bool isOn) {
@@ -62,7 +62,11 @@ void test_is_on_is_off_handler_in_module(OperationHandler* handler, std::string 
     args["id"] = component_name;
     OperationHandlerResult result = handler->handle(args);
     check_handler_code_is_ok(result);
-    TEST_ASSERT_EQUAL(isOn, result.content().asBool());
+    if(isOn) {
+        TEST_ASSERT_TRUE(result.content().asBool());
+    } else {
+        TEST_ASSERT_FALSE(result.content().asBool());
+    }
 }
 
 void test_turn_on_handler_in_module(OperationHandler* handler, std::string component_name) {

@@ -1,12 +1,8 @@
 #include <Arduino.h>
-#include "web-server/Esp8266WebServer.h"
-#include "hw/MockDigitalLightHw.h"
-#include "modules/MockDigitalLightModule.h"
 #include <json_util.h>
-#include "wifi_secret.h"
 #include <list>
-#include "temp-hum-sensor/hw/DHT22SensorHw.h"
-#include "modules/DHT22Module.h"
+#include "web-server/Esp8266WebServer.h"
+#include "wifi_secret.h"
 #include "modules/Module.h"
 #include "modules/dht22.h"
 #include "modules/mock-digital-light.h"
@@ -14,8 +10,7 @@
 Esp8266WebServer* server;
 
 void setup_variables() {
-    Edge* edge = new Edge(edge_modules());
-    server = new Esp8266WebServer(edge);
+    server = new Esp8266WebServer(edge());
 }
 
 void connect_to_wifi() {

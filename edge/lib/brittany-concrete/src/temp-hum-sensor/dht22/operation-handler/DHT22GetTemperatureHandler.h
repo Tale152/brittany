@@ -1,16 +1,16 @@
-#ifndef BRITTANY_DHT22_GET_HUMIDITY_HANDLER_H
-#define BRITTANY_DHT22_GET_HUMIDITY_HANDLER_H
+#ifndef BRITTANY_DHT22_GET_TEMPERATURE_HANDLER_H
+#define BRITTANY_DHT22_GET_TEMPERATURE_HANDLER_H
 
 #include <string>
 #include <list>
 #include "DHT22Handler.h"
-#include "temp-hum-sensor/hw/DHT22SensorHw.h"
+#include "temp-hum-sensor/dht22/hw/DHT22SensorHw.h"
 
-class DHT22GetHumidityHandler : public DHT22Handler {
+class DHT22GetTemperatureHandler : public DHT22Handler {
 
 public:
 
-    DHT22GetHumidityHandler(
+    DHT22GetTemperatureHandler(
         std::string name,
         std::string path,
         std::list<DHT22SensorHw*> components
@@ -23,4 +23,4 @@ private:
     std::list<DHT22SensorHw*> _components;
 };
 
-#endif //BRITTANY_DHT22_GET_HUMIDITY_HANDLER_H
+#endif //BRITTANY_DHT22_GET_TEMPERATURE_HANDLER_H

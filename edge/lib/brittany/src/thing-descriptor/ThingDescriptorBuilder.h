@@ -5,7 +5,6 @@
 #include "json/json.h"
 #include "modules/Module.h"
 #include "modules/ComponentModule.h"
-#include "modules/ComponentModule.cpp"
 #include "hw/ComponentHw.h"
 #include <string>
 
@@ -15,11 +14,11 @@ class ThingDescriptorBuilder {
 
 public:
 
-    static Json::Value build(std::string ip, int port, std::list<Module*> modules) {
+    static Json::Value build(std::string ip, int port, std::string title, std::list<Module*> modules) {
         Json::Value td;
         add_context(td);
         add_id(td, ip, port);
-        add_title(td);
+        add_title(td, title);
         add_security(td);
         add_modules(td, modules);
         add_href(td, ip, port, modules);
@@ -32,8 +31,8 @@ private:
         td[key(Key::CONTEXT)] = value(Key::CONTEXT);
     }
 
-    static void add_title(Json::Value &td) { 
-        td["title"] = "Mock Title";
+    static void add_title(Json::Value &td, std::string title) { 
+        td["title"] = title;
     }
         
     static void add_id(Json::Value &td, std::string ip, int port) { 

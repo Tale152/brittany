@@ -3,8 +3,6 @@
 
 #include <string>
 #include <list>
-#include "DHT22Handler.h"
-#include "temp-hum-sensor/hw/DHT22SensorHw.h"
 
 class DHT22GetTemperatureHandler : public DHT22Handler {
 

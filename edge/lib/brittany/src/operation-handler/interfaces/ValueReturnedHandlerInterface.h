@@ -9,7 +9,7 @@
 #include "ValueReturnedHandlerInterface.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
-
+#include "operation-handler/interfaces/util/ValueReturnedResult.h"
 
 /**
  * @brief Type of the parameter to be returned by this class.
@@ -46,13 +46,19 @@ public:
     };
 
     OperationHandlerResult handle(Json::Value args) {
-        std::optional<T> result = operation(args);
-        if(result.has_value()){
-            return OperationHandlerResult(HttpStatus::OK, Json::Value(result.value()));
+        ValueReturnedResult<T> result = operation(args);
+        if(result.value().has_value()) {
+            // Return the value
+            return OperationHandlerResult(result.code(), Json::Value(result.value().value()));
         } else {
-            return OperationHandlerResult(HttpStatus::NotFound, Json::Value(phrase(ContentResult::OperationFailed)));
+            // Return the description message if present 
+            if(result.message().has_value()) {
+                return OperationHandlerResult(result.code(), Json::Value(result.message().value()));
+            }
         }
-    }
+        // Return a very generic error message
+        return OperationHandlerResult(result.code(), Json::Value(phrase(ContentResult::OperationFailed)));
+    };
 
 private:
     
@@ -60,9 +66,9 @@ private:
      * @brief execute an operation that may return a value that is then processed by the handle method.
      * 
      * @param args the arguments used by the operation.
-     * @return std::optional<T> a generic return type wrapped in an optional in case of failures.
+     * @return ValueReturnedResult the result struct of the operation.
      */
-    virtual std::optional<T> operation(Json::Value args) = 0;
+    virtual ValueReturnedResult<T> operation(Json::Value args) = 0;
 
 };
 
