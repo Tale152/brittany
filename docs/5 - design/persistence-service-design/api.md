@@ -54,7 +54,7 @@ Id dell'Environment (ottenuto dall'auth-service) della quale si vuole ottenere l
 
 ### **Risultato atteso:** **200**
 * **list**  
-Lista ordinata (dal più recente al più vecchio) di campionamenti della temperatura effettuati per il Setting specificato.
+Lista ordinata (dal più vecchio al più recente) di campionamenti della temperatura effettuati per il Setting specificato.
 
 ---
 
@@ -106,4 +106,4 @@ Id dell'Environment (ottenuto dall'auth-service) della quale si vuole ottenere l
 
 ### **Risultato atteso:** **200**
 * **list**  
-Lista ordinata (dal più recente al più vecchio) di campionamenti dell'umidità dell'aria effettuati per il Setting specificato.
+Lista ordinata (dal più vecchio al più recente) di campionamenti dell'umidità dell'aria effettuati per il Setting specificato.
