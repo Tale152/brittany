@@ -34,6 +34,18 @@ agevolmente da una stanza all’altra;
 <p align="center">Logo di Discord</p>
 </div>
 
+## GenMyModel
+
+GenMyModel è un serivizo online per la creazione di diagrammi utili a modellare arcitetture software.
+In particolare dispone della possibilità di creare diagrammi UML gratuitamente.  
+È inoltre possibile a partire da un diagramma generare i relativi sorgenti una volta specificato un linguaggio di programmazione.
+
+<div align="center">
+<img src="https://aranega.github.io/files/COMMITMDE16/imgs/gmm-logo.svg" width="300px" alt="GenMyModel Logo">
+<p align="center">Logo di GenMyModel</p>
+</div>
+
+
 ## Github Pages
 La documentazione del progetto è mantenuta tramite un processo di continuous integration grazie ad una feature proposta da GitHub: _GitHub Pages_.
 GitHub Pages fornisce un modo per automatizzare la pubblicazione di pagine web da semplice testo scritto in markdown a un linguaggio human-readable. La documentazione è mantenuta su un branch orfano denominato "/docs".
