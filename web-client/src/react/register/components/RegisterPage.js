@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
+import FormDatePicker from '../../_common/form/FormDatePicker'
 import { useAlert } from 'react-alert'
 
 import FormText from '../../_common/form/input/FormText'
@@ -57,11 +58,10 @@ export default function RegisterPage() {
                             onChange = { input => setInputMail(input) }
                             onEnter = { tryRegister }
                         />
-                        <FormText
+                        <FormDatePicker
                             text = { "Birthdate:" }
-                            placeholder = { "Enter your birthdate" }
+                            selected = { inputBirthdate }
                             onChange = { input => setInputBirthdate(input) }
-                            onEnter = { tryRegister }
                         />
                         <FormPassword
                             text = { "Password:" }

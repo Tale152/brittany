@@ -50,7 +50,15 @@ function createParams(organizationName, name, surname, mail, birthdate, password
         name: name.trim(),
         surname: surname.trim(),
         mail: mail.trim(),
-        birthdate: birthdate.trim(),
+        birthdate: convertDate(birthdate),
         password: password.trim()
     })
+}
+
+function convertDate(date){
+    return date.getFullYear() + "-" + correctValue(date.getMonth() + 1) + "-" + correctValue(date.getDate())
+}
+
+function correctValue(v){
+    return parseInt(v > 9 ? v : ("0" + v))
 }
