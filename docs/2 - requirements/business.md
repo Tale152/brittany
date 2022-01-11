@@ -6,4 +6,4 @@ has_children: false
 
 # Requisiti di Business
 
-TODO Requisiti di Business
+I requisiti di business specificano le caratteristiche che il sistema dovrà possedere per essere corretto. 

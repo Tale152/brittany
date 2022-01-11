@@ -6,4 +6,4 @@ has_children: false
 
 # Requisiti Implementativi
 
-TODO Requisiti di Business
+I requisiti di implementazione vincolano l’intera fase di realizzazione del sistema, ad esempio richiedendo l’uso di uno specifico linguaggio di programmazione e/o di uno specifico tool software.
