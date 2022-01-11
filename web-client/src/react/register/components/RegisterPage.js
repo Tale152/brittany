@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
-import FormDatePicker from '../../_common/form/FormDatePicker'
 import { useAlert } from 'react-alert'
 
 import FormText from '../../_common/form/input/FormText'
 import FormPassword from '../../_common/form/input/FormPassword'
+import FormDatePicker from '../../_common/form/FormDatePicker'
 import FormLogin from '../../_common/form/button/FormLogin'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 
@@ -20,7 +20,7 @@ export default function RegisterPage() {
     const [inputName, setInputName] = useState("")
     const [inputSurname, setInputSurname] = useState("")
     const [inputMail, setInputMail] = useState("")
-    const [inputBirthdate, setInputBirthdate] = useState("")
+    const [inputBirthdate, setInputBirthdate] = useState(null)
     const [inputPassword, setInputPassword] = useState("")
     const [inputPasswordConfirm, setInputPasswordConfirm] = useState("")
 

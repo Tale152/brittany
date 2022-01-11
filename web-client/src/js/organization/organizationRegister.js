@@ -39,7 +39,7 @@ function validParams(organizationName, name, surname, mail, birthdate, password,
         isNonEmptyString(name) &&
         isNonEmptyString(surname) &&
         isNonEmptyString(mail) &&
-        isNonEmptyString(birthdate) &&
+        birthdate !== null &&
         isNonEmptyString(password) &&
         isNonEmptyString(passwordConfirm)
 }
