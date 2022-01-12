@@ -5,7 +5,6 @@
 #include "mock/operation-handler/MockOperationHandler.h"
 #include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "mock-digital-light/modules/MockDigitalLightModule.h"
-#include "modules/Module.h"
 
 #define MOCK_LIGHT_IN_MODULE_NAME_0 "light0"
 #define MOCK_LIGHT_IN_MODULE_NAME_1 "light1"
