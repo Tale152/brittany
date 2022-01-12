@@ -127,7 +127,7 @@ public class SamplingArtifact extends Artifact {
 	}
 
 	private List<Component> getDevicesByCategory(final String category) {
-		return this.components.stream().filter(d -> d.getCategory().equals(category)).collect(Collectors.toList());
+		return this.components.stream().filter(c -> c.getCategory().equals(category)).filter(c -> !c.getProperties().isEmpty()).collect(Collectors.toList());
 	}
 
 	private Optional<Setting> getSettingByCategory(final String category) {
