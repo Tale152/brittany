@@ -4,6 +4,7 @@
 #include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "util.h"
 
+#define UTIL_TEST_RANDOM_ATTEMPT 100
 #define COMPONENT_0_NAME "name0"
 #define COMPONENT_1_NAME "name1"
 #define COMPONENT_2_NAME "name2"
@@ -37,8 +38,20 @@ void test_util_find_by_id() {
     TEST_ASSERT_FALSE(find_by_id(list, "the game").has_value());
 }
 
+void test_util_random() {
+    TEST_ASSERT_EQUAL(1, random(1,1));
+    TEST_ASSERT_EQUAL(2, random(2,2));
+    int min = 0;
+    int max = 20;
+    for(int i = 0; i <= UTIL_TEST_RANDOM_ATTEMPT; i++) {
+        int r = random(min, max);
+        TEST_ASSERT_TRUE(r >= min && r<= max);
+    }
+}
+
 void test_util() {
     setup_util_test();
     RUN_TEST(test_util_find_by_id);
+    RUN_TEST(test_util_random);
     post_util_test();
 }
