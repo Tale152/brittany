@@ -10,6 +10,7 @@
 #include "hw/MockDigitalLightHwTest.h"
 #include "hw/MockTempHumSensorHwTest.h"
 #include "modules/MockDigitalLightModuleTest.h"
+#include "modules/ModuleNamesTest.h"
 #include "edge/EdgeTest.h"
 #include "edge/ThingDescriptorTest.h"
 #include "utilTest.h"
@@ -32,6 +33,7 @@ void test_operation_handler() {
 
 void test_modules() {
     test_ComponentModuleTest(); //ModuleTest
+    test_ModuleNamesTest(); //ModuleNamesTest
 }
 
 void test_edge() {
