@@ -12,14 +12,12 @@
  */
 class TemperatureSensorHwInterface :
     public ComponentHw,
-    public OnePin,
     public Temperature{
 
 public:
 
-    TemperatureSensorHwInterface(std::string id, uint8_t pin) :
+    TemperatureSensorHwInterface(std::string id) :
         ComponentHw(id),
-        OnePin(pin),
         Temperature() {
 
     };

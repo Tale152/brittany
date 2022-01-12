@@ -3,7 +3,6 @@
 
 #include <string>
 #include "../ComponentHw.h"
-#include "../feature/OnePin.h"
 #include "../feature/Humidity.h"
 
 
@@ -13,14 +12,12 @@
  */
 class HumiditySensorHwInterface :
     public ComponentHw,
-    public OnePin,
     public Humidity {
 
 public:
 
-    HumiditySensorHwInterface(std::string id, uint8_t pin) :
+    HumiditySensorHwInterface(std::string id) :
         ComponentHw(id),
-        OnePin(pin),
         Humidity() {
 
     };
