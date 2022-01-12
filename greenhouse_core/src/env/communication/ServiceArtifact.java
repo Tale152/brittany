@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,13 +19,10 @@ import com.google.gson.JsonParser;
 
 import cartago.*;
 import okhttp3.HttpUrl;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import utility.Pair;
-import utility.Sample;
 import utility.setting.Settings;
 
 /**
@@ -41,7 +39,6 @@ public class ServiceArtifact extends Artifact {
 	private final static String LOGIN_FILE = "login.txt";
 	private final static String AUTH_SERVICE_URL = "http://localhost:81/agent/login";
 	private final static String SETTINGS_SERVICE_URL = "http://localhost:82/settings/latest";
-	private final static String PERSISTENCE_SERVICE_URL = "http://localhost:80/";
 
 	private OkHttpClient client;
 	private List<String> loginData;
@@ -49,7 +46,6 @@ public class ServiceArtifact extends Artifact {
 	void init() {
 		this.loginData = new ArrayList<>();
 		this.client = new OkHttpClient();
-
 	}
 
 	/**
@@ -58,7 +54,6 @@ public class ServiceArtifact extends Artifact {
 	 */
 	@OPERATION
 	void retrieveAuthenticationData() {
-
 		InputStream fileInputStream = getClass().getClassLoader()
 				.getResourceAsStream(LOGIN_FILE);
 
@@ -73,19 +68,11 @@ public class ServiceArtifact extends Artifact {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@INTERNAL_OPERATION
 	void autheticate() {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE_URL).newBuilder();
-		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
-		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
-		urlBuilder.addQueryParameter("environmentName", this.loginData.get(2));
-		urlBuilder.addQueryParameter("environmentPassword", this.loginData.get(3));
-		String url = urlBuilder.build().toString();
-
-		Request request = new Request.Builder().url(url).build();
+		Request request = new Request.Builder().url(getAuthenticationUrl()).build();
 
 		try (Response response = client.newCall(request).execute()) {
 			if (!response.isSuccessful()) {
@@ -96,7 +83,6 @@ public class ServiceArtifact extends Artifact {
 
 			if (tokenObject.has("token")) {
 				defineObsProperty("token", tokenObject.get("token").getAsString());
-				System.out.println("TOKEN:" + tokenObject.get("token"));
 			} else {
 				throw new IllegalStateException("You did not received the token.");
 			}
@@ -105,8 +91,18 @@ public class ServiceArtifact extends Artifact {
 		}
 	}
 
+	private String getAuthenticationUrl(){
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE_URL).newBuilder();
+		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
+		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
+		urlBuilder.addQueryParameter("environmentName", this.loginData.get(2));
+		urlBuilder.addQueryParameter("environmentPassword", this.loginData.get(3));
+
+		return urlBuilder.build().toString();
+	}
+
 	@OPERATION
-	void getSettings(final String token, OpFeedbackParam<Optional<Settings>> retrievedSettings) {
+	void getSettings(final String token) {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
 		String url = urlBuilder.build().toString();
 
@@ -114,13 +110,12 @@ public class ServiceArtifact extends Artifact {
 
 		try (Response response = client.newCall(request).execute()) {
 			if (!response.isSuccessful()) {
-				// settings is empty, handle that
-				retrievedSettings.set(Optional.empty());
+				// settings are empty
+				defineObsProperty("settings", Optional.empty());
 			} else {
 				JsonObject settingsObject = JsonParser.parseString(response.body().string()).getAsJsonObject();
 
 				if (settingsObject.has("_id") && settingsObject.has("created")) {
-
 					SimpleDateFormat dataFormatter = new SimpleDateFormat(UTC_FORMAT);
 					dataFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 					Date creationDate = dataFormatter.parse(settingsObject.get("created").getAsString());
@@ -141,52 +136,17 @@ public class ServiceArtifact extends Artifact {
 						}
 						if (dataObject.has("light")) {
 							JsonObject light = dataObject.get("light").getAsJsonObject();
-							// TODO fix to actually create a HourSetting
-							settings.createSetting("light",
-									new Pair<>(light.get("min").getAsInt(), light.get("max").getAsInt()));
+							LocalTime fromTime = LocalTime.of(light.get("fromH").getAsInt(), light.get("fromM").getAsInt());
+							LocalTime toTime = LocalTime.of(light.get("toH").getAsInt(), light.get("toM").getAsInt());
+							settings.createSetting("light", fromTime, toTime);
 						}
 					}
-
-					System.out.println("SETTINGS: " + settings);
-					retrievedSettings.set(Optional.of(settings));
-
+					defineObsProperty("settings", Optional.of(settings));
 				}
-
 			}
-
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
 	}
 
-	@OPERATION
-	void uploadPersistence(final Sample sample, final String token) {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(PERSISTENCE_SERVICE_URL + sample.getCategory() + "/register")
-				.newBuilder();
-		String url = urlBuilder.build().toString();
-
-		JsonObject jsonSample = new JsonObject();
-		jsonSample.addProperty("value", sample.getValue());
-		jsonSample.addProperty("timestamp", sample.getSamplingTime());
-
-		RequestBody body = RequestBody.create(jsonSample.toString(),
-				MediaType.parse("application/json; charset=utf-8"));
-
-		Request request = new Request.Builder()
-				.addHeader("token", token)
-				.url(url)
-				.post(body)
-				.build();
-
-		try (Response response = client.newCall(request).execute()) {
-			if (!response.isSuccessful()) {
-				throw new IOException("Unexpected code " + response);
-			} else {
-				System.out.println(sample + "correcty uploaded");
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

@@ -4,12 +4,26 @@
 
 /* Initial goals */
 
+!checkSettings.
+
 /* Plans */
 
-+actuate(Device, Setting) <- actuate(Device, Setting).
++setup(Components, Settings) <- setupComponents(Components, Settings).
+
++setupTd(Td) <- setupTd(Td).
+
++!checkSettings <- ?category(Category); checkSettings(Category); !wait.
+
++!checkSettings <- !wait.
+
++!wait <- .at("now + 10 seconds", {+!checkSettings}).
+
+/*
+ * Sample: Sample that caused an out of range status.
+ * Setting: Setting that are violated by the sample current value.
+ * Plan that is triggered when a Sample does not respect the current settings.
+ */
++actuate(Sample, Setting) <- actuate(Sample, Setting).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
-
-// uncomment the include below to have an agent compliant with its organisation
-//{ include("$moiseJar/asl/org-obedient.asl") }
