@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -56,6 +57,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 		//for test purposes
 		getThingDescriptorByFile();
 		System.out.println("UPDATED COMPONENTS!");
+		System.out.println(this.components);
 		defineObsProperty("components", this.components);
 	}
 
@@ -80,25 +82,20 @@ public class DiscoverComponentsArtifact extends Artifact {
 				JsonObject jsonModule = module.getAsJsonObject();
 				if (jsonModule.has("module")) {
 					String category = jsonModule.get("module").getAsString();
-					Map<String, ConsumedThingProperty<Object>> moduleProperties = null;
-					Map<String, ConsumedThingAction<Object, Object>> moduleActions = null;
-
-					if (thingDescriptor.has("properties")) {
-						JsonObject properties = thingDescriptor.getAsJsonObject("properties");
-						moduleProperties = getPropertiesByName(consumedThing, getNamesByCategory(properties, category));
-					}
-					if (thingDescriptor.has("actions")) {
-						JsonObject actions = thingDescriptor.getAsJsonObject("actions");
-						moduleActions = getActionsByName(consumedThing, getNamesByCategory(actions, category));
-					}
 					if (jsonModule.has("components")) {
 						JsonArray components = jsonModule.getAsJsonArray("components");
 						for (JsonElement component : components) {
-							ComponentBuilder componentBuilder = ComponentBuilder.create(edgeIp, component.getAsString(), category);
-							if (moduleProperties != null) {
+							String componentId = component.getAsString();
+							ComponentBuilder componentBuilder = ComponentBuilder.create(edgeIp, componentId, category);
+
+							if (thingDescriptor.has("properties")) {
+								JsonObject properties = thingDescriptor.getAsJsonObject("properties");
+								Map<String, ConsumedThingProperty<Object>> moduleProperties = getPropertiesByName(consumedThing,getNamesByCategory(properties, category, componentId));
 								componentBuilder.addProperties(moduleProperties);
 							}
-							if (moduleActions != null) {
+							if (thingDescriptor.has("actions")) {
+								JsonObject actions = thingDescriptor.getAsJsonObject("actions");
+								Map<String, ConsumedThingAction<Object, Object>> moduleActions = getActionsByName(consumedThing, getNamesByCategory(actions, category, componentId));
 								componentBuilder.addActions(moduleActions);
 							}
 							Component foundComponent = componentBuilder.build();
@@ -113,7 +110,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 		}
 	}
 
-	private List<String> getNamesByCategory(final JsonObject td, final String category) {
+	private List<String> getNamesByCategory(final JsonObject td, final String category, final String componentId) {
 		List<String> names = new ArrayList<>();
 		Set<Map.Entry<String, JsonElement>> entries = td.entrySet();
 		for (Map.Entry<String, JsonElement> entry : entries) {
@@ -122,7 +119,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 				names.add(entry.getKey());
 			}
 		}
-		return names;
+		return names.stream().filter(n -> n.substring(n.lastIndexOf("-") + 1).equals(componentId)).collect(Collectors.toList());
 	}
 
 	private Map<String, ConsumedThingProperty<Object>> getPropertiesByName(final ConsumedThing consumedThing, final List<String> propertiesNames) {
