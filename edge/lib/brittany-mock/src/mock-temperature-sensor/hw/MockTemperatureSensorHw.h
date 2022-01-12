@@ -20,7 +20,7 @@ public:
     MockTemperatureSensorHw(std::string id) : TemperatureSensorHwInterface(id) { };
 
     std::optional<float> temperatureCelsius() {
-        return random(0, MOCK_MAX_TEMPERATURE_CELSIUS);
+        return std::optional<float>(random(0, MOCK_MAX_TEMPERATURE_CELSIUS));
     }
 
     std::optional<float> temperatureKelvin() {

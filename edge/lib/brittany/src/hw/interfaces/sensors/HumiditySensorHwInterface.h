@@ -2,9 +2,8 @@
 #define BRITTANY_HUMIDITY_SENSOR_HW_INTERFACE_H
 
 #include <string>
-#include "../ComponentHw.h"
-#include "../feature/Humidity.h"
-
+#include "hw/ComponentHw.h"
+#include "hw/feature/Humidity.h"
 
 /**
  * @brief An interface to create a component that represents a sensor that can
