@@ -1,16 +1,19 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useAlert } from 'react-alert'
 
 import settingsCreate from '../../../js/settings/settingsCreate'
 import CustomCenteredButton from '../../_common/CustomCenteredButton'
 import CustomModal from '../../_common/CustomModal'
+import FormDatePicker from '../../_common/form/FormDatePicker'
 import FormText from '../../_common/form/input/FormText'
 
 export default function CreateSettings() {
 
+    const alert = useAlert()
     const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false)
-    const [expire, setExpire] = useState("")
+    const [expire, setExpire] = useState(null)
     const [temperatureActive, setTemperatureActive] = useState(false)
     const [temperatureMin, setTemperatureMin] = useState(null)
     const [temperatureMax, setTemperatureMax] = useState(null)
@@ -26,9 +29,18 @@ export default function CreateSettings() {
     let idEnvironment = useSelector(state => state.environments.selected)
 
     function onHide(){
+        setExpire(null)
         setTemperatureActive(false)
+        setTemperatureMin(null)
+        setTemperatureMax(null)
         setAirHumidityActive(false)
+        setAirHumidityMin(null)
+        setAirHumidityMax(null)
         setLightActive(false)
+        setLightFromH(null)
+        setLightFromM(null)
+        setLightToH(null)
+        setLightToM(null)
         setShowModal(false)
     }
 
@@ -58,7 +70,7 @@ export default function CreateSettings() {
                 toM: lightToM
             }
         }
-        settingsCreate(token, payload, idEnvironment, dispatch)
+        settingsCreate(token, payload, idEnvironment, dispatch, alert)
     }
 
     return (
@@ -73,11 +85,10 @@ export default function CreateSettings() {
                 title = { "New Settings" }
                 body = {
                     <>
-                        <FormText
+                        <FormDatePicker
                             text = { "Expires:" }
-                            placeholder = { "Insert expire date" }
+                            selected = { expire }
                             onChange = { input => setExpire(input) }
-                            onEnter = { createNew }
                         />
                         {minMaxValue("Temperature", temperatureActive, () => setTemperatureActive(true), setTemperatureMin, setTemperatureMax, createNew)}
                         {minMaxValue("Air Humidity", airHumidityActive, () => setAirHumidityActive(true), setAirHumidityMin, setAirHumidityMax, createNew)}
