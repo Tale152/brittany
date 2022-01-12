@@ -4,7 +4,7 @@ const AirHumidity = require('../../../mongoose/airHumidity')
 
 async function airHumidityListController(req, res){
     AirHumidity.find({ id_environment: new ObjectId(req.query.id) })
-        .sort({timestamp: 'desc'})
+        .sort({timestamp: 'asc'})
         .select("-_id -id_environment -__v")
         .then(async airHumidities => {
             if(airHumidities !== null){

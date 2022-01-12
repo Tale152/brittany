@@ -6,6 +6,10 @@
 #include <json/json.h>
 #include "operation-handler/OperationHandler.h"
 #include <optional>
+#include "ValueReturnedHandlerInterface.h"
+#include "HttpStatusCodes_C++.h"
+#include "util.h"
+#include "operation-handler/interfaces/util/ValueReturnedResult.h"
 
 /**
  * @brief Type of the parameter to be returned by this class.
@@ -27,9 +31,34 @@ public:
      * @param name the name of the handler.
      * @param path the path(route) of the handler.
      */
-    ValueReturnedHandlerInterface(std::string name, std::string path);
+    ValueReturnedHandlerInterface(
+        std::string name,
+        std::string path,
+        OperationType operationType,
+        Type outputType
+        ) : OperationHandler(
+            name,
+            path,
+            operationType,
+            outputType
+        ) {
+        //does nothing
+    };
 
-    OperationHandlerResult handle(Json::Value args);
+    OperationHandlerResult handle(Json::Value args) {
+        ValueReturnedResult<T> result = operation(args);
+        if(result.value().has_value()) {
+            // Return the value
+            return OperationHandlerResult(result.code(), Json::Value(result.value().value()));
+        } else {
+            // Return the description message if present 
+            if(result.message().has_value()) {
+                return OperationHandlerResult(result.code(), Json::Value(result.message().value()));
+            }
+        }
+        // Return a very generic error message
+        return OperationHandlerResult(result.code(), Json::Value(phrase(ContentResult::OperationFailed)));
+    };
 
 private:
     
@@ -37,9 +66,9 @@ private:
      * @brief execute an operation that may return a value that is then processed by the handle method.
      * 
      * @param args the arguments used by the operation.
-     * @return std::optional<T> a generic return type wrapped in an optional in case of failures.
+     * @return ValueReturnedResult the result struct of the operation.
      */
-    virtual std::optional<T> operation(Json::Value args) = 0;
+    virtual ValueReturnedResult<T> operation(Json::Value args) = 0;
 
 };
 

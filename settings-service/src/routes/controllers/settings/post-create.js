@@ -3,7 +3,9 @@ const numberUtil = require('../util/numberUtil')
 const SettingsFactory = require('../../../mongoose/factories/settings')
 
 function isBetween(val, min, max){
-    return numberUtil.isValidNumber(val) && val >= min && val < max
+    return numberUtil.isValidNumber(val) &&
+    Number.parseFloat(val) >= Number.parseFloat(min) &&
+    Number.parseFloat(val) < Number.parseFloat(max)
 }
 
 function isLightValid(light){
@@ -17,7 +19,9 @@ function isLightValid(light){
 }
 function isRangeFieldValid(field){
     if(field !== undefined){
-        return numberUtil.isValidNumber(field.min) && numberUtil.isValidNumber(field.max) && field.min <= field.max
+        return numberUtil.isValidNumber(field.min) && 
+            numberUtil.isValidNumber(field.max) &&
+            Number.parseFloat(field.min) <= Number.parseFloat(field.max)
     }
     return true
 }

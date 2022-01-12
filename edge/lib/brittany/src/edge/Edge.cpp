@@ -4,8 +4,13 @@
 #include "util.h"
 #include "thing-descriptor/ThingDescriptorBuilder.h"
 
-Edge::Edge(std::list<Module*> modules) {
-    _modules = modules;
+Edge::Edge(std::string title, std::list<Module*> modules) {
+    _title = title;
+    _modules = modules;    
+}
+
+std::string Edge::title() {
+    return _title;
 }
 
 OperationHandlerResult Edge::execute(std::string route, Json::Value args) {
@@ -33,5 +38,5 @@ std::list<std::string> Edge::availablePaths() {
 }
 
 Json::Value Edge::thingDescriptor(std::string ip, int port) {
-    return ThingDescriptorBuilder::build(ip, port, _modules);
+    return ThingDescriptorBuilder::build(ip, port, _title, _modules);
 }

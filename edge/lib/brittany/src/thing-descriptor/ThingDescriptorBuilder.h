@@ -5,7 +5,6 @@
 #include "json/json.h"
 #include "modules/Module.h"
 #include "modules/ComponentModule.h"
-#include "modules/ComponentModule.cpp"
 #include "hw/ComponentHw.h"
 #include <string>
 
@@ -15,14 +14,14 @@ class ThingDescriptorBuilder {
 
 public:
 
-    static Json::Value build(std::string ip, int port, std::list<Module*> modules) {
+    static Json::Value build(std::string ip, int port, std::string title, std::list<Module*> modules) {
         Json::Value td;
         add_context(td);
         add_id(td, ip, port);
-        add_title(td);
+        add_title(td, title);
         add_security(td);
         add_modules(td, modules);
-        add_actions(td, ip, port, modules);
+        add_href(td, ip, port, modules);
         return td;
     };
 
@@ -32,8 +31,8 @@ private:
         td[key(Key::CONTEXT)] = value(Key::CONTEXT);
     }
 
-    static void add_title(Json::Value &td) { 
-        td["title"] = "Mock Title";
+    static void add_title(Json::Value &td, std::string title) { 
+        td["title"] = title;
     }
         
     static void add_id(Json::Value &td, std::string ip, int port) { 
@@ -63,15 +62,37 @@ private:
         }
     }
 
-    static void add_actions(Json::Value &td, std::string ip, int port, std::list<Module*> modules) {
+    static void add_href(Json::Value &td, std::string ip, int port, std::list<Module*> modules) {
         for(Module* m : modules) {
             for(OperationHandler* h : m -> handlers()) {
-                Json::Value action;
-                action["module"] = m -> name();
-                action["forms"][0]["href"] =
-                    std::string("http://") + ip + ":" + std::to_string(port) + h -> path();
-                action["forms"][0]["contentType"] = "application/json";
-                td["actions"][h -> name()] = action;
+                ComponentModule<ComponentHw>* cm = static_cast<ComponentModule<ComponentHw>*>(m);
+                for(ComponentHw c : cm -> components()) {
+                    Json::Value object;
+                    object["module"] = m -> name();
+                    object["forms"][0]["href"] =
+                        std::string("http://") + ip + ":" + std::to_string(port) + h -> path() + "?id=" + c.id();
+                    object["forms"][0]["contentType"] = "application/json";
+                    std::string objectName;
+                    std::string name = h -> name();
+                    if(cm->components().size() != 1) {
+                        name += "-" + c.id();
+                    }
+                    std::string type = type_to_string(h -> outputType());
+                    switch (h -> operationType()) {
+                    case OperationType::ACTION:
+                        objectName = "actions";
+                        object["output"]["type"] = type;
+                        break;
+                    case OperationType::PROPERTY:
+                        objectName = "properties";
+                        object["type"] = type;
+                        break;
+                    case OperationType::EVENT:
+                        objectName = "events";
+                        break;
+                    }
+                    td[objectName][name] = object;
+                } 
             }
         }
         

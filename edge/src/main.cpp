@@ -1,12 +1,17 @@
 #include <Arduino.h>
-#include "web-server/Esp8266WebServer.h"
-#include "hw/MockDigitalLightHw.h"
-#include "modules/MockDigitalLightModule.h"
 #include <json_util.h>
-#include "wifi_secret.h"
 #include <list>
+#include "web-server/Esp8266WebServer.h"
+#include "wifi_secret.h"
+#include "modules/Module.h"
+#include "modules/dht22.h"
+#include "modules/mock-digital-light.h"
 
 Esp8266WebServer* server;
+
+void setup_variables() {
+    server = new Esp8266WebServer(edge());
+}
 
 void connect_to_wifi() {
     WiFi.begin(WIFI_SSID, WIFI_PSWD);
@@ -20,15 +25,6 @@ void connect_to_wifi() {
     Serial.println("Connection established!");  
     Serial.print("IP address:\t");
     Serial.println(WiFi.localIP());  
-}
-
-void setup_variables() {
-    MockDigitalLightHw* light0 = new MockDigitalLightHw("0", 0);
-    MockDigitalLightHw* light1 = new MockDigitalLightHw("1", 1);
-    std::list<MockDigitalLightHw*> lights = std::list<MockDigitalLightHw*>({light0, light1});
-    std::list<Module*> modules = std::list<Module*>({new MockDigitalLightModule("light", lights)});
-    Edge* edge = new Edge(modules);
-    server = new Esp8266WebServer(edge);
 }
 
 void setup() {

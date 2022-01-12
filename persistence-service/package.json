@@ -1,6 +1,6 @@
 {
   "name": "persistence-service",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Server that handles the persistence of data in the Brittany environment",
   "main": "index.js",
   "scripts": {

@@ -35,7 +35,7 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
         200,
         (res) => {
             expect(res.body.list.length).toBe(2)
-            expect(res.body.list[0].value).toBe(valueNewest)
+            expect(res.body.list[0].value).toBe(valueOldest)
         }
     )
 }

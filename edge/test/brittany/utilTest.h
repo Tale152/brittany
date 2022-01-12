@@ -1,7 +1,7 @@
 #include <unity.h>
 #include <list>
 #include "hw/ComponentHw.h"
-#include "hw/MockDigitalLightHw.h"
+#include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "util.h"
 
 #define COMPONENT_0_NAME "name0"
@@ -29,12 +29,12 @@ void post_util_test() {
     delete component0, component1, component2;
 }
 
-void test_util_find_by_id(){
-    TEST_ASSERT_EQUAL(component0, find_by_id(list, COMPONENT_0_NAME));
-    TEST_ASSERT_EQUAL(component1, find_by_id(list, COMPONENT_1_NAME));
-    TEST_ASSERT_EQUAL(component2, (MockDigitalLightHw*)find_by_id(list, COMPONENT_2_NAME));
-    TEST_ASSERT_EQUAL(component2, find_by_id(list_of_light, COMPONENT_2_NAME));
-    TEST_ASSERT_NULL(find_by_id(list, "the game"));
+void test_util_find_by_id() {
+    TEST_ASSERT_EQUAL(component0, find_by_id(list, COMPONENT_0_NAME).value());
+    TEST_ASSERT_EQUAL(component1, find_by_id(list, COMPONENT_1_NAME).value());
+    TEST_ASSERT_EQUAL(component2, (MockDigitalLightHw*)find_by_id(list, COMPONENT_2_NAME).value());
+    TEST_ASSERT_EQUAL(component2, find_by_id(list_of_light, COMPONENT_2_NAME).value());
+    TEST_ASSERT_FALSE(find_by_id(list, "the game").has_value());
 }
 
 void test_util() {

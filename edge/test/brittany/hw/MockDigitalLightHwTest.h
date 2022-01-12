@@ -1,5 +1,5 @@
 #include <unity.h>
-#include "hw/MockDigitalLightHw.h"
+#include "mock-digital-light/hw/MockDigitalLightHw.h"
 
 #define DIGITAL_LIGHT_ID "light"
 #define DIGITAL_LIGHT_PIN 10

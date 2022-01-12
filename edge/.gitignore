@@ -1,5 +1,8 @@
 CMakeListsPrivate.txt
 wifi_secret.h
+cov/
+lcov.info
+filtered_lcov.info
 
 # Created by https://www.toptal.com/developers/gitignore/api/c,c++,visualstudiocode,visualstudio,platformio,gradle,clion+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=c,c++,visualstudiocode,visualstudio,platformio,gradle,clion+all
