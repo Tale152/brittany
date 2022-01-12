@@ -6,6 +6,7 @@
 #include "modules/Module.h"
 #include "modules/dht22.h"
 #include "modules/mock-digital-light.h"
+#include <ESP8266WiFi.h>
 
 Esp8266WebServer* server;
 

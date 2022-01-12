@@ -11,5 +11,5 @@ tasks.register<Exec>("testRealHw") {
 }
 
 tasks.register<Exec>("upload") {
-    commandLine("pio", "run", "-e", "nodemcuv2", "-t", "upload")
+    commandLine("pio", "run", "-e", "mock-digital-light", "-t", "upload", "-t", "monitor")
 }
