@@ -5,6 +5,7 @@ import { setIsLoading } from '../../redux/util/actions'
 import organizationInfo from './organizationInfo'
 import { authService } from '../../conf'
 import { isNonEmptyString } from '../util/validator'
+import { convertDate } from '../util/dateConverter'
 
 $.ajaxSetup({
     contentType: "application/json; charset=utf-8"
@@ -53,12 +54,4 @@ function createParams(organizationName, name, surname, mail, birthdate, password
         birthdate: convertDate(birthdate),
         password: password.trim()
     })
-}
-
-function convertDate(date){
-    return date.getFullYear() + "-" + correctValue(date.getMonth() + 1) + "-" + correctValue(date.getDate())
-}
-
-function correctValue(v){
-    return parseInt(v > 9 ? v : ("0" + v))
 }
