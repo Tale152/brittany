@@ -35,6 +35,8 @@ public class SamplingArtifact extends Artifact {
 	private List<Sample> lastSamples;
 
 	void init() {
+		this.components = new ArrayList<>();
+		this.settings = Optional.empty();
 		this.lastSamples = new ArrayList<>();
 	}
 

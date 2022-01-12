@@ -44,8 +44,10 @@ mas greenhouse_core {
 	}
 	
 	agent actuatorAgent : actuatorAgent.asl {
+		beliefs: category("light")
 		focus: brittany.sampling
 		focus: brittany.actuation
+		focus: brittany.common
 	}
 	
 	workspace brittany {

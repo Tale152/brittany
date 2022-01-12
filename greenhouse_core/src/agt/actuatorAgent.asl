@@ -6,6 +6,12 @@
 
 /* Plans */
 
++setup(Devices, Settings) <- setup(Devices, Settings); !wait.
+
++!wait <- .at("now + 10 seconds", {+!checkSettings}).
+
++!checkSettings <- ?category(Category); checkSettings(Category); !wait.
+
 /*
  * Sample: Sample that caused an out of range status.
  * Setting: Setting that are violated by the sample current value.

@@ -2,9 +2,20 @@
 
 package communication;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.eclipse.rdf4j.query.algebra.evaluation.function.datetime.Hours;
+
 import cartago.*;
 import utility.Sample;
+import utility.component.Component;
+import utility.setting.HourSetting;
 import utility.setting.RangeSetting;
+import utility.setting.Settings;
 
 /**
  * ActautionArtifact is an Artifact that is used to send a message to an actuator to 
@@ -14,7 +25,38 @@ import utility.setting.RangeSetting;
  */
 public class ActuationArtifact extends Artifact {
 	
-	void init() {}
+	private List<Component> components;
+	private Optional<Settings> settings;
+
+	void init() {
+		this.components = new ArrayList<>();
+		this.settings = Optional.empty();
+	}
+
+
+	@OPERATION
+	void setup(final List<Component> components, final Optional<Settings> settings) {
+		this.settings = settings;
+		this.components = components;
+	}
+
+	@OPERATION 
+	void checkSettings(final String category){
+		if (!this.components.isEmpty() && this.settings.isPresent() && this.settings.get().getSetting(category).isPresent()){
+			HourSetting setting = (HourSetting) this.settings.get().getSetting(category).get();
+			List<Component> actuators = getActuatorsByCategory(category);
+			if (setting.getFromTime().compareTo(LocalTime.now()) <= 0) {
+				
+			} else if (setting.getToTime().compareTo(LocalTime.now()) <= 0) {
+
+			}
+		}
+	}
+
+	
+	private List<Component> getActuatorsByCategory(final String category) {
+		return this.components.stream().filter(c -> c.getCategory().equals(category)).filter(c -> !c.getActions().isEmpty()).collect(Collectors.toList());
+	}
 
 	/**
 	 * Used to check the current sample and to notify if it is bigger or lower that the settings.
