@@ -4,13 +4,19 @@
 
 /* Initial goals */
 
+!checkSettings.
+
 /* Plans */
 
-+setup(Devices, Settings) <- setup(Devices, Settings); !wait.
++setup(Components, Settings) <- setupComponents(Components, Settings).
 
-+!wait <- .at("now + 10 seconds", {+!checkSettings}).
++setupTd(Td) <- setupTd(Td).
 
 +!checkSettings <- ?category(Category); checkSettings(Category); !wait.
+
++!checkSettings <- !wait.
+
++!wait <- .at("now + 10 seconds", {+!checkSettings}).
 
 /*
  * Sample: Sample that caused an out of range status.

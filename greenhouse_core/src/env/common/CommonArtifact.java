@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import cartago.*;
+import city.sane.wot.thing.ConsumedThing;
 import utility.component.Component;
 import utility.setting.Settings;
 
@@ -21,17 +22,20 @@ public class CommonArtifact extends Artifact {
 
 	private List<Component> components;
 	private Optional<Settings> settings;
+	private List<ConsumedThing> thingDescriptors;
 
 	void init() {
 		// for test purpose right now devices are hard-coded
 		this.components = new ArrayList<>();
 		this.settings = Optional.empty();
+		this.thingDescriptors = new ArrayList<>();
 
-		defineObsProperty("setup", components, this.settings);
+		defineObsProperty("setup", this.components, this.settings);
+		defineObsProperty("setupTd", this.thingDescriptors);
 	}
 
 	@OPERATION
-	void shareDevices(final List<Component> components) {
+	void shareComponents(final List<Component> components) {
 		if (!this.components.equals(components)) {
 			this.components = components;
 		}
@@ -43,6 +47,14 @@ public class CommonArtifact extends Artifact {
 		if (!this.settings.equals(settings)) {
 			this.settings = settings;
 			updateObsProperty("setup", this.components, this.settings);
+		}
+	}
+
+	@OPERATION
+	void shareThingDescriptors(final List<ConsumedThing> thingDescriptors) {
+		if (!this.thingDescriptors.equals(thingDescriptors)) {
+			this.thingDescriptors = thingDescriptors;
+			updateObsProperty("setupTd", this.thingDescriptors);
 		}
 	}
 }

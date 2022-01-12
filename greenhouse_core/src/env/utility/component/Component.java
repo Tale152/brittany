@@ -1,20 +1,17 @@
 package utility.component;
 
-import java.util.Map;
-
-import city.sane.wot.thing.action.ConsumedThingAction;
-import city.sane.wot.thing.property.ConsumedThingProperty;
+import java.util.List;
+import java.util.Optional;
 
 public class Component {
 	private final String edgeIp;
 	private final String id;
 	private final String category;
-	private final Map<String, ConsumedThingProperty<Object>> properties;
-	private final Map<String, ConsumedThingAction<Object, Object>> actions;
+	private final List<String> properties;
+	private final List<String> actions;
 
 	protected Component(final String edgeIp, final String id, final String category,
-			final Map<String, ConsumedThingProperty<Object>> properties,
-			final Map<String, ConsumedThingAction<Object, Object>> actions) {
+			final List<String> properties, final List<String> actions) {
 		this.edgeIp = edgeIp;
 		this.id = id;
 		this.category = category;
@@ -34,12 +31,19 @@ public class Component {
 		return category;
 	}
 
-	public Map<String, ConsumedThingProperty<Object>> getProperties() {
+	public List<String> getProperties() {
 		return properties;
 	}
 
-	public Map<String, ConsumedThingAction<Object, Object>> getActions() {
+	public Optional<String> getPropertyBySubString(final String subString) {
+		return this.properties.stream().filter(s -> s.contains(subString)).findFirst();
+	}
+
+	public List<String> getActions() {
 		return actions;
+	}
+	public Optional<String> getActionBySubString(final String subString) {
+		return this.actions.stream().filter(s -> s.contains(subString)).findFirst();
 	}
 
 	@Override
@@ -95,6 +99,6 @@ public class Component {
 		} else if (!properties.equals(other.properties))
 			return false;
 		return true;
-    }
+	}
 
 }

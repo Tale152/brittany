@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
@@ -25,17 +25,23 @@ import city.sane.wot.Wot;
 import city.sane.wot.WotException;
 import city.sane.wot.thing.ConsumedThing;
 import city.sane.wot.thing.Thing;
-import city.sane.wot.thing.action.ConsumedThingAction;
-import city.sane.wot.thing.property.ConsumedThingProperty;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import utility.component.Component;
 import utility.component.ComponentBuilder;
 
 public class DiscoverComponentsArtifact extends Artifact {
+	private static final String URL = "http://192.168.25.1";
+
+	private OkHttpClient client;
 
 	private List<Component> components;
+	private List<ConsumedThing> thingDescriptors;
 	private Wot wot;
 
 	void init() {
+		this.client = new OkHttpClient();
 		this.components = new ArrayList<>();
 
 		Config config = ConfigFactory.parseString(
@@ -46,7 +52,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 		} catch (WotException e1) {
 			e1.printStackTrace();
 		}
-		getThingDescriptorByFile();
+		getThingDescriptor();
 	}
 
 	@OPERATION
@@ -55,10 +61,23 @@ public class DiscoverComponentsArtifact extends Artifact {
 		// the proper devices
 
 		//for test purposes
-		getThingDescriptorByFile();
+		getThingDescriptor();
 		System.out.println("UPDATED COMPONENTS!");
-		System.out.println(this.components);
 		defineObsProperty("components", this.components);
+		defineObsProperty("thingDescriptors", this.thingDescriptors);
+	}
+
+	private void getThingDescriptor() {
+		Request request = new Request.Builder().url(URL).build();
+		try (Response response = client.newCall(request).execute()) {
+			if (!response.isSuccessful()) {
+				throw new IOException("Unexpected code " + response);
+			}
+			JsonObject thingDescriptor = JsonParser.parseString(response.body().string()).getAsJsonObject();
+			updateComponents(thingDescriptor);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void getThingDescriptorByFile() {
@@ -73,8 +92,11 @@ public class DiscoverComponentsArtifact extends Artifact {
 	}
 
 	private void updateComponents(final JsonObject thingDescriptor) {
+		this.thingDescriptors = new ArrayList<>();
+
 		Thing thing = Thing.fromJson(thingDescriptor.toString());
 		ConsumedThing consumedThing = wot.consume(thing);
+		this.thingDescriptors.add(consumedThing);
 		String edgeIp = consumedThing.getId();
 		if (thingDescriptor.has("modules")) {
 			JsonArray modules = thingDescriptor.getAsJsonArray("modules");
@@ -90,13 +112,11 @@ public class DiscoverComponentsArtifact extends Artifact {
 
 							if (thingDescriptor.has("properties")) {
 								JsonObject properties = thingDescriptor.getAsJsonObject("properties");
-								Map<String, ConsumedThingProperty<Object>> moduleProperties = getPropertiesByName(consumedThing,getNamesByCategory(properties, category, componentId));
-								componentBuilder.addProperties(moduleProperties);
+								componentBuilder.addProperties(getNamesByCategory(properties, category, componentId));
 							}
 							if (thingDescriptor.has("actions")) {
 								JsonObject actions = thingDescriptor.getAsJsonObject("actions");
-								Map<String, ConsumedThingAction<Object, Object>> moduleActions = getActionsByName(consumedThing, getNamesByCategory(actions, category, componentId));
-								componentBuilder.addActions(moduleActions);
+								componentBuilder.addActions(getNamesByCategory(actions, category, componentId));
 							}
 							Component foundComponent = componentBuilder.build();
 							if (!this.components.contains(foundComponent)){
@@ -120,23 +140,6 @@ public class DiscoverComponentsArtifact extends Artifact {
 			}
 		}
 		return names.stream().filter(n -> n.substring(n.lastIndexOf("-") + 1).equals(componentId)).collect(Collectors.toList());
-	}
-
-	private Map<String, ConsumedThingProperty<Object>> getPropertiesByName(final ConsumedThing consumedThing, final List<String> propertiesNames) {
-		Map<String, ConsumedThingProperty<Object>> properties = new HashMap<>();
-		for (String name : propertiesNames) {
-			properties.put(name, consumedThing.getProperty(name));
-		}
-		return properties;
-	}
-
-	private Map<String, ConsumedThingAction<Object, Object>> getActionsByName(
-			final ConsumedThing consumedThing, final List<String> actionsNames) {
-				Map<String, ConsumedThingAction<Object, Object>> actions = new HashMap<>();
-				for (String name : actionsNames) {
-					actions.put(name, consumedThing.getAction(name));
-				}
-				return actions;
 	}
 
 }

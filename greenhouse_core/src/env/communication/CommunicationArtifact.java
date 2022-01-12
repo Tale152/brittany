@@ -34,7 +34,7 @@ public class CommunicationArtifact extends Artifact {
 	@OPERATION
 	void getSamplesOperation(List<Component> components, OpFeedbackParam<List<Sample>> retrievedSamples) {
 		this.samples = new ArrayList<>();
-		System.out.println("Communicating with " + components);
+		//System.out.println("Communicating with " + components);
 		components.forEach(d -> this.samples.add(new Sample(d.getCategory(),
 				Instant.now().toString(), new Random().nextInt(20))));
 		retrievedSamples.set(this.samples);

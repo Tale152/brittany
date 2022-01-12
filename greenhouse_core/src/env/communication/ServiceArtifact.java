@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -135,9 +136,9 @@ public class ServiceArtifact extends Artifact {
 						}
 						if (dataObject.has("light")) {
 							JsonObject light = dataObject.get("light").getAsJsonObject();
-							// TODO fix to actually create a HourSetting
-							settings.createSetting("light",
-									new Pair<>(light.get("min").getAsInt(), light.get("max").getAsInt()));
+							LocalTime fromTime = LocalTime.of(light.get("fromH").getAsInt(), light.get("fromM").getAsInt());
+							LocalTime toTime = LocalTime.of(light.get("toH").getAsInt(), light.get("toM").getAsInt());
+							settings.createSetting("light", fromTime, toTime);
 						}
 					}
 					defineObsProperty("settings", Optional.of(settings));
