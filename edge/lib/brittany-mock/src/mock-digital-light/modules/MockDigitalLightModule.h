@@ -8,6 +8,7 @@
 #include "mock-digital-light/operation-handler/MockIsOnDigitalLightHandler.h"
 #include "mock-digital-light/operation-handler/MockTurnOffDigitalLightHandler.h"
 #include "mock-digital-light/operation-handler/MockTurnOnDigitalLightHandler.h"
+#include "modules/ModuleNames.h"
 
 #define MOCK_IS_ON_HANDLER_MODULE_NAME "isOn"
 #define MOCK_TURN_ON_HANDLER_MODULE_NAME "turnOn"
@@ -17,7 +18,8 @@ class MockDigitalLightModule : public ComponentModule<MockDigitalLightHw> {
 
 public:
 
-    MockDigitalLightModule(std::string name, std::list<MockDigitalLightHw*> components): ComponentModule<MockDigitalLightHw>(name, components) {
+    MockDigitalLightModule(std::list<MockDigitalLightHw*> components)
+    : ComponentModule<MockDigitalLightHw>(module_as_string(ModuleNames::Light), components) {
         _handlers.push_back(
             new MockIsOnDigitalLightHandler(
                 MOCK_IS_ON_HANDLER_MODULE_NAME,

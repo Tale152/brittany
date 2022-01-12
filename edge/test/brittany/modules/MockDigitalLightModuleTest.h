@@ -7,7 +7,6 @@
 #include "mock-digital-light/modules/MockDigitalLightModule.h"
 #include "modules/Module.h"
 
-#define MOCK_MODULE_NAME "light"
 #define MOCK_LIGHT_IN_MODULE_NAME_0 "light0"
 #define MOCK_LIGHT_IN_MODULE_NAME_1 "light1"
 
@@ -26,7 +25,7 @@ void setup_module_test() {
     lightInModule1 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_1, MOCK_LIGHT_IN_MODULE_PIN_1);
     components.push_back(lightInModule0);
     components.push_back(lightInModule1);
-    moduleTest = new MockDigitalLightModule(MOCK_MODULE_NAME, components);
+    moduleTest = new MockDigitalLightModule(components);
 }
 
 void post_module_test() {
@@ -87,7 +86,10 @@ void test_is_on_handler_in_module(OperationHandler* handler, std::string compone
 
 // TEST
 void test_module_name() {
-    TEST_ASSERT_EQUAL_STRING(MOCK_MODULE_NAME, moduleTest -> name().c_str());
+    TEST_ASSERT_EQUAL_STRING(
+        module_as_string(ModuleNames::Light).c_str(),
+        moduleTest -> name().c_str()
+    );
 }
 
 // TEST

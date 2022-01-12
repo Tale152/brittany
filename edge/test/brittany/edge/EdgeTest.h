@@ -8,7 +8,6 @@
 
 #define EDGE_MOCK_TITLE "MockEdge"
 #define EDGE_MOCK_MODULE_NAME "mock-module"
-#define EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME "light-module"
 
 #define MOCK_LIGHT_IN_EDGE_NAME "light"
 #define MOCK_LIGHT_IN_EDGE_PIN 5
@@ -115,7 +114,7 @@ void test_edge_list() {
     Edge* edge = new Edge(EDGE_MOCK_TITLE,
         std::list<Module*>({
             new MockModule(EDGE_MOCK_MODULE_NAME),
-            new MockDigitalLightModule(EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME, mockDigitalLights)
+            new MockDigitalLightModule(mockDigitalLights)
         })
     );
     test_edge_title(edge);
