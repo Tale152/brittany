@@ -3,8 +3,12 @@ import $ from 'jquery'
 import { setIsLoading } from '../../redux/util/actions'
 import settingsList from './settingsList'
 import { settingsService } from '../../conf'
+import { convertDate } from '../util/dateConverter'
 
-export default function settingsCreate(token, payload, environmentId, dispatch){
+export default function settingsCreate(token, payload, environmentId, dispatch, alert){
+    if(payload.expires !== null && payload.expires !== undefined){
+        payload.expires = convertDate(payload.expires)
+    }
     dispatch(setIsLoading(true))
     $.ajaxSetup({
         contentType: "application/json; charset=utf-8",
@@ -17,7 +21,11 @@ export default function settingsCreate(token, payload, environmentId, dispatch){
             settingsList(token, environmentId, dispatch)
         })
         .fail(function (result) {
-            console.log("fail")
+            if(result.status === 406){
+                alert.error(result.responseJSON.err)
+            } else {
+                alert.error("Error contacting server")
+            }
             dispatch(setIsLoading(false))
         })
 }

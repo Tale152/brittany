@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useAlert } from 'react-alert'
 
 import greenhouseCreate from '../../../js/greenhouse/greenhouseCreate'
 import CustomCenteredButton from '../../_common/CustomCenteredButton'
@@ -8,10 +9,17 @@ import FormText from '../../_common/form/input/FormText'
 
 export default function CreateGreenhouseButton() {
 
+    const alert = useAlert()
     const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false)
     const [name, setName] = useState("")
     let token = useSelector(state => state.identity.token)
+
+    function tryCreateGreenhouse(){
+        greenhouseCreate(token, name, dispatch, alert)
+        setShowModal(false)
+        setName("")
+    }
 
     return (
         <>
@@ -29,16 +37,10 @@ export default function CreateGreenhouseButton() {
                             text = { "Name:" }
                             placeholder = { "Enter new Greenhouse's name" }
                             onChange = { input => setName(input) }
-                            onEnter = { () => {
-                                greenhouseCreate(token, name, dispatch)
-                                setShowModal(false)
-                            }}
+                            onEnter = { tryCreateGreenhouse }
                         />
                         <CustomCenteredButton
-                            onClick = { () => {
-                                greenhouseCreate(token, name, dispatch)
-                                setShowModal(false)
-                            }}
+                            onClick = { tryCreateGreenhouse }
                             text = { "Create" }
                         />
                     </>
