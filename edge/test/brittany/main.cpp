@@ -9,6 +9,7 @@
 #include "operation-handler/types/TypeTest.h"
 #include "hw/ComponentHwTest.h"
 #include "hw/OnePinTest.h"
+#include "hw/MockSwitchableHwTest.h"
 #include "hw/MockDigitalLightHwTest.h"
 #include "hw/MockTemperatureSensorHwTest.h"
 #include "hw/MockHumiditySensorHwTest.h"
@@ -22,6 +23,7 @@ void test_hw() {
     test_ComponentHw(); //ComponentHwTest
     test_OnePin(); //OnePinTest
     test_MockDigitalLightHw(); //MockDigitalLightHwTest
+    test_MockSwitchableHwTest(); //MockSwitchableHwTest
     test_MockTemperatureSensorHwTest(); //MockTemperatureSensoreHwTest
     test_MockHumiditySensorHwTest(); //MockTemperatureSensoreHwTest
 }
