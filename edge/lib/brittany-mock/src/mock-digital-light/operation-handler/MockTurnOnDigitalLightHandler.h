@@ -4,12 +4,13 @@
 #include <list>
 #include <string>
 #include <json/json.h>
-#include "operation-handler/interfaces/TurnOnHandlerInterface.h"
+#include "operation-handler/interfaces/RetrieveValueFromComponentInterface.h"
 #include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "operation-handler/OperationHandlerResult.h"
 #include "util.h"
 
-class MockTurnOnDigitalLightHandler : public  TurnOnHandlerInterface<MockDigitalLightHw> {
+class MockTurnOnDigitalLightHandler
+: public RetrieveValueFromComponentInterface<MockDigitalLightHw, std::string> {
 
 public:
 
@@ -17,13 +18,15 @@ public:
         std::string name,
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): TurnOnHandlerInterface(
+    ): RetrieveValueFromComponentInterface<MockDigitalLightHw, std::string>(
         name,
         path,
+        OperationType::ACTION,
+        Type::STRING,
         components
     ) {
 
-    };
+    }
 
 private:
 
