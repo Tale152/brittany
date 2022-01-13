@@ -9,8 +9,7 @@
 #include "operation-handler/OperationHandlerResult.h"
 #include "util.h"
 
-class MockTurnOnDigitalLightHandler
-: public TurnOnSwitchableHandler<MockDigitalLightHw> {
+class MockTurnOnDigitalLightHandler: public TurnOnSwitchableHandler<MockDigitalLightHw> {
 
 public:
 
@@ -23,7 +22,7 @@ public:
         path,
         components
     ) {
-        
+
     }
 };
 
