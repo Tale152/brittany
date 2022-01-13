@@ -7,34 +7,26 @@
 #include <json/json.h>
 #include "operation-handler/interfaces/ValueReturnedAfterActionHandlerInterface.h"
 
+template <class C>
 /**
  * @brief Operation Handler Interface whose objective is to turn on a component.
- * 
  */
-class TurnOnHandlerInterface : public ValueReturnedAfterActionHandlerInterface<std::string> {
+class TurnOnHandlerInterface : public RetrieveValueFromComponentInterface<C, std::string> {
 
 public:
 
-    TurnOnHandlerInterface(std::string name,std::string path);
-
-    /**
-     * @brief Calls the turnOn method.
-     * 
-     * @param args the arguments passed from operation.
-     * @return std::optional<std::string> a string  with an "Ok." message if everything worked.
-     * Empty otherise.
-     */
-    std::optional<std::string> retrieveValue(Json::Value args);
-
-    /**
-     * @brief turn on the chosen component.
-     * 
-     * @param id the id of the component to turn on.
-     * @return true if the operation succeed.
-     * @return false if the operation fails.
-     */
-    virtual bool turnOn(std::string id) = 0;
+    TurnOnHandlerInterface(std::string name, std::string path, std::list<C*> components)
+    : RetrieveValueFromComponentInterface<C, std::string>(
+        name,
+        path,
+        OperationType::ACTION,
+        Type::STRING,
+        components
+    ) {
+        //does nothing
+    }
 
 };
+
 
 #endif //BRITTANY_TURN_ON_HANDLER_INTERFACE_H

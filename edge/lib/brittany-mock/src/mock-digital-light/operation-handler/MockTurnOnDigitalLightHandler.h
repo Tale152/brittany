@@ -5,12 +5,11 @@
 #include <string>
 #include <json/json.h>
 #include "operation-handler/interfaces/TurnOnHandlerInterface.h"
-#include "operation-handler/interfaces/TurnOnHandlerInterface.cpp"
 #include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "operation-handler/OperationHandlerResult.h"
 #include "util.h"
 
-class MockTurnOnDigitalLightHandler : public TurnOnHandlerInterface {
+class MockTurnOnDigitalLightHandler : public  TurnOnHandlerInterface<MockDigitalLightHw> {
 
 public:
 
@@ -18,23 +17,20 @@ public:
         std::string name,
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): TurnOnHandlerInterface(name, path) {
-         _components = components;
+    ): TurnOnHandlerInterface(
+        name,
+        path,
+        components
+    ) {
+
     };
 
 private:
 
-    bool turnOn(std::string id) {
-        std::optional<MockDigitalLightHw*> oc = find_by_id(_components, id);
-        if(oc.has_value()) {
-            oc.value() -> on();
-            return true;
-        } else {
-            return false;
-        }
+    std::optional<std::string> sub_operation(MockDigitalLightHw* hw, Json::Value args) {
+        hw -> on();
+        return std::optional(phrase(ContentResult::Ok));
     };
-
-    std::list<MockDigitalLightHw*> _components;
 
 };
 
