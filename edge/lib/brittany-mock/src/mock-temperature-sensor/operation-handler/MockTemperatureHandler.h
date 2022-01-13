@@ -1,4 +1,6 @@
-#define BRITTANY_MOCK_TEMPERATURE_HANDLER
+#ifndef BRITTANY_MOCK_TEMPERATURE_HANDLER_H
+#define BRITTANY_MOCK_TEMPERATURE_HANDLER_H
+
 #include <string>
 #include <list>
 #include "operation-handler/interfaces/RetrieveValueFromComponentInterface.h"
@@ -30,3 +32,5 @@ private:
     }
 
 };
+
+#endif // BRITTANY_MOCK_TEMPERATURE_HANDLER_H

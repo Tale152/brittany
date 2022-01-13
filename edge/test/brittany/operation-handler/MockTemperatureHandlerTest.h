@@ -88,6 +88,8 @@ void test_mock_temperature_handler_handle_using_handler(OperationHandler* h) {
     test_mock_temperature_handler_bad_req(h);
 }
 
+#include "../modules/MockTemperatureModelTest.h"
+
 void test_mock_temperature_handler_handle() {
     test_mock_temperature_handler_handle_using_handler(mockTemperatureHandler);
 }
@@ -95,7 +97,7 @@ void test_mock_temperature_handler_handle() {
 void test_MockTemperatureHandler() {
     setup_mock_temperature_handler();
     RUN_TEST(test_mock_temperature_handler_handle);
-    //test_MockTemperatureModule({mockTempSensor});
+    test_MockTemperatureModule({mockTempSensor});
     post_mock_temperature_handler();
 }
 
