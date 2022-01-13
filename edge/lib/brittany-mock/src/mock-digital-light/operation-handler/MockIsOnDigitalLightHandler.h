@@ -4,15 +4,14 @@
 #include <list>
 #include <string>
 #include <json/json.h>
-#include "operation-handler/interfaces/RetrieveValueFromComponentInterface.h"
+#include "operation-handler/interfaces/components/IsOnSwitchableHandler.h"
 #include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "operation-handler/OperationHandlerResult.h"
 #include "HttpStatusCodes_C++.h"
 #include "util.h"
 #include <optional>
 
-class MockIsOnDigitalLightHandler
-: public RetrieveValueFromComponentInterface<MockDigitalLightHw, bool> {
+class MockIsOnDigitalLightHandler: public IsOnSwitchableHandler<MockDigitalLightHw> {
 
 public:
 
@@ -20,22 +19,13 @@ public:
         std::string name,
         std::string path,
         std::list<MockDigitalLightHw*> components
-    ): RetrieveValueFromComponentInterface<MockDigitalLightHw, bool>(
+    ): IsOnSwitchableHandler<MockDigitalLightHw>(
         name,
         path,
-        OperationType::PROPERTY,
-        Type::BOOLEAN,
         components
     ) {
 
     };
-
-private:
-
-    std::optional<bool> sub_operation(MockDigitalLightHw* hw, Json::Value args) {
-        return std::optional(hw -> isOn());
-    }
-
 };
 
 #endif //BRITTANY_MOCK_IS_ON_DIGITAL_LIGHT_HANDLER_INTERFACE_H

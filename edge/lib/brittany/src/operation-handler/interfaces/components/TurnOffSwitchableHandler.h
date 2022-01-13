@@ -5,7 +5,6 @@
 #include <string>
 #include <json/json.h>
 #include "operation-handler/interfaces/RetrieveValueFromComponentInterface.h"
-#include "operation-handler/OperationHandlerResult.h"
 #include "util.h"
 
 template <class C>
