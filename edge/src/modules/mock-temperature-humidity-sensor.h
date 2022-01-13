@@ -1,4 +1,4 @@
-//#ifdef BRITTANY_MAIN_MOCK_TEMPERATURE_HUMIDITY_SENSOR
+#ifdef BRITTANY_MAIN_MOCK_TEMPERATURE_HUMIDITY_SENSOR
 
 #include "mock-temperature-sensor/hw/MockTemperatureSensorHw.h"
 #include "mock-temperature-sensor/modules/MockTemperatureModule.h"
@@ -14,4 +14,4 @@ Edge* edge() {
     return new Edge("Mock Humidity and Temperature Edge", modules);
 }
 
-//#endif
+#endif
