@@ -5,35 +5,26 @@
 #include <string>
 #include <optional>
 #include <json/json.h>
-#include "operation-handler/interfaces/ValueReturnedAfterActionHandlerInterface.h"
+#include "operation-handler/interfaces/RetrieveValueFromComponentInterface.h"
 
+template <class C>
 /**
  * @brief Operation Handler Interface whose objective is to turn off a component.
  */
-class TurnOffHandlerInterface : public ValueReturnedAfterActionHandlerInterface<std::string> {
+class TurnOffHandlerInterface : public RetrieveValueFromComponentInterface<C, std::string> {
 
 public:
 
-    TurnOffHandlerInterface(std::string name, std::string path);
-
-
-    /**
-     * @brief Calls the turnOff method.
-     * 
-     * @param args the arguments passed from operation.
-     * @return std::optional<std::string> a string  with an "Ok." message if everything worked.
-     * Empty otherise.
-     */
-    std::optional<std::string> retrieveValue(Json::Value args);
-
-    /**
-     * @brief turn off the chosen component.
-     * 
-     * @param id the id of the component to turn off.
-     * @return true if the operation succeed.
-     * @return false if the operation fails.
-     */
-    virtual bool turnOff(std::string id) = 0;
+    TurnOffHandlerInterface(std::string name, std::string path, std::list<C*> components)
+    : RetrieveValueFromComponentInterface<C, std::string>(
+        name,
+        path,
+        OperationType::ACTION,
+        Type::STRING,
+        components
+    ) {
+        //does nothing
+    }
 
 };
 

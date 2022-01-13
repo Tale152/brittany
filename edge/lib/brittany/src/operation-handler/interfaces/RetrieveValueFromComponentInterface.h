@@ -11,8 +11,50 @@ class RetrieveValueFromComponentInterface : public ValueReturnedAfterActionHandl
 
 public:
 
-    RetrieveValueFromComponentInterface(std::string name, std::string path, std::list<C*> components)
-    : ValueReturnedAfterActionHandlerInterface<T> (name, path, OperationType::PROPERTY, Type::NUMBER) {
+    /**
+     * @brief Construct a new Retrieve Value From Component Interface object.
+     * 
+     * @param name the name of the operation handler.
+     * @param path the path used for the operation handler.
+     * @param operationType  the operation type.
+     * @param returnedType the returned type.
+     * @param components the list of components.
+     */
+    RetrieveValueFromComponentInterface(
+        std::string name,
+        std::string path,
+        OperationType operationType,
+        Type returnedType,
+        std::list<C*> components
+    )
+    : ValueReturnedAfterActionHandlerInterface<T> (
+        name,
+        path,
+        operationType,
+        returnedType
+    ) {
+        _components = components;
+    };
+
+    /**
+     * @brief Construct a new Retrieve Value From Component Interface object.
+     *        Simplified Constructor that set the handler to a property and return a number.
+     * 
+     * @param name 
+     * @param path 
+     * @param components 
+     */
+    RetrieveValueFromComponentInterface(
+        std::string name,
+        std::string path,
+        std::list<C*> components
+    )
+    : ValueReturnedAfterActionHandlerInterface<T> (
+        name,
+        path,
+        OperationType::PROPERTY,
+        Type::NUMBER
+    ) {
         _components = components;
     };
 
@@ -29,7 +71,7 @@ private:
         return std::nullopt;
     }
 
-    virtual std::optional<float> sub_operation(C* hw, Json::Value args) = 0;
+    virtual std::optional<T> sub_operation(C* hw, Json::Value args) = 0;
 
     std::list<C*> _components;
 };
