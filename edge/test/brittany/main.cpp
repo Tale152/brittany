@@ -10,7 +10,6 @@
 #include "hw/ComponentHwTest.h"
 #include "hw/OnePinTest.h"
 #include "hw/MockDigitalLightHwTest.h"
-#include "hw/MockTempHumSensorHwTest.h"
 #include "hw/MockTemperatureSensorHwTest.h"
 #include "hw/MockHumiditySensorHwTest.h"
 #include "modules/MockDigitalLightModuleTest.h"
@@ -23,7 +22,6 @@ void test_hw() {
     test_ComponentHw(); //ComponentHwTest
     test_OnePin(); //OnePinTest
     test_MockDigitalLightHw(); //MockDigitalLightHwTest
-    test_MockTempHumSensorHwTest(); //MockTempHumSensorHwTest
     test_MockTemperatureSensorHwTest(); //MockTemperatureSensoreHwTest
     test_MockHumiditySensorHwTest(); //MockTemperatureSensoreHwTest
 }
