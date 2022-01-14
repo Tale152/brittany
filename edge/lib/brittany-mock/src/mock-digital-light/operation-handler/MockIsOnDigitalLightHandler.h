@@ -15,14 +15,8 @@ class MockIsOnDigitalLightHandler: public IsOnSwitchableHandler<MockDigitalLight
 
 public:
 
-    MockIsOnDigitalLightHandler(
-        std::string name,
-        std::list<MockDigitalLightHw*> components
-    ): IsOnSwitchableHandler<MockDigitalLightHw>(
-        name,
-        components
-    ) {
-
+    MockIsOnDigitalLightHandler(std::list<MockDigitalLightHw*> components)
+        : IsOnSwitchableHandler<MockDigitalLightHw>("isOn", components) {
     };
 };
 

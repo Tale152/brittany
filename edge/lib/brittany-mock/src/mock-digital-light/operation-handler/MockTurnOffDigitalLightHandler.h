@@ -3,7 +3,6 @@
 
 #include <list>
 #include <string>
-#include <json/json.h>
 #include "operation-handler/interfaces/components/TurnOffSwitchableHandler.h"
 #include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "operation-handler/OperationHandlerResult.h"
@@ -13,13 +12,8 @@ class MockTurnOffDigitalLightHandler: public TurnOffSwitchableHandler<MockDigita
 
 public:
 
-    MockTurnOffDigitalLightHandler(
-        std::string name,
-        std::list<MockDigitalLightHw*> components
-    ): TurnOffSwitchableHandler<MockDigitalLightHw>(
-        name,
-        components
-    ) {
+    MockTurnOffDigitalLightHandler(std::list<MockDigitalLightHw*> components)
+        : TurnOffSwitchableHandler<MockDigitalLightHw>("turnOff", components) {
 
     };
 

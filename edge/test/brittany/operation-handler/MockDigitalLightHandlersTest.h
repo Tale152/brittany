@@ -10,10 +10,6 @@
 #define LIGHT_1_NAME "light1"
 #define LIGHT_1_PIN 11
 
-#define MOCK_TURN_OFF_LIGHT_NAME "turnOff"
-#define MOCK_TURN_ON_LIGHT_NAME "turnOn"
-#define MOCK_IS_ON_LIGHT_NAME "isOn"
-
 MockDigitalLightHw* light0;
 MockDigitalLightHw* light1;
 std::list<MockDigitalLightHw*> light_list;
@@ -31,18 +27,9 @@ void setup_mock_light_handler_test() {
     light1 = new MockDigitalLightHw(LIGHT_1_NAME, LIGHT_1_PIN);
     light_list.push_front(light0);
     light_list.push_front(light1);
-    turnOffDigitalLightHandler = new MockTurnOffDigitalLightHandler(
-        MOCK_TURN_OFF_LIGHT_NAME,
-        light_list
-    );
-    turnOnDigitalLightHandler = new MockTurnOnDigitalLightHandler(
-        MOCK_TURN_ON_LIGHT_NAME,
-        light_list
-    );
-    isOnDigitalLightHandler = new MockIsOnDigitalLightHandler(
-        MOCK_IS_ON_LIGHT_NAME,
-        light_list
-    );
+    turnOffDigitalLightHandler = new MockTurnOffDigitalLightHandler(light_list);
+    turnOnDigitalLightHandler = new MockTurnOnDigitalLightHandler(light_list);
+    isOnDigitalLightHandler = new MockIsOnDigitalLightHandler(light_list);
     args0["id"] = LIGHT_0_NAME;
     args1["id"] = LIGHT_1_NAME;
     argsNotFound["id"] = "the game";
@@ -98,13 +85,13 @@ void test_handle_with_different_args(T h) {
 
 //TEST
 void test_mock_turn_off_digital_light_handler() {
-    test_handler_name_and_path(turnOffDigitalLightHandler, MOCK_TURN_OFF_LIGHT_NAME);
+    test_handler_name_and_path(turnOffDigitalLightHandler, "turnOff");
     test_handle_with_different_args(turnOffDigitalLightHandler);   
 }
 
 //TEST
 void test_mock_turn_on_digital_light_handler(){
-    test_handler_name_and_path(turnOnDigitalLightHandler, MOCK_TURN_ON_LIGHT_NAME);
+    test_handler_name_and_path(turnOnDigitalLightHandler, "turnOn");
     test_handle_with_different_args(turnOnDigitalLightHandler);
 }
 
@@ -114,7 +101,7 @@ void light_state_check(OperationHandlerResult result, bool isOn) {
 }
 
 void is_on_handler_state_must_be(bool isOn) {
-    test_handler_name_and_path(isOnDigitalLightHandler, MOCK_IS_ON_LIGHT_NAME);
+    test_handler_name_and_path(isOnDigitalLightHandler, "isOn");
     light_state_check(isOnDigitalLightHandler->handle(args0), isOn);
     light_state_check(isOnDigitalLightHandler->handle(args1), isOn);
     check_result_is_not_found(isOnDigitalLightHandler->handle(argsNotFound));

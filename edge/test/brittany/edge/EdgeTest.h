@@ -26,15 +26,15 @@ void test_string_element_is_in_list(std::list<std::string> list, std::string str
 void test_light_module_available_path(Edge* edge) {
     test_string_element_is_in_list(
         edge -> availablePaths(),
-        as_route(MOCK_IS_ON_LIGHT_NAME)
+        "/isOn"
     );
     test_string_element_is_in_list(
         edge -> availablePaths(),
-        as_route(MOCK_TURN_OFF_LIGHT_NAME)
+        "/turnOff"
     );
     test_string_element_is_in_list(
         edge -> availablePaths(),
-        as_route(MOCK_TURN_ON_LIGHT_NAME)
+        "/turnOn"
     );
 }
 
@@ -93,10 +93,10 @@ void test_edge_execute_working(Edge* edge) {
     TEST_ASSERT_EQUAL(INCREMENT_VALUE_TEST, result0.content().asInt());
     Json::Value args;
     args["id"] = MOCK_LIGHT_IN_EDGE_NAME;
-    auto result1 = edge -> execute(as_route(MOCK_TURN_ON_HANDLER_MODULE_NAME), args);
+    auto result1 = edge -> execute("/turnOn", args);
     check_edge_result_code_is_ok(result1);
     TEST_ASSERT_EQUAL_STRING(phrase(ContentResult::Ok).c_str(), result1.content().asCString());
-    auto result = edge -> execute(as_route(MOCK_IS_ON_HANDLER_MODULE_NAME), args);
+    auto result = edge -> execute("/isOn", args);
     check_edge_result_code_is_ok(result);
     TEST_ASSERT_TRUE(result.content().asBool());
 }
