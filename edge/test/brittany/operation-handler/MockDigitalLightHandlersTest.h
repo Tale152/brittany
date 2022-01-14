@@ -6,9 +6,7 @@
 #include "util.h"
 
 #define LIGHT_0_NAME "light0"
-#define LIGHT_0_PIN 10
 #define LIGHT_1_NAME "light1"
-#define LIGHT_1_PIN 11
 
 MockDigitalLightHw* light0;
 MockDigitalLightHw* light1;
@@ -23,8 +21,8 @@ Json::Value argsNotFound;
 Json::Value argsBadRequest;
 
 void setup_mock_light_handler_test() {
-    light0 = new MockDigitalLightHw(LIGHT_0_NAME, LIGHT_0_PIN);
-    light1 = new MockDigitalLightHw(LIGHT_1_NAME, LIGHT_1_PIN);
+    light0 = new MockDigitalLightHw(LIGHT_0_NAME);
+    light1 = new MockDigitalLightHw(LIGHT_1_NAME);
     light_list.push_front(light0);
     light_list.push_front(light1);
     turnOffDigitalLightHandler = new MockTurnOffDigitalLightHandler(light_list);

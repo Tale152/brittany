@@ -8,7 +8,6 @@
 #define COMPONENT_0_NAME "name0"
 #define COMPONENT_1_NAME "name1"
 #define COMPONENT_2_NAME "name2"
-#define COMPONENT_2_PIN 10
 
 ComponentHw* component0;
 ComponentHw* component1;
@@ -19,7 +18,7 @@ std::list<MockDigitalLightHw*> list_of_light;
 void setup_util_test() {
     component0 = new ComponentHw(COMPONENT_0_NAME);
     component1 = new ComponentHw(COMPONENT_1_NAME);
-    component2 = new MockDigitalLightHw(COMPONENT_2_NAME, COMPONENT_2_PIN);
+    component2 = new MockDigitalLightHw(COMPONENT_2_NAME);
     list.push_front(component0);
     list.push_front(component1);
     list.push_front(component2);

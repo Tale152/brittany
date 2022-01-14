@@ -142,8 +142,8 @@ void contains_all_elements() {
 }
 
 void setup_thing_descriptor_test() { 
-    mockLight0 = new MockDigitalLightHw(MOCK_LIGHT_TD_0_ID, 0);
-    mockLight1 = new MockDigitalLightHw(MOCK_LIGHT_TD_1_ID, 1);
+    mockLight0 = new MockDigitalLightHw(MOCK_LIGHT_TD_0_ID);
+    mockLight1 = new MockDigitalLightHw(MOCK_LIGHT_TD_1_ID);
     tdEdge = new Edge(EDGE_MOCK_TITLE_TD, 
         std::list<Module*>({
             new MockDigitalLightModule(

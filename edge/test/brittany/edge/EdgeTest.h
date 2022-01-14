@@ -10,7 +10,6 @@
 #define EDGE_MOCK_MODULE_NAME "mock-module"
 
 #define MOCK_LIGHT_IN_EDGE_NAME "light"
-#define MOCK_LIGHT_IN_EDGE_PIN 5
 #define TESTING_EXECUTE_ATTEMPT 10
 
 #define INCREMENT_VALUE_TEST 6
@@ -46,10 +45,7 @@ void test_mock_module_available_path(Edge* edge) {
 }
 
 void setup_test_edge() {
-    mockLightInEdge = new MockDigitalLightHw(
-        MOCK_LIGHT_IN_EDGE_NAME,
-        MOCK_LIGHT_IN_EDGE_PIN
-    );
+    mockLightInEdge = new MockDigitalLightHw(MOCK_LIGHT_IN_EDGE_NAME);
     mockDigitalLights.push_back(mockLightInEdge);
 }
 

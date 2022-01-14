@@ -9,9 +9,6 @@
 #define MOCK_LIGHT_IN_MODULE_NAME_0 "light0"
 #define MOCK_LIGHT_IN_MODULE_NAME_1 "light1"
 
-#define MOCK_LIGHT_IN_MODULE_PIN_0 1
-#define MOCK_LIGHT_IN_MODULE_PIN_1 2
-
 MockDigitalLightHw* lightInModule0;
 MockDigitalLightHw* lightInModule1;
 MockDigitalLightModule* moduleTest;
@@ -20,8 +17,8 @@ std::list<MockDigitalLightHw*> components;
 std::list<std::string> lightNames = {MOCK_LIGHT_IN_MODULE_NAME_0, MOCK_LIGHT_IN_MODULE_NAME_1};
 
 void setup_module_test() {
-    lightInModule0 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_0, MOCK_LIGHT_IN_MODULE_PIN_0);
-    lightInModule1 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_1, MOCK_LIGHT_IN_MODULE_PIN_1);
+    lightInModule0 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_0);
+    lightInModule1 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_1);
     components.push_back(lightInModule0);
     components.push_back(lightInModule1);
     moduleTest = new MockDigitalLightModule(components);
