@@ -19,10 +19,7 @@ public:
 
     MockModule(std::string name): Module(name) {
         _handlers.push_back(
-            new MockOperationHandler(
-                OPERATION_HANDLER_IN_MOCK_MODULE_NAME,
-                as_route(OPERATION_HANDLER_IN_MOCK_MODULE_NAME)
-            )
+            new MockOperationHandler(OPERATION_HANDLER_IN_MOCK_MODULE_NAME)
         );
     };
 

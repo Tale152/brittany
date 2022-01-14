@@ -1,4 +1,5 @@
 #include "OperationHandler.h"
+#include "util.h"
 
 OperationHandler::OperationHandler(
     std::string name,
@@ -11,6 +12,19 @@ OperationHandler::OperationHandler(
     _operationType = operationType;
     _outputType = outputType;
 }
+
+
+OperationHandler::OperationHandler(
+    std::string name,
+    OperationType operationType,
+    Type outputType
+) {
+    _name = name;
+    _path = as_route(name);
+    _operationType = operationType;
+    _outputType = outputType;
+}
+
 
 std::string OperationHandler::name() {
     return _name;
