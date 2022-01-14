@@ -8,20 +8,13 @@
 #include "modules/ComponentModule.h"
 #include "modules/ModuleNames.h"
 
-#define MOCK_HUMIDITY_HANDLER_NAME "humidity"
-
 class MockHumidityModule : public ComponentModule<MockHumiditySensorHw> {
 
 public:
 
     MockHumidityModule(std::list<MockHumiditySensorHw*> components)
     : ComponentModule<MockHumiditySensorHw>(module_as_string(ModuleNames::Humidity), components) {
-        _handlers.push_back(
-            new MockHumidityHandler(
-                MOCK_HUMIDITY_HANDLER_NAME,
-                components
-            )
-        );
+        _handlers.push_back(new MockHumidityHandler(components));
     };
 
 };

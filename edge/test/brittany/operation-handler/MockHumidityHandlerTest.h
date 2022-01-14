@@ -8,7 +8,6 @@
 
 
 #define MOCK_HUMIDITY_SENSOR_NAME_IN_HANDLER "sensor"
-#define MOCK_HUMIDITY_HANDLER_NAME "humidity"
 
 MockHumidityHandler* mockHumidityHandler;
 MockHumiditySensorHw* mockHumSensor;
@@ -22,10 +21,7 @@ void setup_mock_humidity_handler() {
     argsMockHumSensor["id"] = MOCK_HUMIDITY_SENSOR_NAME_IN_HANDLER;
     argsMockHumSensorBadReq["za"] = "warudo";
     argsMockHumSensorNotFound["id"] = "giogia";
-    mockHumidityHandler = new MockHumidityHandler(
-        MOCK_HUMIDITY_HANDLER_NAME,
-        {mockHumSensor}
-    );
+    mockHumidityHandler = new MockHumidityHandler({mockHumSensor});
 }
 
 void post_mock_humidity_handler() {

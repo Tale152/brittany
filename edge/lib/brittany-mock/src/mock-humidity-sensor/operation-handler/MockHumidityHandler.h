@@ -10,8 +10,8 @@ class MockHumidityHandler : public RetrieveValueFromComponentInterface<MockHumid
 
 public:
 
-    MockHumidityHandler(std::string name, std::list<MockHumiditySensorHw*> components)
-    : RetrieveValueFromComponentInterface<MockHumiditySensorHw, float> (name, components) {
+    MockHumidityHandler(std::list<MockHumiditySensorHw*> components)
+        : RetrieveValueFromComponentInterface<MockHumiditySensorHw, float> ("humidity", components) {
 
     };
 

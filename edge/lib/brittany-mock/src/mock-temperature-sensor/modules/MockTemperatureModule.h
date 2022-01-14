@@ -8,20 +8,13 @@
 #include "modules/ComponentModule.h"
 #include "modules/ModuleNames.h"
 
-#define MOCK_TEMPERATURE_HANDLER_NAME "temperature"
-
 class MockTemperatureModule : public ComponentModule<MockTemperatureSensorHw> {
 
 public:
 
     MockTemperatureModule(std::list<MockTemperatureSensorHw*> components)
     : ComponentModule<MockTemperatureSensorHw>(module_as_string(ModuleNames::Temperature), components) {
-        _handlers.push_back(
-            new MockTemperatureHandler(
-                MOCK_TEMPERATURE_HANDLER_NAME,
-                components
-            )
-        );
+        _handlers.push_back(new MockTemperatureHandler(components));
     };
 
 };

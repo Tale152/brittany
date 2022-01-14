@@ -7,7 +7,6 @@
 #include "mock-temperature-sensor/hw/MockTemperatureSensorHw.h"
 
 #define MOCK_TEMPERATURE_SENSOR_NAME_IN_HANDLER "sensor"
-#define MOCK_TEMPERATURE_HANDLER_NAME "temperature"
 
 MockTemperatureHandler* mockTemperatureHandler;
 MockTemperatureSensorHw* mockTempSensor;
@@ -21,10 +20,7 @@ void setup_mock_temperature_handler() {
     argsMockTempSensor["id"] = MOCK_TEMPERATURE_SENSOR_NAME_IN_HANDLER;
     argsMockTempSensorBadReq["za"] = "warudo";
     argsMockTempSensorNotFound["id"] = "giogia";
-    mockTemperatureHandler = new MockTemperatureHandler(
-        MOCK_TEMPERATURE_HANDLER_NAME,
-        {mockTempSensor}
-    );
+    mockTemperatureHandler = new MockTemperatureHandler({mockTempSensor});
 }
 
 void post_mock_temperature_handler() {
