@@ -4,10 +4,10 @@
 #include "web-server/Esp8266WebServer.h"
 #include "wifi_secret.h"
 #include "modules/Module.h"
-#include "modules/dht22.h"
-#include "modules/mock-digital-light.h"
-#include "modules/mock-temperature-humidity-sensor.h"
-#include "modules/mock-temperature-humidity-actuator.h"
+#include "modules/concrete/concrete-dht22.h"
+#include "modules/mock/mock-digital-light.h"
+#include "modules/mock/mock-temperature-humidity-sensor.h"
+#include "modules/mock/mock-temperature-humidity-actuator.h"
 
 Esp8266WebServer* server;
 
