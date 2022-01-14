@@ -18,21 +18,18 @@ public:
         _handlers.push_back(
             new TurnOnSwitchableHandler<MockSwitchableHw>(
                "dehumidifyOn",
-               as_route("dehumidifyOn"),
                components
             )
         );
         _handlers.push_back(
             new TurnOffSwitchableHandler<MockSwitchableHw>(
                "dehumidifyOff",
-               as_route("dehumidifyOff"),
                components
             )
         );
         _handlers.push_back(
             new IsOnSwitchableHandler<MockSwitchableHw>(
                "isDehumidifyOn",
-               as_route("isDehumidifyOn"),
                components
             )
         );

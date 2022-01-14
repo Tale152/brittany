@@ -17,11 +17,9 @@ public:
 
     MockIsOnDigitalLightHandler(
         std::string name,
-        std::string path,
         std::list<MockDigitalLightHw*> components
     ): IsOnSwitchableHandler<MockDigitalLightHw>(
         name,
-        path,
         components
     ) {
 

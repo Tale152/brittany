@@ -33,17 +33,14 @@ void setup_mock_light_handler_test() {
     light_list.push_front(light1);
     turnOffDigitalLightHandler = new MockTurnOffDigitalLightHandler(
         MOCK_TURN_OFF_LIGHT_NAME,
-        as_route(MOCK_TURN_OFF_LIGHT_NAME),
         light_list
     );
     turnOnDigitalLightHandler = new MockTurnOnDigitalLightHandler(
         MOCK_TURN_ON_LIGHT_NAME,
-        as_route(MOCK_TURN_ON_LIGHT_NAME),
         light_list
     );
     isOnDigitalLightHandler = new MockIsOnDigitalLightHandler(
         MOCK_IS_ON_LIGHT_NAME,
-        as_route(MOCK_IS_ON_LIGHT_NAME),
         light_list
     );
     args0["id"] = LIGHT_0_NAME;

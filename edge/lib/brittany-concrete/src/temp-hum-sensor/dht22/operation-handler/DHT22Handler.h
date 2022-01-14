@@ -10,8 +10,8 @@ class DHT22Handler : public RetrieveValueFromComponentInterface<DHT22SensorHw, f
 
 public:
 
-    DHT22Handler(std::string name, std::string path, std::list<DHT22SensorHw*> components)
-    : RetrieveValueFromComponentInterface<DHT22SensorHw, float> (name, path, components) {
+    DHT22Handler(std::string name, std::list<DHT22SensorHw*> components)
+        : RetrieveValueFromComponentInterface<DHT22SensorHw, float> (name, components) {
 
     };
 

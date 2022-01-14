@@ -16,11 +16,9 @@ public:
 
     TurnOnSwitchableHandler(
         std::string name,
-        std::string path,
         std::list<C*> components
     ): RetrieveValueFromComponentInterface<C, std::string>(
         name,
-        path,
         OperationType::ACTION,
         Type::STRING,
         components

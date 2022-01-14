@@ -19,7 +19,6 @@ public:
         _handlers.push_back(
             new MockTemperatureHandler(
                 MOCK_TEMPERATURE_HANDLER_NAME,
-                as_route(MOCK_TEMPERATURE_HANDLER_NAME),
                 components
             )
         );

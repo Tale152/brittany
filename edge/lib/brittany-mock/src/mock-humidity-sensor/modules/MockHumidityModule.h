@@ -19,7 +19,6 @@ public:
         _handlers.push_back(
             new MockHumidityHandler(
                 MOCK_HUMIDITY_HANDLER_NAME,
-                as_route(MOCK_HUMIDITY_HANDLER_NAME),
                 components
             )
         );

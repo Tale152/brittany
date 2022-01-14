@@ -24,7 +24,6 @@ void setup_mock_humidity_handler() {
     argsMockHumSensorNotFound["id"] = "giogia";
     mockHumidityHandler = new MockHumidityHandler(
         MOCK_HUMIDITY_HANDLER_NAME,
-        as_route(MOCK_HUMIDITY_HANDLER_NAME),
         {mockHumSensor}
     );
 }

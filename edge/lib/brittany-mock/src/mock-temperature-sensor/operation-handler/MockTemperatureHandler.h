@@ -10,8 +10,8 @@ class MockTemperatureHandler : public RetrieveValueFromComponentInterface<MockTe
 
 public:
 
-    MockTemperatureHandler(std::string name, std::string path, std::list<MockTemperatureSensorHw*> components)
-    : RetrieveValueFromComponentInterface<MockTemperatureSensorHw, float> (name, path, components) {
+    MockTemperatureHandler(std::string name, std::list<MockTemperatureSensorHw*> components)
+    : RetrieveValueFromComponentInterface<MockTemperatureSensorHw, float> (name, components) {
 
     };
 

@@ -19,21 +19,18 @@ public:
         _handlers.push_back(
             new TurnOnSwitchableHandler<MockSwitchableHw>(
                "heatOn",
-               as_route("heatOn"),
                components
             )
         );
         _handlers.push_back(
             new TurnOffSwitchableHandler<MockSwitchableHw>(
                "heatOff",
-               as_route("heatOff"),
                components
             )
         );
         _handlers.push_back(
             new IsOnSwitchableHandler<MockSwitchableHw>(
                "isHeatOn",
-               as_route("isHeatOn"),
                components
             )
         );

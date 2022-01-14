@@ -16,18 +16,10 @@ public:
 
     DHT22Module(std::string name, std::list<DHT22SensorHw*> components): ComponentModule<DHT22SensorHw>(name, components) {
         _handlers.push_back(
-            new DHT22GetTemperatureHandler(
-                DHT22_GET_TEMPERATURE_HANDLER_NAME,
-                as_route(DHT22_GET_TEMPERATURE_HANDLER_NAME),
-                components
-            )
+            new DHT22GetTemperatureHandler(DHT22_GET_TEMPERATURE_HANDLER_NAME, components)
         );
          _handlers.push_back(
-            new DHT22GetHumidityHandler(
-                DHT22_GET_HUMIDITY_HANDLER_NAME,
-                as_route(DHT22_GET_HUMIDITY_HANDLER_NAME),
-                components
-            )
+            new DHT22GetHumidityHandler(DHT22_GET_HUMIDITY_HANDLER_NAME, components)
         );
     };
 

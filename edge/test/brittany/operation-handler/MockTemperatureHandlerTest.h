@@ -23,7 +23,6 @@ void setup_mock_temperature_handler() {
     argsMockTempSensorNotFound["id"] = "giogia";
     mockTemperatureHandler = new MockTemperatureHandler(
         MOCK_TEMPERATURE_HANDLER_NAME,
-        as_route(MOCK_TEMPERATURE_HANDLER_NAME),
         {mockTempSensor}
     );
 }

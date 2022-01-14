@@ -15,11 +15,9 @@ public:
 
     IsOnSwitchableHandler(
         std::string name,
-        std::string path,
         std::list<C*> components
     ): RetrieveValueFromComponentInterface<C, bool>(
         name,
-        path,
         OperationType::PROPERTY,
         Type::BOOLEAN,
         components

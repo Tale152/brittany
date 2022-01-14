@@ -18,21 +18,18 @@ public:
         _handlers.push_back(
             new TurnOnSwitchableHandler<MockSwitchableHw>(
                "humidifyOn",
-               as_route("humidifyOn"),
                components
             )
         );
         _handlers.push_back(
             new TurnOffSwitchableHandler<MockSwitchableHw>(
                "humidifyOff",
-               as_route("humidifyOff"),
                components
             )
         );
         _handlers.push_back(
             new IsOnSwitchableHandler<MockSwitchableHw>(
                "isHumidifyOn",
-               as_route("isHumidifyOn"),
                components
             )
         );

@@ -15,11 +15,9 @@ public:
 
     MockTurnOffDigitalLightHandler(
         std::string name,
-        std::string path,
         std::list<MockDigitalLightHw*> components
     ): TurnOffSwitchableHandler<MockDigitalLightHw>(
         name,
-        path,
         components
     ) {
 

@@ -23,21 +23,18 @@ public:
         _handlers.push_back(
             new MockIsOnDigitalLightHandler(
                 MOCK_IS_ON_HANDLER_MODULE_NAME,
-                as_route(MOCK_IS_ON_HANDLER_MODULE_NAME),
                 components
             )
         );
         _handlers.push_back(
             new MockTurnOnDigitalLightHandler(
                 MOCK_TURN_ON_HANDLER_MODULE_NAME,
-                as_route(MOCK_TURN_ON_HANDLER_MODULE_NAME),
                 components
             )
         );  
         _handlers.push_back(
             new MockTurnOffDigitalLightHandler(
                 MOCK_TURN_OFF_HANDLER_MODULE_NAME,
-                as_route(MOCK_TURN_OFF_HANDLER_MODULE_NAME),
                 components
             )
         );
