@@ -7,6 +7,7 @@
 #include "modules/dht22.h"
 #include "modules/mock-digital-light.h"
 #include "modules/mock-temperature-humidity-sensor.h"
+#include "modules/mock-temperature-humidity-actuator.h"
 
 Esp8266WebServer* server;
 
