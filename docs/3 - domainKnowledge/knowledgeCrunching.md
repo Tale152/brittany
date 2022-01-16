@@ -14,6 +14,8 @@ Obiettivo principale delle sessioni è stata la definizione dell'Ubiquitous Lang
 Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto del dominio.
 È stata effettuata per praticità una divisione per tipologia di argomento affrontato.
 
+## Dialoghi con esperto del dominio
+
 <details>
 <summary>
     Legenda (click me!)
@@ -117,6 +119,57 @@ Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto de
 
 <span style="color:#b2868e;font-weight:bold">Esperto</span>: "Sì esatto. Una volta che la pianta è stata abituata in un certo modo è meglio non cambiare il suo ritmo, o rischia spiacevoli conseguenze tra cui anche la morte."  
 
-<span style="color:#ec3a8b;font-weight:bold">Developer</span>: "Questo quindi in generale vale per ogni parametro? Anche quando cambia la fase della pianta e quindi le sue esigenze è meglio cercare si essere più graduali possibili?"  
+<span style="color:#ec3a8b;font-weight:bold">Developer</span>: "Questo quindi in generale vale per ogni parametro? Anche quando cambia la fase della pianta e quindi le sue esigenze è meglio cercare di essere il più graduali possibili?"  
 
 <span style="color:#b2868e;font-weight:bold">Esperto</span>: "Precisamente."
+
+---
+
+#### Notifiche
+
+<span style="color:#235f73;font-weight:bold">Developer</span>: "Sarebbe utile un sistema di notifiche all'agricoltore? In questo modo se il sistema si accorge che qualcosa non va può avvisare tempestivamente qualcuno ed evitare disastri."    
+
+<span style="color:#72bcd4;font-weight:bold">Esperto</span>: "Certamente sì, anche se in molti casi probabilmente potrebbe non bastare."  
+
+<span style="color:#235f73;font-weight:bold">Developer</span>: "In che senso?"  
+
+<span style="color:#72bcd4;font-weight:bold">Esperto</span>: "Spesso quando in una serra ci si accorge di qualcosa che non va, è ormai troppo tardi per rimediare. Per esempio se l'impianto di irrigazione si rompe e fornisce troppa acqua alle piante. Venir informati della presenza di un guasto sarebbe utile certo, ma in questo caso il danno sarebbe già fatto, e sarebbe irreparabile."  
+
+<span style="color:#235f73;font-weight:bold">Developer</span>: "Quindi meglio prevenire che curare."  
+
+<span style="color:#72bcd4;font-weight:bold">Esperto</span>: "Certo. Ma le notifiche potrebbero essere utili non solo in caso di guasti. Potrebbe essere utile venir informati quando è il momento di fare manutenzione, o un qualche tipo di controllo."  
+
+<span style="color:#235f73;font-weight:bold">Developer</span>: "Quindi possiamo dire che ci sono due tipi di notifiche: i reminder, e i warning".  
+
+---
+
+#### Autonomia
+
+<span style="color:#235f73;font-weight:bold">Developer</span>: "Abbiamo capito che è impossibile affidare completamente al sistema la gestione delle piante. Ma cosa si può effettivamente automatizzare? Cosa può fare anche un computer in completa autonomia?"  
+
+<span style="color:#72bcd4;font-weight:bold">Esperto</span>: "Ci sono aspetti per cui in realtà automatizzare sarebbe utilissimo. Ad esempio l'irrigazione."  
+
+<span style="color:#235f73;font-weight:bold">Developer</span>: "In base a cosa il sistema dovrebbe capire quando è il momento di irrigare? L'umidità del suolo è un buon parametro?"  
+
+<span style="color:#72bcd4;font-weight:bold">Esperto</span>: "Sì, può essere un buon modo. Dipende molto anche dalle esigenze della pianta. Molte serre scelgono semplicemente ogni quando irrigare. L'importante è che una volta che viene presa una decisione essa venga mantenuta nel tempo. Non si può cambiare la modalità a metà strada o la pianta rischia lo stress."  
+
+---
+
+#### Autonomia
+
+<span style="color:#235f73;font-weight:bold">Developer</span>: "Cosa si fa se una pianta comincia a morire? Come va trattata? Cosa va cambiato?"  
+
+<span style="color:#72bcd4;font-weight:bold">Esperto</span>: "Di solito quando qualche parametro non è il linea con le esigenze della pianta questa comincia ad appassire o cambiare aspetto. Solo guardando la pianta si può capire che c'è qualcosa che non va. Come comportarsi varia molto dal problema. Sicuramente bisogna agire nel modo più tempestivo possibile. Una volta identificato il problema si cerca di rimediare ristabilendo l'equilibrio della pianta, per esempio fornendo meno acqua nel caso in cui quest'ultima ne abbia ricevuta troppa. A volte non è sufficiente però. L'ideale e non arrivare mai alla situazione in cui una pianta mostra segni di deterioramento. Anche il raccolto finale è fortemente influenzato dal modo in cui la pianta è cresciuta."
+
+## Retrospettiva sui meeting
+
+I meeting con l'esperto del dominio sono stati molto utili per comprendere meglio aspetti legati al dominio botanico ed in particolare gli aspetti legati alla coltivazione.  
+Sono stati inoltre molto utili per arricchire il vocabolario e fissare l'ubiquitous language.
+
+### Informazioni chiave ottenute
+
+Vengono di seguito elencate alcune delle informazioni più importanti che sono state apprese dopo i meeting avvenuti:
+
+- Le piante (tutte) sono estremamente delicate, una volta abituate in un certo modo è difficile cambiare il loro ritmo e anche solo piccole variazioni possono portare la pianta in una condizione di stress.
+- La manutenzione resta uno dei cardini principali all'interno della serra in quanto è necessaria a garantire sempre che le piante non possano incorrere in situazioni spiacevoli, e quindi massimizzare il raccolto.
+- Temperatura, Umidità, Irrigazione e Illuminazione sono le quattro "proprietà" a cui prestare più attenzione quando si coltiva una pianta.
