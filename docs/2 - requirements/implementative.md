@@ -14,6 +14,7 @@ Il sistema è diviso in sottoprogetti. Verranno brevemente illustrati i requisit
 - __Build tool utilizzato__: [Gradle](https://gradle.org/)
 - __Versioning tool__: [Git](https://git-scm.com/)
 - __Versioning portal__: [GitHub](https://github.com/)
+- __Containerization__: [Docker](https://www.docker.com/)
 
 ### Edge
 - __Gestore di librerie esterne e configurazioni aggiuntive__: [PlatformIO](https://platformio.org/);
@@ -31,7 +32,7 @@ Il sistema è diviso in sottoprogetti. Verranno brevemente illustrati i requisit
 ### Greenhouse Core
 
 - __Linguaggio utilizzato__: Java 11, Jason, Cartago, Moise;
-- __IDE utilizzato/utilizzabile__: Eclipse;
+- __IDE utilizzato/utilizzabile__: Visual Studio Code, Eclipse;
 - __Framework utilizzato__: [JaCaMo](http://jacamo.sourceforge.net/)
 - __Librerie__:
   - [wot-servient](https://github.com/sane-city/wot-servient): L'implementazione dell'architettura W3C Web of Things (WoT) in Java.
