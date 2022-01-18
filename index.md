@@ -6,8 +6,12 @@ nav_order: 1
 
 # Brittany
 
-Brittany description.
+Brittany è un software per semplificare ed automatizzare la gestione di un sistema di serre.
 
+<div align="center">
+<img src="https://images2.imgbox.com/67/27/yi2jRdpn_o.jpg" alt="Brittany Logo"  width="220px" height="210px">
+<p align="center">Brittany Logo</p>
+</div>
 
 ### Componenti del gruppo
 - Filaseta Angelo (995855) - <angelo.filaseta@studio.unibo.it>
