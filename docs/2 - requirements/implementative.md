@@ -21,7 +21,7 @@ Il sistema è diviso in sottoprogetti. Verranno brevemente illustrati i requisit
 - __Gestore di librerie esterne e configurazioni aggiuntive__: [PlatformIO](https://platformio.org/);
 - __Linguaggio utilizzato__: C++17;
 - __Hardware utilizzato__: ESP8266, Node MCU v1.0
-- __Testing__: <unity.h>, integrata in PlatformIO;
+- __Testing__: unity.h, integrata in PlatformIO;
 - __Coverage__: [lcov](https://github.com/linux-test-project/lcov);
 - __IDE utilizzato/utilizzabile__: Visual Studio Code, Clion;
 - __Librerie__:
