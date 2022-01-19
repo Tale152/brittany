@@ -34,7 +34,7 @@ function createList(elements, keyGenerator, textGenerator, onElementClick) {
                     key={keyGenerator(element)} 
                     action 
                     onClick={() => onElementClick(element._id)}
-                    className = "border-2 border-dark rounded"
+                    className = "border-2 border-dark rounded my-1"
                     style={{backgroundColor: "#198754", color: "white", textAlign: "center"}}
                 >
                     {textGenerator(element)}
