@@ -7,7 +7,7 @@ export default function CustomCenteredButton(props){
         <Row className="d-flex justify-content-center">
             <Button
                 style = { useSelector(state => state.util.isLoading) ? { pointerEvents: "none", opacity: "0.4" } : {} }
-                className = "col-lg-3 col-12 my-2"
+                className = "col-11 my-2"
                 variant = "primary"
                 onClick = {props.onClick}
             >
