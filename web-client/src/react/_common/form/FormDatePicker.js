@@ -5,7 +5,11 @@ export default function FormDatePicker(props){
     return (
         <>
             <h3>{props.text}</h3>
-            <DatePicker selected = { props.selected } onChange = { props.onChange } />
+            <DatePicker 
+                className = "border-2 border-dark rounded"
+                selected = { props.selected } 
+                onChange = { props.onChange }
+            />
         </>
     )
 }
