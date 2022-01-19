@@ -8,7 +8,7 @@ export default function CustomCenteredButton(props){
             <Button
                 style = { useSelector(state => state.util.isLoading) ? { pointerEvents: "none", opacity: "0.4" } : {} }
                 className = "col-11 my-2"
-                variant = "primary"
+                variant = "success"
                 onClick = {props.onClick}
             >
                 {props.text}
