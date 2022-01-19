@@ -31,5 +31,6 @@ test("Expecting modal to be closable", () => {
     let show = true
     renderModal(titleText, <p>{ bodyText }</p>, show, () => { show = false })
     expect(screen.getByText(bodyText)).toBeInTheDocument()
-    //TODO
+    screen.getByRole("button").click()
+    expect(show).toBe(false)
 })
