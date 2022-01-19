@@ -26,7 +26,7 @@ inline std::string module_as_string(ModuleNames moduleName) {
         case ModuleNames::Temperature:
             return "temperature";
         case ModuleNames::Humidity:
-            return "humidity";
+            return "airHumidity";
         case ModuleNames::Light:
             return "light";
         default:
