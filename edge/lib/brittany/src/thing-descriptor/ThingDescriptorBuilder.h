@@ -8,7 +8,6 @@
 #include "hw/ComponentHw.h"
 #include <string>
 #include <unordered_map>
-#include <Arduino.h>
 
 using namespace TD;
 
@@ -55,24 +54,21 @@ private:
         std::unordered_map<std::string, std::list<ComponentHw>> map;
         for(Module* m : modules) {
             ComponentModule<ComponentHw>* cm = static_cast<ComponentModule<ComponentHw>*>(m);
+            std::list<ComponentHw> components;
             if(map.find(cm -> name()) == map.end()) {
-                map.insert_or_assign(cm -> name(), cm -> components());      
+                components = cm -> components();
             } else {
-                std::list<ComponentHw> components = map[cm -> name()];
-                for(ComponentHw c : cm -> components()) {
-                    components.push_back(c);
-                }
-                map.insert_or_assign(cm -> name(), components);   
+                components = map[cm -> name()];
+                components.splice(components.end(), cm -> components());
             } 
+            map.insert_or_assign(cm -> name(), components);
         }
         int i = 0;
         for(const std::pair<std::string, std::list<ComponentHw>> n : map) {
             td["modules"][i]["module"] = n.first.c_str();
             int j = 0;
             for(ComponentHw c : n.second) {
-                Serial.println(c.id().c_str());
-                td["modules"][i]["components"][j] = c.id().c_str();
-                j++;
+                td["modules"][i]["components"][j++] = c.id().c_str();
             }
             i++;
         }
