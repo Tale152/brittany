@@ -12,7 +12,7 @@ export default function List(props){
             </Row>
         )
     } else if(props.elements.length === 0){
-        return (<p>No existing elements</p>)
+        return (<p className="d-flex justify-content-center">No existing elements</p>)
     } else {
         return (
             <Row className="d-flex justify-content-center">
