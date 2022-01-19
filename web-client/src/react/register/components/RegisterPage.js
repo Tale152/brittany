@@ -7,7 +7,7 @@ import { useAlert } from 'react-alert'
 import FormText from '../../_common/form/input/FormText'
 import FormPassword from '../../_common/form/input/FormPassword'
 import FormDatePicker from '../../_common/form/FormDatePicker'
-import FormButton from '../../_common/form/FormButton'
+import CustomCenteredButton from '../../_common/CustomCenteredButton'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 
 import organizationRegister from '../../../js/organization/organizationRegister'
@@ -76,7 +76,7 @@ export default function RegisterPage() {
                             onEnter = { tryRegister }
                         />
                         <div className="mt-lg-3">
-                            <FormButton text={ "Register" }  onClick = { tryRegister } />
+                            <CustomCenteredButton text={ "Register" }  onClick = { tryRegister } />
                             <RedirectButton text = { "Login" } destination = { "" } />
                         </div>
                     </Form>

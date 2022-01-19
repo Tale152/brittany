@@ -6,7 +6,7 @@ import { useAlert } from 'react-alert'
 
 import FormText from '../../_common/form/input/FormText'
 import FormPassword from '../../_common/form/input/FormPassword'
-import FormButton from '../../_common/form/FormButton'
+import CustomCenteredButton from '../../_common/CustomCenteredButton'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 
 import farmerLogin from '../../../js/farmer/farmerLogin'
@@ -41,7 +41,7 @@ export default function LoginPage() {
                             onEnter = { tryLogin }
                         />
                         <div className="mt-lg-3">
-                            <FormButton text={ "Login" } onClick = { tryLogin } />
+                            <CustomCenteredButton text={ "Login" } onClick = { tryLogin } />
                             <RedirectButton text = { "Register" } destination = { "register" } />
                         </div>
                     </Form>
