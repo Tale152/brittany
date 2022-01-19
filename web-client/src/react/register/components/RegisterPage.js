@@ -31,7 +31,7 @@ export default function RegisterPage() {
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
             <Row className="d-flex justify-content-center">
-                <div className="my-5 container col-lg-3 col-9 border border-success rounded trnsp">
+                <div style={{backgroundColor:"#66c95b"}} className="my-5 container col-lg-3 col-9 border border-success rounded trnsp">
                     <Form className="mt-1 mb-3"  >
                         <h1 className="d-flex justify-content-center">Register</h1>
                         <FormText

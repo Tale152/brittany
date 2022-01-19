@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom'
 import App from './react/App'
 
 ReactDOM.render(
-  <App />,
+  <div className='rootContainer'><App /></div>,
   document.getElementById("root")
 )

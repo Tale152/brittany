@@ -4,7 +4,7 @@ import RedirectButton from './navigation/RedirectButton'
 export default function Navbar(props){
 
     return (
-        <div style={{backgroundColor:"#d7f8d3"}} className="border border-success trnsp">
+        <div style={{backgroundColor:"#66c95b"}} className="border border-success trnsp">
             <BrittanyTitle />
             {props.additionalContent === undefined ? <></> : props.additionalContent}
             <RedirectButton
