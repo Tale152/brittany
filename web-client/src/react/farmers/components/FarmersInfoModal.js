@@ -30,7 +30,7 @@ function createFarmerInfo(farmers){
                 <p>Name: {selected.name}</p>
                 <p>Surname: {selected.surname}</p>
                 <p>Mail: {selected.mail}</p>
-                <p>Birthdate: {selected.birthdate}</p>
+                <p>Birthdate: {selected.birthdate.substring(0, 10)}</p>
             </div>
         )
     } else {
