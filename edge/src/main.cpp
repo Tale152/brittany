@@ -4,6 +4,9 @@
 #include "web-server/Esp8266WebServer.h"
 #include "wifi_secret.h"
 #include "modules/Module.h"
+
+#include <ESP8266WiFi.h>
+
 #include "modules/concrete/concrete-dht22.h"
 #include "modules/mock/mock-digital-light.h"
 #include "modules/mock/mock-temperature-humidity.h"

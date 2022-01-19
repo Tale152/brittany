@@ -11,6 +11,7 @@ tasks.register<Exec>("testRealHw") {
 }
 
 tasks.register<Exec>("upload") {
+
     val envs: List<String> = File("platformio.ini").readLines().filter{
             it.matches(Regex("\\[env:.*\\]"))
         }.map{
