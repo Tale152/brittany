@@ -7,6 +7,7 @@ export default function FormInput(props){
             <h3>{props.text}</h3>
             <Form.Control
                 style={useSelector(state => state.util.isLoading) ? { pointerEvents: "none", opacity: "0.4" } : {}}
+                className = "border-2 border-dark"
                 type={props.type}
                 onChange={e => props.onChange(e.target.value)}
                 placeholder={props.placeholder}
