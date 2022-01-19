@@ -30,6 +30,7 @@ export default function EnvironmentListModal(props) {
                     <>
                         <CreateEnvironmentButton />
                         <List
+                            colLgSize = { 8 }
                             elements={environments}
                             keyGenerator = { (e) => { return e.name } }
                             textGenerator = { (e) =>  { return e.name } }
