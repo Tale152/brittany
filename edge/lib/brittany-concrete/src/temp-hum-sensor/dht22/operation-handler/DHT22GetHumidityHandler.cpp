@@ -3,9 +3,8 @@
 
 DHT22GetHumidityHandler::DHT22GetHumidityHandler(
     std::string name,
-    std::string path,
     std::list<DHT22SensorHw*> components
-): DHT22Handler(name, path, components) {
+): DHT22Handler(name, components) {
 
 }
 

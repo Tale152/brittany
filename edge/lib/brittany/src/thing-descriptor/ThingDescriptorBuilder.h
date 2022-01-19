@@ -73,10 +73,7 @@ private:
                         std::string("http://") + ip + ":" + std::to_string(port) + h -> path() + "?id=" + c.id();
                     object["forms"][0]["contentType"] = "application/json";
                     std::string objectName;
-                    std::string name = h -> name();
-                    if(cm->components().size() != 1) {
-                        name += "-" + c.id();
-                    }
+                    std::string name = h -> name() + "-" + c.id();
                     std::string type = type_to_string(h -> outputType());
                     switch (h -> operationType()) {
                     case OperationType::ACTION:

@@ -31,6 +31,20 @@ public:
         Type outputType
     );
 
+
+    /**
+     * @brief Construct a new Operation Handler object.
+     * 
+     * @param name The name of the OperationHandler. Will also be the path with a "/" in front.
+     * @param operationTye The operation type of the OperationHandler.
+     * @param outputType The type of the Output.
+     */
+    OperationHandler(
+        std::string name,
+        OperationType operationType,
+        Type outputType
+    );
+
     /**
      * @brief Return the name of the OperationHandler.
      * 

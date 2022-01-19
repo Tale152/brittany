@@ -10,11 +10,7 @@ class DHT22GetTemperatureHandler : public DHT22Handler {
 
 public:
 
-    DHT22GetTemperatureHandler(
-        std::string name,
-        std::string path,
-        std::list<DHT22SensorHw*> components
-    );
+    DHT22GetTemperatureHandler(std::string name, std::list<DHT22SensorHw*> components);
 
 private:
 

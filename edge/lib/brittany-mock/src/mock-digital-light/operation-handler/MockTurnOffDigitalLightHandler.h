@@ -3,38 +3,19 @@
 
 #include <list>
 #include <string>
-#include <json/json.h>
-#include "operation-handler/interfaces/TurnOffHandlerInterface.h"
-#include "operation-handler/interfaces/TurnOffHandlerInterface.cpp"
+#include "operation-handler/interfaces/components/TurnOffSwitchableHandler.h"
 #include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "operation-handler/OperationHandlerResult.h"
 #include "util.h"
 
-class MockTurnOffDigitalLightHandler : public TurnOffHandlerInterface {
+class MockTurnOffDigitalLightHandler: public TurnOffSwitchableHandler<MockDigitalLightHw> {
 
 public:
 
-    MockTurnOffDigitalLightHandler(
-        std::string name,
-        std::string path,
-        std::list<MockDigitalLightHw*> components
-    ): TurnOffHandlerInterface(name, path) {
-        _components = components;
-    };
+    MockTurnOffDigitalLightHandler(std::list<MockDigitalLightHw*> components)
+        : TurnOffSwitchableHandler<MockDigitalLightHw>("turnOff", components) {
 
-private:
-
-    bool turnOff(std::string id) {
-        std::optional<MockDigitalLightHw*> oc = find_by_id(_components, id);
-        if(oc.has_value()) {
-            oc.value() -> off();
-            return true;
-        } else {
-            return false;
-        }
     };
-    
-    std::list<MockDigitalLightHw*> _components;
 
 };
 

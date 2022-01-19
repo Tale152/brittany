@@ -12,7 +12,9 @@ class MockDigitalLightHw : public DigitalLightHwInterface {
 
 public:
 
-    MockDigitalLightHw(std::string id, uint8_t pin) : DigitalLightHwInterface(id, pin){ }
+    MockDigitalLightHw(std::string id) : DigitalLightHwInterface(id) {
+        _isOn = false;
+    }
 
     void on() {
         _isOn = true;

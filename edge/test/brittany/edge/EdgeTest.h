@@ -8,10 +8,8 @@
 
 #define EDGE_MOCK_TITLE "MockEdge"
 #define EDGE_MOCK_MODULE_NAME "mock-module"
-#define EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME "light-module"
 
 #define MOCK_LIGHT_IN_EDGE_NAME "light"
-#define MOCK_LIGHT_IN_EDGE_PIN 5
 #define TESTING_EXECUTE_ATTEMPT 10
 
 #define INCREMENT_VALUE_TEST 6
@@ -27,15 +25,15 @@ void test_string_element_is_in_list(std::list<std::string> list, std::string str
 void test_light_module_available_path(Edge* edge) {
     test_string_element_is_in_list(
         edge -> availablePaths(),
-        as_route(MOCK_IS_ON_LIGHT_NAME)
+        "/isOn"
     );
     test_string_element_is_in_list(
         edge -> availablePaths(),
-        as_route(MOCK_TURN_OFF_LIGHT_NAME)
+        "/turnOff"
     );
     test_string_element_is_in_list(
         edge -> availablePaths(),
-        as_route(MOCK_TURN_ON_LIGHT_NAME)
+        "/turnOn"
     );
 }
 
@@ -47,10 +45,7 @@ void test_mock_module_available_path(Edge* edge) {
 }
 
 void setup_test_edge() {
-    mockLightInEdge = new MockDigitalLightHw(
-        MOCK_LIGHT_IN_EDGE_NAME,
-        MOCK_LIGHT_IN_EDGE_PIN
-    );
+    mockLightInEdge = new MockDigitalLightHw(MOCK_LIGHT_IN_EDGE_NAME);
     mockDigitalLights.push_back(mockLightInEdge);
 }
 
@@ -94,10 +89,10 @@ void test_edge_execute_working(Edge* edge) {
     TEST_ASSERT_EQUAL(INCREMENT_VALUE_TEST, result0.content().asInt());
     Json::Value args;
     args["id"] = MOCK_LIGHT_IN_EDGE_NAME;
-    auto result1 = edge -> execute(as_route(MOCK_TURN_ON_HANDLER_MODULE_NAME), args);
+    auto result1 = edge -> execute("/turnOn", args);
     check_edge_result_code_is_ok(result1);
     TEST_ASSERT_EQUAL_STRING(phrase(ContentResult::Ok).c_str(), result1.content().asCString());
-    auto result = edge -> execute(as_route(MOCK_IS_ON_HANDLER_MODULE_NAME), args);
+    auto result = edge -> execute("/isOn", args);
     check_edge_result_code_is_ok(result);
     TEST_ASSERT_TRUE(result.content().asBool());
 }
@@ -115,7 +110,7 @@ void test_edge_list() {
     Edge* edge = new Edge(EDGE_MOCK_TITLE,
         std::list<Module*>({
             new MockModule(EDGE_MOCK_MODULE_NAME),
-            new MockDigitalLightModule(EDGE_MOCK_DIGITAL_LIGHT_MODULE_NAME, mockDigitalLights)
+            new MockDigitalLightModule(mockDigitalLights)
         })
     );
     test_edge_title(edge);

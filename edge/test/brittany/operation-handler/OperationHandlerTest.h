@@ -1,20 +1,15 @@
 #include <unity.h>
 #include "mock/operation-handler/MockOperationHandler.h"
+#include "util.h"
 
-#define OPERATION_HANDLER_NAME "Operation"
-#define OPERATION_HANDLER_PATH "/operation"
-
-MockOperationHandler mockOperationHandler = MockOperationHandler(
-    OPERATION_HANDLER_NAME,
-    OPERATION_HANDLER_PATH
-);
+MockOperationHandler mockOperationHandler = MockOperationHandler();
 
 void test_operation_handler_name() {
-    TEST_ASSERT_EQUAL_STRING(OPERATION_HANDLER_NAME, mockOperationHandler.name().c_str());
+    TEST_ASSERT_EQUAL_STRING("value", mockOperationHandler.name().c_str());
 }
 
 void test_operation_handler_path() {
-    TEST_ASSERT_EQUAL_STRING(OPERATION_HANDLER_PATH, mockOperationHandler.path().c_str());
+    TEST_ASSERT_EQUAL_STRING("/value", mockOperationHandler.path().c_str());
 }
 
 void test_operation_handler_operation_type() {

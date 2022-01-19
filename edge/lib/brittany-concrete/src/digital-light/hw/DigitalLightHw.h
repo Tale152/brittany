@@ -2,12 +2,13 @@
 #define BRITTANY_DIGITAL_LIGHT_HW_H
 
 #include "hw/interfaces/DigitalLightHwInterface.h"
+#include "hw/feature/OnePin.h"
 
 /**
  * @brief Concrete implementation of a Digital Light component.
  * 
  */
-class DigitalLightHw : public DigitalLightHwInterface {
+class DigitalLightHw : public DigitalLightHwInterface, public OnePin {
 
 public:
 

@@ -25,18 +25,15 @@ public:
      * @brief Construct a new Value Returned After Action Handler Interface object.
      * 
      * @param name the name of the handler.
-     * @param path the path of the handler.
      * @param operationType the operationType of the handler.
      * @param outputType the output type of the handler.
      */
     ValueReturnedAfterActionHandlerInterface(
         std::string name,
-        std::string path,
         OperationType operationType,
         Type outputType
     ) : ValueReturnedHandlerInterface<T>(
         name,
-        path,
         operationType,
         outputType
     ) {};

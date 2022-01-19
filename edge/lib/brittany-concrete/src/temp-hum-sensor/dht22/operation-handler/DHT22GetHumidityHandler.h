@@ -12,7 +12,6 @@ public:
 
     DHT22GetHumidityHandler(
         std::string name,
-        std::string path,
         std::list<DHT22SensorHw*> components
     );
 

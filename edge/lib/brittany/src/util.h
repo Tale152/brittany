@@ -5,6 +5,7 @@
 #include <list>
 #include <string>
 #include <optional>
+#include <random>
 
 enum class ContentResult {
     Ok,
@@ -66,6 +67,17 @@ inline std::optional<T> find_by_id(std::list<T> list, std::string id) {
         }
     }
     return std::nullopt;
+}
+
+/**
+ * @brief Return a random number from min to max (inclusive)
+ * 
+ * @param min the min number that could be returned.
+ * @param max the max number that could be returned.
+ * @return int the random number.
+ */
+inline int random(int min, int max) {
+   return min + rand() % (( max + 1 ) - min);
 }
 
 #endif //BRITTANY_UTIL_H
