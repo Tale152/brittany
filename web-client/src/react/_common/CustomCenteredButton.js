@@ -6,9 +6,10 @@ export default function CustomCenteredButton(props){
     return (
         <Row className="d-flex justify-content-center">
             <Button
-                style = { useSelector(state => state.util.isLoading) ? { pointerEvents: "none", opacity: "0.4" } : {} }
-                className = "col-lg-3 col-12 my-2"
-                variant = "primary"
+                style = { useSelector(state => state.util.isLoading) ? { pointerEvents: "none", opacity: "0.4", width: '18rem' } : { width: '18rem' } }
+                className = "col-11 my-2 border-2 border-dark"
+                border = "dark"
+                variant = "success"
                 onClick = {props.onClick}
             >
                 {props.text}

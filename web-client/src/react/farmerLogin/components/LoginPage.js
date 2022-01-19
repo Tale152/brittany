@@ -4,9 +4,10 @@ import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 import { useAlert } from 'react-alert'
 
+import BrittanyTitle from '../../_common/BrittanyTitle'
 import FormText from '../../_common/form/input/FormText'
 import FormPassword from '../../_common/form/input/FormPassword'
-import FormButton from '../../_common/form/FormButton'
+import CustomCenteredButton from '../../_common/CustomCenteredButton'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 
 import farmerLogin from '../../../js/farmer/farmerLogin'
@@ -25,7 +26,8 @@ export default function LoginPage() {
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
             <Row className="d-flex justify-content-center">
-                <div className="my-5 container col-lg-3 col-9 border border-primary rounded trnsp">
+                <div style={{backgroundColor:"#66c95b"}} className="my-5 container col-lg-3 col-9 border border-success rounded trnsp">
+                    <BrittanyTitle />
                     <Form className="mt-1 mb-3"  >
                         <h1 className="d-flex justify-content-center">Login</h1>
                         <FormText
@@ -41,7 +43,7 @@ export default function LoginPage() {
                             onEnter = { tryLogin }
                         />
                         <div className="mt-lg-3">
-                            <FormButton text={ "Login" } onClick = { tryLogin } />
+                            <CustomCenteredButton text={ "Login" } onClick = { tryLogin } />
                             <RedirectButton text = { "Register" } destination = { "register" } />
                         </div>
                     </Form>

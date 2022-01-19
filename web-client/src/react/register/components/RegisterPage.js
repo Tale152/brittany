@@ -4,10 +4,11 @@ import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 import { useAlert } from 'react-alert'
 
+import BrittanyTitle from '../../_common/BrittanyTitle'
 import FormText from '../../_common/form/input/FormText'
 import FormPassword from '../../_common/form/input/FormPassword'
 import FormDatePicker from '../../_common/form/FormDatePicker'
-import FormButton from '../../_common/form/FormButton'
+import CustomCenteredButton from '../../_common/CustomCenteredButton'
 import RedirectButton from '../../_common/navigation/RedirectButton'
 
 import organizationRegister from '../../../js/organization/organizationRegister'
@@ -31,7 +32,8 @@ export default function RegisterPage() {
     return (
         <div role="main" style={{ overflowX: "hidden" }}>
             <Row className="d-flex justify-content-center">
-                <div className="my-5 container col-lg-3 col-9 border border-primary rounded trnsp">
+                <div style={{backgroundColor:"#66c95b"}} className="my-5 container col-lg-3 col-9 border border-success rounded trnsp">
+                    <BrittanyTitle />
                     <Form className="mt-1 mb-3"  >
                         <h1 className="d-flex justify-content-center">Register</h1>
                         <FormText
@@ -76,7 +78,7 @@ export default function RegisterPage() {
                             onEnter = { tryRegister }
                         />
                         <div className="mt-lg-3">
-                            <FormButton text={ "Register" }  onClick = { tryRegister } />
+                            <CustomCenteredButton text={ "Register" }  onClick = { tryRegister } />
                             <RedirectButton text = { "Login" } destination = { "" } />
                         </div>
                     </Form>
