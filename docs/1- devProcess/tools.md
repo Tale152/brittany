@@ -45,7 +45,15 @@ In particolare dispone della possibilità di creare diagrammi UML gratuitamente.
 <p align="center">Logo di GenMyModel</p>
 </div>
 
-
 ## Github Pages
 La documentazione del progetto è mantenuta tramite un processo di continuous integration grazie ad una feature proposta da GitHub: _GitHub Pages_.
 GitHub Pages fornisce un modo per automatizzare la pubblicazione di pagine web da semplice testo scritto in markdown a un linguaggio human-readable. La documentazione è mantenuta su un branch orfano denominato "/docs".
+
+## Heroku 
+Heroku è una platform as a service sul cloud che supporta diversi linguaggi di programmazione. In questo progetto è stata utilizzata come piattaforma per effettuare il deploy di alcuni servizi.  
+Heroku offre infatti la possibilità di hostare un'applicazione gratuitamente se quest'ultima non viene utilizzata per fini commerciali.
+
+<div align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Heroku_logo.svg" width="300px" alt="Heroku Logo">
+<p align="center">Logo di Heroku</p>
+</div>
