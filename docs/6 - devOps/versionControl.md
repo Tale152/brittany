@@ -8,6 +8,13 @@ has_children: false
 
 ## Git Workflow
 
+Il Workflow di git è stato suddiviso a sua volta per sottoprogetti.
+Lo sviluppo indipendente di ogni sottoprogetto avviene infatti sul branch corrispondente.
+Il branch ``develop`` viene utilizzato per la sincronizzazione e l'integrazione di funzionalità tra sottoprogetti. Il branch ``master`` viene utilizzato quando il codice raggiunge uno stato in cui può essere efftuata una release.
+Il branch ``docs`` infine viene utilizzato per  mantenere la documentazione.
+Da ciascun branch dei sottoprogetti possono ovviamente partire ulteriori branch di feature.
+Segue l'elenco con descrizione dei branch utilizzati:
+
 - __docs__: il branch orfano dedicato alla stesura della documentazione. Viene utilizzato anche da GitHub per creare l'ambiente di GitHub Pages.
 - __master__: il branch che mantiene la storia del progetto, dedicato principalmente al codice sorgente del software in release.
 - __develop__: il branch in cui sono presenti tutti i sottoprogetti. I sotto branch effettuano operazioni di merge su questo branch quando è necessario integrare qualcosa.
