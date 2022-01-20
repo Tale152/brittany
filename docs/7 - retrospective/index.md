@@ -1,8 +1,8 @@
 ---
-title: Retrospettiva
-has_children: false
+title: Conclusioni
+has_children: true
 nav_order: 8
 ---
 
-# Retrospettiva
-TODO Retrospettiva
+# Conclusioni
+In questo capitolo conclusivo verranno illustrati alcuni possibili sviluppi futuri per l'applicazione, insieme ad una breve retrospettiva sullo sviluppo del progetto.
