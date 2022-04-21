@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.jacamo', name: 'jacamo', version: '1.0'
+    compile group: 'org.jacamo', name: 'jacamo', version: '0.9'
     compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
     compile 'com.google.code.gson:gson:2.8.9'
     compile group: 'city.sane.wot-servient', name: 'wot-servient', version: '1.15'
