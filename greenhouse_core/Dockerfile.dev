@@ -1,4 +1,4 @@
-FROM gradle:6.8.0-jdk8
+FROM gradle:6.9.2-jdk11
 WORKDIR /app
 COPY . /app
 USER root
@@ -7,7 +7,8 @@ USER gradle
 RUN echo 'handlers= java.util.logging.ConsoleHandler' >logging.properties
 RUN gradle uberJar --stacktrace
 
-FROM jomifred/jacamo:1.0
+FROM alessandrotalmi/jacamo-java-11:latest
 WORKDIR /app
 COPY --from=0 /app/build/libs /app
+EXPOSE 1-65535
 CMD ["java", "-jar", "jacamo-greenhouse_core-1.0.jar"]
