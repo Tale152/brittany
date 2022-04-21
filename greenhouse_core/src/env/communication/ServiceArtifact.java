@@ -131,7 +131,7 @@ public class ServiceArtifact extends Artifact {
 						}
 						if (dataObject.has("airHumidity")) {
 							JsonObject airHumidity = dataObject.get("airHumidity").getAsJsonObject();
-							settings.createSetting("temperature",
+							settings.createSetting("airHumidity",
 									new Pair<>(airHumidity.get("min").getAsInt(), airHumidity.get("max").getAsInt()));
 						}
 						if (dataObject.has("light")) {
