@@ -2,8 +2,6 @@
 
 package communication;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -32,8 +29,7 @@ import utility.component.Component;
 import utility.component.ComponentBuilder;
 
 public class DiscoverComponentsArtifact extends Artifact {
-	private static final String URL = "http://192.168.25.1";
-
+	
 	private OkHttpClient client;
 
 	private List<Component> components;
@@ -52,7 +48,8 @@ public class DiscoverComponentsArtifact extends Artifact {
 		} catch (WotException e1) {
 			e1.printStackTrace();
 		}
-		getThingDescriptor();
+		//getThingDescriptor();
+		//getThingDescriptorByFile();
 	}
 
 	@OPERATION
@@ -61,31 +58,23 @@ public class DiscoverComponentsArtifact extends Artifact {
 		// the proper devices
 
 		//for test purposes
-		getThingDescriptor();
+		/*for (int i = 1; i >= 255; i++){
+			System.out.println("http://192.168.189." + i);
+		}*/
+		getThingDescriptor("http://192.168.189.1");
+		
 		System.out.println("UPDATED COMPONENTS!");
 		defineObsProperty("components", this.components);
 		defineObsProperty("thingDescriptors", this.thingDescriptors);
 	}
 
-	private void getThingDescriptor() {
-		Request request = new Request.Builder().url(URL).build();
+	private void getThingDescriptor(final String url) {
+		Request request = new Request.Builder().url(url).build();
 		try (Response response = client.newCall(request).execute()) {
-			if (!response.isSuccessful()) {
-				throw new IOException("Unexpected code " + response);
+			if (response.isSuccessful()) {
+				JsonObject thingDescriptor = JsonParser.parseString(response.body().string()).getAsJsonObject();
+				updateComponents(thingDescriptor);
 			}
-			JsonObject thingDescriptor = JsonParser.parseString(response.body().string()).getAsJsonObject();
-			updateComponents(thingDescriptor);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void getThingDescriptorByFile() {
-		Gson gson = new Gson();
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader("td.json"));
-			JsonObject thingDescriptor = gson.fromJson(reader, JsonObject.class);
-			updateComponents(thingDescriptor);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
