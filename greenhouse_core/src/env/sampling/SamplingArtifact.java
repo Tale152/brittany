@@ -101,7 +101,6 @@ public class SamplingArtifact extends Artifact {
 			}
 			if (this.settings.isPresent()) {
 				String category = avarageSample.getCategory();
-				System.out.println("Settings in sampling: " + this.settings);
 				// handled only range settings
 				if (getSettingByCategory(category).isPresent()
 						&& getSettingByCategory(category).get() instanceof RangeSetting) {
@@ -109,7 +108,7 @@ public class SamplingArtifact extends Artifact {
 					if (avarageSample.getValue() < rangeSetting.getMin()
 							|| avarageSample.getValue() > rangeSetting.getMax()) {
 						System.out.println("Create out of range behavior");
-						defineObsProperty("actuate", avarageSample, rangeSetting);
+						defineObsProperty("actuate", category, avarageSample, rangeSetting);
 					}
 				}
 			}
