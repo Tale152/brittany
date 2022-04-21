@@ -31,20 +31,42 @@ mas greenhouse_core {
 		focus: brittany.discover
 	}
 
-    agent samplingAgent : samplingAgent.asl {
+    agent temperatureAgent : samplingAgent.asl {
     	beliefs: category("temperature")
+		focus: brittany.common
+		focus: brittany.sampling
+		focus: brittany.communication
+	}
+
+	agent humidityAgent : samplingAgent.asl {
+    	beliefs: category("airHumidity")
 		focus: brittany.common
 		focus: brittany.sampling
 		focus: brittany.communication
 	}
 	
 	agent communicationAgent : communicationAgent.asl {
+		focus: brittany.common
 		focus: brittany.sampling
 		focus: brittany.communication
 	}
 	
-	agent actuatorAgent : actuatorAgent.asl {
+	agent lightActuatorAgent : actuatorAgent.asl {
 		beliefs: category("light")
+		focus: brittany.common
+		focus: brittany.sampling
+		focus: brittany.actuation
+	}
+
+	agent tempertatureActuatorAgent : actuatorAgent.asl {
+		beliefs: category("temperature")
+		focus: brittany.common
+		focus: brittany.sampling
+		focus: brittany.actuation
+	}
+
+	agent airHumidityActuatorAgent : actuatorAgent.asl {
+		beliefs: category("airHumidity")
 		focus: brittany.common
 		focus: brittany.sampling
 		focus: brittany.actuation
