@@ -5,9 +5,11 @@ package communication;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 import cartago.*;
+import city.sane.wot.thing.ConsumedThing;
 import utility.Sample;
 import utility.component.Component;
 
@@ -20,8 +22,16 @@ import utility.component.Component;
 public class CommunicationArtifact extends Artifact {
 
 	private List<Sample> samples;
+	private List<ConsumedThing> thingDescriptors;
 
-	void init() {}
+	void init() {
+		this.thingDescriptors = new ArrayList<>();
+	}
+
+	@OPERATION
+	void setupTd(final List<ConsumedThing> thingDescriptors) {
+		this.thingDescriptors = thingDescriptors;
+	}
 
 	/**
 	 * Operation used to retrieve samples from a certain list of sampling components.
@@ -32,12 +42,26 @@ public class CommunicationArtifact extends Artifact {
 	 *                         to the agent that called this operation.
 	 */
 	@OPERATION
-	void getSamplesOperation(List<Component> components, OpFeedbackParam<List<Sample>> retrievedSamples) {
+	void getSamplesOperation(final List<Component> components, OpFeedbackParam<List<Sample>> retrievedSamples) {
 		this.samples = new ArrayList<>();
-		//System.out.println("Communicating with " + components);
-		components.forEach(d -> this.samples.add(new Sample(d.getCategory(),
-				Instant.now().toString(), new Random().nextInt(20))));
+		System.out.println("Communicating with " + components);
+
+		for (Component component : components) {
+			Optional<ConsumedThing> td = getThingDescriptor(component.getEdgeIp());
+			if (td.isPresent() && component.getPropertyBySubString(component.getCategory()).isPresent()) {
+				try {
+					double value = (Double) td.get().getProperty(component.getPropertyBySubString(component.getCategory()).get()).read().get();
+					samples.add(new Sample(component.getCategory(), Instant.now().toString(), (int) Math.round(value)));
+				} catch (InterruptedException | ExecutionException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		retrievedSamples.set(this.samples);
+	}
+
+	private Optional<ConsumedThing> getThingDescriptor(final String id) {
+		return this.thingDescriptors.stream().filter(t -> t.getId().equals(id)).findFirst();
 	}
 
 }
