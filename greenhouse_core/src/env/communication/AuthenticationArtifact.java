@@ -17,6 +17,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * AuthenticationArtifact is an Artifact used to communicate with the authentication 
+ * service outside the greenhouse. It is the Artifact used to retrieve the token for the
+ * greenhouse, which is used to communicate with the other services.
+ */
 public class AuthenticationArtifact extends Artifact {
     private final static String LOGIN_FILE = "login.txt";
 	private final static String AUTH_SERVICE_URL = "http://localhost:81/agent/login";
@@ -48,6 +53,9 @@ public class AuthenticationArtifact extends Artifact {
 		}
 	}
 
+    /**
+     * Internal operation which is used to send the actual HTTP request to the authentication service.
+     */
 	@INTERNAL_OPERATION
 	void autheticate() {
 		try (Response response = client.newCall(getAuthenticationRequest()).execute()) {
@@ -61,15 +69,12 @@ public class AuthenticationArtifact extends Artifact {
 		}
 	}
 
-	private void extractToken(final JsonObject tokeJsonObject) {
-		if (tokeJsonObject.has("token")) {
-			defineObsProperty("token", tokeJsonObject.get("token").getAsString());
-		} else {
-			throw new IllegalStateException("You have not received the token");
-		}
-	}
-
-	private Request getAuthenticationRequest() {
+    /**
+     * Method used to create the request used to ask to the authentication service for the authentication
+     * token. In the request are also added the query parameters used for authenticate.
+     * @return the HTTP request to send to the authentication service.
+     */
+    private Request getAuthenticationRequest() {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(AUTH_SERVICE_URL).newBuilder();
 		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
 		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
@@ -77,5 +82,18 @@ public class AuthenticationArtifact extends Artifact {
 		urlBuilder.addQueryParameter("environmentPassword", this.loginData.get(3));
 		String url = urlBuilder.build().toString();
 		return new Request.Builder().url(url).build();
+	}
+
+    /**
+     * Having the json object returned by the authentication token, retrieve it and create an 
+     * observable property that can be seen by anyone who focus on this artifact.
+     * @param tokeJsonObject the Json Object returned by the authentication service.
+     */
+	private void extractToken(final JsonObject tokeJsonObject) {
+		if (tokeJsonObject.has("token")) {
+			defineObsProperty("token", tokeJsonObject.get("token").getAsString());
+		} else {
+			throw new IllegalStateException("You have not received the token");
+		}
 	}
 }
