@@ -22,11 +22,9 @@ import utility.Pair;
 import utility.setting.Settings;
 
 /**
- * ServiceArtifact is an Artifact used to communicate with all the services
+ * SettingsArtifact is an Artifact used to communicate with the settings service
  * outside the greenhouse. It is the Artifact used to retrieve settings for the
- * greenhouse and it is used also to upload the data registered by the sampling
- * devices.
- *
+ * greenhouse.
  */
 public class SettingsArtifact extends Artifact {
 
@@ -39,6 +37,11 @@ public class SettingsArtifact extends Artifact {
 		this.client = new OkHttpClient();
 	}
 
+	/**
+	 * Operation used to get the current settings from the settings service that are decided
+	 * by the user.
+	 * @param token it is the authentication token which is used to correctly ask for information to the server.
+	 */
 	@OPERATION
 	void getSettings(final String token) {
 		try (Response response = client.newCall(getSettingsRequest(token)).execute()) {
@@ -65,12 +68,23 @@ public class SettingsArtifact extends Artifact {
 		}
 	}
 
+	/**
+	 * Utility method used to create the HTTP request in order to ask for the current settings to the server.
+	 * @param token it is the authentication token which is used to correctly ask for information to the server.
+	 * @return the HTTP request ready to be lauched.
+	 */
 	private Request getSettingsRequest(final String token) {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
 		String url = urlBuilder.build().toString();
 		return new Request.Builder().addHeader("token", token).url(url).build();
 	}
 
+	/**
+	 * Utility method used to extract from the json object the date of creating of the retrieved
+	 * settings from the server.
+	 * @param settingsObject the json object with all the settings returned by the server.
+	 * @return the date of creationg of the settings retrieved.
+	 */
 	private Date getSettingsCreationDate(final JsonObject settingsObject) {
 		SimpleDateFormat dataFormatter = new SimpleDateFormat(UTC_FORMAT);
 		dataFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -83,7 +97,13 @@ public class SettingsArtifact extends Artifact {
 		return creationDate;	
 	}
 
-	private void createRangeSetting(final JsonObject dataObject, Settings settings, final String category) {
+	/**
+	 * Utility method used to create a setting of a specific category which has a min and max value.
+	 * @param dataObject the json object with all the settings.
+	 * @param settings the current settings retrieved from the json object.
+	 * @param category the category of the settings wanted.
+	 */
+	private void createRangeSetting(final JsonObject dataObject, final Settings settings, final String category) {
 		if (dataObject.has(category)) {
 			JsonObject temperature = dataObject.get(category).getAsJsonObject();
 			settings.createSetting(category,
@@ -91,7 +111,13 @@ public class SettingsArtifact extends Artifact {
 		}
 	}
 
-	private void createHourSetting(final JsonObject dataObject, Settings settings, final String category) {
+	/**
+	 * Utility method used to create a setting of a specific category which depends on a time range.
+	 * @param dataObject the json object with all the settings.
+	 * @param settings the current settings retrieved from the json object.
+	 * @param category the cateogry of the settings wanted.
+	 */
+	private void createHourSetting(final JsonObject dataObject, final Settings settings, final String category) {
 		if (dataObject.has(category)) {
 			JsonObject light = dataObject.get(category).getAsJsonObject();
 			LocalTime fromTime = LocalTime.of(light.get("fromH").getAsInt(), light.get("fromM").getAsInt());
