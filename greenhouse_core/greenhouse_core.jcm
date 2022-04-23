@@ -53,34 +53,38 @@ mas greenhouse_core {
 		focus: brittany.communication
 	}
 	
-	agent lightActuatorAgent : actuatorAgent.asl {
+	agent lightActuatorAgent : timeBasedActuatorAgent.asl {
 		beliefs: category("light")
 		focus: brittany.common
 		focus: brittany.sampling
-		focus: brittany.actuation
+		focus: actuators.timeBased
 	}
 
-	agent tempertatureActuatorAgent : actuatorAgent.asl {
+	agent tempertatureActuatorAgent : sampleBasedActuatorAgent.asl {
 		beliefs: category("temperature")
 		focus: brittany.common
 		focus: brittany.sampling
-		focus: brittany.actuation
+		focus: actuators.sampleBased
 	}
 
-	agent airHumidityActuatorAgent : actuatorAgent.asl {
+	agent airHumidityActuatorAgent : sampleBasedActuatorAgent.asl {
 		beliefs: category("airHumidity")
 		focus: brittany.common
 		focus: brittany.sampling
-		focus: brittany.actuation
+		focus: actuators.sampleBased
 	}
 	
 	workspace brittany {
         artifact common: common.CommonArtifact()
         artifact sampling: sampling.SamplingArtifact()
         artifact communication: communication.CommunicationArtifact()
-        artifact actuation: communication.ActuationArtifact()
 		artifact discover: communication.DiscoverComponentsArtifact()   
     }
+
+	workspace actuators {
+		artifact sampleBased: actuators.SampleBasedActuatorArtifact()
+		artifact timeBased: actuators.TimeBasedActuatorArtifact()
+	}
 
 	workspace services {
 		artifact persistence: communication.PersistenceArtifact()
