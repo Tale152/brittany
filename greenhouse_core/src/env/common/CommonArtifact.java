@@ -25,13 +25,13 @@ public class CommonArtifact extends Artifact {
 	private List<ConsumedThing> thingDescriptors;
 
 	void init() {
-		// for test purpose right now devices are hard-coded
 		this.components = new ArrayList<>();
 		this.settings = Optional.empty();
 		this.thingDescriptors = new ArrayList<>();
 
-		defineObsProperty("setup", this.components, this.settings);
-		defineObsProperty("setupTd", this.thingDescriptors);
+		defineObsProperty("setupSettings", this.settings);
+		defineObsProperty("setupComponents", this.components);
+		defineObsProperty("setupTds", this.thingDescriptors);
 	}
 
 	@OPERATION
@@ -39,14 +39,14 @@ public class CommonArtifact extends Artifact {
 		if (!this.components.equals(components)) {
 			this.components = components;
 		}
-		updateObsProperty("setup", this.components, this.settings);
+		updateObsProperty("setupComponents", this.components);
 	}
 
 	@OPERATION
 	void shareSettings(final Optional<Settings> settings) {
 		if (!this.settings.equals(settings)) {
 			this.settings = settings;
-			updateObsProperty("setup", this.components, this.settings);
+			updateObsProperty("setupSettings", this.settings);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class CommonArtifact extends Artifact {
 	void shareThingDescriptors(final List<ConsumedThing> thingDescriptors) {
 		if (!this.thingDescriptors.equals(thingDescriptors)) {
 			this.thingDescriptors = thingDescriptors;
-			updateObsProperty("setupTd", this.thingDescriptors);
+			updateObsProperty("setupTds", this.thingDescriptors);
 		}
 	}
 }

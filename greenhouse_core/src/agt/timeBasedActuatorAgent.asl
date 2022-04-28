@@ -8,9 +8,11 @@
 
 /* Plans */
 
-+setup(Components, Settings) <- setupComponents(Components, Settings).
++setupComponents(Components) <- setupComponents(Components).
 
-+setupTd(Td) <- setupTd(Td).
++setupSettings(Settings) <- setupSettings(Settings).
+
++setupTds(Tds) <- setupTds(Tds).
 
 +!checkSettings <- ?category(Category); checkSettings(Category); !wait.
 

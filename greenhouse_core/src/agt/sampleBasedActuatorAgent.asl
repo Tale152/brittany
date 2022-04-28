@@ -6,9 +6,9 @@
 
 /* Plans */
 
-+setup(Components, Settings) <- setupComponents(Components).
++setupComponents(Components) <- setupComponents(Components).
 
-+setupTd(Td) <- setupTd(Td).
++setupTds(Tds) <- setupTds(Tds).
 
 /*
  * Category: the category of the actuation needed.

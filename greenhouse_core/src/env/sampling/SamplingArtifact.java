@@ -52,9 +52,13 @@ public class SamplingArtifact extends Artifact {
 	 *                   status.
 	 */
 	@OPERATION
-	void setup(final List<Component> components, final Optional<Settings> settings) {
-		this.settings = settings;
+	void setupComponents(final List<Component> components) {
 		this.components = components;
+	}
+
+	@OPERATION
+	void setupSettings( final Optional<Settings> settings) {
+		this.settings = settings;
 	}
 
 	/**

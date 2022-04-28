@@ -6,7 +6,7 @@
 
 /* Plans */
 
-+setupTd(Td) <- setupTd(Td).
++setupTds(Tds) <- setupTds(Tds).
 
 /*
  * Components: Devices that are involved to retrieve samples.

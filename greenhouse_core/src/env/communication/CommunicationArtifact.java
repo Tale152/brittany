@@ -29,7 +29,7 @@ public class CommunicationArtifact extends Artifact {
 	}
 
 	@OPERATION
-	void setupTd(final List<ConsumedThing> thingDescriptors) {
+	void setupTds(final List<ConsumedThing> thingDescriptors) {
 		this.thingDescriptors = thingDescriptors;
 	}
 

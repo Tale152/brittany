@@ -45,7 +45,7 @@ public class SampleBasedActuatorArtifact extends Artifact {
 	 * @param thingDescriptors list of the thing descriptors found.
 	 */
 	@OPERATION
-	void setupTd(final List<ConsumedThing> thingDescriptors) {
+	void setupTds(final List<ConsumedThing> thingDescriptors) {
 		this.thingDescriptors = thingDescriptors;
 	}
 

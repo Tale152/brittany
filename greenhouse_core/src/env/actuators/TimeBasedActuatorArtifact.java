@@ -33,13 +33,22 @@ public class TimeBasedActuatorArtifact extends Artifact {
      * which are the components that the greenhouse can handle.
      * 
      * @param components the list of [[utility.component.Component]] found.
+     */
+    @OPERATION
+    void setupComponents(final List<Component> components) {
+        this.components = components;
+    }
+
+    /**
+     * Operation used to set up the list of settings when they are retrieved,
+     * which are the settings created by the user.
+     * 
      * @param settings   an optional of [[utility.setting.Settings]] which contains
      *                   the settings only if they exist.
      */
     @OPERATION
-    void setupComponents(final List<Component> components, final Optional<Settings> settings) {
+    void setupSettings(final Optional<Settings> settings) {
         this.settings = settings;
-        this.components = components;
     }
 
     /**
@@ -49,7 +58,7 @@ public class TimeBasedActuatorArtifact extends Artifact {
      * @param thingDescriptors list of the thing descriptors found.
      */
     @OPERATION
-    void setupTd(final List<ConsumedThing> thingDescriptors) {
+    void setupTds(final List<ConsumedThing> thingDescriptors) {
         this.thingDescriptors = thingDescriptors;
     }
 

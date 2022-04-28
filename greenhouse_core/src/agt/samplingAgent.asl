@@ -12,7 +12,10 @@
  * This plan is triggered when the setup property is added to the BB. This property has all
  * the devices and the settings in order to start the sampling process.
  */
-+setup(Devices, Settings) <- setup(Devices, Settings); !wait.
+
++setupComponents(Components) <- setupComponents(Components); !wait.
+
++setupSettings(Settings) <- setupSettings(Settings).
 
 /*
  * This plan waits X seconds to trigger the plan sample, which is used to ask for the sample of a specific category.
