@@ -6,8 +6,19 @@
 
 /* Plans */
 
+/*
+ * Components: the list of components found in the greenhouse.
+ * Plan that is triggered when new components are found and the observable property
+ * is updated.
+ */
 +setupComponents(Components) <- setupComponents(Components).
 
+/*
+ * Tds: the list of thing descriptor that contains all the properties and the 
+ * actions of all the components in the greenhouse.
+ * Plan that is triggered when new settings are found and the observable property
+ * is updated.
+ */
 +setupTds(Tds) <- setupTds(Tds).
 
 /*
