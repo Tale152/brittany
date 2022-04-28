@@ -1,8 +1,4 @@
-// Agent actuatorAgent in project greenhouse_core
-
-/* Initial beliefs and rules */
-
-/* Initial goals */
+// Agent sampleBasedActuatorAgent in project greenhouse_core
 
 /* Plans */
 
