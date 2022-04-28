@@ -46,15 +46,15 @@ public class CommonArtifact extends Artifact {
 	void shareSettings(final Optional<Settings> settings) {
 		if (!this.settings.equals(settings)) {
 			this.settings = settings;
-			updateObsProperty("setupSettings", this.settings);
 		}
+		updateObsProperty("setupSettings", this.settings);
 	}
 
 	@OPERATION
 	void shareThingDescriptors(final List<ConsumedThing> thingDescriptors) {
 		if (!this.thingDescriptors.equals(thingDescriptors)) {
 			this.thingDescriptors = thingDescriptors;
-			updateObsProperty("setupTds", this.thingDescriptors);
 		}
+		updateObsProperty("setupTds", this.thingDescriptors);
 	}
 }
