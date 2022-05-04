@@ -20,5 +20,20 @@
  */
 +!wait <- .at("now + 20 seconds", {+!discover}).
 
+/*
+ * Plan that is triggered when the list of components is updated.
+ * This plan uses the common artifact to share the components to 
+ * all the other agents that need them.
+ */
++components(Components) <- shareComponents(Components).
+
+/*
+ * Plan that is triggered when the list of thing descriptors is
+ * updated.
+ * This plan uses the common artifact to share the components to
+ * all the other agents that need them.
+ */
++thingDescriptors(Td) <- shareThingDescriptors(Td).
+
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

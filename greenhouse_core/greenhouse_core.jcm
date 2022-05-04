@@ -30,6 +30,7 @@ mas greenhouse_core {
 	}
 
 	agent discoverAgent : discoverComponentsAgent.asl {
+		focus: brittany.common
 		focus: brittany.discover
 	}
 
