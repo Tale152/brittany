@@ -29,16 +29,13 @@ public:
      * @brief Construct a new Value Returned Handler Interface object
      * 
      * @param name the name of the handler.
-     * @param path the path(route) of the handler.
      */
     ValueReturnedHandlerInterface(
         std::string name,
-        std::string path,
         OperationType operationType,
         Type outputType
         ) : OperationHandler(
             name,
-            path,
             operationType,
             outputType
         ) {

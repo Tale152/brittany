@@ -5,14 +5,9 @@
 #include "mock/operation-handler/MockOperationHandler.h"
 #include "mock-digital-light/hw/MockDigitalLightHw.h"
 #include "mock-digital-light/modules/MockDigitalLightModule.h"
-#include "modules/Module.h"
 
-#define MOCK_MODULE_NAME "light"
 #define MOCK_LIGHT_IN_MODULE_NAME_0 "light0"
 #define MOCK_LIGHT_IN_MODULE_NAME_1 "light1"
-
-#define MOCK_LIGHT_IN_MODULE_PIN_0 1
-#define MOCK_LIGHT_IN_MODULE_PIN_1 2
 
 MockDigitalLightHw* lightInModule0;
 MockDigitalLightHw* lightInModule1;
@@ -22,11 +17,11 @@ std::list<MockDigitalLightHw*> components;
 std::list<std::string> lightNames = {MOCK_LIGHT_IN_MODULE_NAME_0, MOCK_LIGHT_IN_MODULE_NAME_1};
 
 void setup_module_test() {
-    lightInModule0 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_0, MOCK_LIGHT_IN_MODULE_PIN_0);
-    lightInModule1 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_1, MOCK_LIGHT_IN_MODULE_PIN_1);
+    lightInModule0 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_0);
+    lightInModule1 = new MockDigitalLightHw(MOCK_LIGHT_IN_MODULE_NAME_1);
     components.push_back(lightInModule0);
     components.push_back(lightInModule1);
-    moduleTest = new MockDigitalLightModule(MOCK_MODULE_NAME, components);
+    moduleTest = new MockDigitalLightModule(components);
 }
 
 void post_module_test() {
@@ -57,7 +52,7 @@ void test_turn_on_turn_off_handler_in_module(OperationHandler* handler, std::str
 }
 
 void test_is_on_is_off_handler_in_module(OperationHandler* handler, std::string component_name, bool isOn) {
-    check_handler_path(handler, as_route(MOCK_IS_ON_HANDLER_MODULE_NAME));
+    check_handler_path(handler, "/isOn");
     Json::Value args;
     args["id"] = component_name;
     OperationHandlerResult result = handler->handle(args);
@@ -70,11 +65,11 @@ void test_is_on_is_off_handler_in_module(OperationHandler* handler, std::string 
 }
 
 void test_turn_on_handler_in_module(OperationHandler* handler, std::string component_name) {
-    test_turn_on_turn_off_handler_in_module(handler, as_route(MOCK_TURN_ON_HANDLER_MODULE_NAME), component_name);
+    test_turn_on_turn_off_handler_in_module(handler, "/turnOn", component_name);
 }
 
 void test_turn_off_handler_in_module(OperationHandler* handler, std::string component_name) {
-    test_turn_on_turn_off_handler_in_module(handler, as_route(MOCK_TURN_OFF_HANDLER_MODULE_NAME), component_name);
+    test_turn_on_turn_off_handler_in_module(handler, "/turnOff", component_name);
 }
 
 void test_is_off_handler_in_module(OperationHandler* handler, std::string component_name) {
@@ -87,7 +82,10 @@ void test_is_on_handler_in_module(OperationHandler* handler, std::string compone
 
 // TEST
 void test_module_name() {
-    TEST_ASSERT_EQUAL_STRING(MOCK_MODULE_NAME, moduleTest -> name().c_str());
+    TEST_ASSERT_EQUAL_STRING(
+        module_as_string(ModuleNames::Light).c_str(),
+        moduleTest -> name().c_str()
+    );
 }
 
 // TEST

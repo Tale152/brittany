@@ -3,34 +3,22 @@
 
 #include <string>
 #include <list>
-#include "operation-handler/interfaces/ValueReturnedAfterActionHandlerInterface.h"
+#include "operation-handler/interfaces/RetrieveValueFromComponentInterface.h"
 #include "temp-hum-sensor/dht22/hw/DHT22SensorHw.h"
 
-class DHT22Handler : public ValueReturnedAfterActionHandlerInterface<float> {
+class DHT22Handler : public RetrieveValueFromComponentInterface<DHT22SensorHw, float> {
 
 public:
 
-    DHT22Handler(std::string name, std::string path, std::list<DHT22SensorHw*> components)
-    : ValueReturnedAfterActionHandlerInterface<float> (name, path, OperationType::PROPERTY, Type::NUMBER) {
-        _components = components;
+    DHT22Handler(std::string name, std::list<DHT22SensorHw*> components)
+        : RetrieveValueFromComponentInterface<DHT22SensorHw, float> (name, components) {
+
     };
 
 private:
 
-    std::optional<float> retrieveValue(Json::Value args) {
-        std::optional<DHT22SensorHw*> oc = find_by_id(_components, args["id"].asCString());
-        if(oc.has_value()) {
-            std::optional<float> opt_value = sub_operation(oc.value(), args);
-            if(opt_value.has_value()) {
-                return opt_value.value();
-            }
-        }
-        return std::nullopt;
-    }
-
     virtual std::optional<float> sub_operation(DHT22SensorHw* hw, Json::Value args) = 0;
 
-    std::list<DHT22SensorHw*> _components;
 };
 
 #endif //BRITTANY_DHT22_HANDLER_H

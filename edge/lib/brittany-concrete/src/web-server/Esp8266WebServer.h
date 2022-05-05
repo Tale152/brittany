@@ -3,10 +3,11 @@
 
 #include "web-server/WebServer.h"
 #include "edge/Edge.h"
-#include "ESP8266WebServer.h"
+#include <ESP8266WebServer.h>
 #include "HttpStatusCodes_C++.h"
 #include "json_util.h"
 #include "util/DebugPrint.h"
+#include <ESP8266WiFi.h>
 
 /**
  * @brief ESP8266WebServer implementation of web server.

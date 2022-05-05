@@ -8,9 +8,8 @@
 
 /**
  * @brief An interface to create a component that represent a digital light.
- * 
  */
-class DigitalLightHwInterface : public ComponentHw, public OnePin, public Switchable {
+class DigitalLightHwInterface : public ComponentHw, public Switchable {
 
 public:
 
@@ -18,11 +17,9 @@ public:
      * @brief Construct a new Digital Light Hw Interface object.
      * 
      * @param id the unique id of the component.
-     * @param pin the pin attached to the component.
      */
-    DigitalLightHwInterface(std::string id, uint8_t pin) :
+    DigitalLightHwInterface(std::string id) :
         ComponentHw(id),
-        OnePin(pin),
         Switchable() {
 
     };

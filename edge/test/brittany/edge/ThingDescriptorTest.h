@@ -5,15 +5,16 @@
 #include "mock-digital-light/modules/MockDigitalLightModule.h"
 
 #define EDGE_MOCK_TITLE_TD "MockEdge"
-#define MOCK_MODULE_TD_NAME "light-module"
 #define MOCK_LIGHT_TD_0_ID "0"
 #define MOCK_LIGHT_TD_1_ID "1"
+#define MOCK_LIGHT_TD_2_ID "2"
 
 #define TD_IP_TEST "127.0.0.1"
 #define TD_PORT_TEST 80
 
 MockDigitalLightHw* mockLight0;
 MockDigitalLightHw* mockLight1;
+MockDigitalLightHw* mockLight2;
 
 Edge* tdEdge;
 
@@ -59,12 +60,13 @@ void contains_modules() {
     TEST_ASSERT_TRUE(modulesArray.isArray());
     Json::Value moduleObj = modulesArray[0];
     TEST_ASSERT_TRUE(moduleObj.isMember("module"));
-    TEST_ASSERT_EQUAL_STRING(MOCK_MODULE_TD_NAME, moduleObj["module"].asCString());
+    TEST_ASSERT_EQUAL_STRING(module_as_string(ModuleNames::Light).c_str(), moduleObj["module"].asCString());
     TEST_ASSERT_TRUE(moduleObj.isMember("components"));
     Json::Value moduleComponents = moduleObj["components"];
     TEST_ASSERT_TRUE(moduleComponents.isArray());
     TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_TD_0_ID, moduleComponents[0].asCString());
     TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_TD_1_ID, moduleComponents[1].asCString());
+    TEST_ASSERT_EQUAL_STRING(MOCK_LIGHT_TD_2_ID, moduleComponents[2].asCString());
 }
 
 void check_additional_actions(Json::Value action) {
@@ -87,7 +89,7 @@ void check_actions_and_properties(Json::Value object, std::string names[], int s
         for(std::string c : tdComponents) {
             Json::Value name = object[names[i] + "-" + c];
             TEST_ASSERT_TRUE(name.isMember("module"));
-            TEST_ASSERT_EQUAL_STRING(MOCK_MODULE_TD_NAME, name["module"].asCString());
+            TEST_ASSERT_EQUAL_STRING(module_as_string(ModuleNames::Light).c_str(), name["module"].asCString());
             TEST_ASSERT_TRUE(name.isMember("forms"));
             Json::Value forms = name["forms"];
             TEST_ASSERT_TRUE(forms.isArray());
@@ -143,20 +145,23 @@ void contains_all_elements() {
 }
 
 void setup_thing_descriptor_test() { 
-    mockLight0 = new MockDigitalLightHw(MOCK_LIGHT_TD_0_ID, 0);
-    mockLight1 = new MockDigitalLightHw(MOCK_LIGHT_TD_1_ID, 1);
+    mockLight0 = new MockDigitalLightHw(MOCK_LIGHT_TD_0_ID);
+    mockLight1 = new MockDigitalLightHw(MOCK_LIGHT_TD_1_ID);
+    mockLight2 = new MockDigitalLightHw(MOCK_LIGHT_TD_2_ID);
     tdEdge = new Edge(EDGE_MOCK_TITLE_TD, 
         std::list<Module*>({
             new MockDigitalLightModule(
-                MOCK_MODULE_TD_NAME,
                 std::list({mockLight0, mockLight1})
+            ),
+            new MockDigitalLightModule(
+                std::list({mockLight2})
             )}
         )
     );
 }
 
 void post_thing_descriptor_test() {
-    delete mockLight0, mockLight1, tdEdge;
+    delete mockLight0, mockLight1, mockLight2, tdEdge;
 }
 
 void test_ThingDescriptor() {

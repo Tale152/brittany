@@ -1,7 +1,7 @@
 #include "DigitalLightHw.h"
 #include <Arduino.h>
 
-DigitalLightHw::DigitalLightHw(std::string id, uint8_t pin) : DigitalLightHwInterface(id, pin) {
+DigitalLightHw::DigitalLightHw(std::string id, uint8_t pin) : DigitalLightHwInterface(id), OnePin(pin) {
     pinMode(pin, OUTPUT);
 }
 
