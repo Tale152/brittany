@@ -1,10 +1,11 @@
 ---
-title: API
-parent: Settings Service
+title: API Settings Service
+parent: Services
 grand_parent: Design
+nav_order: 4
 ---
 
-# Settings Service - API
+# API - Settings Service
 
 ## Settings
 

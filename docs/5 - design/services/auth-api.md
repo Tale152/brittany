@@ -1,10 +1,11 @@
 ---
-title: API
-parent: Auth Service
+title: API Auth Service
+parent: Services
 grand_parent: Design
+nav_order: 3
 ---
 
-# Auth Service - API
+# API - Auth Service
 
 ## Organization
 
