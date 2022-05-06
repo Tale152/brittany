@@ -25,8 +25,6 @@ public class SamplingArtifact extends Artifact {
 
 	void init() {
 		this.thingDescriptors = new ArrayList<>();
-		this.samples = new ArrayList<>();
-		defineObsProperty("checkSamples", this.samples);
 	}
 
 	/**
@@ -55,7 +53,7 @@ public class SamplingArtifact extends Artifact {
 			handleComponentSample(component);
 		}
 		// the samples retrieved are going to trigger the sampling coordinator agent plan
-		updateObsProperty("checkSamples", this.samples);
+		defineObsProperty("checkSamples", components.get(0).getCategory(), this.samples);
 	}
 
 	/**
