@@ -51,7 +51,9 @@ GitHub Pages fornisce un modo per automatizzare la pubblicazione di pagine web d
 
 ## Heroku 
 Heroku è una platform as a service sul cloud che supporta diversi linguaggi di programmazione. In questo progetto è stata utilizzata come piattaforma per effettuare il deploy di alcuni servizi.  
-Heroku offre infatti la possibilità di hostare un'applicazione gratuitamente se quest'ultima non viene utilizzata per fini commerciali.
+Heroku offre infatti la possibilità di hostare un'applicazione gratuitamente se quest'ultima non viene utilizzata per fini commerciali.  
+Vi sono servizi aggiuntivi applicando un piano tariffario a pagamento, ma nella versione gratuita l'applicazione di cui è stato effettuato il deployment verrà posta in esecuzione solo qualora vi sia del traffico rivolto verso quest'ultima; dopo un certo periodo di inattività, difatti, l'esecuzione del container verrà bloccata per essere nuovamente lanciata qualora vi sia nuovamente del traffico in entrata.  
+Tramite l'interfaccia web è possibile regolare alcuni parametri come le variabili d'ambiente, fondamentali per differenziare un'esecuzione del servizio durante il development o in produzione.
 
 <div align="center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Heroku_logo.svg" width="300px" alt="Heroku Logo">
