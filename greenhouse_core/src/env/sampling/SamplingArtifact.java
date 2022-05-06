@@ -15,10 +15,8 @@ import utility.ThingDescriptorUtility;
 import utility.component.Component;
 
 /**
- * CommunicationArtifact is the Artifact that is going to communicate with
- * sampling devices
- * in order to retrieve the samples needed.
- * 
+ * SamplingArtifact is the Artifact that is going to communicate with
+ * sampling components in order to retrieve the samples needed.
  */
 public class SamplingArtifact extends Artifact {
 
@@ -29,35 +27,52 @@ public class SamplingArtifact extends Artifact {
 		this.thingDescriptors = new ArrayList<>();
 	}
 
+	/**
+	 * Operation used to set up the list of thing descriptors once they are
+	 * retrieved, which defines the action and properties of a component.
+	 * 
+	 * @param thingDescriptors list of the thing descriptors found.
+	 */
 	@OPERATION
 	void setupTds(final List<ConsumedThing> thingDescriptors) {
 		this.thingDescriptors = thingDescriptors;
 	}
 
 	/**
-	 * Operation used to retrieve samples from a certain list of sampling components.
+	 * Operation used to retrieve samples from a certain list of sampling
+	 * components.
 	 * 
-	 * @param components       a list of components that the agent is going to
-	 *                         communicate with to retrieve samples.
-	 * @param retrievedSamples the samples retrieved that are going to be returned
-	 *                         to the agent that called this operation.
+	 * @param components a list of components that the agent is going to
+	 *                   communicate with to retrieve samples.
 	 */
 	@OPERATION
 	void getSamples(final List<Component> components) {
 		this.samples = new ArrayList<>();
 		System.out.println("Communicating with " + components);
 		for (Component component : components) {
-			Optional<ConsumedThing> td = ThingDescriptorUtility.getThingDescriptor(this.thingDescriptors, component.getEdgeIp());
-			if (td.isPresent() && component.getPropertyBySubString(component.getCategory()).isPresent()) {
-				try {
-					double value = (Double) td.get().getProperty(component.getPropertyBySubString(component.getCategory()).get()).read().get();
-					samples.add(new Sample(component.getCategory(), Instant.now().toString(), (int) Math.round(value)));
-				} catch (InterruptedException | ExecutionException e) {
-					e.printStackTrace();
-				}
+			handleComponentSample(component);
+		}
+		// the samples retrieved are going to trigger the sampling coordinator agent plan
+		defineObsProperty("checkSamples", this.samples);
+	}
+
+	/**
+	 * Utility method that is used to actually communicate with the components.
+	 * Using the thing descriptor of a component, this method retieve the property
+	 * of the category of the component and add it to the list of samples retreived.
+	 * 
+	 * @param component the component where the sample is currently being retrieved.
+	 */
+	private void handleComponentSample(final Component component) {
+		Optional<ConsumedThing> td = ThingDescriptorUtility.getThingDescriptor(this.thingDescriptors, component.getEdgeIp());
+		if (td.isPresent() && component.getPropertyBySubString(component.getCategory()).isPresent()) {
+			try {
+				double value = (Double) td.get().getProperty(component.getPropertyBySubString(component.getCategory()).get()).read().get();
+				this.samples.add(new Sample(component.getCategory(), Instant.now().toString(), (int) Math.round(value)));
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
 			}
 		}
-		defineObsProperty("checkSamples", this.samples);
 	}
 
 }
