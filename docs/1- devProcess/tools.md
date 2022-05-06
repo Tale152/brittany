@@ -59,3 +59,13 @@ Tramite l'interfaccia web è possibile regolare alcuni parametri come le variabi
 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Heroku_logo.svg" width="300px" alt="Heroku Logo">
 <p align="center">Logo di Heroku</p>
 </div>
+
+## MongoDB Atlas
+MongoDB Atlas è un Database-as-a-Service (DBaaS) il cui servizio permette il set up e deployment di un database in modo facile e scalabile, demandando al provider del cloud la gestione di hardware, update e configurazioni per le performance.  
+Questo servizio funge dunque da intermediario per un deployment semplificato verso alcuni provider quali AWS , Azure, e GCP.  
+La tier gratuita di questo servizio offre un solo cluster per progetto, con RAM condivisa e 512MB di storage (oltre che assenza di backup), ma risulta comunque un ottimo banco di prova iniziale per un progetto (specialmente data l'assenza di un limite temporale nell'usufruire di questo servizio).
+
+<div align="center">
+<img src="https://webassets.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png" width="300px" alt="MongoDB Logo">
+<p align="center">Logo di MongoDB</p>
+</div>
