@@ -29,7 +29,7 @@ import utility.setting.Settings;
 public class SettingsArtifact extends Artifact {
 
 	private final static String UTC_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
-	private final static String SETTINGS_SERVICE_URL = "http://localhost:82/settings/latest";
+	private final static String SETTINGS_SERVICE_URL = "https://brittany-settings-service.herokuapp.com:443/latest";
 
 	private OkHttpClient client;
 

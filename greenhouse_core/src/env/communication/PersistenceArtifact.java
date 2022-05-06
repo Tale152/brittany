@@ -16,7 +16,7 @@ import utility.Sample;
 
 public class PersistenceArtifact extends Artifact {
 
-	private final static String PERSISTENCE_SERVICE_URL = "http://localhost:80/";
+	private final static String PERSISTENCE_SERVICE_URL = "https://brittany-persistence-service.herokuapp.com:443/";
 	private OkHttpClient client;
 
 	void init() {

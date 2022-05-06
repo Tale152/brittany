@@ -24,7 +24,7 @@ import okhttp3.Response;
  */
 public class AuthenticationArtifact extends Artifact {
     private final static String LOGIN_FILE = "login.txt";
-	private final static String AUTH_SERVICE_URL = "http://localhost:81/agent/login";
+	private final static String AUTH_SERVICE_URL = "https://brittany-auth-service.herokuapp.com:443/agent/login";
 
 	private OkHttpClient client;
 	private List<String> loginData;
