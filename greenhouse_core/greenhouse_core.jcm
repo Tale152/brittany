@@ -34,51 +34,51 @@ mas greenhouse_core {
 		focus: brittany.discover
 	}
 
-    agent temperatureAgent : samplingAgent.asl {
+    agent temperatureAgent : samplingCoordinatorAgent.asl {
     	beliefs: category("temperature")
 		focus: brittany.common
+		focus: brittany.samplingCoordinator
 		focus: brittany.sampling
-		focus: brittany.communication
 	}
 
-	agent humidityAgent : samplingAgent.asl {
+	agent humidityAgent : samplingCoordinatorAgent.asl {
     	beliefs: category("airHumidity")
 		focus: brittany.common
+		focus: brittany.samplingCoordinator
 		focus: brittany.sampling
-		focus: brittany.communication
 	}
 	
-	agent communicationAgent : communicationAgent.asl {
+	agent communicationAgent : samplingAgent.asl {
 		focus: brittany.common
+		focus: brittany.samplingCoordinator
 		focus: brittany.sampling
-		focus: brittany.communication
 	}
 	
 	agent lightActuatorAgent : timeBasedActuatorAgent.asl {
 		beliefs: category("light")
 		focus: brittany.common
-		focus: brittany.sampling
+		focus: brittany.samplingCoordinator
 		focus: actuators.timeBased
 	}
 
 	agent tempertatureActuatorAgent : sampleBasedActuatorAgent.asl {
 		beliefs: category("temperature")
 		focus: brittany.common
-		focus: brittany.sampling
+		focus: brittany.samplingCoordinator
 		focus: actuators.sampleBased
 	}
 
 	agent airHumidityActuatorAgent : sampleBasedActuatorAgent.asl {
 		beliefs: category("airHumidity")
 		focus: brittany.common
-		focus: brittany.sampling
+		focus: brittany.samplingCoordinator
 		focus: actuators.sampleBased
 	}
 	
 	workspace brittany {
         artifact common: common.CommonArtifact()
-        artifact sampling: sampling.SamplingArtifact()
-        artifact communication: communication.CommunicationArtifact()
+        artifact samplingCoordinator: sampling.SamplingArtifact()
+        artifact sampling: communication.CommunicationArtifact()
 		artifact discover: communication.DiscoverComponentsArtifact()   
     }
 
