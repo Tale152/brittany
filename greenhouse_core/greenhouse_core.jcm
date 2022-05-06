@@ -19,14 +19,13 @@ mas greenhouse_core {
 		focus: brittany.discover
 		focus: services.authetication
 		focus: services.settings
-		focus: brittany.sampling
 	}
 
 	agent persistenceAgent : persistenceAgent.asl {
 		focus: services.authetication
 		focus: services.settings
 		focus: services.persistence
-		focus: brittany.sampling
+		focus: brittany.samplingCoordinator
 	}
 
 	agent discoverAgent : discoverComponentsAgent.asl {
