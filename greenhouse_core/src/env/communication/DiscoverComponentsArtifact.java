@@ -28,14 +28,14 @@ import utility.ThingDescriptorUtility;
 
 /**
  * DiscoverComponentArtifact is an Artifcat that is used to broadcast an HTTP
- * request locally in order to detect all the edges that are part of the 
+ * request locally in order to detect all the edges that are part of the
  * greenhouse.
  * It is used to find the components and the thing descriptors that are used
- * to perform action and check properties of the components inside the 
+ * to perform action and check properties of the components inside the
  * greenhouse.
  */
 public class DiscoverComponentsArtifact extends Artifact {
-	
+
 	private OkHttpClient client;
 
 	private List<Component> components;
@@ -50,7 +50,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 	/**
 	 * Configuration of the Wot, used to handle the Thing descriptor.
 	 */
-	private void configWot(){
+	private void configWot() {
 		Config config = ConfigFactory.parseString(
 				"wot.servient.client-factories = [\"city.sane.wot.binding.http.HttpProtocolClientFactory\"]");
 		config = config.withFallback(ConfigFactory.load());
@@ -67,17 +67,19 @@ public class DiscoverComponentsArtifact extends Artifact {
 	 */
 	@OPERATION
 	void discoverComponents() {
-		//initialization due to avoid to try to communicate with disconnected components
+		// initialization due to avoid to try to communicate with disconnected components
 		this.components = new ArrayList<>();
 		this.thingDescriptors = new ArrayList<>();
-		//create cycle for broadcast requests!
-		//for test purposes
-		/*for (int i = 1; i >= 255; i++){
-			System.out.println("http://192.168.189." + i);
-		}*/
-		getThingDescriptor("http://192.168.246.1"); //this is in the cicle
+		// create cycle for broadcast requests!
+		// for test purposes
+		/*
+		 * for (int i = 1; i >= 255; i++){
+		 * System.out.println("http://192.168.189." + i);
+		 * }
+		 */
+		getThingDescriptor("http://192.168.246.1"); // this is in the cicle
 
-		//at the end of the cicle, update components and thing descriptors
+		// at the end of the cicle, update components and thing descriptors
 		defineObsProperty("components", this.components);
 		defineObsProperty("thingDescriptors", this.thingDescriptors);
 	}
@@ -85,6 +87,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 	/**
 	 * Utility method used to send an HTTP request to a specific url,
 	 * looking for one that returns the thing descriptor.
+	 * 
 	 * @param url the url to which the thing descriptor is requestes.
 	 */
 	private void getThingDescriptor(final String url) {
@@ -92,7 +95,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 		try (Response response = client.newCall(request).execute()) {
 			if (response.isSuccessful()) {
 				JsonObject thingDescriptor = JsonParser.parseString(response.body().string()).getAsJsonObject();
-				updateComponents(thingDescriptor); //if found, update components
+				updateComponents(thingDescriptor); // if found, update components
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -101,10 +104,11 @@ public class DiscoverComponentsArtifact extends Artifact {
 
 	/**
 	 * Utility method used to find inside the thing descriptor its modules,
-	 * which is the edge that had information about the sensors and 
+	 * which is the edge that had information about the sensors and
 	 * the actuators that can be contacted in the greenhouse.
+	 * 
 	 * @param thingDescriptor the jsonObject that has all the information
-	 * about the modules in the greenhouse.
+	 *                        about the modules in the greenhouse.
 	 */
 	private void updateComponents(final JsonObject thingDescriptor) {
 		Thing thing = Thing.fromJson(thingDescriptor.toString());
@@ -121,11 +125,14 @@ public class DiscoverComponentsArtifact extends Artifact {
 	}
 
 	/**
-	 * Utility method used to extract from each module, all the components that are connected to it.
+	 * Utility method used to extract from each module, all the components that are
+	 * connected to it.
 	 * Each component can have properties and actions.
-	 * @param edgeIp the ip of the module that contains the components.
-	 * @param thingDescriptor the whole thing descriptor returned by the HTTP request.
-	 * @param jsonModule the thing descriptor of a specific module.
+	 * 
+	 * @param edgeIp          the ip of the module that contains the components.
+	 * @param thingDescriptor the whole thing descriptor returned by the HTTP
+	 *                        request.
+	 * @param jsonModule      the thing descriptor of a specific module.
 	 */
 	private void handleModule(final String edgeIp, final JsonObject thingDescriptor, final JsonObject jsonModule) {
 		if (jsonModule.has("module")) {
@@ -151,15 +158,17 @@ public class DiscoverComponentsArtifact extends Artifact {
 	}
 
 	/**
-	 * Utility method used to add the new component in a list only if it is not already present.
-	 * This is made for security sake, but it should not occur because the list of components
-	 * is emptied each time a new discovery is made.
+	 * Utility method used to add the new component in a list only if it is not
+	 * already present.
+	 * This is made for security sake, but it should not occur because the list of
+	 * components is emptied each time a new discovery is made.
+	 * 
 	 * @param foundComponent the component created.
 	 */
-	private void addComponentIfNotContained(final Component foundComponent){
-		if (!this.components.contains(foundComponent)){
+	private void addComponentIfNotContained(final Component foundComponent) {
+		if (!this.components.contains(foundComponent)) {
 			this.components.add(foundComponent);
-		}	
+		}
 	}
 
 }
