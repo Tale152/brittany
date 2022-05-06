@@ -29,5 +29,7 @@
  */
 +!sample <- ?category(Category); sampleOperation(Category); !wait.
 
++checkSamples(Samples) <- updateOperation(Samples).
+
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

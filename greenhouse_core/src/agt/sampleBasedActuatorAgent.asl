@@ -12,7 +12,7 @@
 /*
  * Tds: the list of thing descriptor that contains all the properties and the 
  * actions of all the components in the greenhouse.
- * Plan that is triggered when new settings are found and the observable property
+ * Plan that is triggered when new tds are found and the observable property
  * is updated.
  */
 +setupTds(Tds) <- setupTds(Tds).

@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutionException;
 import cartago.*;
 import city.sane.wot.thing.ConsumedThing;
 import utility.Sample;
+import utility.ThingDescriptorUtility;
 import utility.component.Component;
 
 /**
@@ -42,12 +43,11 @@ public class CommunicationArtifact extends Artifact {
 	 *                         to the agent that called this operation.
 	 */
 	@OPERATION
-	void getSamplesOperation(final List<Component> components, OpFeedbackParam<List<Sample>> retrievedSamples) {
+	void getSamples(final List<Component> components) {
 		this.samples = new ArrayList<>();
 		System.out.println("Communicating with " + components);
-
 		for (Component component : components) {
-			Optional<ConsumedThing> td = getThingDescriptor(component.getEdgeIp());
+			Optional<ConsumedThing> td = ThingDescriptorUtility.getThingDescriptor(this.thingDescriptors, component.getEdgeIp());
 			if (td.isPresent() && component.getPropertyBySubString(component.getCategory()).isPresent()) {
 				try {
 					double value = (Double) td.get().getProperty(component.getPropertyBySubString(component.getCategory()).get()).read().get();
@@ -57,11 +57,7 @@ public class CommunicationArtifact extends Artifact {
 				}
 			}
 		}
-		retrievedSamples.set(this.samples);
-	}
-
-	private Optional<ConsumedThing> getThingDescriptor(final String id) {
-		return this.thingDescriptors.stream().filter(t -> t.getId().equals(id)).findFirst();
+		defineObsProperty("checkSamples", this.samples);
 	}
 
 }
