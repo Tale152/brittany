@@ -52,7 +52,9 @@ GitHub Pages fornisce un modo per automatizzare la pubblicazione di pagine web d
 ## Heroku 
 Heroku è una platform as a service sul cloud che supporta diversi linguaggi di programmazione. In questo progetto è stata utilizzata come piattaforma per effettuare il deploy di alcuni servizi.  
 Heroku offre infatti la possibilità di hostare un'applicazione gratuitamente se quest'ultima non viene utilizzata per fini commerciali.  
+
 Vi sono servizi aggiuntivi applicando un piano tariffario a pagamento, ma nella versione gratuita l'applicazione di cui è stato effettuato il deployment verrà posta in esecuzione solo qualora vi sia del traffico rivolto verso quest'ultima; dopo un certo periodo di inattività, difatti, l'esecuzione del container verrà bloccata per essere nuovamente lanciata qualora vi sia nuovamente del traffico in entrata.  
+
 Tramite l'interfaccia web è possibile regolare alcuni parametri come le variabili d'ambiente, fondamentali per differenziare un'esecuzione del servizio durante il development o in produzione.
 
 <div align="center">
@@ -63,6 +65,7 @@ Tramite l'interfaccia web è possibile regolare alcuni parametri come le variabi
 ## MongoDB Atlas
 MongoDB Atlas è un Database-as-a-Service (DBaaS) il cui servizio permette il set up e deployment di un database in modo facile e scalabile, demandando al provider del cloud la gestione di hardware, update e configurazioni per le performance.  
 Questo servizio funge dunque da intermediario per un deployment semplificato verso alcuni provider quali AWS , Azure, e GCP.  
+
 La tier gratuita di questo servizio offre un solo cluster per progetto, con RAM condivisa e 512MB di storage (oltre che assenza di backup), ma risulta comunque un ottimo banco di prova iniziale per un progetto (specialmente data l'assenza di un limite temporale nell'usufruire di questo servizio).
 
 <div align="center">
