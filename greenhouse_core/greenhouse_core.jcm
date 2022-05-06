@@ -77,8 +77,8 @@ mas greenhouse_core {
 	
 	workspace brittany {
         artifact common: common.CommonArtifact()
-        artifact samplingCoordinator: sampling.SamplingArtifact()
-        artifact sampling: communication.CommunicationArtifact()
+        artifact samplingCoordinator: sampling.SamplingCoordinatorArtifact()
+        artifact sampling: sampling.SamplingArtifact()
 		artifact discover: communication.DiscoverComponentsArtifact()   
     }
 
