@@ -68,7 +68,22 @@ In questo caso, ad esempio, all'interno di un progetto Node vi sono i due file d
 
 In ultimo troviamo il comando CMD, che specifica l'istruzione da eseguire quando l'immagine verrà eseguita all'interno di un container Docker (in questo caso avviare l'applicativo). Vi può essere un solo CMD per Dockerfile e deve essere necessariamente posto come ultimo comando all'interno di un Dockerfile.  
 
-In caso di esigenze particolari, è possibile creare dei Dockerfile che specifichino delle multistage build, dove vengono specificate delle istruzioni per creare un'immagine che verrà utilizzata dalle istruzioni successive per creare una nuova immagine, continuando iterativamente per i vari stage secondo le necessità del caso.  
+In caso di esigenze particolari, è possibile creare dei Dockerfile che specifichino delle multistage build, dove vengono specificate delle istruzioni per creare un'immagine che verrà utilizzata dalle istruzioni successive per creare una nuova immagine, continuando iterativamente per i vari stage secondo le necessità del caso.
+```dockerfile
+FROM gradle:6.8.0-jdk8
+WORKDIR /app
+COPY . /app
+USER root
+RUN chown -R gradle /app
+USER gradle
+RUN echo 'handlers= java.util.logging.ConsoleHandler' >logging.properties
+RUN gradle uberJar --stacktrace
+
+FROM jomifred/jacamo:1.0
+WORKDIR /app
+COPY --from=0 /app/build/libs /app
+CMD ["java", "-jar", "jacamo-greenhouse_core-1.0.jar"]
+``` 
 
 Specialmente durante il development locale, accade frequentement di dover lanciare più immagini Docker allo stesso tempo. Docker semplifica questo processo attraverso la specifica di un file docker-compose, che evita all'utente il tedioso processo di lanciare manualmente le varie immagini una alla volta.  
 All'interno del docker-compose inoltre, si possono specificare gli stessi parametri aggiuntivi che è possibile fornire al lancio di un'immagine.
