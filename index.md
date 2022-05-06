@@ -6,7 +6,7 @@ nav_order: 1
 
 # Brittany
 
-Brittany è un servizio software volto a semplificare ed automatizzare la gestione di un sistema di serre attraverso l'esecuzione di un coordinatore all'interno di una rete privata; questo coordinatore utilizza sensori ed attuatori dinamicamente aggiunti all'interno della stessa rete, permettendo di scalare facilmente le potenzialità di azione nel mondo fisico dello stesso.  
+Brittany è un servizio software volto a semplificare ed automatizzare la gestione di un sistema di serre attraverso l'esecuzione, all'interno di una rete privata, di un coordinatore ad agenti; questo coordinatore utilizza sensori ed attuatori dinamicamente aggiunti all'interno della stessa rete, permettendo di scalare facilmente le potenzialità di azione nel mondo fisico dello stesso.  
 
 Attraverso un Web Client l'utente finale può, sotto qualsiasi rete, accedere ai dati registrati dal coordinatore, oltre che regolarne le sue impostazioni.  
 
