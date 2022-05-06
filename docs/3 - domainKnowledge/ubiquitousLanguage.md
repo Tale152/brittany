@@ -2,11 +2,12 @@
 title: Ubiquitous Language
 parent: Domain Knowledge
 has_children: false
+nav_order: 2
 ---
 
 # Ubiquitous Language
 
-Viene di seguito illustrato come è stato definito l'Ubiquitous Language utilizzato nel sistema.
+Viene di seguito illustrato come è stato definito l'Ubiquitous Language estrapolato tramite il Knowledge Crunching con il nostro esperto del dominio, successivamente utilizzato nella progettazione ed implementazione del sistema.
 
 <div align="center">
 <img src="https://images2.imgbox.com/18/0c/QdeLTxhs_o.png" alt="UL">

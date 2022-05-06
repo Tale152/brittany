@@ -2,6 +2,7 @@
 title: Boundex Context
 parent: Domain Knowledge
 has_children: false
+nav_order: 3
 ---
 
 # Boundex Context
