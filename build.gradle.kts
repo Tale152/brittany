@@ -78,3 +78,58 @@ tasks.register<Exec>("clientDevLog"){
 tasks.register<Exec>("clientDevDown"){
     commandLine("docker", "stop", "web-client-dev")
 }
+
+tasks.register("servicesUp"){
+    dependsOn("authDevUp")
+    dependsOn("settingsDevUp")
+    dependsOn("persistenceDevUp")
+}
+
+tasks.register("servicesDown"){
+    dependsOn("authDevDown")
+    dependsOn("settingsDevDown")
+    dependsOn("persistenceDevDown")
+}
+
+tasks.register<Exec>("webUp"){
+    dependsOn("servicesUp")
+    mustRunAfter("servicesUp")
+    commandLine("docker", "run", "-d", "--rm",
+        "-p", "3000:3000",
+        "-e", "REACT_APP_PERSISTENCE_SERVICE_ADDRESS=http://localhost:80",
+        "-e", "REACT_APP_AUTH_SERVICE_ADDRESS=http://localhost:81",
+        "-e", "REACT_APP_SETTINGS_SERVICE_ADDRESS=http://localhost:82",
+        "--name", "web-client-dev", "alessandrotalmi/brittany-web-client-dev:latest"
+    )
+}
+
+tasks.register("webDown"){
+    dependsOn("servicesDown")
+    dependsOn("clientDevDown")
+}
+
+tasks.register<Exec>("systemUp"){
+    dependsOn("webUp")
+    mustRunAfter("webUp")
+    if(project.hasProperty("organization") && project.hasProperty("greenhouse") &&
+        project.hasProperty("environment") && project.hasProperty("password")) {
+        val organizationEnv = "ORGANIZATION_NAME=" + project.findProperty("organization")
+        val greenhouseEnv = "GREENHOUSE_NAME=" + project.findProperty("greenhouse")
+        val environmentEnv = "ENVIRONMENT_NAME=" + project.findProperty("environment")
+        val passwordEnv = "ENVIRONMENT_PASSWORD=" + project.findProperty("password")
+        commandLine("docker", "run",
+                    "-e", organizationEnv,
+                    "-e", greenhouseEnv,
+                    "-e", environmentEnv,
+                    "-e", passwordEnv,
+                    "-d", "--rm", "--name", "greenhouse-core-dev",
+                    "alessandrotalmi/brittany-greenhouse-core-dev:latest")
+    } else {
+        throw IllegalArgumentException("Missing parameters")
+    }
+}
+
+tasks.register("systemDown"){
+    dependsOn("webDown")
+    dependsOn("coreDevDown")
+}
