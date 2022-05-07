@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.jacamo', name: 'jacamo', version: '1.0'
+    compile group: 'org.jacamo', name: 'jacamo', version: '0.9'
     compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
     compile 'com.google.code.gson:gson:2.8.9'
     compile group: 'city.sane.wot-servient', name: 'wot-servient', version: '1.15'
@@ -63,6 +63,17 @@ task run (type: JavaExec, dependsOn: 'classes') {
     main 'jacamo.infra.JaCaMoLauncher'
     args 'greenhouse_core.jcm'
     classpath sourceSets.main.runtimeClasspath
+    environment 'AUTH_SERVICE_URL', 'https://brittany-auth-service.herokuapp.com:443/agent/login'
+    environment 'PERSISTENCE_SERVICE_URL', 'https://brittany-persistence-service.herokuapp.com:443/'
+    environment 'SETTINGS_SERVICE_URL', 'https://brittany-settings-service.herokuapp.com:443/latest'
+
+    if (project.hasProperty("organization") && project.hasProperty("greenhouse") &&
+        project.hasProperty("environment") && project.hasProperty("password")) {
+        environment 'ORGANIZATION_NAME', project.getProperty("organization")
+        environment 'GREENHOUSE_NAME', project.getProperty("greenhouse")
+        environment 'ENVIRONMENT_NAME', project.getProperty("environment")
+        environment 'ENVIRONMENT_PASSWORD', project.getProperty("password")
+    }
 }
 
 
@@ -105,7 +116,19 @@ task buildDockerImage(type: Exec, dependsOn: uberJar){
 }
 
 task dockerUp(type: Exec, dependsOn: buildDockerImage){
-    commandLine("docker", "container", "run", "-d", "--rm", "--name", "greenhouse-core-container", "greenhouse-core")
+    if (project.hasProperty("organization") && project.hasProperty("greenhouse") &&
+        project.hasProperty("environment") && project.hasProperty("password")) {
+        def organizationEnv = "ORGANIZATION_NAME=" + project.getProperty("organization")
+        def greenhouseEnv = "GREENHOUSE_NAME=" + project.getProperty("greenhouse")
+        def environmentEnv = "ENVIRONMENT_NAME=" + project.getProperty("environment")
+        def passwordEnv = "ENVIRONMENT_PASSWORD=" + project.getProperty("password")
+        commandLine("docker", "container", "run",
+                    "-e", organizationEnv,
+                    "-e", greenhouseEnv,
+                    "-e", environmentEnv,
+                    "-e", passwordEnv,
+                    "-d", "--rm", "--name", "greenhouse-core-container", "greenhouse-core")
+    }
 }
 
 task dockerLog(type: Exec){

@@ -17,50 +17,79 @@ mas greenhouse_core {
 	agent setupAgent : setupAgent.asl {
 		focus: brittany.common
 		focus: brittany.discover
-		focus: services.service
-		focus: brittany.sampling
+		focus: services.authetication
+		focus: services.settings
 	}
 
 	agent persistenceAgent : persistenceAgent.asl {
-		focus: services.service
+		focus: services.authetication
+		focus: services.settings
 		focus: services.persistence
-		focus: brittany.sampling
+		focus: brittany.samplingCoordinator
 	}
 
 	agent discoverAgent : discoverComponentsAgent.asl {
+		focus: brittany.common
 		focus: brittany.discover
 	}
 
-    agent samplingAgent : samplingAgent.asl {
+    agent temperatureAgent : samplingCoordinatorAgent.asl {
     	beliefs: category("temperature")
 		focus: brittany.common
+		focus: brittany.samplingCoordinator
 		focus: brittany.sampling
-		focus: brittany.communication
+	}
+
+	agent humidityAgent : samplingCoordinatorAgent.asl {
+    	beliefs: category("airHumidity")
+		focus: brittany.common
+		focus: brittany.samplingCoordinator
+		focus: brittany.sampling
 	}
 	
-	agent communicationAgent : communicationAgent.asl {
+	agent communicationAgent : samplingAgent.asl {
+		focus: brittany.common
+		focus: brittany.samplingCoordinator
 		focus: brittany.sampling
-		focus: brittany.communication
 	}
 	
-	agent actuatorAgent : actuatorAgent.asl {
+	agent lightActuatorAgent : timeBasedActuatorAgent.asl {
 		beliefs: category("light")
 		focus: brittany.common
-		focus: brittany.sampling
-		focus: brittany.actuation
+		focus: brittany.samplingCoordinator
+		focus: actuators.timeBased
+	}
+
+	agent tempertatureActuatorAgent : sampleBasedActuatorAgent.asl {
+		beliefs: category("temperature")
+		focus: brittany.common
+		focus: brittany.samplingCoordinator
+		focus: actuators.sampleBased
+	}
+
+	agent airHumidityActuatorAgent : sampleBasedActuatorAgent.asl {
+		beliefs: category("airHumidity")
+		focus: brittany.common
+		focus: brittany.samplingCoordinator
+		focus: actuators.sampleBased
 	}
 	
 	workspace brittany {
         artifact common: common.CommonArtifact()
+        artifact samplingCoordinator: sampling.SamplingCoordinatorArtifact()
         artifact sampling: sampling.SamplingArtifact()
-        artifact communication: communication.CommunicationArtifact()
-        artifact actuation: communication.ActuationArtifact()
 		artifact discover: communication.DiscoverComponentsArtifact()   
     }
 
+	workspace actuators {
+		artifact sampleBased: actuators.SampleBasedActuatorArtifact()
+		artifact timeBased: actuators.TimeBasedActuatorArtifact()
+	}
+
 	workspace services {
 		artifact persistence: communication.PersistenceArtifact()
-		artifact service: communication.ServiceArtifact()
+		artifact settings: communication.SettingsArtifact()
+		artifact authetication: communication.AuthenticationArtifact()
 	}
 
 }
