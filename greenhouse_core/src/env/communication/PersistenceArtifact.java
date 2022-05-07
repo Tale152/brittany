@@ -12,7 +12,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import utility.Sample;
+import utility.sample.Sample;
 
 /**
  * PersistenceArtifact is an Artifact used to upload samples to an external
