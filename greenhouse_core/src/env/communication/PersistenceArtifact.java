@@ -22,8 +22,6 @@ import utility.sample.Sample;
  */
 public class PersistenceArtifact extends Artifact {
 
-	private final static String PERSISTENCE_SERVICE_URL = "https://brittany-persistence-service.herokuapp.com:443/";
-
 	private OkHttpClient client;
 
 	void init() {
@@ -65,7 +63,7 @@ public class PersistenceArtifact extends Artifact {
 	 * @return the HTTP request to send to the persistence service.
 	 */
 	private Request getUploadRequest(final Sample sample, final String token) {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(PERSISTENCE_SERVICE_URL + sample.getCategory() + "/register").newBuilder();
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(System.getenv("PERSISTENCE_SERVICE_URL") + sample.getCategory() + "/register").newBuilder();
 		String url = urlBuilder.build().toString();
 
 		JsonObject jsonSample = new JsonObject();

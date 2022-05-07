@@ -29,7 +29,6 @@ import utility.setting.Settings;
 public class SettingsArtifact extends Artifact {
 
 	private final static String UTC_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
-	private final static String SETTINGS_SERVICE_URL = "https://brittany-settings-service.herokuapp.com:443/latest";
 
 	private OkHttpClient client;
 
@@ -74,7 +73,7 @@ public class SettingsArtifact extends Artifact {
 	 * @return the HTTP request ready to be lauched.
 	 */
 	private Request getSettingsRequest(final String token) {
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(SETTINGS_SERVICE_URL).newBuilder();
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(System.getenv("SETTINGS_SERVICE_URL")).newBuilder();
 		String url = urlBuilder.build().toString();
 		return new Request.Builder().addHeader("token", token).url(url).build();
 	}
