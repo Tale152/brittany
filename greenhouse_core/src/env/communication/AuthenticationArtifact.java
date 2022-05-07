@@ -1,16 +1,11 @@
 package communication;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import cartago.Artifact;
-import cartago.INTERNAL_OPERATION;
 import cartago.OPERATION;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
