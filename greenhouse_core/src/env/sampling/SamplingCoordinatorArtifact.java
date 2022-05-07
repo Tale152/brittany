@@ -115,9 +115,12 @@ public class SamplingCoordinatorArtifact extends Artifact {
 	 * @param lastSample    the last sample saved.
 	 */
 	private void uploadToPersistence(final Sample avarageSample, final Optional<Sample> lastSample){
-		if (lastSample.isPresent() && isSampleDifferenceBiggerThanDelta(avarageSample, lastSample)) {
-			defineObsProperty("uploadPersistence", avarageSample);
-			lastSamples.remove(lastSample.get());
+		if (lastSample.isPresent()) {
+			if (isSampleDifferenceBiggerThanDelta(avarageSample, lastSample)){
+				defineObsProperty("uploadPersistence", avarageSample);
+				lastSamples.remove(lastSample.get());
+			}
+			
 		}
 	}
 
