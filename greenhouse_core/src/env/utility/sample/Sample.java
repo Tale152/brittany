@@ -1,4 +1,4 @@
-package utility;
+package utility.sample;
 
 public class Sample {
     
