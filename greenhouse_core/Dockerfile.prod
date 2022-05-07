@@ -11,4 +11,7 @@ FROM alessandrotalmi/jacamo-java-11:latest
 WORKDIR /app
 COPY --from=0 /app/build/libs /app
 EXPOSE 1-65535
+ENV AUTH_SERVICE_URL=https://brittany-auth-service.herokuapp.com:443/agent/login
+ENV PERSISTENCE_SERVICE_URL=https://brittany-persistence-service.herokuapp.com:443/
+ENV SETTINGS_SERVICE_URL=https://brittany-settings-service.herokuapp.com:443/latest
 CMD ["java", "-jar", "jacamo-greenhouse_core-1.0.jar"]

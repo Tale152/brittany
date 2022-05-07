@@ -1,10 +1,12 @@
-name: Greenhouse core CI
+name: Push Greengouse Core's production Image to Docker Hub
 
 on:
-  push:
-    branches: [ 'greenhouse-core' ]
-  pull_request:
-    branches: [ 'greenhouse-core' ]
+  workflow_run:
+    workflows: ["Greenhouse core CI"]
+    branches:
+      - master
+    types:
+      - completed
 
 jobs:
   deploy-dev-image:
@@ -17,6 +19,6 @@ jobs:
         - name: Login to DockerHub Registry
           run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
         - name: Build the latest Docker image
-          run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core-dev:latest
+          run: docker build . --file Dockerfile.prod --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core:latest
         - name: Push the latest Docker image
-          run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core-dev:latest
+          run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core:latest
