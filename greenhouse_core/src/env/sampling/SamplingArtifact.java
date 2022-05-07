@@ -10,9 +10,9 @@ import java.util.concurrent.ExecutionException;
 
 import cartago.*;
 import city.sane.wot.thing.ConsumedThing;
-import utility.Sample;
 import utility.ThingDescriptorUtility;
 import utility.component.Component;
+import utility.sample.Sample;
 
 /**
  * SamplingArtifact is the Artifact that is going to communicate with
