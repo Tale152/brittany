@@ -7,9 +7,9 @@ import java.util.concurrent.ExecutionException;
 
 import cartago.*;
 import city.sane.wot.thing.ConsumedThing;
-import utility.Sample;
 import utility.ThingDescriptorUtility;
 import utility.component.Component;
+import utility.sample.Sample;
 import utility.setting.RangeSetting;
 
 /**
@@ -90,8 +90,8 @@ public class SampleBasedActuatorArtifact extends Artifact {
 	 * Method used to perform an action based on the action present on the thing descriptors of components
 	 * that are in a specific category.
 	 * 
-	 * @param category the category of the component that registered an out of range sample.
-	 * @param turnOnAction the action that needs to be turned on.
+	 * @param category      the category of the component that registered an out of range sample.
+	 * @param turnOnAction  the action that needs to be turned on.
 	 * @param turnOffAction the action that needs to be turned off.
 	 */
 	private void switchActuatorAction(final String category, final String turnOnAction, final String turnOffAction) {
@@ -114,9 +114,9 @@ public class SampleBasedActuatorArtifact extends Artifact {
 	 * Method used to actually call an action to be performed by the component handled by edge.
 	 * 
 	 * @param component the component that has to perform an action.
-	 * @param td the thing descriptor with all the action and properties of the component.
-	 * @param action the name of the action to be performed. It is searched as a substring in the td,
-	 * so it can be the full name or just part of it.
+	 * @param td        the thing descriptor with all the action and properties of the component.
+	 * @param action 	the name of the action to be performed. It is searched as a substring in the td,
+	 * 					so it can be the full name or just part of it.
 	 */
 	private void performActuatorAction(final Component component, final Optional<ConsumedThing> td, final String action) {
 		if (component.getActionBySubString(action).isPresent()) {
