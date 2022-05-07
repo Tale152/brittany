@@ -19,7 +19,7 @@ public class HourSetting extends Setting {
 	 * 
 	 * @param category the category that the setting is going to regulate.
 	 * @param fromTime the starting time of the setting.
-	 * @param toTime the end time of the setting.
+	 * @param toTime   the end time of the setting.
 	 */
 	public HourSetting(final String category, final LocalTime fromTime, final LocalTime toTime) {
 		super(category);
