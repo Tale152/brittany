@@ -1,5 +1,16 @@
-FROM gradle
-COPY ./build/libs/jacamo-greenhouse_core-1.0.jar .
+FROM gradle:6.9.2-jdk11
+WORKDIR /app
+COPY . /app
+USER root
+RUN chown -R gradle /app
+USER gradle
+RUN echo 'handlers= java.util.logging.ConsoleHandler' >logging.properties
+RUN gradle uberJar --stacktrace
+
+FROM alessandrotalmi/jacamo-java-11:latest
+WORKDIR /app
+COPY --from=0 /app/build/libs /app
+EXPOSE 1-65535
 ENV AUTH_SERVICE_URL=https://brittany-auth-service.herokuapp.com:443/agent/login
 ENV PERSISTENCE_SERVICE_URL=https://brittany-persistence-service.herokuapp.com:443/
 ENV SETTINGS_SERVICE_URL=https://brittany-settings-service.herokuapp.com:443/latest
