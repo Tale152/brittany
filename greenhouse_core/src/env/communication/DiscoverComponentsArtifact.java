@@ -37,7 +37,6 @@ import utility.ThingDescriptorUtility;
 public class DiscoverComponentsArtifact extends Artifact {
 
 	private OkHttpClient client;
-
 	private List<Component> components;
 	private List<ConsumedThing> thingDescriptors;
 	private Wot wot;
@@ -48,7 +47,8 @@ public class DiscoverComponentsArtifact extends Artifact {
 	}
 
 	/**
-	 * Configuration of the Wot, used to handle the Thing descriptor.
+	 * Utility method used for the configuration of the Wot,
+	 * used to handle the thing descriptor.
 	 */
 	private void configWot() {
 		Config config = ConfigFactory.parseString(
