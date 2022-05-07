@@ -3,6 +3,11 @@ package utility.component;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Component class used to represent a Component in the greenhouse,
+ * including the edge ip it is connected to and all the properties and
+ * action names that have been retrieved from the thing descriptor.
+ */
 public class Component {
 	private final String edgeIp;
 	private final String id;
@@ -10,6 +15,16 @@ public class Component {
 	private final List<String> properties;
 	private final List<String> actions;
 
+	/**
+	 * Component constructor, used to give all the information that 
+	 * a Component needs.
+	 * 
+	 * @param edgeIp 	 the ip of the edge where the component is connected.
+	 * @param id 		 the id of the component.
+	 * @param category   the category of the component.
+	 * @param properties the list of the properties' names that the component have.
+	 * @param actions 	 the list of the actions' names tha the component can perform.
+	 */
 	protected Component(final String edgeIp, final String id, final String category,
 			final List<String> properties, final List<String> actions) {
 		this.edgeIp = edgeIp;
@@ -35,6 +50,12 @@ public class Component {
 		return properties;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param subString
+	 * @return
+	 */
 	public Optional<String> getPropertyBySubString(final String subString) {
 		return this.properties.stream().filter(s -> s.contains(subString)).findFirst();
 	}
@@ -42,6 +63,13 @@ public class Component {
 	public List<String> getActions() {
 		return actions;
 	}
+
+	/**
+	 * 
+	 * 
+	 * @param subString
+	 * @return
+	 */
 	public Optional<String> getActionBySubString(final String subString) {
 		return this.actions.stream().filter(s -> s.contains(subString)).findFirst();
 	}

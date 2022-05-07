@@ -23,40 +23,19 @@ import okhttp3.Response;
  * greenhouse, which is used to communicate with the other services.
  */
 public class AuthenticationArtifact extends Artifact {
-    private final static String LOGIN_FILE = "login.txt";
 
 	private OkHttpClient client;
-	private List<String> loginData;
 
 	void init() {
-		this.loginData = new ArrayList<>();
 		this.client = new OkHttpClient();
 	}
 
     /**
 	 * Operation used to retrieve the authentication token, in order to be able to
-	 * communicate with the other services.
+	 * communicate with the other services, sending the HTTP request to the authentication service.
 	 */
 	@OPERATION
 	void retrieveAuthenticationData() {
-		InputStream fileInputStream = getClass().getClassLoader().getResourceAsStream(LOGIN_FILE);
-		try (Scanner scanner = new Scanner(fileInputStream)) {
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				this.loginData.add(line);
-			}
-			scanner.close();
-			autheticate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-    /**
-     * Internal operation which is used to send the actual HTTP request to the authentication service.
-     */
-	@INTERNAL_OPERATION
-	void autheticate() {
 		try (Response response = client.newCall(getAuthenticationRequest()).execute()) {
 			if (!response.isSuccessful()) {
 				throw new IOException("Unexpected code while retrieving TOKEN: " + response);
@@ -75,10 +54,10 @@ public class AuthenticationArtifact extends Artifact {
      */
     private Request getAuthenticationRequest() {
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(System.getenv("AUTH_SERVICE_URL")).newBuilder();
-		urlBuilder.addQueryParameter("organizationName", this.loginData.get(0));
-		urlBuilder.addQueryParameter("greenhouseName", this.loginData.get(1));
-		urlBuilder.addQueryParameter("environmentName", this.loginData.get(2));
-		urlBuilder.addQueryParameter("environmentPassword", this.loginData.get(3));
+		urlBuilder.addQueryParameter("organizationName", System.getenv("ORGANIZATION_NAME"));
+		urlBuilder.addQueryParameter("greenhouseName", System.getenv("GREENHOUSE_NAME"));
+		urlBuilder.addQueryParameter("environmentName", System.getenv("ENVIRONMENT_NAME"));
+		urlBuilder.addQueryParameter("environmentPassword", System.getenv("ENVIRONMENT_PASSWORD"));
 		String url = urlBuilder.build().toString();
 		return new Request.Builder().url(url).build();
 	}
