@@ -93,31 +93,31 @@ public class SamplingCoordinatorArtifact extends Artifact {
 	@OPERATION
 	void updateOperation(final List<Sample> currentSamples) {
 		if (!currentSamples.isEmpty()) {
-			Sample avarageSample = SamplesUtility.getAvarageOfSamples(currentSamples);
-			String category = avarageSample.getCategory();
+			Sample averageSample = SamplesUtility.getAverageOfSamples(currentSamples);
+			String category = averageSample.getCategory();
 			Optional<Sample> lastSample = SamplesUtility.getSampleByCategory(lastSamples, category);
-			System.out.println("Avarage current Sample: " + avarageSample + "\nLast avarage sample: " + lastSample);
+			System.out.println("Average current Sample: " + averageSample + "\nLast average sample: " + lastSample);
 
-			uploadToPersistence(avarageSample, lastSample);
-			startActuator(avarageSample, category);
+			uploadToPersistence(averageSample, lastSample);
+			startActuator(averageSample, category);
 
-			this.lastSamples.add(avarageSample);
+			this.lastSamples.add(averageSample);
 		}
 	}
 
 	/**
-	 * Utility method used to check the avarage of the current samples and the last
+	 * Utility method used to check the average of the current samples and the last
 	 * sample retrieved. If their difference is bigger that the specified DELTA,
-	 * then the new avarage sample is going to be uploaded in the persistence
+	 * then the new average sample is going to be uploaded in the persistence
 	 * service.
 	 * 
-	 * @param avarageSample the avarage of the current samples retrieved.
+	 * @param averageSample the average of the current samples retrieved.
 	 * @param lastSample    the last sample saved.
 	 */
-	private void uploadToPersistence(final Sample avarageSample, final Optional<Sample> lastSample){
+	private void uploadToPersistence(final Sample averageSample, final Optional<Sample> lastSample){
 		if (lastSample.isPresent()) {
-			if (isSampleDifferenceBiggerThanDelta(avarageSample, lastSample)){
-				defineObsProperty("uploadPersistence", avarageSample);
+			if (isSampleDifferenceBiggerThanDelta(averageSample, lastSample)){
+				defineObsProperty("uploadPersistence", averageSample);
 				lastSamples.remove(lastSample.get());
 			}
 			
@@ -125,15 +125,15 @@ public class SamplingCoordinatorArtifact extends Artifact {
 	}
 
 	/**
-	 * Utility method used to check if the difference of the current avarage sample
+	 * Utility method used to check if the difference of the current average sample
 	 * and the last sample is bigger than the DELTA.
 	 * 
-	 * @param avarageSample the avarage of the current samples retrieved.
+	 * @param averageSample the average of the current samples retrieved.
 	 * @param lastSample    the last sample saved.
 	 * @return true if the difference of the samples is bigger thant the DELTA, false otherwise.
 	 */
-	private boolean isSampleDifferenceBiggerThanDelta(final Sample avarageSample, final Optional<Sample> lastSample){
-		return Math.abs(avarageSample.getValue() - lastSample.get().getValue()) > DELTA;
+	private boolean isSampleDifferenceBiggerThanDelta(final Sample averageSample, final Optional<Sample> lastSample){
+		return Math.abs(averageSample.getValue() - lastSample.get().getValue()) > DELTA;
 	}
 
 	/**
@@ -141,34 +141,34 @@ public class SamplingCoordinatorArtifact extends Artifact {
 	 * out of range sample and that it is necessary to perform an action
 	 * from an actuator.
 	 * 
-	 * @param avarageSample the avarage of the current samples retrieved.
-	 * @param category      the category of the current avarage sample.
+	 * @param averageSample the average of the current samples retrieved.
+	 * @param category      the category of the current average sample.
 	 */
-	private void startActuator(final Sample avarageSample, final String category){
+	private void startActuator(final Sample averageSample, final String category){
 		if (this.settings.isPresent()) {
 			// handle only range settings
 			if (getSettingByCategory(category).isPresent()
 					&& getSettingByCategory(category).get() instanceof RangeSetting) {
 				RangeSetting rangeSetting = (RangeSetting) getSettingByCategory(category).get();
-				if (isSampleOutOfRange(avarageSample, rangeSetting)) {
+				if (isSampleOutOfRange(averageSample, rangeSetting)) {
 					System.out.println("Create out of range behavior");
-					defineObsProperty("actuate", category, avarageSample, rangeSetting);
+					defineObsProperty("actuate", category, averageSample, rangeSetting);
 				}
 			}
 		}
 	}
 
 	/**
-	 * Utility method used check if the current avarage sample is out of the minimum and
+	 * Utility method used check if the current average sample is out of the minimum and
 	 * maximum define by the [[utility.setting.RangeSetting]] of its category.
 	 * 
-	 * @param avarageSample the avaragae of the current samples retrieved.
+	 * @param averageSample the average of the current samples retrieved.
 	 * @param rangeSetting  the range setting that define the minimum and the maximum
 	 * 					    value of the sample of a specific category.
-	 * @return true if the value of the avarage sample is out of range, false otherwise.
+	 * @return true if the value of the average sample is out of range, false otherwise.
 	 */
-	private boolean isSampleOutOfRange(final Sample avarageSample, final RangeSetting rangeSetting){
-		return avarageSample.getValue() < rangeSetting.getMin() || avarageSample.getValue() > rangeSetting.getMax();
+	private boolean isSampleOutOfRange(final Sample averageSample, final RangeSetting rangeSetting){
+		return averageSample.getValue() < rangeSetting.getMin() || averageSample.getValue() > rangeSetting.getMax();
 	}
 
 	/**
