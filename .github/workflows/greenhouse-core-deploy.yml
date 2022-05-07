@@ -19,6 +19,6 @@ jobs:
         - name: Login to DockerHub Registry
           run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
         - name: Build the latest Docker image
-          run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core:latest
+          run: docker build . --file Dockerfile.prod --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core:latest
         - name: Push the latest Docker image
           run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/brittany-greenhouse-core:latest
