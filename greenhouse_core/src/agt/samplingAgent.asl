@@ -15,7 +15,7 @@
  * category.
  * Plan that is triggered when a list of Components has to be sampled.
  */
-+communicate(Components) <- getSamples(Components).
++sampling(Components) <- getSamples(Components).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
