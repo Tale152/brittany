@@ -65,3 +65,33 @@ allo stato Redux si rifletterà su tutti i componenti React che utilizzano quel 
 <p align="center">Logo di Redux</p>
 </div>
 
+### React-Bootstrap
+Forte della popolarità di Bootstrap per Javascript, React-Bootstrap ricostruisce da zero ogni componente al fine di renderlo a tutti gli effetti un componente React senza dipendenze esterne non necessarie come jQuery.
+
+React-Bootsrap è affidabile e, soprattutto, ben documentato; il framework, essendo una delle librerie più vecchie di React, si è evoluto nel tempo con quest'ultimo diventando uno dei framework più utilizzati per le UI.
+<div align="center">
+<img src="https://crowdcast-prod.imgix.net/-KHhIzuATU2K4OVPd2sP/event-cover-5388?w=800" width="200px" height="200" alt="React-Bootstrap logo">
+<p align="center">Logo di React-Bootsrap</p>
+</div>
+
+### React Testing Library
+Questa libreria permette di testare il l'albero del DOM che viene renderizzato da React nel browser. L'obiettivo di questa tecnologia è scrivere dei test che simulino il comportamento dell'utente che interagisce con l'applicazione.
+
+Per ottenere questo risultato, la libreria fornisce metodi che possano effettuare query sul DOM in una maniera simile al comportamento umano.  
+Un facile esempio potrebbe essere un utente che ricerca uno specifico bottone a schermo (come un tasto "Salva"); un utente umano cercherà il bottone cercando il testo contenuto e, allo stesso modo, questo framework fornisce il metodo getByText() per restituire un eventuale elemento del DOM che contenga il testo ricercato.
+```js
+import { render, screen } from '@testing-library/react'
+import App from './App'
+
+test('renders learn react link', () => {
+  render(<App />)
+  const linkElement = screen.getByText(/learn react/i)
+  expect(linkElement).toBeInTheDocument()
+})
+```
+Una volta ottenuto un elemento del DOM, vi si potrà anche interagire, ad esempio simulando un click.
+
+<div align="center">
+<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--jU__mVZV--/c_imagga_scale,f_auto,fl_progressive,h_1080,q_auto,w_1080/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/44b0ck96dq965xz2uv1n.png" width="200px" height="200" alt="React-Bootstrap logo">
+<p align="center">Logo di React-Bootsrap</p>
+</div>
