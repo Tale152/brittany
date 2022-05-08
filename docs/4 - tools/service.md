@@ -109,3 +109,69 @@ jojo.save() //save jojo in the collection
 <img src="https://miro.medium.com/max/1296/1*iDvsmUwzZQxJSKdL0xzwIA.png" width="300px" height="100px" alt="Mongoose logo">
 <p align="center">Logo di Mongoose</p>
 </div>
+
+### Jest
+Jest è uno dei principali framework per il testing in progetti JavaScript. Il punto forte di Jest è la facilità di utilizzo e, inoltre, i test possono essere parallelizzati per ottenere il massimo dell'efficienza.  
+
+Con l'aggiunta dell'argomento --coverage, è possibile ottenere la coverage dei test all'interno del progetto.
+
+Un semplice test può essere impostato nel seguente modo:
+```js
+describe('My work', () => {
+  test('works', () => {
+    expect(2).toEqual(2)
+  })
+})
+```
+É inoltre possibile, attraverso una semplice sintassi, esprimere del codice che debba essere eseguito in diversi momenti del testing:
+```js
+describe("Calculator tests", () => {
+  var input1 = 0
+  var input2 = 0
+ 
+  beforeAll(() => {
+    console.log("beforeAll called")
+  })
+ 
+  afterAll(() => {
+    console.log("afterAll called")
+  })
+
+  beforeEach(() => {
+    console.log("beforeEach called")
+    input1 = 1
+    input2 = 2
+  })
+
+  afterEach(() => {
+    console.log("afterEach called")
+  })
+ 
+  test('adding 1 + 2 should return 3', () => {
+    var result = mathOperations.sum(input1,input2)
+    expect(result).toBe(3)
+  })
+})
+```
+<div align="center">
+<img src="https://blog.kakaocdn.net/dn/ZUme7/btrkG2FCG22/VgVbdkjuGHgbqJA3MlScLK/img.png" width="300px" height="280px" alt="Jest logo">
+<p align="center">Logo di Jest</p>
+</div>
+
+### SuperTest
+SuperTest è una libreria Node.js volta al testing delle API. In combinazione con un qualsiasi altro framework di testing (come Jest), permette di eseguire una nuova istanza del server da testare per ogni test da condurre.  
+
+In ogni test vengono eseguite programmaticamente delle chiamate HTTP da un client fittizio, andando a controllare che la risposta ricevuta sia coerente con il comportamento previsto.
+
+```js
+import request from 'supertest'
+import server from '../app'
+
+describe('Example root test', () => {
+    it('should respond with 200', () => {
+        return request(server)
+            .get('/')
+            .expect(200)
+    })
+})
+```
