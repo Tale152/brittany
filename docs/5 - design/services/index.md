@@ -21,7 +21,6 @@ Per ogni push sul branch master, viene creata un'immagine __Docker__ per ognuno 
 
 ## Auth Service
 Responsabile per l'autenticazione di Agricoltori all'interno del sistema tramite client.  
-
 Questo servizio inoltre contiene i dati delle Serre (e relativi Ambienti) per ogni Azienda registrata nel sistema; la scelta di far risiedere qui questi ultimi dati è dovuta alla necessità di far autenticare non solo gli Agricoltori, ma anche gli Agenti (che operano all'interno di un determinato Ambiente).
 
 ## Settings Service
