@@ -6,17 +6,24 @@ has_children: false
 
 # Sviluppi Futuri
 
-Brittany è un sistema che si presta molto facilmente ad essere esteso, soprattutto grazie all'architettura che è stata pensata effettuare aggiunte in un futuro prossimo risulterà molto semplice e veloce. Verranno ora illustrate alcune idee per ciò che potrebbe essere aggiunto:
+Brittany è un sistema che si presta facilmente ad essere esteso; quest'ultima caratteristica è ottenuta grazie all'architettura pensata proprio per poter effettuare aggiunte in modo semplice e veloce.  
 
-### Auth, Persistence, Settings Service
+Verranno ora illustrate alcune idee che illustrano ciò che potrebbe essere aggiunto:
 
-I servizi offerti da Brittany possono sempre essere espandi per offrire più  personalizzazione, soprattutto per quanto concerne le configurazioni.
-Il sistema di autenticazione e di gestione utenti potrebbe essere migliorato aggiungendo un sistema di ruoli e di divisione dei compiti.
-Anche il sistema di persistence potrebbe essere ampliato, lasciando scegliere all'utente la modalità in cui vorrebbe salvare i dati.
+## Auth, Persistence, Settings Service
 
-### Edge
+I servizi offerti da Brittany possono sempre essere espansi per offrire più personalizzazione, soprattutto per quanto concerne le configurazioni.  
 
-Edge è uno dei sottoprogetti che più si presta all'ampliamento, soprattutto per quanto riguarda l'aggiunta di componenti fisici e di moduli.
+Il sistema di autenticazione e di gestione utenti potrebbe essere migliorato aggiungendo un sistema di ruoli e di divisione dei compiti.  
+
+Anche il sistema di persistence potrebbe essere ampliato, lasciando scegliere all'utente la modalità in cui vorrebbe salvare i dati.  
+
+Al fine di incrementare oltre la scalabilità, integrare una tecnologia come Kubernetes al fine di disporre, su necessità, di molteplici repliche dei server.
+
+## Edge
+
+Edge è uno dei sottoprogetti che più si presta all'ampliamento, soprattutto per quanto riguarda l'aggiunta di componenti fisici e di moduli.  
+
 Al momento Brittany dispone solo di un sistema di gestione di temperatura e di illuminazione.
 Alcuni esempi di componenti mancanti e che potranno sicuramente essere aggiunti sono:
 
@@ -26,12 +33,14 @@ Alcuni esempi di componenti mancanti e che potranno sicuramente essere aggiunti 
 - Ventilazione
 - Sensori per misurare la pressione dell'acqua
 - Sensori per misurare la qualità dell'aria
-- Luci analogiche, in cui è possibile impostare più parametri oltre al solo stato acceso e spento.
+- Luci analogiche, in cui sia possibile impostare parametri aggiuntivi come colore, intensità, ecc...
 - Sensori di temperatura della pianta.
 
-### Greenhouse Core
+## Greenhouse Core
 
-L'aggiunta di componenti a Edge richiede necessariamente la creazione dei relativi componenti nel sottoprogetto di Greenhouse Core.
+L'aggiunta di componenti a Edge richiede necessariamente la creazione di nuovi moduli software nel sottoprogetto Greenhouse Core, così che esso sia in grado di adoperare le potenzialità fornite dai nuovi edge.  
+
+L'architettura di questo componente è già predisposta all'espansione, richiedendo semplicemente l'aggiunta di nuovi agenti che collaborino con quelli già esistenti.
 
 ### Web Client
 
@@ -45,4 +54,4 @@ In generale il Web Client subisce modifiche qualora vengano effettuate modifiche
 
 
 ### Altro...
-Brittany potrebbe essere esteso anche per funzionare come gestionale della serra, aggiungendo funzionalità più relative alla documentazione o integrando sistemi già esistenti.
+Brittany potrebbe essere esteso anche per funzionare come gestionale della serra, aggiungendo funzionalità che comprendano la documentazione dello stato di salute delle piante o che integrino sistemi già esistenti.
