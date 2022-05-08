@@ -10,4 +10,5 @@ In particolar modo, il focus sullo studio e la conoscienza del dominio hanno ric
 
 Vi è stata anche una crescita sotto il punto di vista delle competenze tecnologiche, in quanto in questo progetto sono stati utilizzati molti strumenti diversi che ci hanno fatto assaporare la filosofia DevOps.  
 
-In conclusione, questo progetto ha mostrato risultati rilevanti anche nell'ambito del pervasive computing realizzando sistemi edge, dotati di sensori ed attuatori, che si focalizzano sull'interoperabilità con potenzialmente qualsiasi sistema attraverso la descrizione delle potenzialità offerte tramite thing descriptor; non ultimo, il sistema ad agenti capace di coordinare la serra ha portato il team a sviluppare le proprie capacità con questo paradigma.
+In conclusione, questo progetto ha mostrato risultati rilevanti anche nell'ambito del pervasive computing realizzando sistemi edge, dotati di sensori ed attuatori, che si focalizzano sull'interoperabilità con potenzialmente qualsiasi sistema attraverso la descrizione delle potenzialità offerte tramite thing descriptor.  
+Non ultimo, il sistema ad agenti, capace di coordinare la serra, ha portato il team a sviluppare le proprie capacità con questo paradigma.
