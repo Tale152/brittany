@@ -10,6 +10,7 @@ import cartago.*;
 import city.sane.wot.thing.ConsumedThing;
 import utility.ThingDescriptorUtility;
 import utility.component.Component;
+import utility.component.ComponentUtility;
 import utility.setting.HourSetting;
 import utility.setting.Settings;
 
@@ -73,7 +74,7 @@ public class TimeBasedActuatorArtifact extends Artifact {
         if (!this.components.isEmpty() && this.settings.isPresent()
                 && this.settings.get().getSetting(category).isPresent()) {
             HourSetting setting = (HourSetting) this.settings.get().getSetting(category).get();
-            List<Component> actuators = ThingDescriptorUtility.getActuatorsByCategory(this.components, category);
+            List<Component> actuators = ComponentUtility.getActuatorsByCategory(this.components, category);
             checkTime(setting, actuators);
         }
     }
@@ -116,4 +117,5 @@ public class TimeBasedActuatorArtifact extends Artifact {
             }
         }
     }
+    
 }

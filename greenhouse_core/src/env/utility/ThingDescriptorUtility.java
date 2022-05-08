@@ -14,17 +14,31 @@ import city.sane.wot.thing.ConsumedThing;
 
 import utility.component.Component;
 
+/**
+ * ThingDescriptorUtility is an utility class used to provide
+ * methods in order to handle easily the thing descriptor.
+ */
 public class ThingDescriptorUtility {
-    
-    public static List<Component> getActuatorsByCategory(final List<Component> components, final String category) {
-		return components.stream().filter(c -> c.getCategory().equals(category))
-				.filter(c -> !c.getActions().isEmpty()).collect(Collectors.toList());
-	}
 
+	/**
+	 * 
+	 * 
+	 * @param thingDescriptors
+	 * @param id
+	 * @return
+	 */
 	public static Optional<ConsumedThing> getThingDescriptor(final List<ConsumedThing> thingDescriptors, final String id) {
 		return thingDescriptors.stream().filter(t -> t.getId().equals(id)).findFirst();
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param td
+	 * @param category
+	 * @param componentId
+	 * @return
+	 */
 	public static List<String> getNamesByCategory(final JsonObject td, final String category, final String componentId) {
 		List<String> names = new ArrayList<>();
 		Set<Map.Entry<String, JsonElement>> entries = td.entrySet();
@@ -36,4 +50,5 @@ public class ThingDescriptorUtility {
 		}
 		return names.stream().filter(n -> n.substring(n.lastIndexOf("-") + 1).equals(componentId)).collect(Collectors.toList());
 	}
+
 }
