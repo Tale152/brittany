@@ -12,8 +12,6 @@ import com.google.gson.JsonObject;
 
 import city.sane.wot.thing.ConsumedThing;
 
-import utility.component.Component;
-
 /**
  * ThingDescriptorUtility is an utility class used to provide
  * methods in order to handle easily the thing descriptor.
