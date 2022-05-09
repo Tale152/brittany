@@ -28,3 +28,26 @@ Il file di configurazione è diviso in "ambienti". In questo modo è possibile c
 <img src="https://cdn.platformio.org/images/platformio-logo.17fdc3bc.png" width="200px" height="200px" alt="PlatformIO Logo">
 <p align="center">Logo di PlatformIO</p>
 </div>
+
+## unity.h
+Un'installazione di PlatformIO comprende anche una libreria base di tesing che è possibile includere e utilizzare nei sorgenti attraverso la classica direttiva ``#include <unity.h>``.
+La libreria è piuttosto semplice:
+
+1. Vengono create delle apposite funzioni di test.
+2. Nel main, per ognuna di esse specifichiamo un comando ``RUN_TEST(func)``.
+
+Le funzioni di test possono contenere un qualsiasi tipo di asset, ne esistono di diversi tipi in base al tipo di dato che si vuole verificare, ad esempio ``TEST_ASSERT_EQUAL_INT(expected, actual)`` è per i valori interi mentre ``TEST_ASSERT_TRUE(condition)`` serve a verificare se una condizione è vera. La lista esaustiva è consultabile nella [documentazione](https://docs.platformio.org/en/stable/plus/unit-testing.html).
+
+## LCOV
+PlatformIO non possiede un software o un plugin per verificare la coverage.
+Nonostante esistano attualmente Pull Request aperte che ne richiedano l’aggiunta, non esistono quindi strumenti built-in che permettono di verificare la percentuale di codice attraversato dai test rispetto al totale della code base. È stato quindi utilizzato il tool LCOV.  
+
+LCOV è un front-end grafico per il testing di ambienti che utilizzano il compilatore gcc. I dati generati da gcov, ovvero lo strumento di coverage effettivo, vengono collezionati, eventualmente filtrati ed infine presentati all'utente attraverso pagine HTML contenenti informazioni circa i sorgenti su cui sono state effettuate le verifiche.
+
+Generalmente per il setup sono richiesti i seguenti step:
+
+1. Aggiungere ``--coverage`` e i corretti linker flag (ad esempio CFLAGS and LDFLAGS) al comando di compilazione.
+2. Collezionare i dati di coverage in un file:
+   ```lcov --capture --directory project-dir --output-file coverage.info```
+3. Generare il codice HTML:
+    ```genhtml coverage.info --output-directory out```
