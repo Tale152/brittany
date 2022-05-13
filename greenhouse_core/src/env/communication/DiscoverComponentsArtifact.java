@@ -36,6 +36,8 @@ import utility.ThingDescriptorUtility;
  */
 public class DiscoverComponentsArtifact extends Artifact {
 
+	private final static long TICK_TIME = 100;
+
 	private OkHttpClient client;
 	private List<Component> components;
 	private List<ConsumedThing> thingDescriptors;
@@ -67,21 +69,30 @@ public class DiscoverComponentsArtifact extends Artifact {
 	 */
 	@OPERATION
 	void discoverComponents() {
-		// initialization due to avoid to try to communicate with disconnected components
+		//initialization due to avoid to try to communicate with disconnected components
 		this.components = new ArrayList<>();
 		this.thingDescriptors = new ArrayList<>();
-		// create cycle for broadcast requests!
-		// for test purposes
-		/*
-		 * for (int i = 1; i >= 255; i++){
-		 * System.out.println("http://192.168.189." + i);
-		 * }
-		 */
-		getThingDescriptor("http://192.168.246.1"); // this is in the cicle
+		//calling asynchronous operation
+		execInternalOp("broadcastRequest");
+	}
 
-		// at the end of the cicle, update components and thing descriptors
-		defineObsProperty("components", this.components);
-		defineObsProperty("thingDescriptors", this.thingDescriptors);
+	/**
+	 * This internal operation is used to run an asynchronous operation,
+	 * which it is usually for a long term operation.
+	 * This internal operation is used to cicle on all the ip adresses
+	 * in order to find all the edges connected to the greenhouse, and 
+	 * it requires some time.
+	 * 
+	 * Even though it runs asynchronously, it is necessary to call
+	 * await time, which stops the executing operation and makes
+	 * it possible to commit the observable states.
+	 */
+	@INTERNAL_OPERATION
+	void broadcastRequest() {
+		for (int i = 1; i <= 255; i++) {
+			getThingDescriptor("http://192.168.246." + i);
+			await_time(TICK_TIME);
+		}
 	}
 
 	/**
@@ -94,11 +105,15 @@ public class DiscoverComponentsArtifact extends Artifact {
 		Request request = new Request.Builder().url(url).build();
 		try (Response response = client.newCall(request).execute()) {
 			if (response.isSuccessful()) {
+				System.out.println("Successful edge response at url " + url);
 				JsonObject thingDescriptor = JsonParser.parseString(response.body().string()).getAsJsonObject();
-				updateComponents(thingDescriptor); // if found, update components
+				updateComponents(thingDescriptor); //if found, update components
+				//update components and thing descriptors
+				defineObsProperty("components", this.components);
+				defineObsProperty("thingDescriptors", this.thingDescriptors);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("Impossible to contact edge at url " + url);
 		}
 	}
 
