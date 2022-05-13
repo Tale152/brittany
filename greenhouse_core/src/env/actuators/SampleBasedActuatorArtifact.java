@@ -9,6 +9,7 @@ import cartago.*;
 import city.sane.wot.thing.ConsumedThing;
 import utility.ThingDescriptorUtility;
 import utility.component.Component;
+import utility.component.ComponentUtility;
 import utility.sample.Sample;
 import utility.setting.RangeSetting;
 
@@ -95,7 +96,7 @@ public class SampleBasedActuatorArtifact extends Artifact {
 	 * @param turnOffAction the action that needs to be turned off.
 	 */
 	private void switchActuatorAction(final String category, final String turnOnAction, final String turnOffAction) {
-		List<Component> components = ThingDescriptorUtility.getActuatorsByCategory(this.components, category);
+		List<Component> components = ComponentUtility.getActuatorsByCategory(this.components, category);
 		for (Component component : components) {
 			//search for the specific action in the td list for a specific edge
 			Optional<ConsumedThing> td = ThingDescriptorUtility.getThingDescriptor(this.thingDescriptors, component.getEdgeIp());

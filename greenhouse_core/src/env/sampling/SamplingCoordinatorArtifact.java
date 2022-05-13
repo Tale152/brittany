@@ -5,14 +5,13 @@ package sampling;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import cartago.*;
 import utility.component.Component;
+import utility.component.ComponentUtility;
 import utility.sample.Sample;
 import utility.sample.SamplesUtility;
 import utility.setting.RangeSetting;
-import utility.setting.Setting;
 import utility.setting.Settings;
 
 /**
@@ -60,7 +59,7 @@ public class SamplingCoordinatorArtifact extends Artifact {
      *                 the settings only if they exist.
      */
 	@OPERATION
-	void setupSettings( final Optional<Settings> settings) {
+	void setupSettings(final Optional<Settings> settings) {
 		this.settings = settings;
 	}
 
@@ -76,7 +75,7 @@ public class SamplingCoordinatorArtifact extends Artifact {
 	 */
 	@OPERATION
 	void sampleOperation(final String category) {
-		List<Component> filteredComponents = getComponentsByCategory(category);
+		List<Component> filteredComponents = ComponentUtility.getComponentsByCategory(this.components, category);
 		if (!filteredComponents.isEmpty()) {
 			defineObsProperty("sampling", filteredComponents);
 		}
@@ -93,47 +92,46 @@ public class SamplingCoordinatorArtifact extends Artifact {
 	@OPERATION
 	void updateOperation(final List<Sample> currentSamples) {
 		if (!currentSamples.isEmpty()) {
-			Sample avarageSample = SamplesUtility.getAvarageOfSamples(currentSamples);
-			String category = avarageSample.getCategory();
+			Sample averageSample = SamplesUtility.getAverageOfSamples(currentSamples);
+			String category = averageSample.getCategory();
 			Optional<Sample> lastSample = SamplesUtility.getSampleByCategory(lastSamples, category);
-			System.out.println("Avarage current Sample: " + avarageSample + "\nLast avarage sample: " + lastSample);
+			System.out.println("Average current Sample: " + averageSample + "\nLast average sample: " + lastSample);
 
-			uploadToPersistence(avarageSample, lastSample);
-			startActuator(avarageSample, category);
+			uploadToPersistence(averageSample, lastSample);
+			startActuator(averageSample, category);
 
-			this.lastSamples.add(avarageSample);
+			this.lastSamples.add(averageSample);
 		}
 	}
 
 	/**
-	 * Utility method used to check the avarage of the current samples and the last
+	 * Utility method used to check the average of the current samples and the last
 	 * sample retrieved. If their difference is bigger that the specified DELTA,
-	 * then the new avarage sample is going to be uploaded in the persistence
+	 * then the new average sample is going to be uploaded in the persistence
 	 * service.
 	 * 
-	 * @param avarageSample the avarage of the current samples retrieved.
+	 * @param averageSample the average of the current samples retrieved.
 	 * @param lastSample    the last sample saved.
 	 */
-	private void uploadToPersistence(final Sample avarageSample, final Optional<Sample> lastSample){
+	private void uploadToPersistence(final Sample averageSample, final Optional<Sample> lastSample) {
 		if (lastSample.isPresent()) {
-			if (isSampleDifferenceBiggerThanDelta(avarageSample, lastSample)){
-				defineObsProperty("uploadPersistence", avarageSample);
+			if (isSampleDifferenceBiggerThanDelta(averageSample, lastSample)) {
+				defineObsProperty("uploadPersistence", averageSample);
 				lastSamples.remove(lastSample.get());
-			}
-			
+			}	
 		}
 	}
 
 	/**
-	 * Utility method used to check if the difference of the current avarage sample
+	 * Utility method used to check if the difference of the current average sample
 	 * and the last sample is bigger than the DELTA.
 	 * 
-	 * @param avarageSample the avarage of the current samples retrieved.
+	 * @param averageSample the average of the current samples retrieved.
 	 * @param lastSample    the last sample saved.
 	 * @return true if the difference of the samples is bigger thant the DELTA, false otherwise.
 	 */
-	private boolean isSampleDifferenceBiggerThanDelta(final Sample avarageSample, final Optional<Sample> lastSample){
-		return Math.abs(avarageSample.getValue() - lastSample.get().getValue()) > DELTA;
+	private boolean isSampleDifferenceBiggerThanDelta(final Sample averageSample, final Optional<Sample> lastSample) {
+		return Math.abs(averageSample.getValue() - lastSample.get().getValue()) > DELTA;
 	}
 
 	/**
@@ -141,56 +139,46 @@ public class SamplingCoordinatorArtifact extends Artifact {
 	 * out of range sample and that it is necessary to perform an action
 	 * from an actuator.
 	 * 
-	 * @param avarageSample the avarage of the current samples retrieved.
-	 * @param category      the category of the current avarage sample.
+	 * @param averageSample the average of the current samples retrieved.
+	 * @param category      the category of the current average sample.
 	 */
-	private void startActuator(final Sample avarageSample, final String category){
+	private void startActuator(final Sample averageSample, final String category) {
 		if (this.settings.isPresent()) {
-			// handle only range settings
-			if (getSettingByCategory(category).isPresent()
-					&& getSettingByCategory(category).get() instanceof RangeSetting) {
-				RangeSetting rangeSetting = (RangeSetting) getSettingByCategory(category).get();
-				if (isSampleOutOfRange(avarageSample, rangeSetting)) {
+			if (isRangeSettingPresent(category)) {
+				RangeSetting rangeSetting = (RangeSetting) this.settings.get().getSetting(category).get();
+				if (isSampleOutOfRange(averageSample, rangeSetting)) {
 					System.out.println("Create out of range behavior");
-					defineObsProperty("actuate", category, avarageSample, rangeSetting);
+					defineObsProperty("actuate", category, averageSample, rangeSetting);
 				}
 			}
 		}
 	}
 
 	/**
-	 * Utility method used check if the current avarage sample is out of the minimum and
+	 * Utility method used check if the current average sample is out of the minimum and
 	 * maximum define by the [[utility.setting.RangeSetting]] of its category.
 	 * 
-	 * @param avarageSample the avaragae of the current samples retrieved.
+	 * @param averageSample the average of the current samples retrieved.
 	 * @param rangeSetting  the range setting that define the minimum and the maximum
 	 * 					    value of the sample of a specific category.
-	 * @return true if the value of the avarage sample is out of range, false otherwise.
+	 * @return true if the value of the average sample is out of range, false otherwise.
 	 */
-	private boolean isSampleOutOfRange(final Sample avarageSample, final RangeSetting rangeSetting){
-		return avarageSample.getValue() < rangeSetting.getMin() || avarageSample.getValue() > rangeSetting.getMax();
+	private boolean isSampleOutOfRange(final Sample averageSample, final RangeSetting rangeSetting) {
+		return averageSample.getValue() < rangeSetting.getMin() || averageSample.getValue() > rangeSetting.getMax();
 	}
 
 	/**
-	 * Utility method used to retrieve from a list of components only the components of a specific
-	 * category.
+	 * Utility method used to verify if it exists a RangeSetting
+	 * in the current settings list of the specified category.
 	 * 
-	 * @param category the cateogry of the components that are wanted to be retrieved.
-	 * @return the list of components that have a specific category.
+	 * @param category the category of the RangeSetting searched.
+	 * @return true if a RangeSetting of the category specified exists,
+	 * false otherwise.
 	 */
-	private List<Component> getComponentsByCategory(final String category) {
-		return this.components.stream().filter(c -> c.getCategory().equals(category)).filter(c -> !c.getProperties().isEmpty()).collect(Collectors.toList());
-	}
-
-	/**
-	 * Utility method used to retrieve a setting with a specific category
-	 * from an optional list of settings.
-	 * 
-	 * @param category the category of the settings wanted.
-	 * @return an optional which contains the setting of that category if found.
-	 */
-	private Optional<Setting> getSettingByCategory(final String category) {
-		return this.settings.get().getSetting(category);
+	private boolean isRangeSettingPresent(final String category) {
+		Settings currentSettings = this.settings.get();
+		return (currentSettings.getSetting(category).isPresent() 
+				&& currentSettings.getSetting(category).get() instanceof RangeSetting);
 	}
 
 }
