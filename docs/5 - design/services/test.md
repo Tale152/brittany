@@ -24,4 +24,9 @@ Per assicurare un testing il più esaustivo possibile, i test di ogni Service ve
 Occasionalmente durante il development ci si è affidati al tool Postman per verificare il corretto funzionamento delle API, oltre che prove dirette di interazione con Web Client e Greenhouse Core.
 
 ## Coverage
-TODO
+Jest dispone di uno strumento integrato per la gestione della coverage. Aggiungendo semplicemente l'argomento --coverage durante l'esecuzione dei test, verrà generato un report dettagliato sulla coverage dei test.
+
+<div align="center">
+<img src="https://images2.imgbox.com/22/9f/BkZQvLKn_o.png" alt="Esempio di risultati coverage su Auth Service">
+<p align="center"> Esempio di risultati coverage su Auth Service </p>
+</div>
