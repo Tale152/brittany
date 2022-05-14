@@ -7,12 +7,12 @@ nav_order: 1
 
 # Knowledge Crunching
 
-Prima ancora di mettere mano all’architettura di progetto, sono state effettuate sessioni di knowledge crunching che hanno visto la partecipazione di tutti i membri del team e di un esperto del dominio nell'ambito della botanica.
+Prima ancora di mettere mano all’architettura di progetto, sono state effettuate sessioni di knowledge crunching che hanno visto la partecipazione di tutti i membri del team e di un esperto del dominio nell'ambito della botanica.  
 Scopo di queste sessioni era lo studio del dominio applicativo, e la definizione di requisiti tali da guidare lo sviluppo in un’ottica DDD.
 
-Obiettivo principale delle sessioni è stata la definizione dell'Ubiquitous Language e l'acquisizione di una maggiore compotenenza in campo botanico.
+Obiettivo principale delle sessioni è stata la definizione dell'Ubiquitous Language e l'acquisizione di una maggiore competenenza in campo botanico.
 
-Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto del dominio.
+Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto del dominio.  
 È stata effettuata per praticità una divisione per tipologia di argomento affrontato.
 
 ## Dialoghi con esperto del dominio
@@ -39,7 +39,7 @@ Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto de
 
 <span style="color:green;font-weight:bold">Developer</span>: "In che senso? Hanno un aspetto simile?"  
 
-<span style="color:#19ff19;font-weight:bold">Esperto</span>: "Non solo, due piante appartenenti alla stessa famiglia avranno più o meno bisogno dello stesso tipo di trattamento per crescere. Anche se i parametri sono leggermente diversi tra le specie non dovrebbero cambiare più di tanto."  
+<span style="color:#19ff19;font-weight:bold">Esperto</span>: "Non solo, due piante appartenenti alla stessa famiglia avranno più o meno bisogno dello stesso tipo di trattamento per crescere. Anche se i parametri sono leggermente diversi tra le specie, non dovrebbero cambiare più di tanto."  
 
 <span style="color:green;font-weight:bold">Developer</span>: "Interessante, ci sono suddivisioni ulteriori oltre alle famiglie?"  
 
@@ -65,7 +65,7 @@ Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto de
 
 <span style="color:green;font-weight:bold">Developer</span>: "Queste fasi hanno un nome specifico o si chiamano semplicemente fasi?"  
 
-<span style="color:#19ff19;font-weight:bold">Esperto</span>: "Il nome esteso è fase fenologica"
+<span style="color:#19ff19;font-weight:bold">Esperto</span>: "Il nome esteso è _fase fenologica_"
 
 ---
 
@@ -103,7 +103,7 @@ Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto de
 
 <span style="color:#ec3a8b;font-weight:bold">Developer</span>: "È vero che ci sono più tipi di fertilizzante?"  
 
-<span style="color:#b2868e;font-weight:bold">Esperto</span>: "Ci sono diversi modi per fornire minerali ad una pianta, ma il più comune ed utilizzato è sicuramente attraverso la fertirrigazione"  
+<span style="color:#b2868e;font-weight:bold">Esperto</span>: "Ci sono diversi modi per fornire minerali ad una pianta, ma il più comune ed utilizzato è sicuramente attraverso la _fertirrigazione_"  
 
 <span style="color:#ec3a8b;font-weight:bold">Developer</span>: "Di cosa si tratta?"  
 
@@ -111,12 +111,12 @@ Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto de
 
 <span style="color:#ec3a8b;font-weight:bold">Developer</span>: "Io una volta ho accidentalmente ucciso una mia piantina perché le ho dato troppo fertilizzante. Come bisogna calibrarsi?"  
 
-<span style="color:#b2868e;font-weight:bold">Esperto</span>: "Dipende da diversi fattori, ma principalmente dal tipo di pianta e dalla fase in cui si trova. Fornendo troppo fertilizzante rischia di far morire la pianta, fornendonde troppo poco rischia di bloccare la crescita o di ridurre notevolmente il potenziale raccolto della pianta."
+<span style="color:#b2868e;font-weight:bold">Esperto</span>: "Dipende da diversi fattori, ma principalmente dal tipo di pianta e dalla fase in cui si trova. Fornendo troppo fertilizzante rischia di far morire la pianta, fornendone troppo poco rischia di bloccare la crescita o di ridurre notevolmente il potenziale raccolto della pianta."
 
 ---
 
 #### Equilibrio
-<span style="color:#ec3a8b;font-weight:bold">Developer</span>: "Per come ci hai parlato fin'ora mi è sembrato di capire una cosa. L'importante è non far mai subire alla pianta dei cambiamenti nei parametri troppo repentini e lasciarla in una sorta di suo equilibrio. Me lo confermi?"  
+<span style="color:#ec3a8b;font-weight:bold">Developer</span>: "Per come ci hai parlato finora mi è sembrato di capire una cosa. L'importante è non far mai subire alla pianta dei cambiamenti nei parametri troppo repentini e lasciarla in una sorta di suo equilibrio. Me lo confermi?"  
 
 <span style="color:#b2868e;font-weight:bold">Esperto</span>: "Sì esatto. Una volta che la pianta è stata abituata in un certo modo è meglio non cambiare il suo ritmo, o rischia spiacevoli conseguenze tra cui anche la morte."  
 
@@ -140,7 +140,7 @@ Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto de
 
 <span style="color:#72bcd4;font-weight:bold">Esperto</span>: "Certo. Ma le notifiche potrebbero essere utili non solo in caso di guasti. Potrebbe essere utile venir informati quando è il momento di fare manutenzione, o un qualche tipo di controllo."  
 
-<span style="color:#235f73;font-weight:bold">Developer</span>: "Quindi possiamo dire che ci sono due tipi di notifiche: i reminder, e i warning".  
+<span style="color:#235f73;font-weight:bold">Developer</span>: "Quindi possiamo dire che ci sono due tipi di notifiche: i _reminder_, e i _warning_".  
 
 ---
 
@@ -164,7 +164,7 @@ Vengono di seguito illustrate alcune interazioni tra sviluppatori e l'esperto de
 
 ## Retrospettiva sui meeting
 
-I meeting con l'esperto del dominio sono stati molto utili per comprendere meglio aspetti legati al dominio botanico ed in particolare gli aspetti legati alla coltivazione.  
+I meeting con l'esperto del dominio sono stati molto utili per comprendere meglio aspetti legati al dominio botanico e in particolare gli aspetti legati alla coltivazione.  
 Sono stati inoltre molto utili per arricchire il vocabolario e fissare l'ubiquitous language.
 
 ### Informazioni chiave ottenute
