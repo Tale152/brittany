@@ -36,7 +36,10 @@ Il sistema è diviso in sottoprogetti. Verranno brevemente illustrati i requisit
 - __IDE utilizzato/utilizzabile__: Visual Studio Code, Eclipse;
 - __Framework utilizzato__: [JaCaMo](http://jacamo.sourceforge.net/)
 - __Librerie__:
-  - [wot-servient](https://github.com/sane-city/wot-servient): L'implementazione dell'architettura W3C Web of Things (WoT) in Java.
+  - [wot-servient](https://github.com/sane-city/wot-servient): l'implementazione dell'architettura W3C Web of Things (WoT) in Java;
+  - [gson](https://github.com/google/gson): utilizzata per la gestione dei contenuti in formato json ricevuti e inviati;
+  - [okhttp](https://github.com/square/okhttp): libreria che semplifica la creazione e l'invio di richieste HTTP.
+
 
 ### [Auth, Persistence, Settings] Service
 - __Gestore di librerie esterne e configurazioni aggiuntive__: [npm](https://www.npmjs.com/);
