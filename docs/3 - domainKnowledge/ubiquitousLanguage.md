@@ -55,7 +55,7 @@ Stadio del [Ciclo vitale](#ciclo-vitale) delle [Piante](#pianta), associato ad u
 Un valore impostato dall'[Agricoltore](#agricoltore) che il sistema utilizza per prendere decisioni su come comportarsi in modo autonomo.
 
 ## Configurazione
-<span style="color: grey;"><font size="4"> Configuration </font></span>
+<span style="color: grey;"><font size="4"> Settings </font></span>
 
 Insieme di [Parametri](#parametro) impostati dall'[Agricoltore](#agricoltore) validi durante una determinata [Fase Fenologica](#fase-fenologica). Si possono suddividere in [Configurazione della pianta](#configurazione-della-pianta) e [Configurazione dell'ambiente](#configurazione-dellambiente).
 
