@@ -24,7 +24,7 @@ Nel grafico verranno riportati i bounded context. L'asse delle _x_ indica quanto
 
 ### Context map
 
-Lo studio del problema ha portato a definire quattro aree critiche che compongono il sistema, le quali necessitano un importante isolamento, al fine di garantire indipendenza e chiara suddivisione dei moduli durante la fase di sviluppo.
+Lo studio del problema ha portato a definire quattro aree critiche che compongono il sistema, le quali necessitano un importante isolamento, al fine di garantire indipendenza e chiara suddivisione dei moduli durante la fase di sviluppo.  
 Una corretta suddivisione dei bounded context in fase iniziale permette di scomporre in maniera più chiara il lavoro.
 
 Sono stati individuati i seguenti bounded context:
@@ -33,8 +33,6 @@ Sono stati individuati i seguenti bounded context:
 - __Service Bounded Context__: gli aspetti più orientati alla gestione dei dati ottenuti.
 - __Client Bounded Context__: gli aspetti che riguardano l'interazione dell'utente finale con il sistema.
 - __DevOps Bounded Context__: gli aspetti dedicati alle attività della metodologia DevOps;
-
-
 
 Di seguito è riportata la context map del progetto.
 
@@ -48,21 +46,21 @@ Il bounded context per gli aspetti core comprende due moduli del progetto:
 - _Edge_: aspetti più legati alla sensoristica, al raccogliemento di dati, all'eseguire azioni in un determinato ambiente.
 - _Greenhouse core_: aspetti legati all'effettivo comportamento tenuto dalla serra in funzione di ciò che _Edge_ trasmette.
 
-Insieme, questi due moduli sono già sufficienti per far funzionare il sistema in una sua versione basilare.
+Insieme, questi due moduli sono già sufficienti per far funzionare il sistema in una sua versione base.  
 In particolare, _Edge_ offre una API a _Greenhouse core_, la quale comprende come è fatto _Edge_ e di conseguenza, come comportarsi e come orchestrare la situazione.
 
 ##### Service Bounded Context
 
-Il bounded context dei Service compende aspetti strettamente legati ai dati.  
+Il bounded context dei Service comprende aspetti strettamente legati ai dati.    
 In particolare per ogni service esiste:
 - Una API utilizzata per l'interazione con Greenhouse core;
 - Una modalità per immagazzinare e reperire successivamente dati.
 
 ##### Client Bounded Context
-Il bounded context Client comprende aspetti legati all'esperienza utente e al modo in cui quest'ultimo può interagire col sistema.
+Il bounded context Client comprende aspetti legati all'esperienza utente e al modo in cui quest'ultimo può interagire col sistema.  
 In pratica si tratta di un portale in cui l'utente può effettuare operazioni o visionare dati.  
 Grazie alle API offerte dai service il client potrà essere implementato su una qualsiasi piattaforma.
 
 ##### DevOps Bounded Context
 
-È stato definito un bounded context anche per ciò che concerne la metodologia DevOps. Graficamente non è stato riportato alcun collegamento per semplicità. Gli aspetti legati al DevOps sono infatti estremamente pervasivi ed influenzano in maniera indiretta tutti gli altri bounded context.
+È stato definito un bounded context anche per ciò che concerne la metodologia DevOps. Graficamente non è stato riportato alcun collegamento per semplicità. Gli aspetti legati al DevOps sono infatti estremamente pervasivi e influenzano in maniera indiretta tutti gli altri bounded context.
