@@ -9,6 +9,18 @@ parent: Strumenti utilizzati
 In questo capitolo verranno descritti tutti gli strumenti e le tecnologie utilizzate per la costruzione del servizio Greenhouse core.
 
 ## JaCaMo
+[JaCaMo](http://jacamo.sourceforge.net/) è un framework ideato per lo sviluppo di sistemi multi-agente.  
+
+Un sistema multi-agente è caratterizzato da un insieme di agenti, i quali sono entità autonome e in grado di compiere determinate azioni. Gli agenti nel sistema si trovano in un ambiente e possono interagire in base a regole prestabilite.  
+
+Il framework utilizzato combina tre diverse tecnologie, ovvero:
+- Jason: utilizzato per la programmazione di agenti autonomi;
+- Cartago: che permette di programmare artefatti;
+- Moise: per la programmazione di organizzazioni multi-agente.
+
+L'inclusione di queste tre tecnologie permette di create un ambiente in cui gli agenti possono esistere in modo molto flessibile, definendo quale comportamento un agente deve tenere, a quali informazioni può accedere e il modo in cui può interagire all'occorrenza con altri agenti.
+
+I dettagli di design su come questo framework è stato utilizzato per sviluppare il servizio Greenhouse core verranno dati nella sezione specifica.
 
 ## JaCaMo Plug-In
 Al fine di riuscire a lavorare al meglio con JaCaMo è stato necessario l'utilizzo del plug-in disponibile per __Eclipse IDE__.  
