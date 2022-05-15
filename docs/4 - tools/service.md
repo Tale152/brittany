@@ -49,6 +49,25 @@ Per natura dell’event loop, Node è single-threaded, ma è possibile, su necce
 <p align="center">Logo di Node.js</p>
 </div>
 
+### Express
+Express è un popolare framework in ambiente Node utilizzato per la realizzazione di server.  
+Il framework fornisce semplici meccanismi per:
+
+- Realizzare handlers per la gestione di tutti i tipi di richieste HTTP su diverse route
+
+- Impostare parametri comuni di esecuzione (es: porta, cors policies, ecc...)
+
+- Creare middleware da concatenare all'interno della pipeline per la gestione delle richieste
+
+Il successo di questo framework è da attribuirsi alla semplicità di utilizzo, permettendo di realizzare server in poco tempo.  
+
+Express utilizza un approccio minimale, fornendo solo gli strumenti essenziali per la gestione di un progetto, ottenendo un framework relativamente leggero; la popolarità ottenuta negli anni ha portato alla realizzazione di un grande numero di moduli aggiuntivi facilmente integrabili che espandono radicalmente le potenzialità di Express dipendentemente dalle necessità del singolo progetto.
+
+<div align="center">
+<img src="https://expressjs.com/images/express-facebook-share.png" width="300px" height="100px" alt="Express logo">
+<p align="center">Logo di Express</p>
+</div>
+
 ### MongoDB
 MongoDB è un DBMS NoSQL, cioè non utilizza un meccanismo di persistenza relazionale come un tradizionale SQL.
 Il modello NoSQL non è unico e può dunque utilizzare varie strutture dati per sostiturire le tabelle con
