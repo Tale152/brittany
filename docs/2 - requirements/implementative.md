@@ -45,16 +45,17 @@ Il sistema è diviso in sottoprogetti. Verranno brevemente illustrati i requisit
 - __Gestore di librerie esterne e configurazioni aggiuntive__: [npm](https://www.npmjs.com/);
 - __Linguaggio utilizzato__: Javascript;
 - __IDE utilizzato/utilizzabile__: Visual Studio Code, WebStorm;
-- __Testing__: [supertest](https://www.npmjs.com/package/supertest)
-- __Framework utilizzato__: [Express.js](https://expressjs.com/it/)
+- __Testing__: [Jest](https://jestjs.io/), [SuperTest](https://www.npmjs.com/package/supertest)
+- __Framework utilizzati__: [Node.js](https://nodejs.org/en/), [Express.js](https://expressjs.com/it/)
 - __Librerie__:
   - [Mongoose](https://mongoosejs.com/): utilizzata per l'interazione con le basi di dati.
 
 ### Web Client
 - __Gestore di librerie esterne e configurazioni aggiuntive__: [npm](https://www.npmjs.com/);
 - __Linguaggio utilizzato__: Javascript;
-- __Framework utilizzato__: [React.js](https://it.reactjs.org/)
+- __Framework utilizzati__: [Node.js](https://nodejs.org/en/), [React.js](https://it.reactjs.org/)
 - __IDE utilizzato/utilizzabile__: Visual Studio Code, WebStorm;
+- __Testing__: [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - __Librerie__:
   - [Bootstrap](https://getbootstrap.com/): utilizzata per semplificare la creazione dell'interfaccia utente.
   - [Redux](https://redux.js.org/): un contenitore di stato del sistema, utile per semplificare il processo più spinoso offerto da React.
