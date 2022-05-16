@@ -1,0 +1,4 @@
+Dockerfile
+gradle/*
+*gradle*
+.pio/*
