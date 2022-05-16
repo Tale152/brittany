@@ -13,7 +13,7 @@ The machine running Greenhouse Core and the ESP8266 __must__ be connected on the
 ## &#9658; __Method 1__: Use deployed servers and client
 This method will use the services and the [client](https://brittany-web-client.herokuapp.com/) already deployed online, freeing you from the necessity of also running them locally.
 
-### __Step 0__: Software required
+### __Step 0__: Required Software
 - [Docker](https://docs.docker.com/get-docker/)
 
 Windows and MacOS users will also require [PlatformIO](https://platformio.org/) to be able to run Edge since, at the time of writing, Docker can't access USB ports on those operative systems.  
@@ -31,7 +31,7 @@ Using _-e_ you'll need to provide four parameters:
 - __ENVIRONMENT_NAME__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
 - __ENVIRONMENT_PASSWORD__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
 
-### __Step 2__: Run Edge
+### __Step 2__: Run Edge (linux only, Windows and MacOS here)
 Once you have connected an ESP8266 to your machine, run the following command to flash Edge on the chip:
 ```
 docker run --device=<PATH-TO-ESP8266> -e BRITTANY_WIFI_SSID=<WIFI-SSID-HERE> -e BRITTANY_WIFI_PSWD=<WIFI-PASSWORD-HERE> --rm --name edge alessandrotalmi/brittany-edge:latest
@@ -45,43 +45,50 @@ You'll need to provide the following parameters:
 Once the flashing process ends the ESP8266 will start executing Edge each time it is turned on.
 
 ## &#9658; __Method 2__: Run everything locally using images from Docker Hub
+This method will use the dev images (from DockerHub) of every sub-project, requiring you to also run the Services locally.  
+It is important to use the dev image also on Greenhouse Core (not using the step from Method 1) since it uses the correct connection string to connect to the local instances of the services.
 
-### First run
-TODO in respective folder
-```
-.\gradlew authDevUp
-.\gradlew settingsDevUp
-.\gradlew settingsDevUp
-.\gradlew clientDevUp
-```
-Or
+### __Step 0__: Required software
+- [Docker](https://docs.docker.com/get-docker/)
+- [Gradle](https://gradle.org/install/)
+- [MongoDB](https://www.mongodb.com/docs/guides/server/install/)
+
+Windows and MacOS users will also require [PlatformIO](https://platformio.org/) to be able to run Edge since, at the time of writing, Docker can't access USB ports on those operative systems.  
+See _Run Edge_ on Method 3 to read instruction on how to do that.
+
+### __Step 1__: Run Services and Client
+Place yourself in the root directory of the project and run this command:
 ```
 .\gradlew webUp
 ```
-TODO then setup account, greenhouse, environment and settings
+This Gradle task will run in one shot all the Services and the web client (that you can use at http://localhost:3000/), downloading the dev image from DockerHub.
+
+### __Step 2__: Run Greenhouse Core
+After setting up the environment using the Web Client, place yourself in the root of the project and run this command:
 ```
 .\gradlew coreDevUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
 ```
-TODO stuff works yee
+This task will run Greenhouse Core downloading the dev image from DockerHub.  
+Using _-P_ (_yes, without a white space after_) you'll need to provide four parameters:
+- __organization__: the name of your organization, previously registered using the client
+- __greenhouse__: the name of the greenhouse, previously created using the client, that contains the environment that Greenhouse Core will coordinate
+- __environment__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
+- __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
 
-### Second run and onward
 
-```
-.\gradlew systemUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
-```
+### __Step 3__: Run Edge (linux only, Windows and MacOS here)
+TODO 
 
-### Shut down
+### __Step 4__: Shut down Brittany
+In order to stop the execution of the Docker containers of the Services, the Web Client and Greenhouse Core, place yourself in the root of the project and run the following command:
 ```
 .\gradlew systemDown
 ```
 
-### Log
+### __Step 1 and 2 after environment setup__
+Once the environment is created the first time using the Web Client, you can execute step 1 and 2 in one shot using this command:
 ```
-.\gradlew authDevLog
-.\gradlew settingsDevLog
-.\gradlew persistenceDevLog
-.\gradlew coreDevLog
-.\gradlew clientDevLog
+.\gradlew systemUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
 ```
 
 ## &#9658; __Method 3__: Run everything locally compiling Docker images
