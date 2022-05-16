@@ -1,5 +1,5 @@
 ---
-title: Environment
+title: Architettura Environment
 parent: Greenhouse Core
 grand_parent: Design
 nav_order: 2
