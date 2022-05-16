@@ -1,4 +1,4 @@
-name: Test edge
+name: Edge CI
 
 on:
   push:
@@ -40,3 +40,18 @@ jobs:
       with:
         coverage-file: edge/filtered_lcov.info
         minimum-coverage: 90
+  deploy-dev-image:
+    needs: build
+    if: github.ref == 'refs/heads/edge'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./edge
+    steps:
+        - uses: actions/checkout@v1
+        - name: Login to DockerHub Registry
+          run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        - name: Build the latest Docker image
+          run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/brittany-edge-dev:latest
+        - name: Push the latest Docker image
+          run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/brittany-edge-dev:latest
