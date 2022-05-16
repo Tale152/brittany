@@ -17,7 +17,7 @@ This method will use the services and the [client](https://brittany-web-client.h
 - [Docker](https://docs.docker.com/get-docker/)
 
 Windows and MacOS users will also require [PlatformIO](https://platformio.org/) to be able to run Edge since, at the time of writing, Docker can't access USB ports on those operative systems.  
-See _Run Edge_ on Method 3 to read instruction on how to do that.
+See _Run Edge_ on Method 4 to read instruction on how to do that.
 
 ### __Step 1__: Run Greenhouse Core
 Run the following command to execute on your machine Greenhouse Core:
@@ -54,7 +54,7 @@ It is important to use the dev image also on Greenhouse Core (not using the step
 - [MongoDB](https://www.mongodb.com/docs/guides/server/install/)
 
 Windows and MacOS users will also require [PlatformIO](https://platformio.org/) to be able to run Edge since, at the time of writing, Docker can't access USB ports on those operative systems.  
-See _Run Edge_ on Method 3 to read instruction on how to do that.
+See _Run Edge_ on Method 4 to read instruction on how to do that.
 
 ### __Step 1__: Run Services and Client
 Place yourself in the root directory of the project and run this command:
@@ -92,18 +92,47 @@ Once the environment is created the first time using the Web Client, you can exe
 ```
 
 ## &#9658; __Method 3__: Run everything locally compiling Docker images
-TODO go in each folder, first services, then client
+Here no image coming from DockerHub will be used; instead, every Docker image will be compiled and executed locally.
+
+### __Step 0__: Required software
+- [Docker](https://docs.docker.com/get-docker/)
+- [Gradle](https://gradle.org/install/)
+- [MongoDB](https://www.mongodb.com/docs/guides/server/install/)
+
+Windows and MacOS users will also require [PlatformIO](https://platformio.org/) to be able to run Edge since, at the time of writing, Docker can't access USB ports on those operative systems.  
+See _Run Edge_ on Method 4 to read instruction on how to do that.
+
+### __Step 1__: Run Services
+Place yourself on each of the Services folders (in no particolar order) and run the following command:
 ```
 .\gradlew dockerUp
 ```
-TODO then set settings and launch core
+
+### __Step 2__: Run Client
+After having executed Step 1 _for each service_, place yourself in the Web Client directory and run the same command as step 1:
+```
+.\gradlew dockerUp
+```
+You can use the client at http://localhost:3000/
+
+### __Step 4__: Run Greenhouse Core
+After havin setup the environment using the Web Client, place yourself in the Greenhouse Core directory and run the following command:
 ```
 .\gradlew dockerUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
-```
-### Log
+``` 
+Using _-P_ (_yes, without a white space after_) you'll need to provide four parameters:
+- __organization__: the name of your organization, previously registered using the client
+- __greenhouse__: the name of the greenhouse, previously created using the client, that contains the environment that Greenhouse Core will coordinate
+- __environment__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
+- __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
 
+### __Step 5__: Run Edge
+TODO
+
+### __Step 6__: Shut down Brittany
+From the root directory of the project run the following command to stop the execution of the Services, the Web Client and Greenhouse Core:
 ```
-.\gradlew dockerLog
+.\gradlew dockerDown
 ```
 
 ## &#9658; __Method 4__: Run everything locally without Docker
@@ -127,11 +156,6 @@ TODO
 
 # Deployment
 TODO
-
-# Required tools for running the project
-## Method 1
-## Method 2 and 3
-## Method 4 and testing
 
 # Licence
 TODO
