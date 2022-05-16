@@ -1,8 +1,8 @@
 ---
 title: Architettura Brittany Workspace
-parent: Architettura Environment
+parent: Greenhouse Core
 grand_parent: Design
-nav_order: 1
+nav_order: 3
 ---
 
 # Brittany Workspace

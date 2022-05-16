@@ -1,6 +1,6 @@
 ---
 title: Architettura Actuator Workspace
-parent: Architettura Environment
+parent: Greenhouse Core
 grand_parent: Design
-nav_order: 2
+nav_order: 4
 ---

@@ -1,6 +1,6 @@
 ---
 title: Architettura Services Workspace
-parent: Architettura Environment
+parent: Greenhouse Core
 grand_parent: Design
-nav_order: 3
+nav_order: 5
 ---

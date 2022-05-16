@@ -3,7 +3,6 @@ title: Architettura Environment
 parent: Greenhouse Core
 grand_parent: Design
 nav_order: 2
-has_children: true
 ---
 
 # Architettura generale Environment
