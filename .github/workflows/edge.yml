@@ -1,4 +1,4 @@
-name: Test edge
+name: Edge CI
 
 on:
   push:
