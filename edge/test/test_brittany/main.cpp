@@ -49,6 +49,10 @@ void test_edge() {
     test_ThingDescriptor(); //ThingDescriptorTest
 }
 
+void f () {
+    TEST_ASSERT_TRUE(true);
+}
+
 int main() {
     UNITY_BEGIN();
     test_hw();
