@@ -46,8 +46,8 @@ All'interno di questa cartella vi è il codice centralizzato che referenzia i pu
 
 ## test
 <div align="center">
-<img src="https://images2.imgbox.com/06/fb/4EFhCC4F_o.png" alt="Diagramma delle classi - test - Auth Service">
-<p align="center"> Diagramma delle classi - test - Auth Service </p>
+<img src="https://images2.imgbox.com/06/fb/4EFhCC4F_o.png" alt="Diagramma dei package - test - Auth Service">
+<p align="center"> Diagramma dei package - test - Auth Service </p>
 </div>
 
 La cartella test mantiene un'organizzazione in linea con la cartella routes precedentemente affrontata, in quanto l'obiettivo dei test nel sistema è per l'appunto verificare il funzionamenti di tali routes.  
