@@ -51,7 +51,6 @@ It is important to use the dev image also on Greenhouse Core (not using the step
 ### __Step 0__: Required software
 - [Docker](https://docs.docker.com/get-docker/)
 - [Gradle](https://gradle.org/install/)
-- [MongoDB](https://www.mongodb.com/docs/guides/server/install/)
 
 Windows and MacOS users will also require [PlatformIO](https://platformio.org/) to be able to run Edge since, at the time of writing, Docker can't access USB ports on those operative systems.  
 See [_Run Edge (all operative systems)_](#step-4-run-edge-all-operative-systems) on Method 4 to read instruction on how to do that.
@@ -76,8 +75,16 @@ Using _-P_ (_yes, without a white space after_) you'll need to provide four para
 - __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
 
 
-### __Step 3__: Run Edge
-TODO 
+### __Step 3__: Run Edge(linux only, Windows and MacOS [here](#step-4-run-edge-all-operative-systems))
+Once you have connected an ESP8266 to your machine, run the following command to flash Edge on the chip:
+```
+.\gradlew edgeDevUp -PpathToESP8266=<PATH-TO-ESP8266> -Pssid=<WIFI-SSID-HERE> -Ppassword=<WIFI-PASSWORD-HERE>
+```
+This command will download the dev image from DockerHub and execute a container running Edge for the flashing process.  
+You'll need to provide the following parameters:
+- __pathToESP8266__: path to the USB port where ESP8266 is connected (es: /dev/ttyUSB0)
+- __ssid__: SSID of the Wifi to which the ESP8266 will connect to
+- __password__: password of the Wifi to which the ESP8266 will connect to
 
 ### __Step 4__: Shut down Brittany
 In order to stop the execution of the Docker containers of the Services, the Web Client and Greenhouse Core, place yourself in the root of the project and run the following command:
@@ -97,7 +104,6 @@ Here no image coming from DockerHub will be used; instead, every Docker image wi
 ### __Step 0__: Required software
 - [Docker](https://docs.docker.com/get-docker/)
 - [Gradle](https://gradle.org/install/)
-- [MongoDB](https://www.mongodb.com/docs/guides/server/install/)
 
 Windows and MacOS users will also require [PlatformIO](https://platformio.org/) to be able to run Edge since, at the time of writing, Docker can't access USB ports on those operative systems.  
 See [_Run Edge (all operative systems)_](#step-4-run-edge-all-operative-systems) on Method 4 to read instruction on how to do that.
