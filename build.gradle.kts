@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 tasks.register<Exec>("authDevUp"){
     commandLine("docker-compose", "-f", "auth-service-dev-compose.yml", "-p", "auth-service-dev", "up", "-d")
 }
@@ -59,6 +61,33 @@ tasks.register<Exec>("coreDevLog"){
 
 tasks.register<Exec>("coreDevDown"){
     commandLine("docker", "stop", "greenhouse-core-dev")
+}
+
+tasks.register<Exec>("edgeDevUp"){
+    if (!(Os.isFamily(Os.FAMILY_WINDOWS) || Os.isFamily(Os.FAMILY_MAC))) {
+        if(project.hasProperty("pathToESP8266") && project.hasProperty("ssid") && project.hasProperty("password")) {
+            val edgeSsid = "BRITTANY_WIFI_SSID=" + project.findProperty("ssid")
+            val edgePassword = "BRITTANY_WIFI_PSWD=" + project.findProperty("password")
+            commandLine("docker", "run",
+                        "--device=" + project.findProperty("pathToESP8266"),
+                        "-e", edgeSsid,
+                        "-e", edgePassword,
+                        "-d", "--rm", "--name", "edge-dev",
+                        "alessandrotalmi/brittany-edge-dev:latest")
+        } else {
+            throw IllegalArgumentException("Missing parameters")
+        }
+    } else {
+        throw IllegalArgumentException("Cannot run this task on Windows or MacOS")
+    }
+}
+
+tasks.register<Exec>("edgeDevLog"){
+    commandLine("docker", "logs", "-f", "edge-dev")
+}
+
+tasks.register<Exec>("edgeDevDown"){
+    commandLine("docker", "stop", "edge-dev")
 }
 
 tasks.register<Exec>("clientDevUp"){
