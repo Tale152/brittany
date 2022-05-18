@@ -38,3 +38,28 @@ tasks.register<Exec>("upload") {
         }
     }
 }
+
+tasks.register<Exec>("buildDockerImage"){
+    commandLine("docker", "image", "build", ".", "-t", "edge")
+}
+
+tasks.register<Exec>("dockerUp"){
+    dependsOn("buildDockerImage")
+    if (project.hasProperty("pathToESP8266") && project.hasProperty("ssid") && project.hasProperty("password")) {
+        val edgeSsid = "BRITTANY_WIFI_SSID=" + project.findProperty("ssid")
+        val edgePassword = "BRITTANY_WIFI_PSWD=" + project.findProperty("password")
+        commandLine("docker", "container", "run",
+                    "--device=" + project.findProperty("pathToESP8266"),
+                    "-e", edgeSsid,
+                    "-e", edgePassword,
+                    "-d", "--rm", "--name", "edge-container", "edge")
+    }
+}
+
+tasks.register<Exec>("dockerDown"){
+    commandLine("docker", "container", "stop", "edge-container")
+}
+
+tasks.register<Exec>("dockerLog"){
+    commandLine("docker", "logs", "-f", "edge-container")
+}
