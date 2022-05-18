@@ -3,6 +3,10 @@ TODO intro
 
 # Table of contents
 - [How to launch the project](#how-to-launch-the-project)
+    - [Method 1: Use production Services, Client and images](#method-1-use-production-services-client-and-images)
+    - [Method 2: Run everything locally using dev images from Docker Hub](#method-2-run-everything-locally-using-images-from-docker-hub)
+    - [Method 3: Run everything locally compiling Docker images](#method-3-run-everything-locally-compiling-docker-images)
+    - [Method 4: Run everything locally without Docker](#method-4-run-everything-locally-without-docker)
 - [Local testing](#continuous-integration)
 - [Continuous integration](#continuous-integration)
 - [Deployment](#deployment)
@@ -17,8 +21,9 @@ All the methodologies require the following __hardware__:
 
 The machine running Greenhouse Core and the ESP8266 __must__ be connected on the same LAN.
 
-## &#9658; __Method 1__: Use deployed servers and client
-This method will use the services and the [client](https://brittany-web-client.herokuapp.com/) already deployed online, freeing you from the necessity of also running them locally.
+## __Method 1__: Use production Services, Client and images
+This method will use the services and the [client](https://brittany-web-client.herokuapp.com/) already deployed online, freeing you from the necessity of also running them locally.  
+The production Docker images for Greenhouse Core and Edge will also be used.
 
 ### __Step 0__: Required Software
 - [Docker](https://docs.docker.com/get-docker/)
@@ -51,7 +56,7 @@ You'll need to provide the following parameters:
 
 Once the flashing process ends the ESP8266 will start executing Edge each time it is turned on.
 
-## &#9658; __Method 2__: Run everything locally using images from Docker Hub
+## __Method 2__: Run everything locally using dev images from Docker Hub
 This method will use the dev images (from DockerHub) of every sub-project, requiring you to also run the Services locally.  
 It is important to use the dev image also on Greenhouse Core (not using the step from Method 1) since it uses the correct connection string to connect to the local instances of the services.
 
@@ -105,7 +110,7 @@ Once the environment is created the first time using the Web Client, you can exe
 .\gradlew systemUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
 ```
 
-## &#9658; __Method 3__: Run everything locally compiling Docker images
+## __Method 3__: Run everything locally compiling Docker images
 Here no image coming from DockerHub will be used; instead, every Docker image will be compiled and executed locally.
 
 ### __Step 0__: Required software
@@ -156,7 +161,7 @@ From the root directory of the project run the following command to stop the exe
 .\gradlew dockerDown
 ```
 
-## &#9658; __Method 4__: Run everything locally without Docker
+## __Method 4__: Run everything locally without Docker
 This final method will run everything locally without using Docker; this resut in having to install a lot of software to run each sub-project.
 
 ### __Step 0__: Required software
@@ -194,7 +199,7 @@ You'll need to provide four parameters:
 TODO
 
 # Local testing
-To execute tests locally you will need on the running machine all the software listed at step 0 in [Method 4](#9658-method-4-run-everything-locally-without-docker).  
+To execute tests locally you will need on the running machine all the software listed at step 0 in [Method 4](#method-4-run-everything-locally-without-docker).  
 
 You can launch this command from the directory of a project (to test only that project) or run the same command from the root directory to test sequentially all the systems.
 ```
