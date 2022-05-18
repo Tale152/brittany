@@ -129,7 +129,7 @@ After having executed Step 1 _for each service_, place yourself in the Web Clien
 You can use the client at http://localhost:3000/
 
 ### __Step 3__: Run Greenhouse Core
-After havin setup the environment using the Web Client, place yourself in the Greenhouse Core directory and run the following command:
+After having setup the environment using the Web Client, place yourself in the Greenhouse Core directory and run the following command:
 ```
 .\gradlew dockerUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
 ``` 
@@ -168,22 +168,27 @@ This final method will run everything locally without using Docker; this resut i
 - [PlatformIO](https://platformio.org/)
 
 ### __Step 1__: Run Services
-TODO
+Make sure MongoDB is running on your machine and then place yourself on each of the Services folders (in no particolar order) and run the following command:
 ```
 .\gradlew run
 ```
-
+This will trigger the resolution of dependencies by Npm, followed by compilation and subsequent execution.
 ### __Step 2__: Run Web Client
-TODO
+Similarly to the previous step, place yourself in the Web Client directory and run the same command as before to start the Web Client:
 ```
 .\gradlew run
 ```
 
 ### __Step 3__: Run Greenhouse Core
-TODO
+After having setup the environment using the Web Client, place yourself in the Greenhouse Core directory and run the following command to launch a JVM running the program:
 ```
 .\gradlew run -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
 ```
+You'll need to provide four parameters:
+- __organization__: the name of your organization, previously registered using the client
+- __greenhouse__: the name of the greenhouse, previously created using the client, that contains the environment that Greenhouse Core will coordinate
+- __environment__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
+- __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
 
 ### __Step 4__: Run Edge (all operative systems)
 TODO
