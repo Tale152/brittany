@@ -1,6 +1,13 @@
 # Brittany
 TODO intro
 
+# Table of contents
+- [How to launch the project](#how-to-launch-the-project)
+- [Local testing](#continuous-integration)
+- [Continuous integration](#continuous-integration)
+- [Deployment](#deployment)
+- [Licence](#licence)
+
 # How to launch the project
 Here will be listed all ways to launch the project, starting from the simplest way up to more complex ones.  
 
