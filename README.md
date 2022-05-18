@@ -194,7 +194,14 @@ You'll need to provide four parameters:
 TODO
 
 # Local testing
-TODO
+To execute tests locally you will need on the running machine all the software listed at step 0 in [Method 4](#9658-method-4-run-everything-locally-without-docker).  
+
+You can launch this command from the directory of a project (to test only that project) or run the same command from the root directory to test sequentially all the systems.
+```
+.\gradlew test
+```
+
+Since the tests of a particular system is not influenced from the other systems, you can also place yourself on the root directory and launch the same command with the flag _--parallel_ to test all the systems in parallel.
 ```
 .\gradlew test --parallel
 ```
