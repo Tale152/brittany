@@ -82,7 +82,7 @@ Using _-P_ (_yes, without a white space after_) you'll need to provide four para
 - __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
 
 
-### __Step 3__: Run Edge(linux only, Windows and MacOS [here](#step-4-run-edge-all-operative-systems))
+### __Step 3__: Run Edge (linux only, Windows and MacOS [here](#step-4-run-edge-all-operative-systems))
 Once you have connected an ESP8266 to your machine, run the following command to flash Edge on the chip:
 ```
 .\gradlew edgeDevUp -PpathToESP8266=<PATH-TO-ESP8266> -Pssid=<WIFI-SSID-HERE> -Ppassword=<WIFI-PASSWORD-HERE>
@@ -128,7 +128,7 @@ After having executed Step 1 _for each service_, place yourself in the Web Clien
 ```
 You can use the client at http://localhost:3000/
 
-### __Step 3__: Run Greenhouse Core (linux only, Windows and MacOS [here](#step-4-run-edge-all-operative-systems))
+### __Step 3__: Run Greenhouse Core
 After havin setup the environment using the Web Client, place yourself in the Greenhouse Core directory and run the following command:
 ```
 .\gradlew dockerUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
@@ -139,8 +139,16 @@ Using _-P_ (_yes, without a white space after_) you'll need to provide four para
 - __environment__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
 - __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
 
-### __Step 4__: Run Edge
-TODO
+### __Step 4__: Run Edge (linux only, Windows and MacOS [here](#step-4-run-edge-all-operative-systems))
+Once you have connected an ESP8266 to your machine, place yourself in the Edge directory and run the following command to flash Edge on the chip:
+```
+.\gradlew dockerUp -PpathToESP8266=<PATH-TO-ESP8266> -Pssid=<WIFI-SSID-HERE> -Ppassword=<WIFI-PASSWORD-HERE>
+```
+This command will compile an image from the Dockerfile of the project and execute a container running Edge for the flashing process.  
+You'll need to provide the following parameters:
+- __pathToESP8266__: path to the USB port where ESP8266 is connected (es: /dev/ttyUSB0)
+- __ssid__: SSID of the Wifi to which the ESP8266 will connect to
+- __password__: password of the Wifi to which the ESP8266 will connect to
 
 ### __Step 5__: Shut down Brittany
 From the root directory of the project run the following command to stop the execution of the Services, the Web Client and Greenhouse Core:
