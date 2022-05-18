@@ -1,7 +1,6 @@
-# Brittany
-TODO intro
-
-# Table of contents
+# Brittany - Table of contents
+- [What is Brittany](#what-is-brittany)
+- [The project](#the-project)
 - [How to launch the project](#how-to-launch-the-project)
     - [Method 1: Use production Services, Client and images](#method-1-use-production-services-client-and-images)
     - [Method 2: Run everything locally using dev images from Docker Hub](#method-2-run-everything-locally-using-images-from-docker-hub)
@@ -11,6 +10,27 @@ TODO intro
 - [Continuous integration](#continuous-integration)
 - [Deployment](#deployment)
 - [Licence](#licence)
+
+# What is Brittany
+Brittany is a software as a service aimed to simplify and automate the management of greenhouses with the execution (inside of a private network) of a agent-driven coordinator; said coordinator uses sensors and actuators dinamically added inside the same private network allowing to easily scale the coordinator's capabilities to act in the real world.
+
+Using a Web Client the final user can, using any network, access the data recorded by the coordinator and also set the coordinator's parameters.
+
+There is also a cloud of microservices (with whom coordinators and clients communicate) created to provide authentication and persistence in the Brittany ecosystem.
+
+# The project
+This project was created for a combination of two academic courses for the Master degree in [Engineering and Computer Science](https://corsi.unibo.it/2cycle/ComputerScienceEngineering) at University of Bologna (Cesena department).  
+
+Said academic courses are:
+- [Pervasive Computing](https://www.unibo.it/en/teaching/course-unit-catalogue/course-unit/2021/412647)
+- [Laboratory of Software Systems](https://www.unibo.it/en/teaching/course-unit-catalogue/course-unit/2021/412677)
+
+Using the GitHub Pages section of this repository it is possible to see the [documentation](https://tale152.github.io/brittany/) of this project.
+
+The project idea, engineering and development was made by the FaTaTe team:
+- [Filaseta Angelo](https://github.com/AngeloFilaseta)
+- [Talmi Alessandro](https://github.com/Tale152)
+- [Tronetti Elisa](https://github.com/ElisaTronetti)
 
 # How to launch the project
 Here will be listed all ways to launch the project, starting from the simplest way up to more complex ones.  
