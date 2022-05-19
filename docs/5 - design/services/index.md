@@ -6,7 +6,7 @@ has_children: true
 
 # Services
 
-All interno dell'ecosistema Brittany vi sono tre microservizi nel cloud che vengono contattati dal Web Client e da Greenhouse Core.  
+All' interno dell'ecosistema Brittany vi sono tre microservizi nel cloud che vengono contattati dal Web Client e da Greenhouse Core.  
 
 I tre server HTTP sono seguono una filosofia REST, mantenendo indipendenza tra loro e, in particolar modo, operando in maniera stateless.  
 
