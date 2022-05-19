@@ -250,7 +250,15 @@ The tests are triggered depending on the branch where the push was executed; for
 The actual tests that will be executed are the same that can be performed locally, but the GitHub actions allow to increase the testing power running tests on different setups; for example, each service runs all its tests using a bidimensional matrix for testing on different versions of NodeJs and MongoDB.
 
 # Deployment
-TODO
+Each time a test completed successfully in the GitHub actions a deploy task is triggered, creating a Docker image that gets pushed to Docker Hub at the [alessandrotalmi](https://hub.docker.com/u/alessandrotalmi) profile.  
+
+Two types of images gets deployed:
+- dev image, created after the completion of tests in each branch of every system or in develop
+- production image, created only on push to the branch master
+
+Only Greenhouse Core and Edge have a production image that gets deployed at [alessandrotalmi](https://hub.docker.com/u/alessandrotalmi); on a push to master each Service and the Web Client, instead, gets deployed directly to the Heroku hoisting service.  
+
+The difference in the way the various systems gets deployed is dependent on the fact that Services and Web Client are ment to run on remote servers, while Greenhouse Core and Edge are ment to run on a user machine and an ESP8266 respectively.
 
 # License
 
