@@ -243,7 +243,11 @@ Since the tests of a particular system is not influenced from the other systems,
 ```
 
 # Continuous integration
-TODO
+Using the GitHub actions, the codebase gets tested each time a commit is pushed to this repository.  
+
+The tests are triggered depending on the branch where the push was executed; for example, pushing on the branch auth-service will trigger the tests only for the Auth Service system. This is not the case when pushing to the barnches develop and master, that will trigger the tests for all the systems at once.  
+
+The actual tests that will be executed are the same that can be performed locally, but the GitHub actions allow to increase the testing power running tests on different setups; for example, each service runs all its tests using a bidimensional matrix for testing on different versions of NodeJs and MongoDB.
 
 # Deployment
 TODO
