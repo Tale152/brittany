@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 tasks.register<Exec>("run") {
     commandLine("pio", "run", "-e", "nodemcuv2")
 }
@@ -36,6 +38,8 @@ tasks.register<Exec>("upload") {
         if(userInput != null && userInput >= 0 && userInput < envs.size) {
             commandLine("pio", "run", "-e", envs[userInput], "-t", "upload")
         }
+    } else {
+        throw IllegalArgumentException("Missing parameters")
     }
 }
 
@@ -44,16 +48,23 @@ tasks.register<Exec>("buildDockerImage"){
 }
 
 tasks.register<Exec>("dockerUp"){
-    dependsOn("buildDockerImage")
-    if (project.hasProperty("pathToESP8266") && project.hasProperty("ssid") && project.hasProperty("password")) {
-        val edgeSsid = "BRITTANY_WIFI_SSID=" + project.findProperty("ssid")
-        val edgePassword = "BRITTANY_WIFI_PSWD=" + project.findProperty("password")
-        commandLine("docker", "container", "run",
-                    "--device=" + project.findProperty("pathToESP8266"),
-                    "-e", edgeSsid,
-                    "-e", edgePassword,
-                    "-d", "--rm", "--name", "edge-container", "edge")
+    if (!(Os.isFamily(Os.FAMILY_WINDOWS) || Os.isFamily(Os.FAMILY_MAC))) {
+        dependsOn("buildDockerImage")
+        if (project.hasProperty("pathToESP8266") && project.hasProperty("ssid") && project.hasProperty("password")) {
+            val edgeSsid = "BRITTANY_WIFI_SSID=" + project.findProperty("ssid")
+            val edgePassword = "BRITTANY_WIFI_PSWD=" + project.findProperty("password")
+            commandLine("docker", "container", "run",
+                        "--device=" + project.findProperty("pathToESP8266"),
+                        "-e", edgeSsid,
+                        "-e", edgePassword,
+                        "-d", "--rm", "--name", "edge-container", "edge")
+        } else {
+            throw IllegalArgumentException("Missing parameters")
+        }
+    } else {
+        throw IllegalArgumentException("Cannot run this task on Windows or MacOS")
     }
+
 }
 
 tasks.register<Exec>("dockerDown"){
