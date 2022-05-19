@@ -245,7 +245,7 @@ Since the tests of a particular system is not influenced from the other systems,
 # Continuous integration
 Using the GitHub actions, the codebase gets tested each time a commit is pushed to this repository.  
 
-The tests are triggered depending on the branch where the push was executed; for example, pushing on the branch auth-service will trigger the tests only for the Auth Service system. This is not the case when pushing to the barnches develop and master, that will trigger the tests for all the systems at once.  
+The tests are triggered depending on the branch where the push was executed; for example, pushing on the branch auth-service will trigger the tests only for the Auth Service system. This is not the case when pushing to the branches develop and master, that will trigger the tests for all the systems at once.  
 
 The actual tests that will be executed are the same that can be performed locally, but the GitHub actions allow to increase the testing power running tests on different setups; for example, each service runs all its tests using a bidimensional matrix for testing on different versions of NodeJs and MongoDB.
 
@@ -256,7 +256,7 @@ Two types of images gets deployed:
 - dev image, created after the completion of tests in each branch of every system or in develop
 - production image, created only on push to the branch master
 
-Only Greenhouse Core and Edge have a production image that gets deployed at [alessandrotalmi](https://hub.docker.com/u/alessandrotalmi); on a push to master each Service and the Web Client, instead, gets deployed directly to the Heroku hoisting service.  
+Only Greenhouse Core and Edge have a production image that gets deployed at [alessandrotalmi](https://hub.docker.com/u/alessandrotalmi); on a push to master each Service and the Web Client, instead, gets deployed directly to the Heroku hosting service.  
 
 The difference in the way the various systems gets deployed is dependent on the fact that Services and Web Client are ment to run on remote servers, while Greenhouse Core and Edge are ment to run on a user machine and an ESP8266 respectively.
 
