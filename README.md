@@ -18,6 +18,8 @@ Using a Web Client the final user can, using any network, access the data record
 
 There is also a cloud of microservices (with whom coordinators and clients communicate) created to provide authentication and persistence in the Brittany ecosystem.
 
+The keyword in Brittany's philosophy is _scalability_, aiming to provide a service for the management of a potentially limitless number of greenhouses equipped with dinamically expandable capabilities in a way that is transparent to the end user; said user will only need to obtain a new physical module and connect it to the network of his coordinator.
+
 # The project
 This project was created for a combination of two academic courses for the Master degree in [Engineering and Computer Science](https://corsi.unibo.it/2cycle/ComputerScienceEngineering) at University of Bologna (Cesena department).  
 
