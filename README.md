@@ -1,4 +1,6 @@
 # Brittany
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FTale152%2Fbrittany.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FTale152%2Fbrittany?ref=badge_shield)
+
 TODO intro
 
 # How to launch the project
@@ -94,3 +96,5 @@ TODO
 
 # Licence
 TODO
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FTale152%2Fbrittany.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FTale152%2Fbrittany?ref=badge_large)
