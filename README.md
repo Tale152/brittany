@@ -218,7 +218,16 @@ You'll need to provide four parameters:
 - __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
 
 ### __Step 4__: Run Edge (all operative systems)
-TODO
+Once you have connected an ESP8266 to your machine, place yourself in the Edge directory and run the following command to flash Edge on the chip:
+```
+.\gradlew upload -Pssid=<WIFI-SSID-HERE> -Ppswd=<WIFI-PASSWORD-HERE>
+```
+You'll need to provide the following parameters:
+- __ssid__: SSID of the Wifi to which the ESP8266 will connect to
+- __pswd__: password of the Wifi to which the ESP8266 will connect to
+
+The task will print a list of possible environment. It is required to specify the one to upload by specifying the corresponding number.
+The task will then proceed to build the code and upload it to the ESP8266.
 
 # Local testing
 To execute tests locally you will need on the running machine all the software listed at step 0 in [Method 4](#method-4-run-everything-locally-without-docker).  
