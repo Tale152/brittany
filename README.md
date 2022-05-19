@@ -9,7 +9,7 @@
 - [Local testing](#continuous-integration)
 - [Continuous integration](#continuous-integration)
 - [Deployment](#deployment)
-- [Licence](#licence)
+- [License](#license)
 
 # What is Brittany
 Brittany is a software as a service aimed to simplify and automate the management of greenhouses with the execution (inside of a private network) of a agent-driven coordinator; said coordinator uses sensors and actuators dinamically added inside the same private network allowing to easily scale the coordinator's capabilities to act in the real world.
@@ -239,5 +239,7 @@ TODO
 # Deployment
 TODO
 
-# Licence
-TODO
+# License
+
+This project's source code is licensed under the Apache License Version 2.0.
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FTale152%2Fbrittany.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FTale152%2Fbrittany?ref=badge_large)
