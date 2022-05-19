@@ -33,3 +33,5 @@ In questo modo a partire dalla root del progetto è possibile per esempio lancia
 $ gradle test --parallel
 ```
 In questo modo tutti i task di test dei sottoprogetti verranno lanciati in parallelo, permettendo di effettuare un test dell'intero sistema molto velocemente.
+
+Per avere una visione completa riguardo i task rilevanti all'interno del progetto è possibile leggere la sezione [__How to launch the project__](https://github.com/Tale152/brittany#how-to-launch-the-project) disponibile all'interno del README del repository.
