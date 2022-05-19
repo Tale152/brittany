@@ -241,5 +241,6 @@ TODO
 
 # License
 
-This project's source code is licensed under the Apache License Version 2.0.
+This project's source code is licensed under the Apache License Version 2.0.  
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FTale152%2Fbrittany.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FTale152%2Fbrittany?ref=badge_large)
