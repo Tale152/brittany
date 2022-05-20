@@ -20,6 +20,8 @@ L'unica operazione esposta è denominata __retrieveAuthenticationData__, che si 
 ## SettingsArtifact
 __SettingsArtifact__ si occupa di fornire operazioni che coinvolgono la comunicazione con il __Settings Service__. Nello specifico, l'operazione esposta prende il nome di __getSettings__: questa crea una richiesta HTTP da mandare al __Settings Service__ con lo scopo di recuperare le configurazioni attualmente valide create dall'utente. Questa richiesta va a buon fine solo nel caso in cui sia stato precendentemente recuperato il _token_, necessario perché il sistama venga riconosciuto dal servizio contattato.  
 
-Questo artefatto si occupa della creazione dei due tipi di configurazioni citate in precedenza, che vanno a distiguere le configurazioni che prevendono un valore minimo e massimo stabilito e le configurazioni che devono essere applicate in un certo intervallo di tempo.
+Questo artefatto si occupa della creazione dei due tipi di configurazioni citate in precedenza, che vanno a distiguere le configurazioni che prevendono un valore minimo e massimo e le configurazioni che devono essere applicate in un certo intervallo di tempo.
 
 ## PersistenceArtifact
+__PersistenceArtifact__ è l'artefatto dedicato alla comunicazione con il __Persistence Service__.  
+L'operazione presente in questo artefatto è denominata __uploadPersistence__, che si occupa di inviare al servizio un dato campionato che vuole essere salvato, al fine che l'utente possa consultarlo.   
