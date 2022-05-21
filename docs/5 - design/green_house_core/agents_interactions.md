@@ -43,13 +43,21 @@ Nella sua interezza, la sequenza di messaggi appena descritta viene ripetura reg
 </div>
 
 ## Fase di campionamento
+La fase di campionamento riguarda il comportamento centrale del sistema e coinvolge diversi agenti. Il campionamento viene svolto periodicamente, a intervalli di tempo molto brevi, di modo che il sistema possa monitorare dati aggiornati e compiere azioni nel caso sia ritenuto necessario.  
+
+Il flusso di esecuzione in questo caso viene iniziato dal __samplingCoordinatorAgent__: quest'ultimo richiede ad un __samplingAgent__ di occuparsi dell'effettivo recupero dei dati. Al fine di ottenere i nuovi dati, __samplingAgent__ manda una richiesta a __Edge__, che può essere effettuata grazie all'uso dei Thing Descriptor. __Edge__ restituisce quindi i dati, e __samplingAgent__ li consegna al __samplingCoordinatorAgent__ per mezzo del messaggio chiamato _checkSamples_.  
+Una volta ottenuta la media dei nuovi dati campionati, viene verificato se la differenza tra gli ultimi dati e quelli appena recuperati supera un certo delta: nel caso in cui sia così, allora è previsto che tali dati vengano resi persistenti. Per fare in modo che questo avvengo, __samplingCoordinatorAgent__ manda un messaggio chiamato _uploadPersistence_ a __persistenceAgent__. Questo agente si occupa di mandare una HTTP Post a __Persistence Service__, effettuando così la richiesta che tali dati campionati vengano salvati sul database.  
+Un altro flusso di messaggi opzionale è quello che viene eseguito nel caso in cui la media dei dati campionati non rientri tra il valore minimo e massimo delle configurazioni attuali. Se ciò avviene, allora è richiesto che uno o più attuatori vengano azionati perché tali dati possano poi tornare nell'intervallo di valori previsto. Per fare ciò __samplingCoordinatorAgent__, manda il messaggio _actuate_ a __sampleBasedActuatorAgent__, il quale, per mezzo dei Thing Descriptor, potrà comunicare con __Edge__ per fare in modo che dei componenti fisici svolgano determinate azioni.
 
 <div align="center">
 <img src="https://images2.imgbox.com/14/38/8T2EqfYm_o.png" alt="Sequence diagram - sampling">
 <p align="center">Diagramma di Sequenza - Campionamento</p>
 </div>
 
+## Fase di attuazione a tempo
+
+
 <div align="center">
-<img src="https://images2.imgbox.com/4b/67/ceBxFAom_o.png" alt="Sequence diagram - time based settings check">
-<p align="center">Diagramma di Sequenza - Gestione configurazioni a tempo</p>
+<img src="https://images2.imgbox.com/4b/67/ceBxFAom_o.png" alt="Sequence diagram - time based actuation">
+<p align="center">Diagramma di Sequenza - Attuazione a tempo</p>
 </div>
