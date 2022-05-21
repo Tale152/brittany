@@ -55,7 +55,12 @@ Un altro flusso di messaggi opzionale è quello che viene eseguito nel caso in c
 </div>
 
 ## Fase di attuazione a tempo
+Nella fase precedente è stato identificato in quale caso è previsto che uno o più attuatori performino un'azione. Questo si basava però sui dati campionati.  
+Oltre ad un'attuazione basata sui dati campionati, esiste anche un'attuazione basata sul tempo. Esistono infatti delle configurazioni che prevedono un certo comportamento degli attuatori in base alla fascia oraria.  
+Tale esigenza non viene gestita nella fase precedente, ma __timeBasedActuatorAgent__ ha il compito di farlo.  
 
+Come si vede nel diagramma di sequenza proposto sotto, __timeBasedActuatorAgent__ invia un messaggio a sé stesso, ovvero _checkSettings_. Questo va a controllare in base alle configurazioni quali azioni deve svolgere ogni attuatore, e utilizzando le informazioni nel Thing Descriptor, viene mandato a __Edge__ l'azione che deve essere eseguita.  
+Questo controllo appena descritto avviene periodicamente, di modo da intercettare velocemente il momento effettivo in cui un certo attuatore deve essere acceso o spento.
 
 <div align="center">
 <img src="https://images2.imgbox.com/4b/67/ceBxFAom_o.png" alt="Sequence diagram - time based actuation">
