@@ -83,6 +83,7 @@ Ogni componente è poi suddiviso in:
   
 ##### brittany-concrete
 
+<div>
 <img src="https://images2.imgbox.com/7f/93/md5iN7DL_o.png" alt="Package diagram - brittany-concrete">
 <p align="center">Diagramma dei Package - brittany-concrete</p>
 </div>
@@ -98,5 +99,5 @@ Si arriva dunque alle foglie, che anche in questo caso sono:
 ### test
 Anche per i test vi sono due cartelle principali:
 
-- _brittany_: I test all'interno di questa cartella possono venir eseguiti su qualunque sistema operativo desktop. Viene principalmente testato il funzionamento dell'architettura utilizzando componenti di mock.
-- _brittany-concrete_: I test all'interno di questa cartella possono essere eseguiti solo se caricati su un ESP8266. Servono a fare il testing degli effettivi componenti hardware.
+- _test_brittany_: I test all'interno di questa cartella possono venir eseguiti su qualunque sistema operativo desktop. Viene principalmente testato il funzionamento dell'architettura utilizzando componenti di mock.
+- _test_brittany-concrete_: I test all'interno di questa cartella possono essere eseguiti solo se caricati su un ESP8266. Servono a fare il testing degli effettivi componenti hardware.
