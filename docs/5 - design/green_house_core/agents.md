@@ -30,11 +30,18 @@ Al fine di adempiere al suo scopo, il __setupAgent__ utilizza operazioni present
 
 Questo agente ha un _iniatial goal_, che viene utilizzato per iniziare il suo flusso di esecuzione nel momento in cui l'agente è stato creato.  
 L'_initial goal_ citato prende il nome di _authentication_, e permette di andare a chiamare l'operazione _retrieveAuthenticationData_ esposta dall'__AuthenticationArtifact__ al fine di autenticarsi con l'__Auth Service__.  
-Una volta ottenuto il _token_, il relativo _plan_ viene azionato, il quale va a richiamara l'operazione __getSettings__ presente nel __SettingsArtifact__: questa piano ha l'obiettivo di andare a recuperare le configurazioni valide e di iniziare un ciclo di richieste, al fine di aggiornare le configurazioni nel caso in cui avvengano dei cambiamenti. Per iniaziare il ciclo appena citato, viene utilizzato il piano _wait_, il quale richiama _updateSettings_ ogni 20 secondi. Il piano _updateSettings_ recupera il _token_ presente nella _Belief Base_ dell'agente, chiama nuovamente _getSettings_ per recuperare le configurazioni e termina ripetendo la chiamata a _wait_, creando quindi il ciclo.  
+Una volta ottenuto il _token_, il relativo _plan_ viene azionato, il quale va a richiamara l'operazione _getSettings_ presente nel __SettingsArtifact__: questa piano ha l'obiettivo di andare a recuperare le configurazioni valide e di iniziare un ciclo di richieste, al fine di aggiornare le configurazioni nel caso in cui avvengano dei cambiamenti. Per iniaziare il ciclo appena citato, viene utilizzato il piano _wait_, il quale richiama _updateSettings_ ogni 20 secondi. Il piano _updateSettings_ recupera il _token_ presente nella _Belief Base_ dell'agente, chiama nuovamente _getSettings_ per recuperare le configurazioni e termina ripetendo la chiamata a _wait_, creando quindi il ciclo.  
 
 Infine, ogni volta che le configurazioni vengono recuperate, viene scatenato un altro _plan_, ovvero _settings_, che chiama l'operazione _shareSettings_ presente nel __CommonArtifact__, la quale ha il compito di condividere con gli altri agenti le configurazioni trovate.
 
 ### discoverComponentsAgent
+Il __discoverComponentsAgent__ viene utilizzato per scoprire se sulla stessa rete LAN del sistema multi-agente sono presenti degli __Edge__ con i quali comunicare.  
+
+Per fare questo, dopo la sua creazione l'agente inizia a cercare di adempiere al suo scopo, stabilito tramite l'_initial goal_ _discover_. Questo porta alla chiamata dell'operazione _discoverComponents_, la quale si trova nel __DiscoverComponentsArtifact__. Questa operazione itera su tutti gli indirizzi della rete locale in cui si trova il sistema, ricercando componenti che siano in grado di restituire un Thing Descriptor valido.  
+Come detto in precedenza, un requisito del sistema multi-agente è quello di essere in grado di aggiungere dinamicamente nuovi __Edge__ connessi; per questa ragione, una volta terminata l'operazione di ricerca, tramite l'uso del piano _wait_, si attendono 20 secondi, e poi il piano _discover_ viene nuovamente chiamato. Questo crea un ciclo che permette al sistema di aggiornarsi nel caso in cui sia necessario.
+
+Quando un __Edge__ viene identificato tramite la ricerca su tutti gli indirizzi locali, allora il Thing Descriptor restituito viene analizzato: tramite il TD infatti è possibile estrarre tutti i componenti fisici, che siano attuatori o sensori, con i quali il sistema multi-agente può comunicare, e quali sono le azioni e le proprietà che possono essere richiamate.  
+Una volta ottenute tutte le informazioni necessarie, utilizzando le operazioni nel __CommonArtifact__, queste verranno condivise a tutti gli agenti interessati; la chiamata delle operazione nel __CommonArtifact__  viene fatta utilizzando il piano _components_ e il piano _thingDescriptors_ del __discoverComponentsAgent__.
 
 ### samplingCoordinatorAgent
 
