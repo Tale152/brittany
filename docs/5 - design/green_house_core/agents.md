@@ -73,5 +73,13 @@ Quando il suo unico piano viene azionato, l'agente recupera dalla sua _BB_ il _t
 Anche in questo caso, come nel precedente, esiste nel sistema un unico __persistenceAgent__, ma rimane molto semplice aggiungerne altri nel caso in cui il lavoro sia troppo per essere gestito da un solo agente.
 
 ### sampleBasedActuatorAgent
+Come i due agenti precedenti, anche il __sampleBasedActuatorAgent__ non ha un __initial goal_ e rimane in attesa che il suo piano venga avviato.  
+Lo scopo di questo agente è di comunicare con gli attuatori nel caso in cui i dati campionati non rientrino tra il minimo e il massimo specificati neller configurazioni. La comunicazione è resa possibile dai Thing Descriptor e avviene per mezzo di __Edge__.  
+
+Il piano presente in questo agente si chiama _actuate_ e la sua esecuzione ha una guardia che va a permettere l'adempimento del piano solo nel caso in cui la categoria nella sua _BB_ sia coerente con quella del messaggio ricevuto.  
+Nel caso in cui lo sia, allora l'agente chiama l'operazione _actuate_ presente nel __SampleBasedActuatorArtifact__, la quale stabilisce che tipo di azione è necessaria per correggere lo stato registrato dai sensori e invia tali azioni a __Edge__.
+
+Nel MAS sono presenti 2 __sampleBasedActuatorAgent__, uno che è responsabile della temperatura e uno dell'umidità dell'aria.  
+Nel caso in cui si aggiungano altri tipi di sensori su __Edge__ allora sarebbe necessario aggiungere al MAS un altro __sampleBasedActuatorAgent__ dedicato a quella categoria di sensore e nel __SampleBasedActuatorArtifact__ sarebbe necessario specificare il comportamento in base al valore attuale registrato dai sensori.
 
 ### timeBasedActuatorAgent
