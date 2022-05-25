@@ -65,6 +65,12 @@ Per questa ragione, non ha un _initial goal_, ma rimane semplicemente in attesa 
 All'interno del MAS è presente un unico __samplingAgent__ al momento, poiché è stato ritenuto sufficiente in fase di verifica del funzionamento del sistema. Aggiungere nuovi agenti di questo tipo è comunque una cosa molto agevole, l'unica cosa necessaria sarebbe stabilire quali categorie dovrebbe prendere in carico un agente, al fine di evitare che più agenti richiedano i dati agli stessi componenti.
 
 ### persistenceAgent
+Il __persistenceAgent__ viene utilizzato per rendere persitenti i dati e deve comunicare con il __Persistence Service__ per tale scopo.
+
+Questo agente ha un comportamento molto simile al __samplingAgent__ appena descritto: infatti anche lui non ha un _initial goal_, semplicemente attende passivamente che il suo piano venga azionato, in questo caso _uploadPersistence_.  
+Quando il suo unico piano viene azionato, l'agente recupera dalla sua _BB_ il _token_ necessario per la comuncazione con i servizi e chiama poi l'operazione __uploadPersistence__ presente nel __PersistenceArtifact__. In questo modo invia effettivamente i dati al __Persistence Service__, rendendoli permanenti.
+
+Anche in questo caso, come nel precedente, esiste nel sistema un unico __persistenceAgent__, ma rimane molto semplice aggiungerne altri nel caso in cui il lavoro sia troppo per essere gestito da un solo agente.
 
 ### sampleBasedActuatorAgent
 
