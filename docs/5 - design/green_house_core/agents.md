@@ -59,6 +59,8 @@ Come detto in precedenza, il __samplingCoordinatorAgent__ è l'unico ad avere in
 L'operazione va a stabilire se rendere i dati persistenti e se è opportuno azionare degli attuatori. Questo comportamento è stato descritto nel dettaglio nella sezione precedente relativa al __SamplingCoordinatorArtifact__.
 
 ### samplingAgent
+Il __samplingAgent__ ha l'unico scopo di comunicare con un determinata lista di componenti fisici collegati a __Edge__.  
+Per questa ragione, non ha un _initial goal_, ma rimane semplicemente in attesa che il suo piano _sampling_ venga azionato. Questo piano utilizza l'operazione __getSamples__ esposta dal __SamplingArtifact__, la quale effettua l'effettiva operazione di campionamento.  
 
 ### persistenceAgent
 
