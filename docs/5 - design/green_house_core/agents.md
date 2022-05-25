@@ -62,6 +62,8 @@ L'operazione va a stabilire se rendere i dati persistenti e se è opportuno azio
 Il __samplingAgent__ ha l'unico scopo di comunicare con un determinata lista di componenti fisici collegati a __Edge__.  
 Per questa ragione, non ha un _initial goal_, ma rimane semplicemente in attesa che il suo piano _sampling_ venga azionato. Questo piano utilizza l'operazione __getSamples__ esposta dal __SamplingArtifact__, la quale effettua l'effettiva operazione di campionamento.  
 
+All'interno del MAS è presente un unico __samplingAgent__ al momento, poiché è stato ritenuto sufficiente in fase di verifica del funzionamento del sistema. Aggiungere nuovi agenti di questo tipo è comunque una cosa molto agevole, l'unica cosa necessaria sarebbe stabilire quali categorie dovrebbe prendere in carico un agente, al fine di evitare che più agenti richiedano i dati agli stessi componenti.
+
 ### persistenceAgent
 
 ### sampleBasedActuatorAgent
