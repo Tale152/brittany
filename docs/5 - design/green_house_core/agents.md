@@ -44,6 +44,19 @@ Quando un __Edge__ viene identificato tramite la ricerca su tutti gli indirizzi 
 Una volta ottenute tutte le informazioni necessarie, utilizzando le operazioni nel __CommonArtifact__, queste verranno condivise a tutti gli agenti interessati; la chiamata delle operazione nel __CommonArtifact__  viene fatta utilizzando il piano _components_ e il piano _thingDescriptors_ del __discoverComponentsAgent__.
 
 ### samplingCoordinatorAgent
+Il __samplingCoordinatorAgent__ gestisce in che modo compiere il campionamento dei dati e prende decisioni su come reagire ai dati appena ottenuti.  
+
+Nel MAS sono stati creati più __samplingCoordinatorAgent__, ognuno dei quali si occupa di coordinare il campionamento di una categoria diversa di sensori.  
+Per questo, quando vengono creati, viene anche aggiunto un _initial belief_, che andrà a costituire la categoria di cui tale agente è responsabile.  
+Per esempio, nel sistema implementato sono presenti due agenti di questo tipo:  
+- uno ha come _belief_ __temperature__, quindi si dedicherà alla coordinazione del campionamento di tutti i sensori che trattano la temperatura;
+- il _belief_ dell'altro agente è __airHumidity__, quindi è dedicato alla gestione del campionamento riguardante l'umidità dell'aria.
+
+L'_initial goal_ di un __samplingCoordinatorAgent__ è _sample_, il quale si occupa di recuperare la categoria a cui è assegnato dalla _BB_ e chiama l'operazione _sampleOperation_ presente nel __SamplingCoordinatorArtifact__. In questo modo l'agente sta richiedendo di campionare i dati di un certo tipo di sensori, senza sapere quale agente adempierà effettivamente alla sua richiesta.  
+Oltre a ciò, viene anche chiamato _wait_, di modo da iniziare un ciclo che ogni 5 secondi ripeterà il piano _sample_.  
+
+Come detto in precedenza, il __samplingCoordinatorAgent__ è l'unico ad avere informazioni a sufficienza per riuscire a stabilire come comportarsi alla ricezione dei dati campionati. Quando il campionamento è completato, viene scatenato il piano _checkSamples_, il quale, se la categoria dei dati ricevuti è quella presente nella sua _BB_, chiama l'operazione _updateOperation_ presente nel __SamplingCoordinatorArtifact__.  
+L'operazione va a stabilire se rendere i dati persistenti e se è opportuno azionare degli attuatori. Questo comportamento è stato descritto nel dettaglio nella sezione precedente relativa al __SamplingCoordinatorArtifact__.
 
 ### samplingAgent
 
