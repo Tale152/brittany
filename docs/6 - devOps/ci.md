@@ -21,23 +21,25 @@ Il workflow dei sottoprogetti _Auth_, _Persistence_ e _Settings_ Service è prat
 5. npm install;
 6. npm test.
 
-#### Deploy Docker Image
+#### Deploy Dev Docker Image
 
 1. Controllo sullo stato del workflow di test. In caso di successo si prosegue;
-2. Checkout;
-3. Autenticazione a DockerHub Registry;
-4. Creazione dell'immagine Docker;
-5. Push dell'immagine Docker.
+2. Controllo del branch che ha effetuato il push. In caso ci si trovi nel branch [auth/settings/persistence]-service si prosegue;
+3. Checkout;
+4. Autenticazione a DockerHub Registry;
+5. Creazione dell'immagine Docker;
+6. Push dell'immagine Docker.
 
-#### Deploy
+#### Production Deploy su Heroku
 
 1. Controllo sullo stato del workflow di test. In caso di successo si prosegue;
-2. Checkout;
-3. Autenticazione al registro di Heroku;
-4. Creazione del container;
-5. Release del container.
+2. Controllo del branch che ha effetuato il push. In caso ci si trovi nel branch master si prosegue;
+3. Checkout;
+4. Autenticazione al registro di Heroku;
+5. Creazione del container;
+6. Release del container.
 
-## Edge Worklow
+## Edge Workflow
 
 Il workflow del sottoprogetto _Edge_ è strutturato nel seguente modo:
 
