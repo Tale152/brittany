@@ -76,7 +76,7 @@ Mail del titolare del nuovo account Farmer collegato all'Organization contenuta 
 Tipo: Data  
 Formato: *"1997-12-31T00:00:00.000+00:00"*  
 Obbligatorio: sì  
-Mail del titolare del nuovo account Farmer collegato all'Organization contenuta nel Farmer token.
+Data di nascita del titolare del nuovo account Farmer collegato all'Organization contenuta nel Farmer token.
 * **password**  
 Tipo: Stringa  
 Obbligatorio: sì  
@@ -129,7 +129,7 @@ Cognome del titolare del Farmer account richiesto.
 * **mail**   
 Mail del titolare del Farmer account richiesto.
 * **birthdate**  
-Mail del titolare del Farmer account richiesto.
+Data di nascita del titolare del Farmer account richiesto.
 
 ---
 

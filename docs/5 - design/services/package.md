@@ -42,7 +42,7 @@ Prendiamo ad esempio la macro area _farmer_ all'interno della quale sono disponi
 __farmer.js__ sarà dunque il punto d'accesso a questa macro-area mentre, all'interno di __controllers > farmer__ troveremo i quattro file contenenti le implementazioni delle quattro route.
 
 ### __setup__
-All'interno di questa cartella vi è il codice centralizzato che referenzia i punti di ingresso delle routes e setta altri aspetti come le CORS policies. Tale codice viene utilizzato in _server.js_
+All'interno di questa cartella vi è il codice centralizzato che referenzia i punti di ingresso delle routes e imposta altri aspetti come le CORS policies. Tale codice viene utilizzato in _server.js_.
 
 ## test
 <div align="center">
@@ -50,7 +50,7 @@ All'interno di questa cartella vi è il codice centralizzato che referenzia i pu
 <p align="center"> Diagramma dei package - test - Auth Service </p>
 </div>
 
-La cartella test mantiene un'organizzazione in linea con la cartella routes precedentemente affrontata, in quanto l'obiettivo dei test nel sistema è per l'appunto verificare il funzionamenti di tali routes.  
+La cartella test mantiene un'organizzazione in linea con la cartella routes precedentemente affrontata, in quanto l'obiettivo dei test nel sistema è appunto verificare il funzionamenti di tali routes.  
 All'interno della cartella della macro area dunque troveremo dei file contenenti i test specifici per le varie API; continuando l'esempio dei farmer, all'interno dell'omonima cartella troveremo:
 - get.info.test.js
 - get.list.test.js
