@@ -18,8 +18,8 @@ La natura dell'applicativo ed una corretta divisione dei compiti ha permesso di 
 
 Come già anticipato, esistono due cartelle di test:
 
-- _brittany_: Viene testato principlamente il funzionamento dell'architettura utilizzando componenti di mock.
-- _brittany-concrete_: Vengono testati i componenti fisici, serve necessariamente il chip hw per far funzionare questi test.
+- _brittany_: viene testato principlamente il funzionamento dell'architettura utilizzando componenti di mock.
+- _brittany-concrete_: vengono testati i componenti fisici, serve necessariamente il chip hw per far funzionare questi test.
 
 Per effettuare il testing di Edge è stata utilizzata la libreria ``unity.h`` già inclusa in PlatformIO.
 

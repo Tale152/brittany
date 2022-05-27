@@ -15,8 +15,4 @@ Un dispositivo Edge può avere funzionalità specifiche in base ai componenti ch
 <p align="center">Chip ESP8266</p>
 </div>
 
-
 Per quando riguarda l'hardware e gli stack tecnologici utilizzati si è deciso di optare per dei dispositivi adatti all'IoT. Per sviluppare il software sono stati utilizzati degli ESP8266 (NoveMCU v2) ma qualunque scheda in grado di supportare le piattaforme Arduino like non dovrebbero dare alcun tipo di problema. Il linguaggio utilizzato è C++17.
-
-
-

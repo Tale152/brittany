@@ -62,7 +62,7 @@ I package della libreria ``brittany`` hanno i seguenti scopi:
 - __operation-handler__: contiene le classi utili per poter creare degli OperationHandler.
   - __interfaces__: come nel caso di hw, contiene classi utili per poter creare operation handler più complessi a partire da caratteristiche più semplici.
   - __types__: package utilizzato principalmente per informazioni addizionali sugli handler, in particolare informazioni utili per generare un thing descriptor robusto.
-- __web-server__: contiene le classi utili per poter creare implementazioni di Web Server ed altre funzioni di utilità a loro collegati.
+- __web-server__: contiene le classi utili per poter creare implementazioni di Web Server ed altre funzioni di utilità a loro collegate.
 - __thing-descriptor__: contiene classi utili per generare un Thing Descriptor.
 - __modules__: contiene classi utili per creare dei moduli.
 
@@ -75,7 +75,7 @@ I package della libreria ``brittany`` hanno i seguenti scopi:
 
 I package della libreria ``brittany-mock`` hanno una struttura solida solo a partire dal secondo layer.  
 Nel primo layer ogni package rappresenta un componente di mock. Nel diagramma vengono riportati due esempi di componenti di mock, ``mock-digital-light`` e ``mock-temp-hum-sensor``.
-I package scalano ovviamente in funzione al numero di componenti di mock che si aggiungono al sistema.
+I package scalano ovviamente in funzione al numero di componenti di mock che si aggiungono al sistema.  
 Ogni componente è poi suddiviso in:
 - __hw__: le implementazioni mock dei relativi componenti hardware.
 - __operation-handler__: le implementazioni di mock dei relativi operation handler.
@@ -89,8 +89,8 @@ Ogni componente è poi suddiviso in:
 </div>
 
 Come per ``brittany-mock``, anche nella libreria ``brittany-concrete`` vi è una divisione per componenti, ma con un livello di dettaglio in più.
-Esistono infatti diversi tipi di componenti hardware che effettuano le stesse operazioni ma possono avere implementazioni diverse, a differenza di una classe di mock.
-Nel caso del diagramma, anche in questo caso vi è una divisione in componenti, in particolare ``digital-light`` e ``temp-hum-sensor``. Esistono però diversi tipi di sensori per la misurazione di temperatura ed umidità, per cui è necessaria una ulteriore distinzione, in questo caso tra i sensori di tipo ``dht11`` e ``dht22``.
+Esistono infatti diversi tipi di componenti hardware che effettuano le stesse operazioni ma possono avere implementazioni diverse, a differenza di una classe di mock.  
+Nel caso del diagramma, anche in questo caso vi è una divisione in componenti, in particolare ``digital-light`` e ``temp-hum-sensor``. Esistono però diversi tipi di sensori per la misurazione di temperatura ed umidità, per cui è necessaria una ulteriore distinzione, in questo caso tra i sensori di tipo ``dht11`` e ``dht22``.  
 Si arriva dunque alle foglie, che anche in questo caso sono:
 - __hw__: le implementazioni effettive e reali dei relativi componenti hardware.
 - __operation-handler__: le implementazioni effettive e reali dei relativi operation handler.
@@ -98,6 +98,5 @@ Si arriva dunque alle foglie, che anche in questo caso sono:
 
 ### test
 Anche per i test vi sono due cartelle principali:
-
-- _test_brittany_: I test all'interno di questa cartella possono venir eseguiti su qualunque sistema operativo desktop. Viene principalmente testato il funzionamento dell'architettura utilizzando componenti di mock.
-- _test_brittany-concrete_: I test all'interno di questa cartella possono essere eseguiti solo se caricati su un ESP8266. Servono a fare il testing degli effettivi componenti hardware.
+- __test_brittany__: i test all'interno di questa cartella possono venire eseguiti su qualunque sistema operativo desktop. Viene principalmente testato il funzionamento dell'architettura utilizzando componenti di mock.
+- __test_brittany-concrete__: i test all'interno di questa cartella possono essere eseguiti solo se caricati su un ESP8266. Servono a fare il testing degli effettivi componenti hardware.
