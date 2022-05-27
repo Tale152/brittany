@@ -43,7 +43,7 @@ Le strutture dati contenute nella cartella _redux_ vengono popolate attraverso i
 ## react
 In quest'ultima directory sono contenute le definizioni dei componenti grafici React che popolano la GUI.  
 
-Come intuibile dal nome, la directory __common_ contiene componenti comuni riutilizzati da altri componenti; le directory rimanenti, invece, trovano una corrispondenza con le varie pagine che l'utente può visitare.
+Come intuibile dal nome, la directory _common_ contiene componenti comuni riutilizzati da altri componenti; le directory rimanenti, invece, trovano una corrispondenza con le varie pagine che l'utente può visitare.
 
 <div align="center">
 <img src="https://images2.imgbox.com/fb/db/xXaZw7fn_o.png" alt="Diagramma dei package - react">

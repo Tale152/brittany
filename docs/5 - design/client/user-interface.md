@@ -11,11 +11,11 @@ Segue ora una breve spiegazione delle schermate presentate nella User Interface 
 ## Login
 La prima schermata che si presenta all'apertura dell'applicativo contine il form per il login.  
 
-All'interno del form vi sono due textbox che permettono all'utente (già registrato nel sistema) di inserire mail e password.  
+All'interno del form vi sono due textbox che permettono all'utente (già registrato nel sistema) di inserire email e password.  
 
 Interagendo con il bottone login (o attraverso la pressione del tasto _Enter_ sulla tastiera), verrà effettuato un tentativo di login.  
 
-Il secondo ed ultimo bottone permette di accedere alla schermata per la registrazione all'interno del sistema.
+Il secondo e ultimo bottone permette di accedere alla schermata per la registrazione all'interno del sistema.
 
 <div align="center">
 <img src="https://images2.imgbox.com/6a/18/vpiHibGz_o.png" alt="Login">
@@ -66,14 +66,13 @@ Interagendo con il tasto _Create new_ si potranno creare nuovi Settings.
 
 In alto troviamo dei bottoni di navigazione. Il bottone _Back to Greenhouses_, una volta premuto, riporterà l'utente nella schermata contenente la lista di Greenhouse; il bottone _Go to Data_, invece, porterà l'utente nella schermata contenente i dati campionati all'interno dell'Environment.
 
-
 <div align="center">
 <img src="https://images2.imgbox.com/a5/98/NLwuYBYi_o.png" alt="Settings di un Environment">
 <p align="center"> Settings di un Environment </p>
 </div>
 
 ## Dati
-In questa schermata saranno presentati dei grafici cartesiani raffiguranti i dati campionati all'interno dell'Environment da parte di Greenhouse Core; questa schermata effettuerà polling verso il Persistence Service, aggiornandosi di volta in volta con i nuovi dati disponibili.
+In questa schermata saranno presentati dei grafici cartesiani raffiguranti i dati campionati all'interno dell'Environment da parte di Greenhouse Core; questa schermata effettuerà polling verso il Persistence Service, aggiornandosi di volta in volta con i nuovi dati disponibili.  
 Nella schermata di esempio si possono vedere i grafici contenenti la Temperatura e l'umidità dell'aria.  
 
 In cima possiamo trovare i bottoni di navigazione per tornare alla schermata di Settings dell'Environment (_Go to Settings_) e per tornare alla lista di Greenhouse (_Go to Greenhouses_).
@@ -86,9 +85,10 @@ In cima possiamo trovare i bottoni di navigazione per tornare alla schermata di 
 ## Agricoltori
 In questa schermata troviamo l'elenco di tutti gli Agricoltori registrati all'interno dell'Organizzazione.  
 
-Interagendo con un Agricoltore sarà possibile visionare suoi dettagli mentre, effettuando un click sul bottone _Create new_, sarà possibile registrare un nuovo Agricoltore all'interno dell'Organizzazione.  
+Interagendo con un Agricoltore sarà possibile visionare i suoi dettagli mentre, effettuando un click sul bottone _Create new_, sarà possibile registrare un nuovo Agricoltore all'interno dell'Organizzazione.  
 
 Cliccando sul bottone _Back to Greenhouses_ si tornerà alla schermata contenente l'elenco delle Greenhouse registrate all'interno dell'Organizzazione.
+
 <div align="center">
 <img src="https://images2.imgbox.com/0d/dc/r1iHpmML_o.png" alt="Lista di Farmer all'interno dell'Organizzazione">
 <p align="center"> Lista di Farmer all'interno dell'Organizzazione </p>
