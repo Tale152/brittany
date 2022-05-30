@@ -6,7 +6,7 @@ has_children: true
 
 # Services
 
-All' interno dell'ecosistema Brittany vi sono tre microservizi nel cloud che vengono contattati dal Web Client e da Greenhouse Core.  
+All'interno dell'ecosistema Brittany vi sono tre microservizi nel cloud che vengono contattati dal Web Client e da Greenhouse Core.  
 
 I tre server HTTP sono seguono una filosofia REST, mantenendo indipendenza tra loro e, in particolar modo, operando in maniera stateless.  
 
@@ -17,7 +17,7 @@ Come stack tecnologico si è scelto di sviluppare i server utilizzando __Node.js
 
 Nel testing è stata utilizzata una combinazione di due framework: __Jest__ (popolare ambiente di testing su JavaScript) e __SuperTest__ (per istanziare server e mock client che effettuassero richieste HTTP il quale risultato viene verificato a fini di testing).  
 
-Per ogni push sul branch master, viene creata un'immagine __Docker__ per ognuno dei tre servizi attraverso le Github Actions (previa aver superato tutti i test all'interno delle stesse action); di queste immagini dunque viene automaticamente effettuato il deploy sul servizio di hoisting __Heroku__. Queste istanze online comunicano con delle istanze all'interno del servizio online __MongoDB Atlas__.
+Per ogni push sul branch master, viene creata un'immagine __Docker__ per ognuno dei tre servizi attraverso le Github Actions (previa aver superato tutti i test all'interno delle stesse action); di queste immagini dunque viene automaticamente effettuato il deploy sul servizio di hosting __Heroku__. Queste istanze online comunicano con delle istanze all'interno del servizio online __MongoDB Atlas__.
 
 ## Auth Service
 Responsabile per l'autenticazione di Agricoltori all'interno del sistema tramite client.  
@@ -26,7 +26,7 @@ Questo servizio inoltre contiene i dati delle Serre (e relativi Ambienti) per og
 ## Settings Service
 Questo gestizio gestisce la persistenza delle impostazioni relative ad uno specifico Ambiente all'interno di una data Serra.  
 
-Attraverso il client web gli Agricoltori, precedentemente autenticati,possono controllare le impostazioni correnti, modificandole o creandone di nuove.  
+Attraverso il client web gli Agricoltori, precedentemente autenticati, possono controllare le impostazioni correnti, modificandole o creandone di nuove.  
 
 Un Agente, tramite un token fornitogli nell'autenticazione, può richiedere le impostazioni correnti per il determinato Ambiente in cui opera; attraverso queste impostazioni, gli Agenti di Greenhouse Core adatteranno il loro comportamento per rispettare i vincoli imposti dagli Agricoltori.
 

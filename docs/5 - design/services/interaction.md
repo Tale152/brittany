@@ -22,7 +22,7 @@ Nel seguente diagramma di sequenza è possibile vedere un'esempio in cui un Gree
 <p align="center"> Diagramma di sequenza - Esempio di interazione con i Services </p>
 </div>
 
-L'Agent innanzitutto effettua una richiesta HTTP GET verso l'Auth Service presso l'API dedicata al login di un Agent; nel caso l'autenticazione sia completata con successo il Service restituisce un agentToken.  
+L'Agent innanzitutto effettua una richiesta HTTP GET verso l'Auth Service presso l'API dedicata al login di un Agent; nel caso l'autenticazione sia completata con successo il Service restituisce un _agentToken_.  
 
 A questo punto, l'Agent utilizza il suo Token per richiedere al Settings Service gli ultimi settings attivi collegati al suo Environment all'interno della Greenhouse (le informazioni per identificare il giusto Environment sono contenute nel Token, dunque inaccessibili all'Agent).  
 

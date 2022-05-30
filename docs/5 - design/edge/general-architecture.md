@@ -75,4 +75,3 @@ Un ``Module`` è una classe composta da più OperationHandler che hanno componen
 
 ``DigitalLightModule`` in questo caso è un modulo che contiene due ``OperationHandler`` che agiscono sugli stessi componenti di tipo ``DigitalLightHw``.
 Oltre alle implementazioni effettive, anche in questo caso è possibile creare delle classi di Mock per testare il funzionamento dell'architettura. In questo caso è necessario che i componenti manovrabili siano a loro volta classi di Mock.
-
