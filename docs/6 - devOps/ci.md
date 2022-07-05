@@ -1,10 +1,10 @@
 ---
-title: Continous Integration
+title: Continuous integration
 parent: Documentazione DevOps
 has_children: false
 ---
 
-# Continous Integration
+# Continuous integration
 
 Particolare attenzione è stata posta nell’individuazione di misure per assicurare la qualità del codice del sistema. Grazie alle GitHub Actions sono stati predisposti dei workflow per garantire la Continuous Integration e la Quality Assurance.
 
