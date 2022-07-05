@@ -1,11 +1,11 @@
 ---
-title: Boundex Context
+title: Bounded Context
 parent: Domain Knowledge
 has_children: false
 nav_order: 4
 ---
 
-# Boundex Context
+# Bounded Context
 
 ### Context map
 
