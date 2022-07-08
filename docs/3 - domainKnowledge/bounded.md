@@ -27,3 +27,9 @@ Sono stati individuati i seguenti bounded context:
 - __Persistence Service__: La parte di sistema dedicata alla memorizzazione dei dati.
 - __Settings Service__:  La parte di sistema dedicata alla gestione delle impostazioni.
 - __Client__: La parte dedicata all'iterazione tra l'utente finale ed il sistema.
+
+
+<div align="center">
+<img src="https://images2.imgbox.com/2c/b1/oyvUIDhB_o.png" alt="Context map">
+<p align="center">Context Map più dettagliata</p>
+</div>
