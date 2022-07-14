@@ -17,7 +17,7 @@ Il software permette di costruire in modo molto personalizzabile una board, ovve
 Essendo molto versatile, Trello è ideale per creare un ambiente su misura per applicare anche una metodologia di lavoro agile.
 
 <div align="center">
-<img src="https://loghi-famosi.com/wp-content/uploads/2021/03/Trello-Logo.png" width="300px" height="150px" alt="Trello Logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Trello-logo-blue.svg/1920px-Trello-logo-blue.svg.png" width="250" height="60" alt="Trello Logo">
 <p align="center">Logo di Trello</p>
 </div>
 
@@ -30,7 +30,7 @@ agevolmente da una stanza all’altra;
 - per la possibilità di implementare hook integrati con GitHub, tali per cui ogni modifica alle repository di progetto viene notificata a tutti i componenti del gruppo, tramite un apposito canale testuale.
 
 <div align="center">
-<img src="https://loghi-famosi.com/wp-content/uploads/2021/02/Discord-Logo.png" width="190px" height="110px" alt="Discord Logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Discord_icon.svg" width="190px" height="110px" alt="Discord Logo">
 <p align="center">Logo di Discord</p>
 </div>
 
