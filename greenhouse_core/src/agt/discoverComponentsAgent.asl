@@ -28,13 +28,13 @@
  * This also start a loop of requests to discover new components
  * in regular time intervals.
  */
-+!discover <- discoverComponents; !wait.
++!discover <- discoverComponents.
 
 /*
  * Plan used to start a loop that is going to trigger again the initial goal
  * every X seconds, in order to update the components if necessary.
  */
-+!wait <- .at("now + 20 seconds", {+!discover}).
++wait <- .at("now + 20 seconds", {+!discover}).
 
 /*
  * Plan that is triggered when the list of components is updated.

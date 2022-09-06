@@ -109,6 +109,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 			getThingDescriptor("http://192.168.246." + i);
 			await_time(TICK_TIME);
 		}
+		defineObsProperty("wait");
 	}
 
 	/**
