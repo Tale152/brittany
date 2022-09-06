@@ -37,19 +37,28 @@ tasks.register<Exec>("persistenceDevDown"){
 }
 
 tasks.register<Exec>("coreDevUp"){
-    if(project.hasProperty("organization") && project.hasProperty("greenhouse") &&
-        project.hasProperty("environment") && project.hasProperty("password")) {
-        val organizationEnv = "ORGANIZATION_NAME=" + project.findProperty("organization")
-        val greenhouseEnv = "GREENHOUSE_NAME=" + project.findProperty("greenhouse")
-        val environmentEnv = "ENVIRONMENT_NAME=" + project.findProperty("environment")
-        val passwordEnv = "ENVIRONMENT_PASSWORD=" + project.findProperty("password")
-        commandLine("docker", "run",
-                    "-e", organizationEnv,
-                    "-e", greenhouseEnv,
-                    "-e", environmentEnv,
-                    "-e", passwordEnv,
-                    "-d", "--rm", "--name", "greenhouse-core-dev",
-                    "alessandrotalmi/brittany-greenhouse-core-dev:latest")
+    if (
+        project.hasProperty("organization") &&
+        project.hasProperty("greenhouse") &&
+        project.hasProperty("environment") &&
+        project.hasProperty("password") &&
+        project.hasProperty("subnet")
+    ) {
+        def organizationEnv = "ORGANIZATION_NAME=" + project.getProperty("organization")
+        def greenhouseEnv = "GREENHOUSE_NAME=" + project.getProperty("greenhouse")
+        def environmentEnv = "ENVIRONMENT_NAME=" + project.getProperty("environment")
+        def passwordEnv = "ENVIRONMENT_PASSWORD=" + project.getProperty("password")
+        def subnet = "SUBNET_IP=" + project.getProperty("subnet")
+        commandLine(
+            "docker", "container", "run",
+            "-e", organizationEnv,
+            "-e", greenhouseEnv,
+            "-e", environmentEnv,
+            "-e", passwordEnv,
+            "-e", subnet,
+            "-d", "--rm", "--name", "greenhouse-core-dev",
+            "alessandrotalmi/brittany-greenhouse-core-dev:latest"
+        )
     } else {
         throw IllegalArgumentException("Missing parameters")
     }
