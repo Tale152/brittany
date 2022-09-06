@@ -109,6 +109,7 @@ public class DiscoverComponentsArtifact extends Artifact {
 			getThingDescriptor("http://" + System.getenv("SUBNET_IP") + "." + i);
 			await_time(TICK_TIME);
 		}
+		defineObsProperty("wait");
 	}
 
 	/**
