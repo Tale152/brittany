@@ -3,7 +3,7 @@ FROM node:13.12.0-alpine
 COPY package.json .
 COPY package-lock.json .
 
-RUN npm install --silent
+RUN npm ci --silent
 
 COPY . ./
 
