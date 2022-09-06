@@ -56,7 +56,7 @@ See [_Run Edge (all operative systems)_](#step-4-run-edge-all-operative-systems)
 ### __Step 1__: Run Greenhouse Core
 Run the following command to execute on your machine Greenhouse Core:
 ```
-docker run -e ORGANIZATION_NAME=<ORGANIZATION-NAME-HERE> -e GREENHOUSE_NAME=<GREENHOUSE-NAME-HERE> -e ENVIRONMENT_NAME=<ENVIRONMENT-NAME-HERE> -e ENVIRONMENT_PASSWORD=<ENVIRONMENT-PASSWORD-HERE> --rm --name greenhouse-core alessandrotalmi/brittany-greenhouse-core:latest
+docker run -e ORGANIZATION_NAME=<ORGANIZATION-NAME-HERE> -e GREENHOUSE_NAME=<GREENHOUSE-NAME-HERE> -e ENVIRONMENT_NAME=<ENVIRONMENT-NAME-HERE> -e ENVIRONMENT_PASSWORD=<ENVIRONMENT-PASSWORD-HERE> -e SUBNET_IP=<SUBNET-IP-HERE> --rm --name greenhouse-core alessandrotalmi/brittany-greenhouse-core:latest
 ```
 This command will download the image from DockerHub and execute a container (named greenhouse-core) running Greenhouse Core.  
 Using _-e_ you'll need to provide four parameters:
@@ -64,6 +64,7 @@ Using _-e_ you'll need to provide four parameters:
 - __GREENHOUSE_NAME__: the name of the greenhouse, previously created using the client, that contains the environment that Greenhouse Core will coordinate
 - __ENVIRONMENT_NAME__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
 - __ENVIRONMENT_PASSWORD__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
+- __SUBNET_IP__: the subnet where Edges are connected (e.g. 192.168.1)
 
 ### __Step 2__: Run Edge (linux only, Windows and MacOS [here](#step-4-run-edge-all-operative-systems))
 Once you have connected an ESP8266 to your machine, run the following command to flash Edge on the chip:
@@ -99,7 +100,7 @@ This Gradle task will run in one shot all the Services and the web client (that 
 ### __Step 2__: Run Greenhouse Core
 After setting up the environment using the Web Client, place yourself in the root of the project and run this command:
 ```
-.\gradlew coreDevUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
+.\gradlew coreDevUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE> -Psubnet=<SUBNET-IP-HERE>
 ```
 This task will run Greenhouse Core downloading the dev image from DockerHub.  
 Using _-P_ (_yes, without a white space after_) you'll need to provide four parameters:
@@ -107,7 +108,7 @@ Using _-P_ (_yes, without a white space after_) you'll need to provide four para
 - __greenhouse__: the name of the greenhouse, previously created using the client, that contains the environment that Greenhouse Core will coordinate
 - __environment__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
 - __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
-
+- __subnet__: the subnet where Edges are connected (e.g. 192.168.1)
 
 ### __Step 3__: Run Edge (linux only, Windows and MacOS [here](#step-4-run-edge-all-operative-systems))
 Once you have connected an ESP8266 to your machine, run the following command to flash Edge on the chip:
@@ -158,13 +159,14 @@ You can use the client at http://localhost:3000/
 ### __Step 3__: Run Greenhouse Core
 After having setup the environment using the Web Client, place yourself in the Greenhouse Core directory and run the following command:
 ```
-.\gradlew dockerUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
+.\gradlew dockerUp -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE> -Psubnet=<SUBNET-IP-HERE>
 ``` 
 Using _-P_ (_yes, without a white space after_) you'll need to provide four parameters:
 - __organization__: the name of your organization, previously registered using the client
 - __greenhouse__: the name of the greenhouse, previously created using the client, that contains the environment that Greenhouse Core will coordinate
 - __environment__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
 - __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
+- __subnet__: the subnet where Edges are connected (e.g. 192.168.1)
 
 ### __Step 4__: Run Edge (linux only, Windows and MacOS [here](#step-4-run-edge-all-operative-systems))
 Once you have connected an ESP8266 to your machine, place yourself in the Edge directory and run the following command to flash Edge on the chip:
@@ -209,13 +211,14 @@ Similarly to the previous step, place yourself in the Web Client directory and r
 ### __Step 3__: Run Greenhouse Core
 After having setup the environment using the Web Client, place yourself in the Greenhouse Core directory and run the following command to launch a JVM running the program:
 ```
-.\gradlew run -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE>
+.\gradlew run -Porganization=<ORGANIZATION-NAME-HERE> -Pgreenhouse=<GREENHOUSE-NAME-HERE> -Penvironment=<ENVIRONMENT-NAME-HERE> -Ppassword=<ENVIRONMENT-PASSWORD-HERE> -Psubnet=<SUBNET-IP-HERE>
 ```
 You'll need to provide four parameters:
 - __organization__: the name of your organization, previously registered using the client
 - __greenhouse__: the name of the greenhouse, previously created using the client, that contains the environment that Greenhouse Core will coordinate
 - __environment__: the name of the environment, previously created using the client, that Greenhouse Core will coordinate
 - __password__: the password of the environment, previously created using the client, that Greenhouse Core will coordinate
+- __subnet__: the subnet where Edges are connected (e.g. 192.168.1)
 
 ### __Step 4__: Run Edge (all operative systems)
 Once you have connected an ESP8266 to your machine, place yourself in the Edge directory and run the following command to flash Edge on the chip:
