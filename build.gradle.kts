@@ -44,18 +44,18 @@ tasks.register<Exec>("coreDevUp"){
         project.hasProperty("password") &&
         project.hasProperty("subnet")
     ) {
-        def organizationEnv = "ORGANIZATION_NAME=" + project.getProperty("organization")
-        def greenhouseEnv = "GREENHOUSE_NAME=" + project.getProperty("greenhouse")
-        def environmentEnv = "ENVIRONMENT_NAME=" + project.getProperty("environment")
-        def passwordEnv = "ENVIRONMENT_PASSWORD=" + project.getProperty("password")
-        def subnet = "SUBNET_IP=" + project.getProperty("subnet")
+        val organizationEnv = "ORGANIZATION_NAME=" + project.findProperty("organization")
+        val greenhouseEnv = "GREENHOUSE_NAME=" + project.findProperty("greenhouse")
+        val environmentEnv = "ENVIRONMENT_NAME=" + project.findProperty("environment")
+        val passwordEnv = "ENVIRONMENT_PASSWORD=" + project.findProperty("password")
+        val subnetEnv = "SUBNET_IP=" + project.findProperty("subnet")
         commandLine(
             "docker", "container", "run",
             "-e", organizationEnv,
             "-e", greenhouseEnv,
             "-e", environmentEnv,
             "-e", passwordEnv,
-            "-e", subnet,
+            "-e", subnetEnv,
             "-d", "--rm", "--name", "greenhouse-core-dev",
             "alessandrotalmi/brittany-greenhouse-core-dev:latest"
         )
