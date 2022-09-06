@@ -106,9 +106,10 @@ public class DiscoverComponentsArtifact extends Artifact {
 	@INTERNAL_OPERATION
 	void broadcastRequest() {
 		for (int i = 1; i <= 255; i++) {
-			getThingDescriptor("http://192.168.246." + i);
+			getThingDescriptor("http://" + System.getenv("SUBNET_IP") + "." + i);
 			await_time(TICK_TIME);
 		}
+		defineObsProperty("wait");
 	}
 
 	/**
