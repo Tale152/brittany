@@ -2,9 +2,9 @@ name: Greenhouse core CI
 
 on:
   push:
-    branches: [ 'greenhouse-core' ]
+    branches: [ '**' ]
   pull_request:
-    branches: [ 'greenhouse-core' ]
+    branches: [ '**' ]
 
 jobs:
   deploy-dev-image:
