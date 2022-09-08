@@ -85,75 +85,199 @@ Ogni property è composta da:
   - **input**: Campo utilizzato per contenere informazioni sull'input.
 ### Esempio di Thing Descriptor
 
-Il Thing Descriptor risultante sarebbe molto simile al seguente:
+Segue un esempio di Thing Descriptor in grado di gestire attuatori che agiscono sulla temperatura e l'umidità dell'aria:
+
 ``` json
 {
     "@context": "https://www.w3.org/2019/wot/td/v1",
-    "id": "http://IP_ADDRESS:PORT",
-    "title": "Mock Title",
-    "security": ["no_sec"],
+    "id": "http://192.168.3.193:80",
+    "title": "Mock Temperature Edge for handling temperature and humidity.",
+    "security": [
+        "no_sec"
+    ],
     "securityDefinitions": {
         "no_sec": {
             "in": "header",
             "scheme": "nosec"
         }
     },
-    "modules": [{
-        "components": ["G","R"],
-        "module": "light"
-    }],
+    "modules": [
+        {
+            "components": [
+                "humidifier",
+                "dehumidifier",
+                "hum"
+            ],
+            "module": "airHumidity"
+        },
+        {
+            "components": [
+                "heater",
+                "cooler",
+                "temp"
+            ],
+            "module": "temperature"
+        }
+    ],
     "properties": {
-        "isOn-G": {
-            "forms": [{
-                "contentType": "application/json",
-                "href": "http://IP_ADDRESS:PORT/isOn?id=G"
-            }],
-            "module": "light",
+        "airHumidity-hum": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/airHumidity?id=hum"
+                }
+            ],
+            "module": "airHumidity",
+            "type": "number"
+        },
+        "isCoolOn-cooler": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/isCoolOn?id=cooler"
+                }
+            ],
+            "module": "temperature",
             "type": "boolean"
         },
-        "isOn-R": {
-            "forms": [{
-                "contentType": "application/json",
-                "href": "http://IP_ADDRESS:PORT/isOn?id=R"
-            }],
-            "module": "light",
+        "isDehumidifyOn-dehumidifier": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/isDehumidifyOn?id=dehumidifier"
+                }
+            ],
+            "module": "airHumidity",
             "type": "boolean"
+        },
+        "isHeatOn-heater": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/isHeatOn?id=heater"
+                }
+            ],
+            "module": "temperature",
+            "type": "boolean"
+        },
+        "isHumidifyOn-humidifier": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/isHumidifyOn?id=humidifier"
+                }
+            ],
+            "module": "airHumidity",
+            "type": "boolean"
+        },
+        "temperature-temp": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/temperature?id=temp"
+                }
+            ],
+            "module": "temperature",
+            "type": "number"
         }
     },
     "actions": {
-        "turnOff-G": {
-            "forms": [{
-                "contentType": "application/json",
-                "href": "http://IP_ADDRESS:PORT/turnOff?id=G"
-            }],
-            "module": "light",
-            "output": {"type": "string"}
+        "coolOff-cooler": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/coolOff?id=cooler"
+                }
+            ],
+            "module": "temperature",
+            "output": {
+                "type": "string"
+            }
         },
-        "turnOff-R": {
-            "forms": [{
-                "contentType": "application/json",
-                "href": "http://IP_ADDRESS:PORT/turnOff?id=R"
-            }],
-            "module": "light",
-            "output": {"type": "string"}
+        "coolOn-cooler": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/coolOn?id=cooler"
+                }
+            ],
+            "module": "temperature",
+            "output": {
+                "type": "string"
+            }
         },
-        "turnOn-G": {
-            "forms": [{
-                "contentType": "application/json",
-                "href": "http://IP_ADDRESS:PORT/turnOn?id=G"
-            }],
-            "module": "light",
-            "output": {"type": "string"}
+        "dehumidifyOff-dehumidifier": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/dehumidifyOff?id=dehumidifier"
+                }
+            ],
+            "module": "airHumidity",
+            "output": {
+                "type": "string"
+            }
         },
-        "turnOn-R": {
-            "forms": [{
-                "contentType": "application/json",
-                "href": "http://IP_ADDRESS:PORT/turnOn?id=R"
-            }],
-            "module": "light",
-            "output": {"type": "string"}
+        "dehumidifyOn-dehumidifier": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/dehumidifyOn?id=dehumidifier"
+                }
+            ],
+            "module": "airHumidity",
+            "output": {
+                "type": "string"
+            }
+        },
+        "heatOff-heater": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/heatOff?id=heater"
+                }
+            ],
+            "module": "temperature",
+            "output": {
+                "type": "string"
+            }
+        },
+        "heatOn-heater": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/heatOn?id=heater"
+                }
+            ],
+            "module": "temperature",
+            "output": {
+                "type": "string"
+            }
+        },
+        "humidifyOff-humidifier": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/humidifyOff?id=humidifier"
+                }
+            ],
+            "module": "airHumidity",
+            "output": {
+                "type": "string"
+            }
+        },
+        "humidifyOn-humidifier": {
+            "forms": [
+                {
+                    "contentType": "application/json",
+                    "href": "http://192.168.3.193:80/humidifyOn?id=humidifier"
+                }
+            ],
+            "module": "airHumidity",
+            "output": {
+                "type": "string"
+            }
         }
     }
 }
 ```
-
