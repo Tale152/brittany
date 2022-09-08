@@ -32,10 +32,6 @@ test("Retreiving with multiple values for Temperature", async () => {
     await latestTests.latestMultipleValues(registerRoute, latestRoute)
 })
 
-test("Not existing Settings id for Temperature", async () => {
-    await latestTests.notExistingId(latestRoute)
-})
-
 test("Wrong token for Temperature", async () => {
     await latestTests.wrongToken(latestRoute)
 })

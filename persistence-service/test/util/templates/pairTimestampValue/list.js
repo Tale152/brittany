@@ -45,7 +45,7 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
         server,
         retreiveRoute,
         {
-            id: values.idEnvironment
+            id: values.environmentId
         },
         values.correctFarmerToken,
         200,
@@ -56,25 +56,12 @@ module.exports.correctList = async function(registerRoute, retreiveRoute){
     )
 }
 
-module.exports.notExistingId = async function(retreiveRoute){
-    await httpTest.get(
-        server,
-        retreiveRoute,
-        {
-            id: values.idEnvironment
-        },
-        values.correctFarmerToken,
-        200,
-        (res) => expect(res.body.list.length).toBe(0)
-    )
-}
-
 module.exports.wrongToken = async function(retreiveRoute){
     await httpTest.get(
         server,
         retreiveRoute,
         {
-            id: values.idEnvironment
+            id: values.environmentId
         },
         values.wrongToken,
         401,
