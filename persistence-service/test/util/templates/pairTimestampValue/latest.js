@@ -70,17 +70,6 @@ module.exports.latestMultipleValues = async function(registerRoute, retreiveRout
     )
 }
 
-module.exports.notExistingId = async function(retreiveRoute){
-    await httpTest.get(
-        server,
-        retreiveRoute,
-        {},
-        values.correctAgentToken,
-        404,
-        (res) => {/* does nothing */}
-    )
-}
-
 module.exports.wrongToken = async function(retreiveRoute){
     await httpTest.get(
         server,
